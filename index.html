@@ -362,6 +362,25 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
 .prow .padd{width:34px;height:34px;border-radius:10px;border:none;background:var(--accent);
   color:var(--accent-ink);font-size:17px;font-weight:800;cursor:pointer}
 
+.ob-name{display:block;width:100%;max-width:420px;margin:0 auto 14px;background:var(--panel);
+  border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;color:var(--ink);
+  font-family:'Manrope';font-weight:700;font-size:15px;text-align:center;box-shadow:var(--shadow)}
+.ob-name:focus{outline:none;border-color:var(--accent)}
+.qb .ob-name{max-width:100%;text-align:left;margin:0;box-shadow:none;background:var(--panel2)}
+.wkhead{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2);
+  font-weight:800;margin:14px 2px 6px}
+.wkhead:first-child{margin-top:0}
+.hrow{cursor:pointer}
+.hrow .hcv{color:var(--muted2);font-size:11px;transition:.3s;margin-left:2px}
+.hrow.op .hcv{transform:rotate(180deg)}
+.hdetail{display:none;background:var(--panel);border:1px solid var(--line);border-top:none;
+  border-radius:0 0 13px 13px;margin:-9px 0 0;padding:6px 14px 10px;box-shadow:var(--shadow)}
+.hdetail.op{display:block}
+.hd-row{display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:8px 0;border-bottom:1px dashed var(--line);font-size:12px}
+.hd-row:last-child{border-bottom:none}
+.hd-row span{font-weight:700}
+.hd-row small{color:var(--muted);font-weight:700;white-space:nowrap}
 .hidden{display:none!important}
 </style>
 </head>
@@ -382,7 +401,7 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
         </div>
       </div>
     </div>
-    <div class="hello">Bora, <em>Pablo</em>.</div>
+    <div class="hello">Bora, <em id="helloName">Atleta</em>.</div>
     <div class="quote" id="quote"></div>
   </header>
 
@@ -1457,6 +1476,7 @@ function render(){
   ensureProgram();
   applyAccent();
   $('quote').textContent=QUOTES[Math.floor(Math.random()*QUOTES.length)];
+  $('helloName').textContent=(SETUP&&SETUP.name)?SETUP.name:'Atleta';
   $('brandSub').textContent=SETUP&&!SETUP.default?`${SPLITS[SETUP.splits].name} · ${SETUP.freq}x/sem`:'Push · Pull · Legs';
   renderTabs();
   if(view==='train'){renderTrain()}else{renderProgress()}
@@ -1603,7 +1623,9 @@ $('finBtn').onclick=()=>{
     done+=arr.filter(Boolean).length;tot+=a.sets;
     if(!a.bw)snap[a.vid]=wOf(a)});
   if(done===0){toast('Marca pelo menos uma série antes 😉');return}
-  HISTORY.unshift({date:$('date').value||todayISO(),workout:cur,label:day.label,done,tot,weights:snap,ts:Date.now()});
+  const items=day.ex.map(ex=>{const a=activeOf(ex);const arr=setsArr(ex.id,a.sets);
+    return {n:a.name,s:arr.filter(Boolean).length,t:a.sets,w:a.bw?null:wOf(a)}});
+  HISTORY.unshift({date:$('date').value||todayISO(),workout:cur,label:day.label,done,tot,weights:snap,items,ts:Date.now()});
   save('iron_history',HISTORY);
   SESSION[cur]={};save('iron_session',SESSION);cloudSync();
   confetti();toast('🔥 Treino '+cur+' registrado! '+done+'/'+tot+' séries');
@@ -1627,13 +1649,27 @@ function renderProgress(){
     const isToday=iso===todayISO();
     daysHtml+=`<div class="day"><div class="ball${hit?' hit':''}${isToday?' today':''}">${hit?hit.workout:''}</div><small>${wd[i]}</small></div>`;
   }
-  const hist=HISTORY.length?HISTORY.map(h=>{
+  const wkKey=iso=>{const d=new Date(iso+'T00:00');const dw=(d.getDay()+6)%7;d.setDate(d.getDate()-dw);return d.toISOString().slice(0,10)};
+  const wkLabel=mon=>{const a=new Date(mon+'T00:00');const b=new Date(a);b.setDate(a.getDate()+6);
+    const f=x=>x.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});return 'Semana de '+f(a)+' a '+f(b)};
+  let lastWk=null;
+  const hist=HISTORY.length?HISTORY.map((h,i)=>{
     const d=new Date(h.date+'T00:00');
-    const ds=d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});
+    const ds=d.toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short'});
     const pct=Math.round(h.done/h.tot*100);
-    return `<div class="hrow"><div class="wk" style="background:${HIST_COLORS[h.workout]||'#F5B301'}">${h.workout}</div>
+    const wk=wkKey(h.date);
+    const head=wk!==lastWk?`<div class="wkhead">${wkLabel(wk)}</div>`:'';
+    lastWk=wk;
+    const det=h.items?h.items.map(it=>
+      `<div class="hd-row"><span>${it.n}</span><small>${it.s}/${it.t} séries${it.w!=null?' · '+fmtW(it.w)+' kg':''}</small></div>`).join(''):
+      (h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
+      `<div class="hd-row"><span>${vidName(vid)}</span><small>${fmtW(w)} kg</small></div>`).join(''):
+      '<div class="hd-row"><span>Sem detalhes salvos nesta sessão</span></div>');
+    return `${head}<div class="hrow" onclick="toggleHist(${i})" id="hr${i}">
+      <div class="wk" style="background:${HIST_COLORS[h.workout]||'#F5B301'}">${h.workout}</div>
       <div class="mid"><b>${h.label} · Treino ${h.workout}</b><small>${ds} · ${h.done}/${h.tot} séries</small></div>
-      <div class="pct">${pct}%</div></div>`;
+      <div class="pct">${pct}%</div><span class="hcv">▾</span></div>
+      <div class="hdetail" id="hd${i}">${det}</div>`;
   }).join(''):'<div class="empty">Nenhum treino registrado ainda.<br>Conclua um treino e ele aparece aqui. 📈</div>';
   const plan=SETUP?`<div class="tip"><div class="ic">📅</div><p><b>Sua semana:</b> ${weekPlan(SETUP)} (${SETUP.freq}x). Nos outros dias, descanso ou caminhada leve.</p></div>`:'';
 
@@ -1663,6 +1699,10 @@ function renderProgress(){
     </div>
     ${LS_OK?'':'<div class="empty" style="color:var(--red)">⚠️ Este ambiente não salva dados entre sessões. Hospede o arquivo (ex: GitHub Pages).</div>'}
   `;
+}
+function toggleHist(i){
+  const d=$('hd'+i),r=$('hr'+i);
+  if(d){d.classList.toggle('op');r.classList.toggle('op')}
 }
 function calcStreak(){
   if(!HISTORY.length)return 0;
@@ -1726,11 +1766,12 @@ function renderOB(){
       <div class="ob-hero">
         <div class="logo"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#181818"/></svg></div>
         <h1>Bem-vindo ao <em>IRON</em></h1>
-        <p>Seu treino de academia, do seu jeito. Responda 5 perguntas rápidas e eu monto seu programa completo: exercícios, ordem, séries, repetições e descansos calibrados pela ciência de hipertrofia mais recente.</p>
+        <p>Seu treino de academia, do seu jeito. Responda algumas perguntas rápidas e eu monto seu programa completo: exercícios, ordem, séries, repetições e descansos calibrados pela ciência de hipertrofia mais recente.</p>
+        <input class="ob-name" id="obName" placeholder="Seu nome (como quer ser chamado)" value="${OBDATA.name||''}" maxlength="20">
         <div class="ob-cta">
-          <button class="ob-btn pri" onclick="OBSTEP=1;renderOB()">Montar meu treino</button>
-          ${hasData?`<button class="ob-btn" onclick="useDefault()">Continuar com meu treino atual (PPL)</button>`:
-                    `<button class="ob-btn" onclick="useDefault()">Usar o programa padrão (PPL)</button>`}
+          <button class="ob-btn pri" onclick="obGoForm()">Montar meu treino</button>
+          ${hasData?`<button class="ob-btn" onclick="obUseDefault()">Continuar com meu treino atual (PPL)</button>`:
+                    `<button class="ob-btn" onclick="obUseDefault()">Usar o programa padrão (PPL)</button>`}
           ${SB_ON()?`<button class="ob-btn ghost" onclick="closeOB();$('acct').click()">Já tenho conta ☁️</button>`:''}
         </div>
       </div></div>`;
@@ -1742,6 +1783,10 @@ function renderOB(){
     ob.innerHTML=`<div class="ob-in">${steps}
       <h2>Monte seu perfil</h2>
       <div class="lead">Suas respostas definem o programa. Dá pra ajustar tudo depois.</div>
+      <div class="qb"><h4>Como você quer ser chamado?</h4>
+        <div class="hint">Aparece na saudação do app.</div>
+        <input class="ob-name" id="obName2" placeholder="Seu nome" value="${OBDATA.name||''}" maxlength="20">
+      </div>
       <div class="qb"><h4>Quais grupos você quer priorizar?</h4>
         <div class="hint">Marcados ganham prioridade na ordem e volume extra. Desmarcados perdem os isolados (os compostos mantêm a base pra evitar desequilíbrio).</div>
         <div class="qchips">${Object.keys(GRP_LABEL).map(g=>
@@ -1772,8 +1817,8 @@ function renderOB(){
         </div>
       </div>
       <div class="ob-nav">
-        <button class="ob-btn" onclick="OBSTEP=0;renderOB()">Voltar</button>
-        <button class="ob-btn pri" onclick="obGen()">Gerar meu treino →</button>
+        <button class="ob-btn" onclick="obGrabName();OBSTEP=0;renderOB()">Voltar</button>
+        <button class="ob-btn pri" onclick="obGrabName();obGen()">Gerar meu treino →</button>
       </div></div>`;
     return;
   }
@@ -1798,6 +1843,9 @@ function renderOB(){
       <button class="ob-btn pri" onclick="obFinish()">Concluir e treinar 🚀</button>
     </div></div>`;
 }
+function obGrabName(){const i=$('obName2')||$('obName');if(i)OBDATA.name=i.value.trim()}
+function obGoForm(){const i=$('obName');if(i)OBDATA.name=i.value.trim();OBSTEP=1;renderOB();window.scrollTo({top:0})}
+function obUseDefault(){const i=$('obName');if(i)OBDATA.name=i.value.trim();useDefault()}
 function obTgl(g){
   const i=OBDATA.groups.indexOf(g);
   if(i>=0){if(OBDATA.groups.length>1)OBDATA.groups.splice(i,1)}
@@ -1843,7 +1891,7 @@ function obAdd(id){
   $('pickOv').classList.add('hidden');renderOB();toast(x.name+' adicionado em '+pickDay);
 }
 function useDefault(){
-  SETUP={...DEFAULT_SETUP};PROGRAM=generateProgram(SETUP);
+  SETUP={...DEFAULT_SETUP,name:(OBDATA&&OBDATA.name)||''};PROGRAM=generateProgram(SETUP);
   save('iron_setup',SETUP);save('iron_program',PROGRAM);cloudSync();
   closeOB();cur='A';render();
 }
@@ -1864,8 +1912,8 @@ function obFinish(){
    3) Cole os dois valores aqui embaixo, entre as aspas
    4) Rode o conteúdo do arquivo supabase.sql no SQL Editor
    ============================================================ */
-const SUPABASE_URL = 'https://vxyicadvizwnmclijofn.supabase.co/rest/v1/';
-const SUPABASE_ANON_KEY = 'sb_publishable_lRPzAYweHnyvZDktHx5V3A_LTnM8U3D';
+const SUPABASE_URL = '';
+const SUPABASE_ANON_KEY = '';
 
 let sb=null, sbUser=null, syncT=null, authMode='in';
 const SB_ON=()=>SUPABASE_URL.indexOf('https://')===0&&SUPABASE_ANON_KEY.length>20;
@@ -2016,7 +2064,7 @@ async function exportPDF(){
   const {jsPDF}=window.jspdf;const doc=new jsPDF();
   doc.setFontSize(18);doc.setTextColor(20);doc.text('IRON · Relatório de Treinos',14,18);
   doc.setFontSize(10);doc.setTextColor(120);
-  doc.text('Pablo · gerado em '+new Date().toLocaleDateString('pt-BR'),14,25);
+  doc.text(((SETUP&&SETUP.name)?SETUP.name:'IRON')+' · gerado em '+new Date().toLocaleDateString('pt-BR'),14,25);
   doc.autoTable({startY:32,
     head:[['Data','Treino','Séries','Conclusão']],
     body:[...HISTORY].reverse().map(h=>[fmtBR(h.date),h.workout+' · '+h.label,h.done+'/'+h.tot,Math.round(h.done/h.tot*100)+'%']),
