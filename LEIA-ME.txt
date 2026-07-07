@@ -1,0 +1,13 @@
+IRON · Treino PPL — Pacote do app (PWA)
+
+COMO PUBLICAR (GitHub Pages, igual você fez com o Studio Manual):
+1. Crie um repositório novo (ex: iron-app)
+2. Suba estes 5 arquivos na raiz: index.html, manifest.json, sw.js, icon-192.png, icon-512.png
+3. Settings > Pages > Branch: main > Save
+4. Abra a URL gerada no Safari do iPhone
+5. Compartilhar > Adicionar à Tela de Início
+
+Pronto: vira um app com ícone próprio, tela cheia, funciona offline
+e guarda pesos, variações e histórico no aparelho.
+
+EXPORTAR DADOS: aba Progresso > botões "Exportar Excel" e "Exportar PDF".

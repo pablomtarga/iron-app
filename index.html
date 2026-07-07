@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#F4F5F7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="IRON">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAQAElEQVR4nOxcPdMk11V+btcgra3io0rrQNpdcIBUJALbZJL/AamgCjkjYRXwB6SAxIQk2FUmlcIVIQUGAj4kYxMTWQ61qwSJQtjyrna1c9zT956P+9Xd89090x28O+99p89z7z3nPPeZZ2dmtf7Jt5xzIIJzRNQ+BAGbAXJwhO5nN949pXfcR+jGsYkTRhCetBkBAsBYrDArR+vKOK19TMYNWD5mGUvvJR4eO67rWsfrsnuIcI3FSvZW1tUNBdywlnDvMFY5ZjWPUb4Yy9F//aGuLb78nTwnhP0N4yB+Et9K6d3+3jwqNBCimBFWmLDFshFpOOYorG5Y9zfFQgAcipn8gjhnskFxfeiWF3aKqjGr+cqwONKIfJViNlKDm67qpklSob6m9EaSnfWZQ1hh15dmNvBdSzxDJ1MJfdz9DH1sYkZYrpvJppbBWDyrboWOEUMgP3XuY4sFxdKYjAWeAxksCFbYTd5sZaMUK8R0fnujmLYyZBXOhX4LmeN1hZ8pcMgfbxCZ9KZYfmppHuN8IUmLspHFYuZIL4ItKcMDWQ32VHdvf5fGi5xhEKkINZ4zonUlfYycn1xlFcnD4f4ucoa5h4qb1B+zvAMJVqjy8IvLaNDcUIjZhPMGhjOiDgg1KNVtWoV5DL7uwuydua3EGdJ4FquPM0zVC2eEmAGL+zjEz7GYM7r+thti+hiyDcJPvC6XYQEZZ0j6Qr9iiDN8fyPiDDn7YTmDMs5IsYSJUcqX43wx8zmzCqflw+vilTr6ybeiatlfZ5TrutDH2+kMGhVzFJY9j69EZ+jsh2PKeEPYU2fw2S86QwVI0sf76QxEOkM1TUwvBawddYZnKcYC9ekMzpPG7OUM1HWG69cZroI1qDMgOoOxKjrDYlnmoKh0tIYpa5WcG+LbzNDw2V/njEpME2Fsf6ez0ZwNxEwj9HOG3ZkezijELM1WY1b7O52y7uFAzKrOsNzfbKszQsVxDfobxuoMqmBZzhAs4JQ6A/Z1EK9Cz2My+UCvzqhhCaUKG+2pM1xJZ1CqMwJWki8tH14X76rVoBvmWPwMfvpl6YxivoZ0hh1rdtIZGnHxMzTmrjrj7H4GEk3DMVvm+KaWjuGBrAZ7qru3v0vjRc4wiCfSGU7ooryK5OFwfxc5w9xDxU3qj1negQRrPz+Duy4db8bojMXPMJwh6Qv9egF+htUZNl8b5qDddEatBrM+XvyMifsZ6TDvYTNaZ/DZv/gZh9AZk/IzCBFnSL4c/fibVNIZYXeK16DOiAKlZZpzRiWmiTC2v9PZaM4GYqYR+jnD7kwPZxRilmarMc/kZ8TjCtssfgau3s+oeV2eORY/oxfLzuwS/QxU8tUsfgYjVnRG6CQTc1edMVk/o5yvTnN8I67Bnuru7e/SeJEzTNWfSGc4oYvyKpKHw/1d5AxzDxU3qT9meQcSrOP4GVG+DFZDi59BkicYzpD0hX69YD8jypfBcusffwO0+BnZuJ3ZpfsZqOSrweJn5DqD86QxezkDM/czrM6wGtQzR84NUnFJddLw2U+Ln7GTziDKl6t7OBCTq7z4h/J4Cusyfmqw+BmgK/czal6XW//nHyCtqcLpiUofL37GBfgZroxFDcxssPgZh9AZs/MzKl6Xy5iDhnRGabxYg6YST6QznNBFeRXJw+H+LnKGuYeKm9Qfs7wDCdZp/Qxng5mYjdagrqFXZ3ANYvEzsLfOmIafwdP3iKxBmTmGay1+uPgZlK4JwzzUj8WRzuBnBCzt0nA1WPyMQ+iMWfsZVmcErG4lHXPQkM6Iei4t05wzoMlEdo3ljAirrjMqMdMI/Zxhu62HMwoxS7PVmDPxMyox+VP2XPQJZwhoqEEsfsb+OmN6fgaMzpCYHXP86Pejaqn08eJnXLCfUYvZhKWnnLH4GVfkZ8DoDFNKzjJH3HO2Cntr0FTiiXSGE7qgolpKHg73d5EzzD1U2gz0xyzvQII1DT+jsIruaqQ4sfgZiDiDDqgzpu1nWJ2h/OSC5qAD6Iy0Cmn47KdFZ4Rfioxd5SE6gs4o8VBj+njxM67Uz0DF6xLmyHsuLdOcM6DJRKkSR3FGhFXXGZWYaYR+zrCd0cMZhZil2WrMmfsZ4bZsqEnP/sCli5+xt86Yj59hOYP3rZv1+kevxC29+Bk5W9FRdIY+ZTjmUXRGDYvX2+ylM2jxMzS98/UzkklIvtz6g1eSeqnVoKnEE+kMJ3RRQKTs4XB/FznD3BPHLM02j1negQRr2n5GMSYo/U6wPs6gk+uMxc8Y0hkmX3v4GYRyvppNLJmrs5zhZB/Dkw1Dyl6EiCAtH7+/nAtnSppjOhBZpvY8HGH5upN6sjsVY5mzjJx2AMd0ERbpOHRnFZdrF+7ho/W///faVDl0f90QlpRr2FuOTNrGmmOXVBtJ0AiL/9iXrwTL2UyFPgldpPvZl69m8TOKOuPtd58+/IKqOuOy/IxyvrBhDgxyBmTlthK78NU+5teZTriE2Yw72PRxKWaMyONc6iXOIOGhFKvCGRIzRsS999fvvf/09tdcvY9jLAfLGdrHJqaeAhEi0j72WMiwuL+jfKHMGXqSRojIOQMpZ5h8pd8JtvgZRD/7eP32O0/av9256SRmzPwZFmU6Y1Z+RpovxlpVOcMyZMQZodZOqjPoFDqjHXr4Bf78b548eoxf/wr95nNmf7fVGbpv+rLmbDqDttAZFquhMTqDcCV+RssZP/uYAm1knEEoYdkuspzB3EByBpkQk/Iz0nzx+CrnDG7Oqs4AKn3MNbitznCBh5w5oUPkYZ0RzgiHIc4IFF7RGe34vf/48r0P1j5ZG8GRcYZwHjBKZzhReeDd42ltqTMMZyDlDDekMxBzRqYzsnxxzCbnDDq5ztBzx+oMi4WcM6TllD/7OYPqOqMd//DB07ff+VLC3r4Zs3GCdVl+htUZhsJa5rhuP8PH/OWj9d3vfdlKDbnu3MTWOkMi88QBzMLPKGIh+BxX//6Mt9956qUGlDkaPftzrEGdMSs/o4iFjjm0j3FlfobfqXvvP33vg6eIr9s3tVsUywFDOgMz9DMiLKOWzHeCaXWfQmfAvg5i4tLzmBs25gxwyyl/VrGkbYSNMp3R/vPhA7JSQy5vcqRYlOkMogvwMyIso0FXEUNGnBFq7aQ6g06nM2jjatDd7z2xUsNfYnJgUGfovpmXBYYz9NQIaQlBcQydQQfQGVaDNrA6g3BV789oOSORGv66bbzRLXSGnEGa73n4GWR0RhjvAqxwfX6G/+fe++pqJJc/U67Hz7A6w5mY/J1gJ9EZeu5YnWGxkHOGtJzyZz9n0JDOaP/+4YN1UWr4q1WjjHgVfobVGZwWzxx233EOnVHjp+PojHb84Repq5Fcd752XX5GxetCE2pQNUG/zpi3n+FnVJMact16HlflZ1idAdWgljm68BfsZ3isztVYo/dqmQNDOgMX5Ge4PGa3Uv2sbDi3cGCdAfs6iItTz2Mmh5gzwhXpjBqWtI2wUUVntP/0Sw25bj/vLGc4yxmcaFyQn5HmizXo6jw6g06tM9q/dK5Gn9TwV2ty/NZzLtUZDvHZD8ScoadGSEtYAI6hM+g4OkMmyFgNzD5KY8JFNUi0p86AcoasgSo6g6L5HcTP8JkalBr+al/HUr/OIDJ9FrZz1n4GjM4AdBErKbBCH1+En+FhxkgNf7UOGG/GtfgZTipYaqu7GssZh9IZNBk/w8f86f1RUoOLA9fmZ+jZLaQB/2rFcMaF+RkeppUab35/WGrIdWfDHNflZ0RYUm2gRhoTkc64BD/DBx0pNeTaMMeV+Rnw/KR5DD22Svv4UvwMn697H6xHSg1bHK4UM0bcQWcAU/UzUMojSL6fo3hubaMzuLoxBT/DRxvpaiTXnZuNIXLGYs7woXfSGbwBJZ2BU+oMWOZDojM0X/49pKidW/P0M3zMVmQU36vRf7Umx288Z3cWiDlDTw3/F14AjqEz6Dg6QyZoEEO1IcqX/U4w7K0zoJyBIZ1B0fwO6Gf4feykBra9/OtYPft96jXfl+lnwOgMm6+VrcFtdcYE/Qwf1H4CZavrzk3ICY2r8TNQeS3Z7KMzaGJ+ho/zYetqvPsUO10b5uBuw9X4GSlnMMDq8DoDZ9MZ7b0PH63vbuNqJNed53FmnYHj6AwtckUM1ZbniwGavXWGA03Cz/A/W87YytVIrls3hQIY67Q64yx+RpovxlptqzMwST/Db8wOrkZy3bmJGHEHnQHMzc9I8xUUodcc2+gMTM/P8P98+DHt4GokV/dqZU+dwRtQ0hk4pc6AZT6M1BmK1f7y9N9+j/REsEwtfBgufkza7DJlUPIw+QU2Ju8I2b4gko1irPheqsZsb3v4GH/0l493eO161Ov1V/HXf0Z2S4QXo0saP/tDcW+jfLHO4PEsX2nYEfnih83c/Qy/PW/t5Goc9XrpBXz3O/PwMwxW9H9qq+jsr+iMyfoZfntaV+Pv9pMaB79uPIMfvElffRaz8DOszrBYjVZp0sfm3Jqmn+G356d7uBrHu1rOePnF2fgZVmdYDbqyTD0jP8NvT+tqvPn9Jzu7Gke6Xn+V/uQ1zMjPSLGYCxoaqzOm5Wf4ne1cDUzq+t0X6K++MzM/I9U0zP2rOfoZ/ud7o98WerLrxjP0t2/ixrO8rpn4Gamm4Xw1NDc/w+/C5ns1pic1Ws5oX6TwluBEOkPytaufYXWGzddqLu/PcKZxHn1BdycpNV5/bfOgqjPoODoDh9QZNl8NzcrP8DHfmp7U2LgabwzojMn6GUWvq2OOqAYn7Wf4mPfefzo9V4N+8Ca+emNAZ2BAZ5zNz4g4IyBuYjb23KIJ+xn+8TSlRssZL78ozD8/P0OrDSDDfCtgSGdgEjrDdZ9AmabU+ONvg+bsZ9Ty1WAOfoZX0VN1NYCZ+xlWZ2i+/GdlJ+5n+MjTdTWewdz9jJrX1WDafoYfnKqrsXmRcjqdIcxxaD8jypfBWpV1Bk1FZ2DCUuP1Vy/Ez0jzFca7z8pO1s/wq3/r3Qm+V4O++8bl+BlWZ0A1qHNf/utL5qCQldiHtmrtE0leu5OtVeIO0HvimM5GrsZM/mB/mKonOQBZGmWzjZgWn31Or/xFHn+Lq5Uaf/82XrqF0jx5FYX5u3QB4Re9yewb2TU4y0mFyHlM159HLSTH9YEsX5tPvClnYGud0csZtJ/OiLCkA4BwEkN6Tl4wQvnZrEL1U3fd/2SvyoB3NW7hRDpD+vuYfobtNxgNugJjTMfPqGJJuSL7DAjkcFfEuNoC1kefYp9r816Nb6OgM3AcnXESPwOGiWE0aIPp+RkFLMMZYRx8Rkq3+XoSLK4qPaK7mPf/Bztf3tWgi/MzYHSG5wzPxOxz+JWUOeOkfkaE5WA5g6TnSjFjRKR97LFA93dlDnY1DGcwS8/dz0DF6zLfCYacM8IV6QzObYUzDqczXElnUKozAhZzhg+R6AzlJ7iPdtUcnatxmX4GIs4gwVqV3fFqrgAACXRJREFUa3CyOsMpN2iCDGfE1Vbgp/ufYIerczVMB2vLX4KfEXOGE6ymqjMomt8J/IytdYacQSZEUWcolnM7HCvsajA/cbfB9esMpGf/VP0MGJ0B088r1HRGOCMchjiD6W3H92dA+M2ZE1pXhVxnONkRPaHDtIo6Q7A++8X65w8dtrk279W4S195FrnOQMwZeR+nZ/+Qzjj2+zO0SkzMRGcI+aBjjhE6o5cz6IA643B+hskc/29A+1Jle9poOePlW8fXGdLf0o28DAeknJFjAbHOiPPlYHUGFXWGy7DCNxhHnBGuufsZ2eugzdhHWwqOzXs1Xov6JHRRzBlz9zM0XzFWA6sz4vnN2s9Isbp7t1Kj4b0asc64SD8DFa+riXSGzI9m72ekWF3M+58Sxl0bV+MuBVeDWRoX6meg4nU1l+pniM6A03oazxwbV+PFI+sMWObDGf0MxeKYftObvrP/jDrDYU8/w1K+nP0jNUfkalyBnyFbr30emIOi+V2MnxGokevJ7+OYVyvB1QgsBXMk1HQG0rN/bn6G7Kpwho+54jPC4YL8DBidAe7j//8lDZoc6moookPMGXkfp2f/3PwM2BC6CjTx2d/HGXRAnXFkP8NyhvT3mDMluBrH0xnS39KNvAwHpJyRYwGxzojz5WB1BhV1hsuwOGbIFzRfq4v0M1A6+wfPFHU1rszPsDrD5qvZU2dM08+A8hBXtht4D9jG1XjDI0q30ZX4GVAeivIVfydYhTMwNz8DicfQ3XT/E1erjOBqPMsruTI/w3BGlK/6d4JJ20jF7akzTuhnpGd/h9XzBkH/Xo2AJbfhQDoDlvkwQT+j5nWt+jnD1ONxdIbDMfyMQh/XHTB2NVyEdUCdIRM0nBEqACfRGRYLAzrD5quh7XUG+nVGthen9zP4KRBu77zzQmWwqwFTSi6ZBC7dzyjnqxWkeQ0yvc3Vz7A6Q14H/d/nhXdyGFcDhriEz9M+Ts/+S/EzNF+xpmlyzqAD6oxz+BlEBawHJdpoOaP9DxQcQ2dIfwclLnU5RT8j0oUyG+Nz4HQ6Q9lIN+dIOkOwcgfMuxqBXWPOuDY/o+h1wfgcAzpjRn6G1RmClQiOztUgLH5Gki8oPyF8D6k5n2o6Y6iPKTq3HHA+PyPnp/Ze+4kE42osfkaGZfip0baRittTZ5zbz4g5wyPSg0+VRzdS44Uj6AxY5sOM/Iwa1gra36aDeWMOpjMcTuZnWM4QXhTNsZEarx5HZ8gEDWeECsBJdIbFwo46w2Lxd4JdkJ+RYnUxvebYuBp/uobr1xlIz/5L9zOEM2Cx/HtIL8nPYEQYd4E++3zzTo7gatxwiDkj7+P07L90P6PMT/7d55fkZ/ABxWzUrdkb55v3arwIyxmLn0Eo8ZML7bmCcIbhpcPoDIlMujmn1Bny8/7/utdfXcsnUGQqi5/honHlDBeYI8Ti86xfZ0zez7A6g18N4cavhW8LreuMq/YzYs6QXYV78i9f13IFYFhIc6avlJJx5kbbF2El/TEt02Z/KI+nsIo1EJNvq0wieZhiCfNZrGQqhch5zPipOZbdQ8qwCjHTCFUsmW0NK93y8EuDnXXGJP0M0RkS0wEH1hmwzIcL8DPI6AzFan978s9f76u1EmfIuQVbTUj72DxlOGYVS5mz3sdGZ4zCqnBGjmXGdRn6jBExR2HV+zjojJ6YMlAcD9tQyVcBS2NBPisb3ZVxBjc8AdvojHP4GaIzTCm5ZBJY/AxUdQZ04hDmSIut3nNpG2gfkyjwwM9pdTtU+7i3v6mkMwxifi+voh4z68V06Sk/yc7278w2/a2FpHVv76FimMquunIes5XX+SndmQaGM4Z1xrT9jCPqDOnvS/QzSF9L6ypcxxy/g6TW9tEZWnvDMatY++iMETwUP5yhzqBefgpbu6POsDEbuQlAevYDW+uMs/oZXPu0+Bnb6wyDxRrUMEdff6clq31M5ZMbUQlu1d8pbM4ZlZh8W2USycMUq6IzoqkUIg/1cY6VcEYamIphKjFL0xqnMwoxs51pFj+Drt7PkKfqqyE/pQ1z0H46Q58S3bz4GSnWPjpDBorjYRsOoDNswMZyBjc8AdvojMXPUKxZ+hmo/J8aM0d6kf2h9b74GTv1txaS1r29h4phKrta4IyROiPNV2VnJGZT1hmLn3FNfgZQyld785N/+u24XBY/A1PRGdTLT2FrD6wzAE0Gf8p+W52x+BlFrL11xln8jFq+DHPQ4mdQsZFG9XGOlXBGGpiKYSoxK/1dw9rSz4himpubxc8ALPNdo5+RcgZfG+ZY/IzwjBExR2HtozNkoDgetuGIOsOONYufQVfvZ6T54pgtc9xJSln7mH/hes+q26Hax739XdQZBjG/16ykEjPrRb1p8TOKO5NuUDbeaHvkZz/rjMXPSLGAS/Iz7AlusdyTH96hHp2htYcxtbb4GfU+HhUTJWKBqWNEGcbBdYbFaoQzwujiZ5xEZ0zKzyhjbd4Jxsyx+Bmj+jjHSjgjDUzFMJWYlf6uYR3Iz4jHdcrN4mfg6v2MCEu2gZlj8TPSmKOw9tEZMlAcD9twBp1h72wWP+NkOgMWCwbr3H4GJV4Xx2yZ47boDK73rLodqn3c299FnaFH06l0RtjZxc8Y4v4IC/KdYLT4GSUs4Br8DOWMOF/u8Q9vI5Ko5ZoaM774GTP1M5BxRtAcWPwMOqLOmIWfEXGG0aDu8T/eLtUaKpqgp79NmWY12BuTb6tMInmYYlV0RjSVQuShPs6xEs5IA1MxTCVmpb9rWEf2M9J88S/8nWDMGf7Oxc+A6gyzgxfqZ6T5ciFfLXPcAkbW2qF1BtHiZwDT0hk+kh9pEB3xi59xAJ0BiwWDNVU/w+qMLib41YowB+2gM0wfZzVoTq/8XrOSSsysF/Wmxc8o7ky6QfXxImeYRIV/GsMZsgYz7wGdYfp48TNm62dE+TIatGOOEbUWDS9+xuiYKBELTB0jyjDOozPA3RXHbLD4GYfQGbP2M6BeF+eLfY5b2K6/TZlWatCwdx6gglXuOYNV0RnRVAqRh/o4x0o4Iw1MxTCVmJX+rmGdyc+oxPSfss9rcPEzpOcSLKszciyOaThDtpb4r5PzMxBxBudr43P8w4uI6uUIOoNo8TOAiekMitdVitn7nWAH0hmLnwHspjOkiI7rZ8DoDJsvyxyy2rSQbJfmNeggp1d+r1lJJWbWi3rT4mcUdybdoPp4kTNMovJ7oz//CgAA///1qIZ3AAAABklEQVQDABFvCBtf8JRtAAAAAElFTkSuQmCC">
+<link rel="manifest" href="manifest.json">
+<title>IRON · Treino PPL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F5F7; --panel:#FFFFFF; --panel2:#F1F2F5; --line:#E5E8EC;
+  --ink:#14181F; --muted:#667085; --muted2:#98A2B3;
+  --viz1:#1A1C20; --viz2:#0C0D10;
+  --shadow:0 1px 2px rgba(16,24,40,.05),0 6px 16px -6px rgba(16,24,40,.10);
+  --green:#12805C; --red:#D92D20;
+  --accent:#F5B301; --accent-ink:#181818; --accent-text:#9A6B00;
+}
+html[data-theme=dark]{
+  --bg:#0B0C0E; --panel:#16181C; --panel2:#1E2127; --line:#2A2E36;
+  --ink:#F2F3F5; --muted:#9AA1AB; --muted2:#6B7280;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 20px -8px rgba(0,0,0,.55);
+  --green:#39D98A; --red:#FF6B6B;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',sans-serif;
+  overflow-x:hidden;padding-bottom:118px;-webkit-text-size-adjust:100%;
+  transition:background .3s,color .3s}
+
+.wrap{position:relative;z-index:2;max-width:560px;margin:0 auto}
+
+/* ---------- HEADER ---------- */
+header{padding:calc(16px + env(safe-area-inset-top)) 18px 6px}
+.htop{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.brand{display:flex;align-items:center;gap:9px}
+.brand .logo{width:36px;height:36px;border-radius:11px;background:var(--accent);
+  display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);transition:background .3s}
+.brand .logo svg{width:20px;height:20px}
+.brand b{font-family:'Anton';font-size:21px;letter-spacing:.04em}
+.brand small{display:block;color:var(--muted);font-size:9.5px;letter-spacing:.18em;
+  text-transform:uppercase;font-weight:800;margin-top:-2px}
+.hbtns{display:flex;gap:8px;align-items:center}
+.thm{width:38px;height:38px;border-radius:11px;border:1px solid var(--line);background:var(--panel);
+  color:var(--ink);cursor:pointer;font-size:16px;box-shadow:var(--shadow)}
+.datebox{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:6px 10px;text-align:right;box-shadow:var(--shadow)}
+.datebox label{display:block;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted2);font-weight:800;margin-bottom:1px}
+.datebox input{background:none;border:none;color:var(--ink);font-family:'Manrope';
+  font-weight:800;font-size:13px;text-align:right;width:112px;color-scheme:light}
+html[data-theme=dark] .datebox input{color-scheme:dark}
+
+.hello{margin-top:14px;font-family:'Anton';font-size:clamp(28px,8.6vw,40px);
+  line-height:.95;text-transform:uppercase}
+.hello em{color:var(--accent-text);font-style:normal;transition:color .3s}
+.quote{color:var(--muted);font-size:12.5px;font-weight:600;margin-top:5px;min-height:18px}
+
+.install{margin:12px 16px 0;background:var(--panel);border:1px dashed var(--accent);
+  border-radius:14px;padding:11px 13px;display:flex;gap:10px;align-items:flex-start;box-shadow:var(--shadow)}
+.install .ic{font-size:17px}
+.install p{font-size:12px;line-height:1.5;color:var(--muted);flex:1}
+.install p b{color:var(--ink)}
+.install button{border:none;background:none;color:var(--muted2);font-size:15px;cursor:pointer;padding:2px}
+
+/* ---------- TABS ---------- */
+.tabs{position:sticky;top:0;z-index:30;display:flex;gap:8px;padding:12px 16px 10px;
+  background:linear-gradient(180deg,var(--bg) 76%,transparent)}
+.tab{flex:1;border:1px solid var(--line);background:var(--panel);border-radius:15px;
+  padding:10px 6px;cursor:pointer;transition:.2s;position:relative;box-shadow:var(--shadow)}
+.tab .ltr{font-family:'Anton';font-size:17px;line-height:1;color:var(--muted)}
+.tab .nm{font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted2);margin-top:2px}
+.tab.on{background:var(--accent);border-color:var(--accent);transform:translateY(-1px)}
+.tab.on .ltr,.tab.on .nm{color:var(--accent-ink)}
+
+/* ---------- PROGRESS ---------- */
+.prog{margin:2px 16px 8px;background:var(--panel);border:1px solid var(--line);
+  border-radius:16px;padding:13px 15px;box-shadow:var(--shadow)}
+.prog .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
+.prog .row .l{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);font-weight:800}
+.prog .row .r{font-family:'Anton';font-size:16px}
+.prog .row .r em{color:var(--accent-text);font-style:normal}
+.bar{height:9px;border-radius:6px;background:var(--panel2);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:6px;background:var(--accent);
+  transition:width .5s cubic-bezier(.2,.8,.2,1)}
+
+.dintro{margin:2px 18px 10px;color:var(--muted);font-size:12.5px;line-height:1.55;font-weight:500}
+
+/* ordem do treino */
+.order{margin:0 16px 14px;background:var(--panel);border:1px solid var(--line);
+  border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.order>button{width:100%;background:none;border:none;color:var(--ink);font-family:'Manrope';
+  font-weight:800;font-size:13px;padding:13px 15px;cursor:pointer;display:flex;
+  align-items:center;gap:8px;text-align:left}
+.order>button .cv{margin-left:auto;color:var(--accent-text);transition:.3s}
+.order>button.op .cv{transform:rotate(180deg)}
+.order .bd{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.order .bd.op{max-height:900px}
+.order .bd-i{padding:0 15px 14px}
+.order .oi{display:flex;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+.order .oi .n{flex:0 0 22px;height:22px;border-radius:7px;background:var(--accent);color:var(--accent-ink);
+  font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.order .oi .tx b{display:block;font-size:12.5px;font-weight:800}
+.order .oi .tx span{font-size:11.5px;color:var(--muted);line-height:1.45}
+
+/* ---------- EXERCISE CARD ---------- */
+.list{padding:2px 14px 8px;display:flex;flex-direction:column;gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;
+  box-shadow:var(--shadow);opacity:0;transform:translateY(12px);animation:rise .45s forwards}
+.card.done{border-color:var(--accent)}
+@keyframes rise{to{opacity:1;transform:none}}
+.ssband{height:3px;background:repeating-linear-gradient(90deg,var(--accent) 0 14px,transparent 14px 26px)}
+
+.ctop{display:flex;gap:13px;padding:15px 15px 10px}
+.viz{flex:0 0 96px;width:96px;height:96px;border-radius:15px;
+  background:radial-gradient(120% 120% at 35% 12%,var(--viz1),var(--viz2));overflow:hidden;position:relative}
+.viz svg{width:100%;height:100%}
+.cinfo{flex:1;min-width:0}
+.cidx{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.cidx .n{font-family:'Anton';font-size:12px;color:var(--accent-text)}
+.badge{font-size:8.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  padding:3px 7px;border-radius:6px}
+.badge.new{background:var(--accent);color:var(--accent-ink)}
+.badge.ss{background:var(--panel2);border:1px solid var(--accent);color:var(--accent-text)}
+.cname{font-family:'Anton';font-size:20px;line-height:1.02;margin:3px 0 7px;text-transform:uppercase}
+.meta{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:10.5px;font-weight:700;padding:4px 9px;border-radius:8px;
+  background:var(--panel2);border:1px solid var(--line);color:var(--ink)}
+.chip b{color:var(--accent-text)}
+
+/* variações */
+.vars{display:flex;gap:7px;overflow-x:auto;padding:2px 15px 10px;scrollbar-width:none}
+.vars::-webkit-scrollbar{display:none}
+.vlab{flex:0 0 auto;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted2);align-self:center;padding-right:2px}
+.vchip{flex:0 0 auto;border:1.5px solid var(--line);background:var(--panel2);color:var(--muted);
+  font-family:'Manrope';font-weight:700;font-size:11.5px;padding:7px 12px;border-radius:999px;
+  cursor:pointer;transition:.18s;white-space:nowrap}
+.vchip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+
+/* peso + descanso */
+.wt{display:flex;align-items:stretch;gap:8px;padding:0 15px 4px}
+.wt .stp{display:flex;align-items:center;background:var(--panel2);border:1px solid var(--line);
+  border-radius:13px;overflow:hidden;flex:1}
+.wt .stp button{width:46px;border:none;background:none;color:var(--ink);font-size:22px;
+  font-weight:700;cursor:pointer;padding:11px 0;transition:.15s}
+.wt .stp button:active{background:var(--line)}
+.wt .stp .val{flex:1;text-align:center;cursor:text}
+.wt .stp .val .num{font-family:'Anton';font-size:25px;line-height:1}
+.wt .stp .val .u{font-size:11px;color:var(--muted);font-weight:700;margin-left:2px}
+.wt .stp .val input{width:78px;background:var(--panel);border:1.5px solid var(--accent);border-radius:8px;
+  color:var(--ink);font-family:'Anton';font-size:22px;text-align:center;padding:2px}
+.wt .rest{flex:0 0 auto;border:1px solid var(--line);background:var(--panel2);border-radius:13px;
+  padding:0 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:pointer;transition:.15s;min-width:62px}
+.wt .rest:active{background:var(--line)}
+.wt .rest .t{font-family:'Anton';font-size:17px;line-height:1;color:var(--accent-text)}
+.wt .rest .lb{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);font-weight:800}
+.lastw{padding:5px 17px 2px;font-size:10.5px;color:var(--muted2);font-weight:600}
+
+/* séries */
+.sets{padding:6px 15px 12px}
+.sets .lab{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  font-weight:800;margin-bottom:7px;display:flex;justify-content:space-between}
+.sets .lab span:last-child{color:var(--accent-text);font-family:'Anton';font-size:13px;letter-spacing:0}
+.dots{display:flex;gap:8px;flex-wrap:wrap}
+.dot{flex:1;min-width:44px;height:44px;border-radius:12px;border:1.5px solid var(--line);
+  background:var(--panel2);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-family:'Anton';font-size:15px;color:var(--muted2);transition:.18s;user-select:none}
+.dot.fill{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);transform:scale(1.03)}
+.dot.fill::before{content:"✓";font-size:17px}
+.dot.fill span{display:none}
+
+/* nota + ações */
+.drnote{margin:0 15px 10px;background:var(--panel2);border:1px solid var(--line);
+  border-left:3px solid var(--accent);border-radius:12px;padding:10px 12px;display:flex;gap:9px}
+.drnote .ic{flex:0 0 auto;font-size:14px}
+.drnote p{font-size:11.5px;line-height:1.5;color:var(--muted);font-weight:500}
+.drnote b{color:var(--ink)}
+
+.acts{display:flex;gap:8px;padding:0 15px 15px}
+.abtn{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;
+  border:1px solid var(--line);background:var(--panel2);border-radius:12px;padding:11px;
+  color:var(--ink);font-family:'Manrope';font-weight:800;font-size:12px;cursor:pointer;
+  text-decoration:none;transition:.15s}
+.abtn:active{background:var(--line)}
+.abtn.vid{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.abtn .cv{color:inherit;transition:.3s;font-size:11px}
+.abtn.op .cv{transform:rotate(180deg)}
+
+.how{max-height:0;overflow:hidden;transition:max-height .4s ease;margin:0 15px}
+.how.op{max-height:560px;margin-bottom:15px}
+.how-i{padding:2px 0 4px;border-top:1px solid var(--line)}
+.how ol{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.how ol li{counter-increment:s;position:relative;padding-left:28px;font-size:13px;line-height:1.5;color:var(--ink);font-weight:500}
+.how ol li::before{content:counter(s);position:absolute;left:0;top:0;width:20px;height:20px;
+  border-radius:6px;background:var(--accent);color:var(--accent-ink);font-weight:800;font-size:11px;
+  display:flex;align-items:center;justify-content:center}
+.cue{display:flex;gap:8px;font-size:12px;line-height:1.45;padding:8px 0;border-top:1px dashed var(--line);font-weight:600}
+.cue.g{color:var(--green)}.cue.b{color:var(--red)}
+.cue b{font-weight:800}
+
+/* concluir */
+.fin{margin:18px 16px 6px}
+.fin button{width:100%;border:1px solid var(--line);border-radius:16px;padding:17px;font-family:'Anton';
+  font-size:19px;letter-spacing:.03em;text-transform:uppercase;cursor:pointer;transition:.2s;
+  background:var(--panel);color:var(--muted);box-shadow:var(--shadow)}
+.fin button.ready{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.fin button.ready:active{transform:scale(.985)}
+
+/* ---------- PROGRESSO ---------- */
+.pv{padding:6px 16px 8px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 10px;
+  text-align:center;box-shadow:var(--shadow)}
+.stat .v{font-family:'Anton';font-size:29px;line-height:1;color:var(--accent-text)}
+.stat .k{font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:800;margin-top:4px}
+.week{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;
+  margin-bottom:16px;box-shadow:var(--shadow)}
+.week h4{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800;margin-bottom:11px}
+.days{display:flex;justify-content:space-between;gap:5px}
+.day{flex:1;text-align:center}
+.day .ball{height:36px;border-radius:10px;background:var(--panel2);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;font-family:'Anton';font-size:12px;color:var(--muted2)}
+.day .ball.hit{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.day .ball.today{border-color:var(--accent);border-width:2px}
+.day small{display:block;font-size:9px;color:var(--muted2);font-weight:800;margin-top:4px}
+
+.sectit{font-family:'Anton';font-size:16px;text-transform:uppercase;margin:4px 2px 10px;
+  display:flex;justify-content:space-between;align-items:center}
+.sectit button{background:var(--panel);border:1px solid var(--line);color:var(--muted);border-radius:9px;
+  font-size:10px;font-weight:800;padding:6px 10px;cursor:pointer;font-family:'Manrope'}
+.hist{display:flex;flex-direction:column;gap:9px}
+.hrow{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:12px 14px;
+  display:flex;align-items:center;gap:12px;box-shadow:var(--shadow)}
+.hrow .wk{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-family:'Anton';font-size:17px;flex:0 0 auto;color:#181818}
+.hrow .mid{flex:1;min-width:0}
+.hrow .mid b{font-size:13px;font-weight:800}
+.hrow .mid small{display:block;color:var(--muted);font-size:11px;margin-top:1px}
+.hrow .pct{font-family:'Anton';font-size:15px;color:var(--accent-text)}
+.empty{text-align:center;color:var(--muted2);font-size:13px;padding:26px 10px;line-height:1.55;font-weight:600}
+
+.tips{margin-top:18px}
+.tip{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:12px 14px;
+  margin-bottom:9px;display:flex;gap:10px;box-shadow:var(--shadow)}
+.tip .ic{flex:0 0 auto;width:27px;height:27px;border-radius:8px;background:var(--panel2);
+  display:flex;align-items:center;justify-content:center;font-size:13px}
+.tip p{font-size:12px;line-height:1.5;color:var(--muted);font-weight:500}
+.tip b{color:var(--ink)}
+
+/* ---------- TIMER ---------- */
+.tmr{position:fixed;left:14px;right:14px;bottom:calc(86px + env(safe-area-inset-bottom));z-index:60;
+  background:var(--ink);color:var(--bg);border-radius:18px;padding:13px 16px;display:none;
+  align-items:center;gap:14px;box-shadow:0 18px 50px -14px rgba(0,0,0,.45);max-width:532px;margin:0 auto}
+html[data-theme=dark] .tmr{background:#fff;color:#111}
+.tmr.show{display:flex;animation:rise .3s}
+.tmr .big{font-family:'Anton';font-size:36px;line-height:1;min-width:92px;color:var(--accent)}
+.tmr .info{flex:1}
+.tmr .info b{font-size:13px;font-weight:800}
+.tmr .info small{display:block;opacity:.65;font-size:11px}
+.tmr .x{width:40px;height:40px;border-radius:11px;border:none;background:rgba(128,128,128,.18);
+  color:inherit;font-size:17px;cursor:pointer}
+.tmr .ring{position:absolute;left:0;bottom:0;height:3px;background:var(--accent);border-radius:2px;transition:width 1s linear}
+
+/* ---------- NAV ---------- */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:50;
+  padding:8px 16px calc(10px + env(safe-area-inset-bottom));
+  background:linear-gradient(0deg,var(--bg) 62%,transparent);display:flex;gap:10px;justify-content:center}
+.nav button{flex:1;max-width:266px;border:1px solid var(--line);background:var(--panel);border-radius:15px;
+  padding:11px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;
+  color:var(--muted);transition:.2s;box-shadow:var(--shadow)}
+.nav button.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.nav button svg{width:21px;height:21px}
+.nav button span{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+
+/* toast + confete */
+.toast{position:fixed;left:50%;bottom:158px;transform:translateX(-50%) translateY(20px);
+  background:var(--ink);color:var(--bg);font-weight:800;font-size:13px;padding:11px 18px;
+  border-radius:12px;z-index:90;opacity:0;transition:.3s;pointer-events:none;white-space:nowrap;
+  box-shadow:0 10px 30px -8px rgba(0,0,0,.35)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.cfx{position:fixed;inset:0;z-index:80;pointer-events:none;overflow:hidden}
+.cf{position:absolute;width:9px;height:14px;top:-20px;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.2}}
+
+.exports{display:flex;gap:8px;margin:0 0 16px}
+.exports .abtn{padding:13px;font-size:12.5px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="htop">
+      <div class="brand">
+        <div class="logo"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#181818"/></svg></div>
+        <div><b>IRON</b><small>Push · Pull · Legs</small></div>
+      </div>
+      <div class="hbtns">
+        <button class="thm" id="thm" title="Tema claro/escuro">🌙</button>
+        <div class="datebox">
+          <label>Dia do treino</label>
+          <input type="date" id="date">
+        </div>
+      </div>
+    </div>
+    <div class="hello">Bora, <em>Pablo</em>.</div>
+    <div class="quote" id="quote"></div>
+  </header>
+
+  <div class="install hidden" id="install">
+    <span class="ic">📲</span>
+    <p><b>Instale como app:</b> no iPhone, abra no Safari, toque em Compartilhar e depois em <b>Adicionar à Tela de Início</b>. No Android: menu ⋮ e <b>Instalar app</b>.</p>
+    <button onclick="dismissInstall()">✕</button>
+  </div>
+
+  <div id="trainView">
+    <nav class="tabs" id="tabs"></nav>
+    <div class="prog">
+      <div class="row"><span class="l">Progresso do treino</span><span class="r"><em id="pdone">0</em>/<span id="ptot">0</span> séries</span></div>
+      <div class="bar"><i id="pbar"></i></div>
+    </div>
+    <div class="dintro" id="dintro"></div>
+    <div class="order" id="order">
+      <button onclick="toggleOrder(this)">🧠 Por que essa ordem? <span class="cv">▾</span></button>
+      <div class="bd"><div class="bd-i" id="orderBody"></div></div>
+    </div>
+    <div class="list" id="list"></div>
+    <div class="fin"><button id="finBtn">Concluir treino</button></div>
+  </div>
+
+  <div id="progView" class="pv hidden"></div>
+</div>
+
+<div class="tmr" id="tmr">
+  <div class="ring" id="tring"></div>
+  <div class="big" id="tbig">0:30</div>
+  <div class="info"><b id="tname">Descanso</b><small id="tsub">Respira e prepara a próxima série</small></div>
+  <button class="x" id="tx">✕</button>
+</div>
+
+<nav class="nav">
+  <button id="navTrain" class="on" onclick="setView('train')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6.5 6.5 17.5 17.5M4 9l2-2M20 15l-2 2M9 4 7 6M17 20l-2-2M3.5 11.5l9 9"/></svg>
+    <span>Treino</span>
+  </button>
+  <button id="navProg" onclick="setView('progress')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19V5M4 19h16M8 16l3-4 3 2 4-6"/></svg>
+    <span>Progresso</span>
+  </button>
+</nav>
+
+<div class="toast" id="toast"></div>
+<div class="cfx hidden" id="cfx"></div>
+
+<script>// Biblioteca de figuras de exercício (SVG + CSS). viewBox 0 0 120 100.
+// Cada figura: máquina (cinza) + corpo (amarelo, com volume) + parte animada.
+// Prefixos únicos por exercício evitam colisão de @keyframes.
+const COL = {
+  body:'#FFD633', bodyDark:'#e0b800', skin:'#FFD633',
+  frame:'#3a3a3a', frameFill:'#1c1c1c', pad:'#2c2c2c',
+  stack:'#444', cable:'#7a7a7a', floor:'#2a2a2a', arrow:'rgba(255,214,51,.30)'
+};
+
+const FIG = {
+/* ---------------- PUSH ---------------- */
+// Chest Press — perfil, empurra para a frente (direita)
+chestpress:`<svg viewBox="0 0 120 100"><style>
+ .cp-arm{transform-origin:60px 44px;animation:cp 2s infinite ease-in-out}
+ .cp-fore{transform-origin:48px 52px;animation:cpf 2s infinite ease-in-out}
+ .cp-hand{transform-origin:60px 44px;animation:cph 2s infinite ease-in-out}
+ @keyframes cp{0%,100%{transform:rotate(8deg)}50%{transform:rotate(-6deg)}}
+ @keyframes cpf{0%,100%{transform:rotate(38deg)}50%{transform:rotate(2deg)}}
+ @keyframes cph{0%,100%{transform:translateX(0)}50%{transform:translateX(16px)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<!-- machine stack right -->
+<rect x="96" y="40" width="16" height="48" rx="2" fill="${COL.frameFill}" stroke="${COL.frame}" stroke-width="1.5"/>
+<rect x="98" y="44" width="12" height="20" rx="1" fill="${COL.stack}"/>
+<g class="cp-hand"><rect x="84" y="40" width="6" height="20" rx="3" fill="${COL.cable}"/><line x1="90" y1="50" x2="98" y2="50" stroke="${COL.cable}" stroke-width="2"/></g>
+<!-- seat + backrest -->
+<rect x="30" y="64" width="26" height="8" rx="2" fill="${COL.pad}"/>
+<rect x="28" y="30" width="8" height="40" rx="3" fill="${COL.pad}"/>
+<rect x="40" y="86" width="4" height="6" fill="${COL.frame}"/>
+<!-- body seated, profile -->
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="42" y1="66" x2="62" y2="68" stroke-width="9"/> <!-- thigh -->
+ <line x1="62" y1="68" x2="64" y2="86" stroke-width="8"/> <!-- shin -->
+ <line x1="40" y1="44" x2="40" y2="66" stroke-width="11"/> <!-- torso -->
+ <g class="cp-arm"><line x1="60" y1="44" x2="48" y2="52" stroke-width="7"/></g>
+ <g class="cp-fore"><line x1="48" y1="52" x2="60" y2="58" stroke-width="6"/></g>
+</g>
+<circle cx="40" cy="34" r="8" fill="${COL.body}"/>
+</svg>`,
+
+// Pec Deck — frente, braços fecham
+pecdeck:`<svg viewBox="0 0 120 100"><style>
+ .pd-l{transform-origin:60px 46px;animation:pdl 2.2s infinite ease-in-out}
+ .pd-r{transform-origin:60px 46px;animation:pdr 2.2s infinite ease-in-out}
+ @keyframes pdl{0%,100%{transform:rotate(-42deg)}50%{transform:rotate(-6deg)}}
+ @keyframes pdr{0%,100%{transform:rotate(42deg)}50%{transform:rotate(6deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="54" y="70" width="12" height="6" rx="2" fill="${COL.pad}"/>
+<rect x="58" y="40" width="4" height="34" fill="${COL.pad}"/>
+<!-- pads that move -->
+<g class="pd-l"><line x1="60" y1="46" x2="34" y2="54" stroke="${COL.cable}" stroke-width="3"/><rect x="28" y="48" width="7" height="14" rx="3" fill="${COL.stack}"/></g>
+<g class="pd-r"><line x1="60" y1="46" x2="86" y2="54" stroke="${COL.cable}" stroke-width="3"/><rect x="85" y="48" width="7" height="14" rx="3" fill="${COL.stack}"/></g>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="60" y1="40" x2="60" y2="68" stroke-width="12"/>
+ <g class="pd-l"><line x1="60" y1="46" x2="40" y2="52" stroke-width="7"/></g>
+ <g class="pd-r"><line x1="60" y1="46" x2="80" y2="52" stroke-width="7"/></g>
+</g>
+<circle cx="60" cy="30" r="8" fill="${COL.body}"/>
+</svg>`,
+
+// Shoulder Press — frente, empurra para cima
+shoulderpress:`<svg viewBox="0 0 120 100"><style>
+ .sp-l{transform-origin:50px 46px;animation:spl 2s infinite ease-in-out}
+ .sp-r{transform-origin:70px 46px;animation:spr 2s infinite ease-in-out}
+ @keyframes spl{0%,100%{transform:rotate(0deg)}50%{transform:rotate(28deg)}}
+ @keyframes spr{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-28deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="52" y="72" width="16" height="7" rx="2" fill="${COL.pad}"/>
+<rect x="46" y="40" width="6" height="36" rx="2" fill="${COL.pad}"/><rect x="68" y="40" width="6" height="36" rx="2" fill="${COL.pad}"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="60" y1="42" x2="60" y2="72" stroke-width="13"/>
+ <g class="sp-l"><line x1="50" y1="46" x2="46" y2="24" stroke-width="7"/><circle cx="46" cy="22" r="3.5" fill="${COL.body}"/></g>
+ <g class="sp-r"><line x1="70" y1="46" x2="74" y2="24" stroke-width="7"/><circle cx="74" cy="22" r="3.5" fill="${COL.body}"/></g>
+</g>
+<circle cx="60" cy="30" r="8" fill="${COL.body}"/>
+</svg>`,
+
+// Lateral Raise machine — frente, braços sobem pelos lados
+lateralraise:`<svg viewBox="0 0 120 100"><style>
+ .lr-l{transform-origin:50px 48px;animation:lrl 2.2s infinite ease-in-out}
+ .lr-r{transform-origin:70px 48px;animation:lrr 2.2s infinite ease-in-out}
+ @keyframes lrl{0%,100%{transform:rotate(0deg)}50%{transform:rotate(78deg)}}
+ @keyframes lrr{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-78deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="52" y="74" width="16" height="7" rx="2" fill="${COL.pad}"/>
+<rect x="40" y="44" width="6" height="18" rx="3" fill="${COL.stack}"/><rect x="74" y="44" width="6" height="18" rx="3" fill="${COL.stack}"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="60" y1="44" x2="60" y2="74" stroke-width="13"/>
+ <g class="lr-l"><line x1="50" y1="48" x2="44" y2="64" stroke-width="7"/></g>
+ <g class="lr-r"><line x1="70" y1="48" x2="76" y2="64" stroke-width="7"/></g>
+</g>
+<circle cx="60" cy="32" r="8" fill="${COL.body}"/>
+</svg>`,
+
+// Triceps Rope Pushdown — perfil, antebraço desce
+triceps:`<svg viewBox="0 0 120 100"><style>
+ .tr-fore{transform-origin:54px 52px;animation:trf 1.8s infinite ease-in-out}
+ .tr-rope{animation:trr 1.8s infinite ease-in-out}
+ @keyframes trf{0%,100%{transform:rotate(-58deg)}50%{transform:rotate(6deg)}}
+ @keyframes trr{0%,100%{transform:translateY(0)}50%{transform:translateY(14px)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="86" y="8" width="10" height="84" rx="2" fill="${COL.frameFill}" stroke="${COL.frame}" stroke-width="1.5"/>
+<line x1="78" y1="14" x2="91" y2="14" stroke="${COL.frame}" stroke-width="3"/>
+<line x1="78" y1="14" x2="60" y2="40" stroke="${COL.cable}" stroke-width="2"/>
+<g class="tr-rope"><line x1="58" y1="40" x2="58" y2="58" stroke="${COL.cable}" stroke-width="3"/></g>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="40" y1="44" x2="42" y2="74" stroke-width="11"/> <!-- torso -->
+ <line x1="42" y1="74" x2="44" y2="90" stroke-width="9"/> <!-- leg -->
+ <line x1="44" y1="46" x2="54" y2="52" stroke-width="7"/> <!-- upper arm -->
+ <g class="tr-fore"><line x1="54" y1="52" x2="58" y2="40" stroke-width="6"/></g>
+</g>
+<circle cx="40" cy="34" r="8" fill="${COL.body}"/>
+</svg>`,
+
+// Abs full crunch — perfil, tronco sobe
+absfull:`<svg viewBox="0 0 120 100"><style>
+ .ab-torso{transform-origin:62px 74px;animation:abt 2.2s infinite ease-in-out}
+ @keyframes abt{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-34deg)}}
+</style>
+<line x1="6" y1="90" x2="114" y2="90" stroke="${COL.floor}" stroke-width="3"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="62" y1="74" x2="84" y2="70" stroke-width="9"/> <!-- thigh up -->
+ <line x1="84" y1="70" x2="86" y2="86" stroke-width="8"/> <!-- shin down -->
+ <g class="ab-torso">
+   <line x1="62" y1="74" x2="38" y2="74" stroke-width="11"/>
+   <circle cx="30" cy="74" r="8" fill="${COL.body}"/>
+   <line x1="44" y1="74" x2="40" y2="60" stroke-width="6"/>
+ </g>
+</g>
+</svg>`,
+
+/* ---------------- PULL ---------------- */
+// Lat Pulldown — frente, barra desce
+latpull:`<svg viewBox="0 0 120 100"><style>
+ .lp-bar{animation:lpb 2.2s infinite ease-in-out}
+ .lp-al{transform-origin:50px 48px;animation:lpal 2.2s infinite ease-in-out}
+ .lp-ar{transform-origin:70px 48px;animation:lpar 2.2s infinite ease-in-out}
+ @keyframes lpb{0%,100%{transform:translateY(0)}50%{transform:translateY(22px)}}
+ @keyframes lpal{0%,100%{transform:rotate(0deg)}50%{transform:rotate(34deg)}}
+ @keyframes lpar{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-34deg)}}
+</style>
+<rect x="14" y="6" width="92" height="5" rx="2" fill="${COL.frame}"/>
+<line x1="60" y1="11" x2="60" y2="18" stroke="${COL.cable}" stroke-width="2"/>
+<g class="lp-bar"><rect x="36" y="18" width="48" height="5" rx="2" fill="${COL.stack}"/></g>
+<rect x="52" y="74" width="16" height="7" rx="2" fill="${COL.pad}"/>
+<rect x="54" y="80" width="12" height="14" rx="2" fill="${COL.pad}"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="60" y1="42" x2="60" y2="74" stroke-width="13"/>
+ <g class="lp-al"><line x1="50" y1="48" x2="44" y2="24" stroke-width="7"/></g>
+ <g class="lp-ar"><line x1="70" y1="48" x2="76" y2="24" stroke-width="7"/></g>
+</g>
+<circle cx="60" cy="32" r="8" fill="${COL.body}"/>
+</svg>`,
+
+// Seated Row — perfil, puxa para trás
+seatedrow:`<svg viewBox="0 0 120 100"><style>
+ .sr-arm{transform-origin:46px 50px;animation:sra 2.1s infinite ease-in-out}
+ .sr-cable{animation:src 2.1s infinite ease-in-out}
+ .sr-torso{transform-origin:42px 70px;animation:srt 2.1s infinite ease-in-out}
+ @keyframes sra{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-46deg)}}
+ @keyframes src{0%,100%{transform:translateX(0)}50%{transform:translateX(-20px)}}
+ @keyframes srt{0%,100%{transform:rotate(2deg)}50%{transform:rotate(-8deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="28" y="70" width="30" height="7" rx="2" fill="${COL.pad}"/>
+<rect x="92" y="40" width="14" height="40" rx="2" fill="${COL.frameFill}" stroke="${COL.frame}" stroke-width="1.5"/>
+<g class="sr-cable"><line x1="58" y1="56" x2="92" y2="56" stroke="${COL.cable}" stroke-width="2"/><rect x="54" y="52" width="5" height="9" rx="2" fill="${COL.stack}"/></g>
+<g class="sr-torso">
+ <line x1="42" y1="44" x2="42" y2="70" stroke="${COL.body}" stroke-width="11" stroke-linecap="round"/>
+ <g class="sr-arm"><line x1="46" y1="50" x2="58" y2="56" stroke="${COL.body}" stroke-width="7" stroke-linecap="round"/></g>
+ <circle cx="42" cy="34" r="8" fill="${COL.body}"/>
+</g>
+<line x1="44" y1="70" x2="64" y2="72" stroke="${COL.body}" stroke-width="9" stroke-linecap="round"/>
+<line x1="64" y1="72" x2="66" y2="80" stroke="${COL.body}" stroke-width="8" stroke-linecap="round"/>
+</svg>`,
+
+// Low Row / Upper Back — perfil, puxa (variação mais baixa)
+lowrow:`<svg viewBox="0 0 120 100"><style>
+ .lw-arm{transform-origin:48px 52px;animation:lwa 2.1s infinite ease-in-out}
+ .lw-cable{animation:lwc 2.1s infinite ease-in-out}
+ @keyframes lwa{0%,100%{transform:rotate(10deg)}50%{transform:rotate(-40deg)}}
+ @keyframes lwc{0%,100%{transform:translateX(0)}50%{transform:translateX(-18px)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="30" y="72" width="28" height="7" rx="2" fill="${COL.pad}"/>
+<rect x="34" y="40" width="6" height="34" rx="2" fill="${COL.pad}"/>
+<rect x="92" y="46" width="14" height="34" rx="2" fill="${COL.frameFill}" stroke="${COL.frame}" stroke-width="1.5"/>
+<g class="lw-cable"><line x1="60" y1="60" x2="92" y2="60" stroke="${COL.cable}" stroke-width="2"/><rect x="56" y="56" width="5" height="9" rx="2" fill="${COL.stack}"/></g>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="44" y1="46" x2="44" y2="72" stroke-width="11"/>
+ <line x1="46" y1="72" x2="66" y2="74" stroke-width="9"/>
+ <line x1="66" y1="74" x2="68" y2="82" stroke-width="8"/>
+ <g class="lw-arm"><line x1="48" y1="52" x2="60" y2="60" stroke-width="7"/></g>
+</g>
+<circle cx="44" cy="36" r="8" fill="${COL.body}"/>
+</svg>`,
+
+// Reverse Fly — frente, braços abrem para trás
+reversefly:`<svg viewBox="0 0 120 100"><style>
+ .rf-l{transform-origin:50px 48px;animation:rfl 2.2s infinite ease-in-out}
+ .rf-r{transform-origin:70px 48px;animation:rfr 2.2s infinite ease-in-out}
+ @keyframes rfl{0%,100%{transform:rotate(50deg)}50%{transform:rotate(96deg)}}
+ @keyframes rfr{0%,100%{transform:rotate(-50deg)}50%{transform:rotate(-96deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="52" y="72" width="16" height="7" rx="2" fill="${COL.pad}"/>
+<rect x="56" y="36" width="8" height="38" rx="3" fill="${COL.pad}"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="60" y1="42" x2="60" y2="72" stroke-width="12"/>
+ <g class="rf-l"><line x1="50" y1="48" x2="44" y2="62" stroke-width="7"/></g>
+ <g class="rf-r"><line x1="70" y1="48" x2="76" y2="62" stroke-width="7"/></g>
+</g>
+<circle cx="60" cy="30" r="8" fill="${COL.body}"/>
+</svg>`,
+
+// Barbell Biceps Curl — perfil/frente, antebraço sobe
+biceps:`<svg viewBox="0 0 120 100"><style>
+ .bi-l{transform-origin:48px 52px;animation:bil 1.9s infinite ease-in-out}
+ .bi-r{transform-origin:72px 52px;animation:bir 1.9s infinite ease-in-out}
+ .bi-bar{transform-origin:60px 70px;animation:bib 1.9s infinite ease-in-out}
+ @keyframes bil{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-118deg)}}
+ @keyframes bir{0%,100%{transform:rotate(0deg)}50%{transform:rotate(118deg)}}
+ @keyframes bib{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="60" y1="40" x2="60" y2="64" stroke-width="13"/>
+ <line x1="56" y1="64" x2="52" y2="90" stroke-width="9"/>
+ <line x1="64" y1="64" x2="68" y2="90" stroke-width="9"/>
+ <line x1="50" y1="46" x2="48" y2="52" stroke-width="7"/>
+ <line x1="70" y1="46" x2="72" y2="52" stroke-width="7"/>
+ <g class="bi-l"><line x1="48" y1="52" x2="46" y2="70" stroke-width="6"/></g>
+ <g class="bi-r"><line x1="72" y1="52" x2="74" y2="70" stroke-width="6"/></g>
+</g>
+<g class="bi-bar"><rect x="34" y="68" width="52" height="5" rx="2" fill="${COL.stack}"/>
+ <rect x="32" y="64" width="5" height="13" rx="1" fill="${COL.frame}"/><rect x="83" y="64" width="5" height="13" rx="1" fill="${COL.frame}"/></g>
+<circle cx="60" cy="30" r="8" fill="${COL.body}"/>
+</svg>`,
+
+// Reverse Crunch — perfil, joelhos sobem ao peito
+reversecrunch:`<svg viewBox="0 0 120 100"><style>
+ .rc-leg{transform-origin:64px 72px;animation:rcl 2s infinite ease-in-out}
+ @keyframes rcl{0%,100%{transform:rotate(0deg) translateX(0)}50%{transform:rotate(-30deg) translateX(-14px)}}
+</style>
+<line x1="6" y1="90" x2="114" y2="90" stroke="${COL.floor}" stroke-width="3"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="30" y1="74" x2="64" y2="74" stroke-width="11"/> <!-- torso on floor -->
+ <line x1="40" y1="74" x2="34" y2="62" stroke-width="6"/> <!-- arm -->
+ <g class="rc-leg">
+   <line x1="64" y1="74" x2="80" y2="64" stroke-width="9"/>
+   <line x1="80" y1="64" x2="72" y2="50" stroke-width="8"/>
+ </g>
+</g>
+<circle cx="26" cy="74" r="8" fill="${COL.body}"/>
+</svg>`,
+
+/* ---------------- LEGS ---------------- */
+// Leg Press — perfil reclinado, pernas empurram plataforma
+legpress:`<svg viewBox="0 0 120 100"><style>
+ .lgp-thigh{transform-origin:54px 60px;animation:lgt 2.2s infinite ease-in-out}
+ .lgp-shin{transform-origin:78px 50px;animation:lgs 2.2s infinite ease-in-out}
+ .lgp-plate{animation:lgpp 2.2s infinite ease-in-out}
+ @keyframes lgt{0%,100%{transform:rotate(18deg)}50%{transform:rotate(0deg)}}
+ @keyframes lgs{0%,100%{transform:rotate(-40deg)}50%{transform:rotate(-2deg)}}
+ @keyframes lgpp{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-9px)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<!-- reclined seat -->
+<rect x="20" y="60" width="34" height="8" rx="2" fill="${COL.pad}" transform="rotate(-8 37 64)"/>
+<rect x="16" y="44" width="10" height="24" rx="3" fill="${COL.pad}" transform="rotate(-8 21 56)"/>
+<!-- sled plate -->
+<g class="lgp-plate"><rect x="92" y="28" width="9" height="44" rx="2" fill="${COL.stack}"/><rect x="101" y="32" width="6" height="36" rx="1" fill="${COL.frame}"/></g>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="26" y1="52" x2="54" y2="60" stroke-width="12"/> <!-- torso reclined -->
+ <g class="lgp-thigh"><line x1="54" y1="60" x2="78" y2="50" stroke-width="10"/>
+   <g class="lgp-shin"><line x1="78" y1="50" x2="92" y2="56" stroke-width="9"/></g>
+ </g>
+</g>
+<circle cx="22" cy="48" r="8" fill="${COL.body}"/>
+</svg>`,
+
+// Leg Extension — perfil, canela sobe à frente
+legext:`<svg viewBox="0 0 120 100"><style>
+ .le-shin{transform-origin:72px 58px;animation:les 2s infinite ease-in-out}
+ @keyframes les{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-72deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="36" y="58" width="34" height="8" rx="2" fill="${COL.pad}"/>
+<rect x="34" y="28" width="8" height="32" rx="3" fill="${COL.pad}"/>
+<rect x="40" y="84" width="4" height="8" fill="${COL.frame}"/><rect x="64" y="84" width="4" height="8" fill="${COL.frame}"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="42" y1="36" x2="42" y2="58" stroke-width="11"/> <!-- torso -->
+ <line x1="46" y1="58" x2="72" y2="58" stroke-width="10"/> <!-- thigh -->
+ <g class="le-shin"><line x1="72" y1="58" x2="72" y2="82" stroke-width="9"/>
+   <rect x="68" y="78" width="9" height="7" rx="3" fill="${COL.stack}"/></g>
+</g>
+<circle cx="42" cy="26" r="8" fill="${COL.body}"/>
+</svg>`,
+
+// Leg Curl (seated) — perfil, canela dobra para baixo/trás
+legcurl:`<svg viewBox="0 0 120 100"><style>
+ .lc-shin{transform-origin:72px 56px;animation:lcs 2s infinite ease-in-out}
+ @keyframes lcs{0%,100%{transform:rotate(-70deg)}50%{transform:rotate(6deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="36" y="56" width="34" height="8" rx="2" fill="${COL.pad}"/>
+<rect x="34" y="26" width="8" height="32" rx="3" fill="${COL.pad}"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="42" y1="34" x2="42" y2="56" stroke-width="11"/>
+ <line x1="46" y1="56" x2="72" y2="56" stroke-width="10"/>
+ <g class="lc-shin"><line x1="72" y1="56" x2="74" y2="80" stroke-width="9"/>
+   <rect x="70" y="76" width="9" height="7" rx="3" fill="${COL.stack}"/></g>
+</g>
+<circle cx="42" cy="24" r="8" fill="${COL.body}"/>
+</svg>`,
+
+// Glute Kickback — perfil em 4 apoios, perna estende para trás
+glutekick:`<svg viewBox="0 0 120 100"><style>
+ .gk-thigh{transform-origin:60px 56px;animation:gkt 2s infinite ease-in-out}
+ .gk-shin{transform-origin:74px 70px;animation:gks 2s infinite ease-in-out}
+ @keyframes gkt{0%,100%{transform:rotate(28deg)}50%{transform:rotate(-22deg)}}
+ @keyframes gks{0%,100%{transform:rotate(-30deg)}50%{transform:rotate(-66deg)}}
+</style>
+<line x1="6" y1="90" x2="114" y2="90" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="34" y="46" width="34" height="8" rx="3" fill="${COL.pad}"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="36" y1="50" x2="60" y2="56" stroke-width="11"/> <!-- torso horizontal -->
+ <line x1="40" y1="52" x2="40" y2="80" stroke-width="7"/> <!-- support arm -->
+ <line x1="58" y1="56" x2="58" y2="80" stroke-width="8"/> <!-- support knee -->
+ <g class="gk-thigh"><line x1="60" y1="56" x2="80" y2="64" stroke-width="9"/>
+   <g class="gk-shin"><line x1="80" y1="64" x2="96" y2="64" stroke-width="8"/></g>
+ </g>
+</g>
+<circle cx="30" cy="48" r="8" fill="${COL.body}"/>
+</svg>`,
+
+// Hip Abductor — frente, joelhos abrem
+abductor:`<svg viewBox="0 0 120 100"><style>
+ .ab-l{transform-origin:60px 56px;animation:abl 2s infinite ease-in-out}
+ .ab-r{transform-origin:60px 56px;animation:abr 2s infinite ease-in-out}
+ @keyframes abl{0%,100%{transform:rotate(0deg)}50%{transform:rotate(26deg)}}
+ @keyframes abr{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-26deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="48" y="56" width="24" height="8" rx="2" fill="${COL.pad}"/>
+<rect x="52" y="30" width="16" height="28" rx="3" fill="${COL.pad}"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="60" y1="34" x2="60" y2="56" stroke-width="13"/>
+ <g class="ab-l"><line x1="60" y1="56" x2="48" y2="84" stroke-width="9"/><rect x="42" y="60" width="8" height="16" rx="3" fill="${COL.stack}" transform="rotate(8 46 68)"/></g>
+ <g class="ab-r"><line x1="60" y1="56" x2="72" y2="84" stroke-width="9"/><rect x="70" y="60" width="8" height="16" rx="3" fill="${COL.stack}" transform="rotate(-8 74 68)"/></g>
+</g>
+<circle cx="60" cy="24" r="8" fill="${COL.body}"/>
+</svg>`,
+
+// Hip Adductor — frente, joelhos fecham
+adductor:`<svg viewBox="0 0 120 100"><style>
+ .ad-l{transform-origin:60px 56px;animation:adl 2s infinite ease-in-out}
+ .ad-r{transform-origin:60px 56px;animation:adr 2s infinite ease-in-out}
+ @keyframes adl{0%,100%{transform:rotate(30deg)}50%{transform:rotate(4deg)}}
+ @keyframes adr{0%,100%{transform:rotate(-30deg)}50%{transform:rotate(-4deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="48" y="56" width="24" height="8" rx="2" fill="${COL.pad}"/>
+<rect x="52" y="30" width="16" height="28" rx="3" fill="${COL.pad}"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="60" y1="34" x2="60" y2="56" stroke-width="13"/>
+ <g class="ad-l"><rect x="40" y="60" width="8" height="16" rx="3" fill="${COL.stack}"/><line x1="60" y1="56" x2="46" y2="84" stroke-width="9"/></g>
+ <g class="ad-r"><rect x="72" y="60" width="8" height="16" rx="3" fill="${COL.stack}"/><line x1="60" y1="56" x2="74" y2="84" stroke-width="9"/></g>
+</g>
+<circle cx="60" cy="24" r="8" fill="${COL.body}"/>
+</svg>`,
+
+// Calf Raise — perfil, calcanhar sobe
+calf:`<svg viewBox="0 0 120 100"><style>
+ .cf{transform-origin:60px 88px;animation:cf 1.6s infinite ease-in-out}
+ @keyframes cf{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+ .cf-heel{transform-origin:66px 86px;animation:cfh 1.6s infinite ease-in-out}
+ @keyframes cfh{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-22deg)}}
+</style>
+<line x1="6" y1="90" x2="114" y2="90" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="50" y="84" width="24" height="6" rx="1" fill="${COL.pad}"/>
+<rect x="84" y="20" width="6" height="70" rx="2" fill="${COL.stack}"/>
+<g class="cf" fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="60" y1="40" x2="60" y2="62" stroke-width="13"/>
+ <line x1="60" y1="62" x2="60" y2="84" stroke-width="10"/>
+ <line x1="56" y1="44" x2="78" y2="40" stroke-width="6"/> <!-- arm to support -->
+ <g class="cf-heel"><line x1="60" y1="85" x2="70" y2="85" stroke-width="7"/></g>
+</g>
+<circle cx="60" cy="30" r="8" fill="${COL.body}"/>
+</svg>`,
+
+// Lower Back Extension — perfil banco romano, tronco sobe
+lowerback:`<svg viewBox="0 0 120 100"><style>
+ .lb-torso{transform-origin:58px 58px;animation:lbt 2.4s infinite ease-in-out}
+ @keyframes lbt{0%,100%{transform:rotate(48deg)}50%{transform:rotate(2deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="44" y="54" width="20" height="8" rx="3" fill="${COL.pad}"/> <!-- hip pad -->
+<rect x="70" y="74" width="16" height="6" rx="3" fill="${COL.pad}"/> <!-- ankle pad -->
+<line x1="58" y1="62" x2="78" y2="76" stroke="${COL.body}" stroke-width="10" stroke-linecap="round"/> <!-- legs back -->
+<g class="lb-torso">
+ <line x1="58" y1="58" x2="38" y2="58" stroke="${COL.body}" stroke-width="11" stroke-linecap="round"/>
+ <circle cx="30" cy="58" r="8" fill="${COL.body}"/>
+ <line x1="46" y1="58" x2="42" y2="44" stroke="${COL.body}" stroke-width="6" stroke-linecap="round"/>
+</g>
+</svg>`,
+};
+
+// Finisher cardio (bike) — perna pedala
+FIG.bike=`<svg viewBox="0 0 120 100"><style>
+ .bk-l{transform-origin:62px 58px;animation:bkl 0.9s infinite linear}
+ .bk-r{transform-origin:62px 58px;animation:bkr 0.9s infinite linear}
+ @keyframes bkl{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+ @keyframes bkr{from{transform:rotate(180deg)}to{transform:rotate(540deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="#2a2a2a" stroke-width="3"/>
+<circle cx="62" cy="58" r="3" fill="#444"/>
+<rect x="40" y="40" width="6" height="44" rx="2" fill="#2c2c2c"/>
+<g fill="none" stroke="#FFD633" stroke-linecap="round">
+ <line x1="43" y1="40" x2="43" y2="60" stroke-width="12"/>
+ <line x1="43" y1="44" x2="56" y2="50" stroke-width="6"/>
+ <g class="bk-l"><line x1="62" y1="58" x2="62" y2="70" stroke-width="8"/></g>
+ <g class="bk-r"><line x1="62" y1="58" x2="62" y2="70" stroke-width="8"/></g>
+ <line x1="43" y1="60" x2="62" y2="58" stroke-width="9"/>
+</g>
+<circle cx="43" cy="32" r="8" fill="#FFD633"/>
+</svg>`;
+
+// Elevação Lateral com halteres — em pé, frente, braços sobem pelos lados
+FIG.lateralraisedb=`<svg viewBox="0 0 120 100"><style>
+ .ld-l{transform-origin:51px 46px;animation:ldl 2.2s infinite ease-in-out}
+ .ld-r{transform-origin:69px 46px;animation:ldr 2.2s infinite ease-in-out}
+ @keyframes ldl{0%,100%{transform:rotate(0deg)}50%{transform:rotate(74deg)}}
+ @keyframes ldr{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-74deg)}}
+</style>
+<line x1="6" y1="90" x2="114" y2="90" stroke="#2a2a2a" stroke-width="3"/>
+<g fill="none" stroke="#FFD633" stroke-linecap="round">
+ <line x1="60" y1="34" x2="60" y2="62" stroke-width="13"/>
+ <line x1="58" y1="62" x2="52" y2="88" stroke-width="9"/>
+ <line x1="62" y1="62" x2="68" y2="88" stroke-width="9"/>
+ <g class="ld-l"><line x1="51" y1="46" x2="46" y2="66" stroke-width="7"/>
+   <g transform="translate(46,66)"><rect x="-9" y="-3" width="18" height="6" rx="2" fill="#444"/><rect x="-10" y="-6" width="5" height="12" rx="1.5" fill="#666"/><rect x="5" y="-6" width="5" height="12" rx="1.5" fill="#666"/></g>
+ </g>
+ <g class="ld-r"><line x1="69" y1="46" x2="74" y2="66" stroke-width="7"/>
+   <g transform="translate(74,66)"><rect x="-9" y="-3" width="18" height="6" rx="2" fill="#444"/><rect x="-10" y="-6" width="5" height="12" rx="1.5" fill="#666"/><rect x="5" y="-6" width="5" height="12" rx="1.5" fill="#666"/></g>
+ </g>
+</g>
+<circle cx="60" cy="26" r="8" fill="#FFD633"/>
+</svg>`;
+
+/* ============ FIGURAS DAS VARIAÇÕES ============ */
+// Supino com halteres (deitado no banco)
+FIG.dbbench=`<svg viewBox="0 0 120 100"><style>
+ .db-a{transform-origin:56px 52px;animation:dba 2s infinite ease-in-out}
+ @keyframes dba{0%,100%{transform:translateY(10px)}50%{transform:translateY(-8px)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="26" y="62" width="62" height="8" rx="3" fill="${COL.pad}"/>
+<rect x="34" y="70" width="5" height="22" fill="${COL.frame}"/><rect x="74" y="70" width="5" height="22" fill="${COL.frame}"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="34" y1="58" x2="66" y2="58" stroke-width="11"/> <!-- torso deitado -->
+ <line x1="66" y1="58" x2="80" y2="52" stroke-width="9"/> <!-- coxa -->
+ <line x1="80" y1="52" x2="84" y2="70" stroke-width="8"/> <!-- canela -->
+ <g class="db-a">
+  <line x1="52" y1="56" x2="52" y2="34" stroke-width="7"/>
+  <g transform="translate(52,32)"><rect x="-8" y="-3" width="16" height="6" rx="2" fill="${COL.stack}"/><rect x="-11" y="-6" width="5" height="12" rx="1.5" fill="#666"/><rect x="6" y="-6" width="5" height="12" rx="1.5" fill="#666"/></g>
+ </g>
+</g>
+<circle cx="28" cy="56" r="8" fill="${COL.body}"/>
+</svg>`;
+
+// Crucifixo na polia (cable fly)
+FIG.cablefly=`<svg viewBox="0 0 120 100"><style>
+ .cfy-l{transform-origin:52px 46px;animation:cfyl 2.2s infinite ease-in-out}
+ .cfy-r{transform-origin:68px 46px;animation:cfyr 2.2s infinite ease-in-out}
+ @keyframes cfyl{0%,100%{transform:rotate(-52deg)}50%{transform:rotate(-4deg)}}
+ @keyframes cfyr{0%,100%{transform:rotate(52deg)}50%{transform:rotate(4deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="8" y="14" width="8" height="78" rx="2" fill="${COL.frameFill}" stroke="${COL.frame}" stroke-width="1.5"/>
+<rect x="104" y="14" width="8" height="78" rx="2" fill="${COL.frameFill}" stroke="${COL.frame}" stroke-width="1.5"/>
+<line x1="16" y1="30" x2="40" y2="52" stroke="${COL.cable}" stroke-width="1.5"/>
+<line x1="104" y1="30" x2="80" y2="52" stroke="${COL.cable}" stroke-width="1.5"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="60" y1="40" x2="60" y2="66" stroke-width="12"/>
+ <line x1="57" y1="66" x2="52" y2="90" stroke-width="9"/>
+ <line x1="63" y1="66" x2="68" y2="90" stroke-width="9"/>
+ <g class="cfy-l"><line x1="52" y1="46" x2="40" y2="54" stroke-width="7"/></g>
+ <g class="cfy-r"><line x1="68" y1="46" x2="80" y2="54" stroke-width="7"/></g>
+</g>
+<circle cx="60" cy="30" r="8" fill="${COL.body}"/>
+</svg>`;
+
+// Elevação lateral na polia (perfil, um braço)
+FIG.cablelat=`<svg viewBox="0 0 120 100"><style>
+ .clat-a{transform-origin:56px 46px;animation:clata 2.2s infinite ease-in-out}
+ @keyframes clata{0%,100%{transform:rotate(6deg)}50%{transform:rotate(-72deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="10" y="14" width="9" height="78" rx="2" fill="${COL.frameFill}" stroke="${COL.frame}" stroke-width="1.5"/>
+<line x1="19" y1="84" x2="60" y2="66" stroke="${COL.cable}" stroke-width="1.5"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="56" y1="40" x2="56" y2="66" stroke-width="12"/>
+ <line x1="53" y1="66" x2="50" y2="90" stroke-width="9"/>
+ <line x1="59" y1="66" x2="64" y2="90" stroke-width="9"/>
+ <g class="clat-a"><line x1="56" y1="46" x2="62" y2="66" stroke-width="7"/><circle cx="63" cy="68" r="3.5" fill="${COL.body}"/></g>
+</g>
+<circle cx="56" cy="30" r="8" fill="${COL.body}"/>
+</svg>`;
+
+// Mergulho no banco
+FIG.benchdip=`<svg viewBox="0 0 120 100"><style>
+ .bdp-b{animation:bdpb 2s infinite ease-in-out}
+ @keyframes bdpb{0%,100%{transform:translateY(0)}50%{transform:translateY(14px)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="16" y="56" width="30" height="8" rx="2" fill="${COL.pad}"/>
+<rect x="20" y="64" width="5" height="28" fill="${COL.frame}"/><rect x="38" y="64" width="5" height="28" fill="${COL.frame}"/>
+<g class="bdp-b">
+ <g fill="none" stroke="${COL.body}" stroke-linecap="round">
+  <line x1="50" y1="52" x2="54" y2="70" stroke-width="11"/> <!-- torso -->
+  <line x1="54" y1="70" x2="80" y2="76" stroke-width="9"/> <!-- perna estendida -->
+  <line x1="80" y1="76" x2="94" y2="88" stroke-width="8"/>
+ </g>
+ <circle cx="49" cy="42" r="8" fill="${COL.body}"/>
+</g>
+<line x1="46" y1="58" x2="44" y2="72" stroke="${COL.body}" stroke-width="6" stroke-linecap="round"/> <!-- braço fixo no banco -->
+</svg>`;
+
+// Prancha
+FIG.plank=`<svg viewBox="0 0 120 100"><style>
+ .plk{animation:plk 2.6s infinite ease-in-out}
+ @keyframes plk{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+</style>
+<line x1="6" y1="90" x2="114" y2="90" stroke="${COL.floor}" stroke-width="3"/>
+<g class="plk">
+ <g fill="none" stroke="${COL.body}" stroke-linecap="round">
+  <line x1="34" y1="66" x2="86" y2="72" stroke-width="11"/> <!-- corpo reto -->
+  <line x1="38" y1="68" x2="34" y2="86" stroke-width="7"/>  <!-- antebraço -->
+  <line x1="86" y1="72" x2="94" y2="88" stroke-width="8"/>  <!-- perna -->
+ </g>
+ <circle cx="28" cy="62" r="8" fill="${COL.body}"/>
+</g>
+<line x1="28" y1="86" x2="44" y2="86" stroke="${COL.pad}" stroke-width="4"/>
+</svg>`;
+
+// Face Pull (polia alta)
+FIG.facepull=`<svg viewBox="0 0 120 100"><style>
+ .fpl-a{transform-origin:52px 44px;animation:fpla 2.1s infinite ease-in-out}
+ .fpl-c{animation:fplc 2.1s infinite ease-in-out}
+ @keyframes fpla{0%,100%{transform:rotate(34deg)}50%{transform:rotate(-14deg)}}
+ @keyframes fplc{0%,100%{transform:translateX(0)}50%{transform:translateX(-16px)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="98" y="8" width="10" height="84" rx="2" fill="${COL.frameFill}" stroke="${COL.frame}" stroke-width="1.5"/>
+<g class="fpl-c"><line x1="66" y1="42" x2="98" y2="24" stroke="${COL.cable}" stroke-width="1.5"/><line x1="64" y1="36" x2="64" y2="48" stroke="${COL.cable}" stroke-width="3"/></g>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="46" y1="40" x2="46" y2="68" stroke-width="12"/>
+ <line x1="43" y1="68" x2="40" y2="90" stroke-width="9"/>
+ <line x1="49" y1="68" x2="54" y2="90" stroke-width="9"/>
+ <g class="fpl-a"><line x1="52" y1="44" x2="64" y2="42" stroke-width="7"/></g>
+</g>
+<circle cx="46" cy="30" r="8" fill="${COL.body}"/>
+</svg>`;
+
+// Elevação de pernas (deitado)
+FIG.legraise=`<svg viewBox="0 0 120 100"><style>
+ .lgr{transform-origin:60px 76px;animation:lgr 2.2s infinite ease-in-out}
+ @keyframes lgr{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-72deg)}}
+</style>
+<line x1="6" y1="90" x2="114" y2="90" stroke="${COL.floor}" stroke-width="3"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="26" y1="76" x2="60" y2="76" stroke-width="11"/> <!-- tronco -->
+ <line x1="36" y1="76" x2="34" y2="64" stroke-width="6"/>
+ <g class="lgr"><line x1="60" y1="76" x2="94" y2="78" stroke-width="9"/></g>
+</g>
+<circle cx="20" cy="76" r="8" fill="${COL.body}"/>
+</svg>`;
+
+// Agachamento Goblet
+FIG.goblet=`<svg viewBox="0 0 120 100"><style>
+ .gob{animation:gob 2.2s infinite ease-in-out}
+ .gob-th{transform-origin:60px 62px;animation:gobt 2.2s infinite ease-in-out}
+ @keyframes gob{0%,100%{transform:translateY(0)}50%{transform:translateY(14px)}}
+ @keyframes gobt{0%,100%{transform:rotate(0)}50%{transform:rotate(0)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<g class="gob">
+ <g fill="none" stroke="${COL.body}" stroke-linecap="round">
+  <line x1="60" y1="36" x2="58" y2="60" stroke-width="12"/>
+  <line x1="58" y1="44" x2="58" y2="52" stroke-width="6"/>
+ </g>
+ <circle cx="60" cy="26" r="8" fill="${COL.body}"/>
+ <rect x="52" y="44" width="12" height="14" rx="3" fill="${COL.stack}"/>
+</g>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="58" y1="66" x2="46" y2="78" stroke-width="10"/>
+ <line x1="46" y1="78" x2="48" y2="90" stroke-width="8"/>
+ <line x1="60" y1="66" x2="72" y2="78" stroke-width="10"/>
+ <line x1="72" y1="78" x2="74" y2="90" stroke-width="8"/>
+</g>
+</svg>`;
+
+// Afundo (lunge)
+FIG.lunge=`<svg viewBox="0 0 120 100"><style>
+ .lng{animation:lng 2.2s infinite ease-in-out}
+ @keyframes lng{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<g class="lng">
+ <g fill="none" stroke="${COL.body}" stroke-linecap="round">
+  <line x1="56" y1="36" x2="56" y2="60" stroke-width="12"/>
+  <line x1="52" y1="46" x2="48" y2="62" stroke-width="6"/><circle cx="48" cy="65" r="3" fill="${COL.body}"/>
+  <line x1="60" y1="46" x2="64" y2="62" stroke-width="6"/><circle cx="64" cy="65" r="3" fill="${COL.body}"/>
+ </g>
+ <circle cx="56" cy="26" r="8" fill="${COL.body}"/>
+</g>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="56" y1="62" x2="76" y2="66" stroke-width="10"/> <!-- coxa frente -->
+ <line x1="76" y1="66" x2="76" y2="90" stroke-width="8"/>
+ <line x1="56" y1="62" x2="42" y2="78" stroke-width="9"/> <!-- perna trás -->
+ <line x1="42" y1="78" x2="30" y2="88" stroke-width="7"/>
+</g>
+</svg>`;
+
+// Stiff / RDL com halteres
+FIG.rdl=`<svg viewBox="0 0 120 100"><style>
+ .rdl2-t{transform-origin:56px 62px;animation:rdl2 2.3s infinite ease-in-out}
+ @keyframes rdl2{0%,100%{transform:rotate(0deg)}50%{transform:rotate(74deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="56" y1="62" x2="52" y2="90" stroke-width="9"/>
+ <line x1="58" y1="62" x2="62" y2="90" stroke-width="9"/>
+</g>
+<g class="rdl2-t">
+ <line x1="56" y1="62" x2="56" y2="38" stroke="${COL.body}" stroke-width="12" stroke-linecap="round"/>
+ <circle cx="56" cy="28" r="8" fill="${COL.body}"/>
+ <line x1="56" y1="46" x2="56" y2="64" stroke="${COL.body}" stroke-width="6" stroke-linecap="round"/>
+ <g transform="translate(56,66)"><rect x="-8" y="-3" width="16" height="6" rx="2" fill="${COL.stack}"/></g>
+</g>
+</svg>`;
+
+// Ponte de glúteo
+FIG.bridge=`<svg viewBox="0 0 120 100"><style>
+ .brg{transform-origin:82px 82px;animation:brg 2.2s infinite ease-in-out}
+ @keyframes brg{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-16deg)}}
+</style>
+<line x1="6" y1="90" x2="114" y2="90" stroke="${COL.floor}" stroke-width="3"/>
+<g class="brg">
+ <g fill="none" stroke="${COL.body}" stroke-linecap="round">
+  <line x1="34" y1="82" x2="80" y2="80" stroke-width="11"/> <!-- tronco+quadril -->
+ </g>
+ <circle cx="27" cy="82" r="8" fill="${COL.body}"/>
+</g>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="80" y1="80" x2="88" y2="66" stroke-width="9"/> <!-- coxa -->
+ <line x1="88" y1="66" x2="90" y2="88" stroke-width="8"/> <!-- canela -->
+</g>
+</svg>`;
+
+// Superman
+FIG.superman=`<svg viewBox="0 0 120 100"><style>
+ .spm-f{transform-origin:44px 78px;animation:spmf 2.3s infinite ease-in-out}
+ .spm-b{transform-origin:76px 78px;animation:spmb 2.3s infinite ease-in-out}
+ @keyframes spmf{0%,100%{transform:rotate(0)}50%{transform:rotate(-22deg)}}
+ @keyframes spmb{0%,100%{transform:rotate(0)}50%{transform:rotate(22deg)}}
+</style>
+<line x1="6" y1="88" x2="114" y2="88" stroke="${COL.floor}" stroke-width="3"/>
+<line x1="44" y1="78" x2="76" y2="78" stroke="${COL.body}" stroke-width="11" stroke-linecap="round"/>
+<g class="spm-f">
+ <line x1="44" y1="78" x2="22" y2="76" stroke="${COL.body}" stroke-width="7" stroke-linecap="round"/>
+ <circle cx="38" cy="72" r="7" fill="${COL.body}"/>
+</g>
+<g class="spm-b">
+ <line x1="76" y1="78" x2="100" y2="78" stroke="${COL.body}" stroke-width="9" stroke-linecap="round"/>
+</g>
+</svg>`;
+
+// Esteira inclinada
+FIG.treadmill=`<svg viewBox="0 0 120 100"><style>
+ .trd-l1{transform-origin:56px 58px;animation:trd1 .8s infinite ease-in-out}
+ .trd-l2{transform-origin:56px 58px;animation:trd2 .8s infinite ease-in-out}
+ @keyframes trd1{0%,100%{transform:rotate(24deg)}50%{transform:rotate(-24deg)}}
+ @keyframes trd2{0%,100%{transform:rotate(-24deg)}50%{transform:rotate(24deg)}}
+</style>
+<polygon points="16,84 104,66 104,74 16,92" fill="${COL.pad}"/>
+<rect x="98" y="26" width="6" height="44" rx="2" fill="${COL.frame}"/>
+<line x1="98" y1="30" x2="78" y2="36" stroke="${COL.frame}" stroke-width="4" stroke-linecap="round"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="56" y1="36" x2="58" y2="58" stroke-width="11"/>
+ <line x1="57" y1="42" x2="70" y2="40" stroke-width="6"/>
+ <g class="trd-l1"><line x1="56" y1="58" x2="50" y2="78" stroke-width="8"/></g>
+ <g class="trd-l2"><line x1="58" y1="58" x2="64" y2="78" stroke-width="8"/></g>
+</g>
+<circle cx="55" cy="26" r="8" fill="${COL.body}"/>
+</svg>`;
+
+// Remo ergômetro
+FIG.rower=`<svg viewBox="0 0 120 100"><style>
+ .row2-t{transform-origin:52px 66px;animation:rowt 1.6s infinite ease-in-out}
+ .row2-a{transform-origin:56px 50px;animation:rowa 1.6s infinite ease-in-out}
+ @keyframes rowt{0%,100%{transform:rotate(8deg)}50%{transform:rotate(-12deg)}}
+ @keyframes rowa{0%,100%{transform:rotate(24deg)}50%{transform:rotate(-30deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="20" y="74" width="84" height="5" rx="2" fill="${COL.frame}"/>
+<rect x="16" y="56" width="12" height="18" rx="2" fill="${COL.frameFill}" stroke="${COL.frame}" stroke-width="1.5"/>
+<g class="row2-t">
+ <line x1="52" y1="66" x2="54" y2="44" stroke="${COL.body}" stroke-width="11" stroke-linecap="round"/>
+ <circle cx="54" cy="36" r="8" fill="${COL.body}"/>
+ <g class="row2-a"><line x1="56" y1="50" x2="40" y2="56" stroke="${COL.body}" stroke-width="7" stroke-linecap="round"/></g>
+</g>
+<line x1="28" y1="58" x2="40" y2="56" stroke="${COL.cable}" stroke-width="1.5"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="52" y1="68" x2="76" y2="62" stroke-width="10"/>
+ <line x1="76" y1="62" x2="88" y2="74" stroke-width="8"/>
+</g>
+</svg>`;
+</script>
+<script>
+/* =================== ACENTOS POR TREINO E TEMA =================== */
+const ACCENTS={
+  light:{A:{a:'#F5B301',ink:'#181818',t:'#9A6B00'},B:{a:'#14B8A6',ink:'#12312C',t:'#0E7568'},C:{a:'#FB8A3C',ink:'#3A1D07',t:'#C24E0A'}},
+  dark:{A:{a:'#FFD633',ink:'#181818',t:'#FFD633'},B:{a:'#2DD4BF',ink:'#0E2925',t:'#2DD4BF'},C:{a:'#FB923C',ink:'#331A05',t:'#FB923C'}}
+};
+const HIST_COLORS={A:'#F5B301',B:'#14B8A6',C:'#FB8A3C'};
+
+/* =================== PROGRAMA =================== */
+const YT=q=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q);
+const PROGRAM={
+ A:{label:'Push',sub:'Peito · Ombro · Tríceps',
+   intro:'Empurrar. Compostos pesados primeiro (você fresco = mais carga = mais estímulo), isolados depois, core no fim.',
+   ex:[
+    {id:'chestpress',fig:'chestpress',name:'Chest Press',muscle:'Peito',w:30,sets:4,reps:'8–12',rest:90,
+      yt:'seated chest press machine form shorts',
+      why:'Maior composto do empurrar. Vem primeiro porque com você descansado dá pra mover mais carga com forma limpa, e é daqui que sai o principal estímulo de massa do dia.',
+      steps:['Ajuste o banco: pegadores na linha do meio do peito','Costas apoiadas, pés firmes no chão','Empurre à frente sem travar o cotovelo','Volte controlado sentindo o peito alongar'],
+      g:'Escápulas levemente retraídas: protege o ombro.',b:'Não suba os ombros em direção à orelha.',
+      alts:[{id:'dbbench',fig:'dbbench',name:'Supino Halteres (banco)',w:12,yt:'dumbbell bench press form shorts',
+        steps:['Deitado no banco, halteres na linha do peito','Empurre pra cima até quase estender','Desça controlado até a altura do peito','Cotovelos a ~45° do tronco'],
+        g:'Pés firmes no chão dão estabilidade.',b:'Não bata os halteres no topo.'}]},
+    {id:'pecdeck',fig:'pecdeck',name:'Pec Deck',muscle:'Peito (isolado)',w:22.5,sets:3,reps:'12–15',rest:60,
+      yt:'pec deck machine form shorts',
+      why:'Isola o peito logo depois do press, quando ele já está ativado mas o tríceps começa a cansar. Aqui o tríceps não limita nada: é peito puro completando o estímulo.',
+      steps:['Antebraços nas almofadas, cotovelo na altura do ombro','Feche os braços juntando no centro','Segure 1s apertando o peito','Abra devagar até sentir o alongamento'],
+      g:'Movimento vem do peito, não dos braços.',b:'Não deixe a carga puxar o ombro pra trás bruscamente.',
+      alts:[{id:'cablefly',fig:'cablefly',name:'Crucifixo na Polia',w:7.5,yt:'cable chest fly form shorts',
+        steps:['Polias na altura do ombro, um passo à frente','Braços em arco, feche as mãos à frente do peito','Aperte 1s no centro','Abra controlado sem esticar demais'],
+        g:'Cotovelo levemente flexionado o tempo todo.',b:'Não transforme em press dobrando o cotovelo.'}]},
+    {id:'shoulderpress',fig:'shoulderpress',name:'Shoulder Press',muscle:'Ombro',w:20,sets:3,reps:'8–12',rest:90,
+      yt:'shoulder press machine form shorts',
+      why:'Segundo composto do dia. O ombro ainda está forte, e o tríceps (que ajuda aqui) trabalha de novo antes do isolado dele. Depois do peito pra não roubar força do press principal.',
+      steps:['Costas apoiadas, pegada na largura do ombro','Empurre pra cima sem travar o cotovelo','Pare antes de encostar as mãos no topo','Desça até os cotovelos na linha do ombro'],
+      g:'Core firme pra não arquear a lombar.',b:'Não jogue a cabeça à frente ao empurrar.',
+      alts:[{id:'dbshoulder',fig:'shoulderpress',name:'Desenvolvimento Halteres',w:10,yt:'seated dumbbell shoulder press form shorts',
+        steps:['Sentado com encosto, halteres na altura da orelha','Empurre pra cima até quase juntar','Desça controlado até a linha da orelha','Antebraço sempre vertical'],
+        g:'Encosto levemente inclinado protege a lombar.',b:'Não arquee as costas pra empurrar.'}]},
+    {id:'sidelat',fig:'lateralraisedb',name:'Elevação Lateral (halteres)',muscle:'Deltóide lateral',w:8,sets:3,reps:'12–15',rest:45,
+      yt:'dumbbell lateral raise form shorts',
+      why:'Isolado do deltóide lateral, o músculo que dá largura ao ombro. Vem depois dos presses porque se viesse antes, roubaria força deles; e nenhum press atinge bem essa cabeça do ombro.',
+      steps:['Em pé, halteres ao lado do corpo, cotovelo levemente flexionado','Suba pelos lados até a altura do ombro','Lidere com o cotovelo: a mão nunca passa acima dele','Desça lento, sem deixar o peso despencar'],
+      g:'Imagine derramar uma jarra: o mindinho sobe um tiquinho a mais.',b:'Não balance o tronco nem suba acima da linha do ombro.',
+      alts:[{id:'cablelatv',fig:'cablelat',name:'Elevação Lateral na Polia',w:5,yt:'cable lateral raise form shorts',
+        steps:['Polia baixa, de lado pra torre','Suba o braço de fora até o ombro','Tensão constante: desça devagar','Troque o lado ao terminar'],
+        g:'A polia mantém tensão até embaixo, ótima variação.',b:'Não incline o tronco pra ajudar.'}]},
+    {id:'triceps',fig:'triceps',name:'Tríceps Corda (polia)',muscle:'Tríceps',w:12.5,sets:3,reps:'12–15',rest:45,
+      yt:'triceps rope pushdown form shorts',
+      why:'O tríceps já ajudou em todos os presses, então chega aqui pré-fatigado: pouco volume direto já completa o trabalho. Se viesse antes, derrubaria a carga dos compostos.',
+      steps:['Cotovelos colados ao tronco','Empurre a corda pra baixo estendendo o cotovelo','No fim, abra levemente as pontas da corda','Suba controlado até ~90°'],
+      g:'Só o antebraço se move: cotovelo é a dobradiça.',b:'Não afaste o cotovelo do corpo.',
+      alts:[{id:'benchdipv',fig:'benchdip',name:'Mergulho no Banco',bw:true,yt:'bench dips form shorts',
+        steps:['Mãos no banco atrás, pernas à frente','Desça dobrando o cotovelo até ~90°','Empurre de volta estendendo o braço','Costas sempre rente ao banco'],
+        g:'Ombros longe da orelha o tempo todo.',b:'Não desça além de 90° se sentir o ombro.'}]},
+    {id:'absfull',fig:'absfull',name:'Abdominal Completo',muscle:'Abdômen',w:0,bw:true,sets:3,reps:'15–20',rest:45,
+      yt:'crunch proper form shorts',
+      why:'Core fecha o treino de propósito: se cansasse antes, você perderia estabilidade justamente nos exercícios pesados que mais precisam dela.',
+      steps:['Deite, joelhos dobrados','Tire as escápulas do chão enrolando o tronco','Expire ao subir, contraindo o abdômen','Desça sem relaxar totalmente'],
+      g:'Queixo afastado do peito, olhar pro teto.',b:'Não puxe o pescoço com as mãos.',
+      alts:[{id:'plankv',fig:'plank',name:'Prancha',bw:true,reps:'30–45s',yt:'plank form shorts',
+        steps:['Antebraços no chão, corpo reto','Contraia abdômen e glúteo','Respire normal, segure o tempo','Quadril nem alto nem caído'],
+        g:'Corpo em linha reta da cabeça ao calcanhar.',b:'Não deixe a lombar afundar.'}]},
+   ]},
+ B:{label:'Pull',sub:'Costas · Posterior · Bíceps',
+   intro:'Puxar. Puxada vertical antes da horizontal (recruta mais massa), detalhe e posterior de ombro no meio, bíceps fecha.',
+   ex:[
+    {id:'latpull',fig:'latpull',name:'Lat Pulldown',muscle:'Dorsal',w:31,sets:4,reps:'8–12',rest:90,
+      yt:'lat pulldown form shorts',
+      why:'Puxada vertical recruta a maior área do dorsal de uma vez. Abre o dia porque é o composto que mais paga quando você está com força total.',
+      steps:['Pegada um pouco mais larga que os ombros','Puxe a barra até a parte alta do peito','Leve os cotovelos pra baixo e pra trás','Suba controlado alongando o dorsal'],
+      g:'Peito pra cima: puxe com as costas, não com o braço.',b:'Não jogue o tronco muito pra trás.',
+      alts:[{id:'neutralpull',fig:'latpull',name:'Pulldown Pegada Neutra',w:31,yt:'neutral grip lat pulldown form shorts',
+        steps:['Use o triângulo ou pegada neutra','Puxe até a parte alta do peito','Cotovelos rente ao corpo','Volte controlado até alongar'],
+        g:'Pegada neutra costuma ser mais confortável pro ombro.',b:'Não balance pra completar a repetição.'}]},
+    {id:'seatedrow',fig:'seatedrow',name:'Remada Sentada (triângulo)',muscle:'Costas (espessura)',w:20,sets:3,reps:'10–12',rest:75,
+      yt:'seated cable row form shorts',
+      why:'Depois da vertical vem a horizontal: é ela que constrói a espessura do meio das costas. Segundo lugar porque ainda exige bastante energia.',
+      steps:['Joelhos levemente dobrados, coluna ereta','Puxe o triângulo em direção ao umbigo','Aperte as escápulas no fim','Volte estendendo os braços sem curvar a lombar'],
+      g:'Cotovelos passam rente ao corpo.',b:'Não arredonde as costas ao voltar.',
+      alts:[{id:'widerow',fig:'seatedrow',name:'Remada Aberta na Polia',w:17.5,yt:'wide grip seated cable row form shorts',
+        steps:['Barra reta, pegada aberta','Puxe em direção à base do peito','Cotovelos abertos na linha do ombro','Volte controlado'],
+        g:'Pegada aberta muda o foco pro meio das costas e posterior.',b:'Não encolha os ombros ao puxar.'}]},
+    {id:'lowrow',fig:'lowrow',name:'Upper Back / Low Row',muscle:'Costas (detalhe)',w:17.5,sets:3,reps:'12',rest:60,
+      yt:'chest supported row machine form shorts',
+      why:'Terceira puxada com carga menor: refina o meio das costas depois que os dois grandes já fizeram o trabalho bruto.',
+      steps:['Peito apoiado se a máquina permitir','Puxe abrindo bem as escápulas','Foque na contração no meio das costas','Retorne controlado'],
+      g:'Pausa de 1s na contração rende mais.',b:'Não use só os braços.',
+      alts:[{id:'facepullv',fig:'facepull',name:'Face Pull',w:10,yt:'face pull form shorts',
+        steps:['Polia alta, corda com as duas mãos','Puxe em direção ao rosto','Abra os cotovelos pra fora no fim','Volte devagar'],
+        g:'Excelente pra postura e saúde do ombro.',b:'Não use carga alta: é exercício de controle.'}]},
+    {id:'reversefly',fig:'reversefly',name:'Crucifixo Inverso',muscle:'Deltóide posterior',w:5,sets:3,reps:'12–15',rest:45,
+      yt:'reverse pec deck form shorts',
+      why:'O posterior de ombro é pequeno e some se ficar só nos grandes. Entra aqui pra equilibrar todo o volume de empurrar da semana: ombro saudável é ombro equilibrado.',
+      steps:['Peito no apoio, braços à frente','Abra os braços pra trás em arco','Aperte a parte de trás do ombro','Volte devagar controlando'],
+      g:'Carga leve e foco: é um músculo pequeno.',b:'Não dobre muito o cotovelo (vira remada).',
+      alts:[{id:'dbrevfly',fig:'reversefly',name:'Crucifixo Inverso (halteres)',w:4,yt:'bent over reverse fly dumbbell form shorts',
+        steps:['Tronco inclinado à frente, costas retas','Abra os halteres pros lados','Aperte as escápulas no topo','Desça sem balançar'],
+        g:'Tronco parado: só o braço se move.',b:'Não levante o tronco a cada repetição.'}]},
+    {id:'biceps',fig:'biceps',name:'Rosca Direta (barra)',muscle:'Bíceps',w:12.5,sets:3,reps:'10–12',rest:60,
+      yt:'barbell curl form shorts',
+      why:'O bíceps já trabalhou em todas as puxadas do dia. Fechando com ele pré-fatigado, pouco volume direto já basta pra completar o estímulo sem exagerar.',
+      steps:['Em pé, cotovelos colados ao tronco','Suba a barra contraindo o bíceps','Não balance o corpo','Desça controlado até estender'],
+      g:'A descida lenta é onde mora o ganho.',b:'Não use impulso de quadril pra subir.',
+      alts:[{id:'hammer',fig:'biceps',name:'Rosca Martelo (halteres)',w:8,yt:'hammer curl form shorts',
+        steps:['Halteres com pegada neutra (palmas se olhando)','Suba sem girar o punho','Cotovelo fixo ao lado do corpo','Desça controlado'],
+        g:'Pega também o braquial: braço mais grosso.',b:'Não deixe o cotovelo ir à frente.'}]},
+    {id:'reversecrunch',fig:'reversecrunch',name:'Abdominal Inverso',muscle:'Abdômen inferior',w:0,bw:true,sets:3,reps:'15',rest:45,
+      yt:'reverse crunch form shorts',
+      why:'Core fecha o dia pelo mesmo motivo do treino A: cansar o estabilizador antes das puxadas pesadas seria dar um tiro no pé.',
+      steps:['Deite, joelhos dobrados a 90°','Enrole o quadril trazendo os joelhos ao peito','Tire o cóccix do chão na subida','Desça sem encostar os pés'],
+      g:'O movimento é o quadril enrolando, não a perna.',b:'Não use balanço pra jogar as pernas.',
+      alts:[{id:'legraisev',fig:'legraise',name:'Elevação de Pernas',bw:true,yt:'lying leg raises form shorts',
+        steps:['Deitado, mãos sob o quadril','Suba as pernas quase retas até 90°','Desça devagar sem tocar o chão','Lombar sempre colada no chão'],
+        g:'Quanto mais lenta a descida, melhor.',b:'Não arqueie a lombar ao descer.'}]},
+   ]},
+ C:{label:'Legs',sub:'Pernas · Glúteo · Lombar',
+   intro:'Maior gasto energético da semana. Composto gigante primeiro, isolados de coxa, superset de quadril pra economizar tempo, panturrilha e lombar fecham.',
+   ex:[
+    {id:'legpress',fig:'legpress',name:'Leg Press',muscle:'Quadríceps + glúteo',w:60,sets:4,reps:'10–12',rest:120,
+      yt:'leg press form shorts',
+      why:'O maior recrutamento muscular e a maior carga da semana. Abre o dia porque exige tudo de você: fazer isso cansado seria perder metade do resultado e arriscar a forma.',
+      steps:['Pés na largura do quadril, meio da plataforma','Desça até ~90° no joelho','Empurre pelos calcanhares','Não trave o joelho no topo'],
+      g:'Joelhos acompanham a linha dos pés.',b:'Não deixe a lombar descolar do banco.',
+      alts:[{id:'goblet2',fig:'goblet',name:'Agachamento Goblet',w:16,yt:'goblet squat form shorts',
+        steps:['Halter junto ao peito, pés na largura do ombro','Agache empurrando o quadril pra trás','Desça até a coxa paralela','Suba pelos calcanhares'],
+        g:'Peito aberto, cotovelos entre os joelhos embaixo.',b:'Não deixe o calcanhar levantar.'}]},
+    {id:'legext',fig:'legext',name:'Cadeira Extensora',muscle:'Quadríceps',w:20,sets:3,reps:'12–15',rest:60,
+      yt:'leg extension form shorts',
+      why:'Isola o quadríceps logo depois do composto, quando ele já está ativado. É o "acabamento" da frente da coxa sem exigir mais nada da lombar.',
+      steps:['Costas apoiadas, almofada acima do tornozelo','Estenda até quase travar o joelho','Aperte a coxa 1s no topo','Desça controlado'],
+      g:'Pausa no topo dá um estímulo extra.',b:'Não jogue a perna com impulso.',
+      alts:[{id:'lungev',fig:'lunge',name:'Afundo (halteres)',w:8,yt:'dumbbell lunge form shorts',
+        steps:['Passo à frente, tronco ereto','Desça até o joelho de trás quase tocar','Empurre de volta pelo calcanhar da frente','Alterne as pernas'],
+        g:'Passo longo = mais glúteo; curto = mais quadríceps.',b:'Não deixe o joelho da frente passar muito do pé.'}]},
+    {id:'legcurl',fig:'legcurl',name:'Cadeira Flexora',muscle:'Posterior de coxa',w:25,sets:3,reps:'12–15',rest:60,
+      yt:'seated leg curl form shorts',
+      why:'Na sequência da extensora pra equilibrar: quadríceps forte com posterior fraco é receita de joelho frágil. O par extensora + flexora protege a articulação.',
+      steps:['Almofada na parte de trás do tornozelo','Flexione o joelho puxando o calcanhar','Aperte o posterior no fim','Volte sem deixar a carga cair'],
+      g:'Quadril fixo no banco o tempo todo.',b:'Não levante o quadril pra ajudar.',
+      alts:[{id:'rdlv',fig:'rdl',name:'Stiff Halteres (RDL)',w:14,yt:'dumbbell romanian deadlift form shorts',
+        steps:['Halteres à frente das coxas','Empurre o quadril pra trás descendo o tronco','Desça até sentir alongar o posterior','Suba apertando o glúteo'],
+        g:'Costas retas sempre; o movimento é do quadril.',b:'Não arredonde a lombar pra descer mais.'}]},
+    {id:'glutekick',fig:'glutekick',name:'Glute Kickback',muscle:'Glúteo',w:45,sets:3,reps:'12 / perna',rest:45,
+      yt:'glute kickback machine form shorts',
+      why:'Isola o glúteo com quase zero estresse na lombar, que ainda vai trabalhar no fim. Depois dos compostos porque é refinamento, não base.',
+      steps:['Apoie e estabilize o tronco','Empurre a perna pra trás e cima','Aperte o glúteo no topo','Volte controlado sem arquear a lombar'],
+      g:'Movimento sai do glúteo, não da lombar.',b:'Não hiperestenda a coluna.',
+      alts:[{id:'bridgev',fig:'bridge',name:'Ponte de Glúteo',bw:true,yt:'glute bridge form shorts',
+        steps:['Deitado, joelhos dobrados, pés no chão','Suba o quadril apertando o glúteo','Pausa de 1s no topo','Desça controlado'],
+        g:'Costela pra baixo: o arco é do quadril, não da lombar.',b:'Não empurre com a lombar.'}]},
+    {id:'abductor',fig:'abductor',name:'Cadeira Abdutora',muscle:'Glúteo médio',w:35,sets:3,reps:'15',rest:0,
+      ss:'A',yt:'hip abduction machine form shorts',
+      why:'Superset 1 de 2. Abdutora e adutora usam máquinas vizinhas e músculos opostos: emendar as duas economiza tempo e eleva o gasto calórico sem atrapalhar nada.',
+      steps:['Sentado, joelhos contra as almofadas externas','Abra as pernas contra a resistência','Aperte 1s na abertura máxima','Volte devagar'],
+      g:'Tronco levemente à frente recruta mais glúteo.',b:'Não use balanço pra abrir.',
+      alts:[{id:'bandabd',fig:'abductor',name:'Abdução com Mini Band',bw:true,yt:'banded hip abduction form shorts',
+        steps:['Elástico acima dos joelhos','Sentado ou deitado de lado, abra os joelhos','Segure 1s aberto','Volte com controle'],
+        g:'Ótima opção se a máquina estiver ocupada.',b:'Não deixe o elástico fechar rápido.'}]},
+    {id:'adductor',fig:'adductor',name:'Cadeira Adutora',muscle:'Adutores',w:10,sets:3,reps:'15',rest:45,
+      ss:'A',ssEnd:true,yt:'hip adduction machine form shorts',
+      why:'Superset 2 de 2: emenda direto na abdutora, sem descanso entre elas. Descansa só depois do par completo.',
+      steps:['Logo após a abdutora, sem descanso','Almofadas na parte interna das coxas','Feche as pernas juntando','Volte controlado abrindo'],
+      g:'Em sequência com a abdutora = superset.',b:'Não force amplitude que machuque a virilha.',
+      alts:[{id:'cableadd',fig:'adductor',name:'Adução na Polia',w:5,yt:'cable hip adduction form shorts',
+        steps:['Tornozeleira na perna de dentro','Cruze a perna à frente da outra','Segure 1s e volte devagar','Troque o lado'],
+        g:'Segure em algo pra equilibrar.',b:'Não incline o tronco pra compensar.'}]},
+    {id:'calf',fig:'calf',name:'Panturrilha (máquina)',muscle:'Panturrilha',w:60,sets:4,reps:'15–20',rest:45,
+      yt:'calf raise machine form shorts',
+      why:'Não interfere em nenhum outro exercício, então vai pro fim sem prejuízo. Responde melhor a repetições altas e amplitude total.',
+      steps:['Ponta dos pés na plataforma','Suba o máximo na ponta do pé','Pausa 1s no topo','Desça alongando bem a panturrilha'],
+      g:'Amplitude total: desce bem, sobe bem.',b:'Não faça repetições curtas e rápidas demais.',
+      alts:[{id:'dbcalf',fig:'calf',name:'Panturrilha c/ Halter (degrau)',w:16,yt:'standing dumbbell calf raise form shorts',
+        steps:['Ponta do pé num degrau, halter na mão do mesmo lado','Suba na ponta o máximo que der','Pausa 1s no topo','Desça alongando abaixo do degrau'],
+        g:'Uma perna por vez aumenta a intensidade.',b:'Não faça pela metade.'}]},
+    {id:'lowerback',fig:'lowerback',name:'Extensão Lombar',muscle:'Lombar',w:0,bw:true,sets:3,reps:'12–15',rest:45,
+      yt:'back extension form shorts',
+      why:'A lombar estabiliza tudo no dia de pernas. Se cansasse antes do Leg Press, sua forma iria embora. Por isso o estabilizador é sempre o último a trabalhar.',
+      steps:['Quadril apoiado, tornozelos travados','Desça o tronco flexionando o quadril','Suba até alinhar com as pernas','Não hiperestenda no topo'],
+      g:'Suba até a linha neutra, sem passar.',b:'Não faça com peso cedo demais.',
+      alts:[{id:'supermanv',fig:'superman',name:'Superman (solo)',bw:true,yt:'superman exercise form shorts',
+        steps:['De bruços, braços à frente','Suba braços e pernas juntos','Segure 1-2s no topo','Desça com controle'],
+        g:'Olhar pro chão pra não forçar o pescoço.',b:'Não suba além do confortável.'}]},
+   ]},
+};
+const FINISHER={id:'finisher',fig:'bike',name:'Finisher Cardio (bike)',muscle:'Condicionamento',w:0,bw:true,sets:1,reps:'5–8 min',rest:0,
+  isNew:true,yt:'stationary bike hiit beginner shorts',
+  why:'Fecha o treino com um gasto calórico extra que ajuda no déficit sem roubar energia da musculação (por isso é curto e vem por último).',
+  steps:['Bike no fim do treino','30s forte / 30s leve, alternando','Esforço moderado-alto no tiro','Encerra ao completar 5–8 min'],
+  g:'Soma no déficit sem atrapalhar a recuperação.',b:'Não vire um cardio longo que rouba energia do treino.',
+  alts:[
+   {id:'treadmillv',fig:'treadmill',name:'Esteira Inclinada',bw:true,reps:'8–10 min',yt:'incline treadmill walk benefits shorts',
+    steps:['Inclinação 8–12%, velocidade de caminhada forte','Sem segurar no apoio','Mantém 8–10 min constantes','Postura ereta'],
+    g:'Queima alta com impacto baixíssimo.',b:'Não segure nas barras (corta o esforço pela metade).'},
+   {id:'rowerv',fig:'rower',name:'Remo Ergômetro',bw:true,reps:'5–8 min',yt:'rowing machine proper form shorts',
+    steps:['Ordem do movimento: perna, tronco, braço','Volta na ordem inversa','30s forte / 30s leve','Costas retas sempre'],
+    g:'Corpo inteiro: gasto altíssimo em pouco tempo.',b:'Não puxe com o braço antes de estender a perna.'}]};
+PROGRAM.A.ex.push(JSON.parse(JSON.stringify(FINISHER)));
+PROGRAM.C.ex.push(JSON.parse(JSON.stringify(FINISHER)));
+
+const QUOTES=["Constância vence intensidade.","O treino feito > o treino perfeito adiado.","2 reps na reserva hoje, mais carga na próxima.","Forma primeiro. Sempre.","Disciplina é liberdade.","Cada série marcada é um tijolo."];
+
+/* =================== ESTADO =================== */
+let LS_OK=true; try{localStorage.setItem('__t','1');localStorage.removeItem('__t')}catch(e){LS_OK=false}
+const load=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}};
+const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+
+let WEIGHTS=load('iron_weights',{});
+let SESSION=load('iron_session',{A:{},B:{},C:{}});
+let HISTORY=load('iron_history',[]);
+let VARIANT=load('iron_variant',{});
+let THEME=load('iron_theme','light');
+let cur='A', view='train';
+
+const todayISO=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)};
+
+/* variação ativa de um exercício (mescla base + alt) */
+function activeOf(ex){
+  const vid=VARIANT[ex.id];
+  if(vid&&ex.alts){const alt=ex.alts.find(a=>a.id===vid);
+    if(alt) return {...ex,...alt,baseId:ex.id,vid:alt.id};}
+  return {...ex,baseId:ex.id,vid:ex.id};
+}
+const wOf=a=>WEIGHTS[a.vid]!=null?WEIGHTS[a.vid]:(a.w||0);
+function setsArr(baseId,n){
+  if(!SESSION[cur][baseId]||SESSION[cur][baseId].length!==n) SESSION[cur][baseId]=Array(n).fill(false);
+  return SESSION[cur][baseId];
+}
+function lastW(vid){
+  for(const h of HISTORY){if(h.weights&&h.weights[vid]!=null)return h.weights[vid]}
+  return null;
+}
+
+/* =================== TEMA / ACENTO =================== */
+const $=id=>document.getElementById(id);
+function applyTheme(){
+  document.documentElement.setAttribute('data-theme',THEME);
+  $('thm').textContent=THEME==='light'?'🌙':'☀️';
+  const m=document.querySelector('meta[name=theme-color]');
+  if(m)m.setAttribute('content',THEME==='light'?'#F4F5F7':'#0B0C0E');
+  applyAccent();
+}
+function applyAccent(){
+  const c=ACCENTS[THEME][cur];
+  const r=document.documentElement.style;
+  r.setProperty('--accent',c.a);r.setProperty('--accent-ink',c.ink);r.setProperty('--accent-text',c.t);
+}
+$('thm').onclick=()=>{THEME=THEME==='light'?'dark':'light';save('iron_theme',THEME);applyTheme()};
+
+/* =================== RENDER =================== */
+function render(){
+  applyAccent();
+  $('quote').textContent=QUOTES[Math.floor(Math.random()*QUOTES.length)];
+  renderTabs();
+  if(view==='train'){renderTrain()}else{renderProgress()}
+}
+function renderTabs(){
+  const t=$('tabs');t.innerHTML='';
+  for(const k of ['A','B','C']){
+    const p=PROGRAM[k];
+    const b=document.createElement('button');
+    b.className='tab'+(k===cur?' on':'');
+    b.innerHTML=`<div class="ltr">${k}</div><div class="nm">${p.label}</div>`;
+    b.onclick=()=>{cur=k;render();window.scrollTo({top:0,behavior:'smooth'})};
+    t.appendChild(b);
+  }
+}
+function renderTrain(){
+  const day=PROGRAM[cur];
+  $('dintro').textContent=day.intro;
+  // ordem
+  $('orderBody').innerHTML=day.ex.map((ex,i)=>{
+    const a=activeOf(ex);
+    return `<div class="oi"><div class="n">${i+1}</div><div class="tx"><b>${a.name}${ex.ss?' (superset)':''}</b><span>${ex.why}</span></div></div>`;
+  }).join('');
+  // cards
+  const list=$('list');list.innerHTML='';
+  day.ex.forEach((ex,i)=>{
+    const a=activeOf(ex);
+    const arr=setsArr(ex.id,a.sets);
+    const done=arr.filter(Boolean).length;
+    const card=document.createElement('div');
+    card.className='card'+(done===a.sets?' done':'');
+    card.style.animationDelay=(i*40)+'ms';
+    const badges=(ex.isNew?'<span class="badge new">novo</span>':'')+
+                 (ex.ss?'<span class="badge ss">superset</span>':'');
+    // chips de variação
+    let vhtml='';
+    if(ex.alts&&ex.alts.length){
+      const opts=[{id:ex.id,name:ex.name},...ex.alts.map(x=>({id:x.id,name:x.name}))];
+      vhtml=`<div class="vars"><span class="vlab">Opções</span>`+opts.map(o=>
+        `<button class="vchip${a.vid===o.id?' on':''}" onclick="setVar('${ex.id}','${o.id}')">${o.name}</button>`).join('')+`</div>`;
+    }
+    const lw=lastW(a.vid);
+    const wDisp=a.bw?`<div class="val"><span class="num" style="font-size:19px">Peso corporal</span></div>`:
+      `<button onclick="bump('${ex.id}',-2.5)">−</button>
+       <div class="val" onclick="editW(this,'${ex.id}')"><span class="num">${fmtW(wOf(a))}</span><span class="u">kg</span></div>
+       <button onclick="bump('${ex.id}',2.5)">+</button>`;
+    card.innerHTML=`
+      ${ex.ss?'<div class="ssband"></div>':''}
+      <div class="ctop">
+        <div class="viz">${FIG[a.fig]||''}</div>
+        <div class="cinfo">
+          <div class="cidx"><span class="n">${String(i+1).padStart(2,'0')}</span>${badges}</div>
+          <div class="cname">${a.name}</div>
+          <div class="meta">
+            <span class="chip"><b>${a.muscle}</b></span>
+            <span class="chip">${a.sets}×${a.reps}</span>
+          </div>
+        </div>
+      </div>
+      ${vhtml}
+      <div class="wt">
+        <div class="stp">${wDisp}</div>
+        ${a.rest?`<div class="rest" onclick="startRest(${a.rest},'${a.name.replace(/'/g,'')}')">
+          <div class="t">${a.rest}s</div><div class="lb">Descanso</div></div>`:
+          `<div class="rest" style="opacity:.55"><div class="t">${ex.ss?'SS':'GO'}</div><div class="lb">${ex.ss?'Sem pausa':'Contínuo'}</div></div>`}
+      </div>
+      ${(!a.bw&&lw!=null&&lw!==wOf(a))?`<div class="lastw">Último registrado: ${fmtW(lw)} kg</div>`:''}
+      <div class="sets">
+        <div class="lab"><span>Séries concluídas</span><span>${done}/${a.sets}</span></div>
+        <div class="dots">${arr.map((v,si)=>`<div class="dot${v?' fill':''}" onclick="toggleSet('${ex.id}',${si})"><span>${si+1}</span></div>`).join('')}</div>
+      </div>
+      <div class="drnote"><span class="ic">🧬</span><p>${ex.why}</p></div>
+      <div class="acts">
+        <a class="abtn vid" href="${YT(a.yt)}" target="_blank" rel="noopener">▶ Ver vídeo</a>
+        <button class="abtn" onclick="toggleHow(this)">Passo a passo <span class="cv">▾</span></button>
+      </div>
+      <div class="how"><div class="how-i">
+        <ol>${a.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+        <div class="cue g"><b>✓</b><span>${a.g}</span></div>
+        <div class="cue b"><b>✕</b><span>${a.b}</span></div>
+      </div></div>`;
+    list.appendChild(card);
+  });
+  updateProgress();
+}
+function fmtW(n){return Number.isInteger(n)?n:n.toFixed(1).replace('.',',')}
+function updateProgress(){
+  const day=PROGRAM[cur];
+  let done=0,tot=0;
+  day.ex.forEach(ex=>{const a=activeOf(ex);const arr=setsArr(ex.id,a.sets);done+=arr.filter(Boolean).length;tot+=a.sets});
+  $('pdone').textContent=done;$('ptot').textContent=tot;
+  $('pbar').style.width=(tot?done/tot*100:0)+'%';
+  const fb=$('finBtn');
+  if(done>=tot&&tot>0){fb.classList.add('ready');fb.textContent='✓ Concluir treino '+cur}
+  else{fb.classList.remove('ready');fb.textContent=`Concluir treino (${done}/${tot})`}
+}
+
+/* =================== INTERAÇÕES =================== */
+function setVar(baseId,vid){
+  VARIANT[baseId]=vid;save('iron_variant',VARIANT);renderTrain();
+}
+function findBase(id){for(const k in PROGRAM){const e=PROGRAM[k].ex.find(x=>x.id===id);if(e)return e}}
+function bump(baseId,delta){
+  const a=activeOf(findBase(baseId));let v=wOf(a)+delta;if(v<0)v=0;
+  WEIGHTS[a.vid]=Math.round(v*10)/10;save('iron_weights',WEIGHTS);renderTrain();
+}
+function editW(el,baseId){
+  const a=activeOf(findBase(baseId));const cur0=wOf(a);
+  el.innerHTML=`<input type="number" inputmode="decimal" step="2.5" value="${cur0}">`;
+  const inp=el.querySelector('input');inp.focus();inp.select();
+  const commit=()=>{let v=parseFloat(String(inp.value).replace(',','.'));if(isNaN(v)||v<0)v=cur0;
+    WEIGHTS[a.vid]=Math.round(v*10)/10;save('iron_weights',WEIGHTS);toast('Peso salvo: '+fmtW(WEIGHTS[a.vid])+' kg');renderTrain()};
+  inp.onblur=commit;inp.onkeydown=e=>{if(e.key==='Enter')inp.blur()};
+}
+function toggleSet(baseId,si){
+  const ex=findBase(baseId);const a=activeOf(ex);const arr=setsArr(baseId,a.sets);
+  arr[si]=!arr[si];save('iron_session',SESSION);
+  const justDone=arr[si];renderTrain();
+  if(justDone){if(navigator.vibrate)navigator.vibrate(35);
+    const allNow=PROGRAM[cur].ex.every(e=>{const aa=activeOf(e);return setsArr(e.id,aa.sets).every(Boolean)});
+    if(!allNow&&a.rest)startRest(a.rest,a.name);
+  }
+}
+function toggleHow(btn){btn.classList.toggle('op');btn.parentElement.nextElementSibling.classList.toggle('op')}
+function toggleOrder(btn){btn.classList.toggle('op');btn.nextElementSibling.classList.toggle('op')}
+
+/* timer */
+let tInt=null,tLeft=0,tTotal=0;
+function startRest(sec,name){
+  clearInterval(tInt);tLeft=sec;tTotal=sec;
+  $('tname').textContent='Descanso · '+sec+'s';
+  $('tsub').textContent='Próxima série: '+(name||'');
+  $('tmr').classList.add('show');paintT();
+  tInt=setInterval(()=>{tLeft--;if(tLeft<=0){clearInterval(tInt);
+    if(navigator.vibrate)navigator.vibrate([120,60,120]);
+    $('tbig').textContent='Vai!';$('tname').textContent='Descanso completo';
+    $('tsub').textContent='Manda a próxima série 💪';$('tring').style.width='0%';
+    setTimeout(()=>$('tmr').classList.remove('show'),1600);return}
+    paintT()},1000);
+}
+function paintT(){const m=Math.floor(tLeft/60),s=tLeft%60;
+  $('tbig').textContent=`${m}:${String(s).padStart(2,'0')}`;
+  $('tring').style.width=(tLeft/tTotal*100)+'%';}
+$('tx').onclick=()=>{clearInterval(tInt);$('tmr').classList.remove('show')};
+
+/* concluir */
+$('finBtn').onclick=()=>{
+  const day=PROGRAM[cur];let done=0,tot=0;const snap={};
+  day.ex.forEach(ex=>{const a=activeOf(ex);const arr=setsArr(ex.id,a.sets);
+    done+=arr.filter(Boolean).length;tot+=a.sets;
+    if(!a.bw)snap[a.vid]=wOf(a)});
+  if(done===0){toast('Marca pelo menos uma série antes 😉');return}
+  HISTORY.unshift({date:$('date').value||todayISO(),workout:cur,label:day.label,done,tot,weights:snap,ts:Date.now()});
+  save('iron_history',HISTORY);
+  SESSION[cur]={};save('iron_session',SESSION);
+  confetti();toast('🔥 Treino '+cur+' registrado! '+done+'/'+tot+' séries');
+  renderTrain();
+};
+
+/* =================== PROGRESSO =================== */
+function renderProgress(){
+  const pv=$('progView');
+  const now=new Date();
+  const last7=new Set();
+  HISTORY.forEach(h=>{const d=new Date(h.date+'T00:00');const diff=(now-d)/864e5;if(diff>=0&&diff<7)last7.add(h.date)});
+  const total=HISTORY.length;
+  const streak=calcStreak();
+  const wd=['S','T','Q','Q','S','S','D'];
+  const monday=new Date(now);const dow=(now.getDay()+6)%7;monday.setDate(now.getDate()-dow);
+  let daysHtml='';
+  for(let i=0;i<7;i++){const d=new Date(monday);d.setDate(monday.getDate()+i);
+    const iso=d.toISOString().slice(0,10);
+    const hit=HISTORY.find(h=>h.date===iso);
+    const isToday=iso===todayISO();
+    daysHtml+=`<div class="day"><div class="ball${hit?' hit':''}${isToday?' today':''}">${hit?hit.workout:''}</div><small>${wd[i]}</small></div>`;
+  }
+  const hist=HISTORY.length?HISTORY.map(h=>{
+    const d=new Date(h.date+'T00:00');
+    const ds=d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});
+    const pct=Math.round(h.done/h.tot*100);
+    return `<div class="hrow"><div class="wk" style="background:${HIST_COLORS[h.workout]}">${h.workout}</div>
+      <div class="mid"><b>${h.label} · Treino ${h.workout}</b><small>${ds} · ${h.done}/${h.tot} séries</small></div>
+      <div class="pct">${pct}%</div></div>`;
+  }).join(''):'<div class="empty">Nenhum treino registrado ainda.<br>Conclua um treino e ele aparece aqui. 📈</div>';
+
+  pv.innerHTML=`
+    <div class="stats">
+      <div class="stat"><div class="v">${last7.size}</div><div class="k">Esta semana</div></div>
+      <div class="stat"><div class="v">${streak}</div><div class="k">Sequência (sem)</div></div>
+      <div class="stat"><div class="v">${total}</div><div class="k">Total feitos</div></div>
+    </div>
+    <div class="week"><h4>Sua semana</h4><div class="days">${daysHtml}</div></div>
+    <div class="exports">
+      <button class="abtn vid" onclick="exportXLSX()">📊 Exportar Excel</button>
+      <button class="abtn" onclick="exportPDF()">📄 Exportar PDF</button>
+    </div>
+    <div class="sectit">Histórico ${HISTORY.length?`<button onclick="clearHist()">Limpar</button>`:''}</div>
+    <div class="hist">${hist}</div>
+    <div class="tips">
+      <div class="sectit" style="font-size:14px">Princípios do Dr. 🧬</div>
+      <div class="tip"><div class="ic">📈</div><p><b>Progressão dupla:</b> fechou o topo das reps em todas as séries (com 2 na reserva)? Sobe ~5% na carga e volta pro fundo da faixa.</p></div>
+      <div class="tip"><div class="ic">🔁</div><p><b>Frequência 2×:</b> conseguindo 4–6 dias, repete A-B-C-A-B-C. Cada músculo 2×/semana bate 1× em hipertrofia.</p></div>
+      <div class="tip"><div class="ic">⏳</div><p><b>Readaptação:</b> nas 2–3 primeiras semanas, trabalhe com 2 reps na reserva antes de forçar carga.</p></div>
+      <div class="tip"><div class="ic">🍽️</div><p><b>Composição:</b> o abdômen aparece no déficit. ~300–500 kcal abaixo do gasto + proteína 1,6–2,2 g/kg.</p></div>
+    </div>
+    ${LS_OK?'':'<div class="empty" style="color:var(--red)">⚠️ Este ambiente não salva dados entre sessões. Hospede o arquivo (ex: GitHub Pages) ou abra direto no navegador.</div>'}
+  `;
+}
+function calcStreak(){
+  if(!HISTORY.length)return 0;
+  const weeks=new Set();
+  HISTORY.forEach(h=>{const d=new Date(h.date+'T00:00');const oneJan=new Date(d.getFullYear(),0,1);
+    const wk=d.getFullYear()+'-'+Math.ceil(((d-oneJan)/864e5+oneJan.getDay()+1)/7);weeks.add(wk)});
+  const now=new Date();const oneJan=new Date(now.getFullYear(),0,1);
+  let wkNum=Math.ceil(((now-oneJan)/864e5+oneJan.getDay()+1)/7);
+  let streak=0;
+  while(weeks.has(now.getFullYear()+'-'+wkNum)){streak++;wkNum--}
+  return streak;
+}
+function clearHist(){
+  if(confirm('Apagar todo o histórico de treinos? Os pesos atuais são mantidos.')){
+    HISTORY=[];save('iron_history',HISTORY);renderProgress();toast('Histórico limpo');
+  }
+}
+
+/* =================== NAV / FX =================== */
+function setView(v){
+  view=v;
+  $('trainView').classList.toggle('hidden',v!=='train');
+  $('progView').classList.toggle('hidden',v!=='progress');
+  $('navTrain').classList.toggle('on',v==='train');
+  $('navProg').classList.toggle('on',v==='progress');
+  render();window.scrollTo({top:0,behavior:'smooth'});
+}
+let toastT=null;
+function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2200)}
+function confetti(){
+  const c=$('cfx');c.classList.remove('hidden');c.innerHTML='';
+  const ac=ACCENTS[THEME][cur].a;
+  const cols=[ac,'#8AC7FF','#B7F0AD','#FFD1DC','#FFE08A'];
+  for(let i=0;i<50;i++){const d=document.createElement('div');d.className='cf';
+    d.style.left=Math.random()*100+'%';d.style.background=cols[i%cols.length];
+    d.style.animationDuration=(1.4+Math.random()*1.4)+'s';d.style.animationDelay=(Math.random()*.3)+'s';
+    d.style.transform=`rotate(${Math.random()*360}deg)`;c.appendChild(d)}
+  setTimeout(()=>c.classList.add('hidden'),2800);
+}
+
+
+/* =================== EXPORTAÇÃO (Excel / PDF) =================== */
+function loadScript(u){return new Promise((ok,err)=>{const s=document.createElement('script');s.src=u;s.onload=ok;s.onerror=err;document.head.appendChild(s)})}
+async function ensureXLSX(){if(!window.XLSX)await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js')}
+async function ensurePDF(){
+  if(!window.jspdf)await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+  if(!(window.jspdf&&window.jspdf.jsPDF&&window.jspdf.jsPDF.API.autoTable))await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js');
+}
+function vidName(vid){
+  for(const k in PROGRAM){for(const ex of PROGRAM[k].ex){
+    if(ex.id===vid)return ex.name;
+    if(ex.alts){const a=ex.alts.find(x=>x.id===vid);if(a)return a.name}
+  }}
+  return vid;
+}
+function fmtBR(iso){const d=new Date(iso+'T00:00');return d.toLocaleDateString('pt-BR')}
+async function exportXLSX(){
+  if(!HISTORY.length){toast('Sem treinos registrados ainda');return}
+  toast('Gerando Excel...');
+  try{await ensureXLSX()}catch(e){toast('Precisa de internet pra gerar o arquivo');return}
+  const s1=[['Data','Treino','Nome','Séries feitas','Séries totais','Conclusão']];
+  [...HISTORY].reverse().forEach(h=>s1.push([fmtBR(h.date),h.workout,h.label,h.done,h.tot,Math.round(h.done/h.tot*100)+'%']));
+  const s2=[['Data','Treino','Exercício','Carga (kg)']];
+  [...HISTORY].reverse().forEach(h=>{if(h.weights)Object.entries(h.weights).forEach(([vid,w])=>s2.push([fmtBR(h.date),h.workout,vidName(vid),w]))});
+  const wb=XLSX.utils.book_new();
+  const ws1=XLSX.utils.aoa_to_sheet(s1);ws1['!cols']=[{wch:12},{wch:7},{wch:8},{wch:13},{wch:13},{wch:11}];
+  const ws2=XLSX.utils.aoa_to_sheet(s2);ws2['!cols']=[{wch:12},{wch:7},{wch:30},{wch:11}];
+  XLSX.utils.book_append_sheet(wb,ws1,'Sessões');
+  XLSX.utils.book_append_sheet(wb,ws2,'Cargas');
+  XLSX.writeFile(wb,'iron_treinos_'+todayISO()+'.xlsx');
+  toast('Excel gerado ✔');
+}
+async function exportPDF(){
+  if(!HISTORY.length){toast('Sem treinos registrados ainda');return}
+  toast('Gerando PDF...');
+  try{await ensurePDF()}catch(e){toast('Precisa de internet pra gerar o arquivo');return}
+  const {jsPDF}=window.jspdf;const doc=new jsPDF();
+  doc.setFontSize(18);doc.setTextColor(20);doc.text('IRON · Relatório de Treinos',14,18);
+  doc.setFontSize(10);doc.setTextColor(120);
+  doc.text('Pablo · gerado em '+new Date().toLocaleDateString('pt-BR'),14,25);
+  doc.autoTable({startY:32,
+    head:[['Data','Treino','Séries','Conclusão']],
+    body:[...HISTORY].reverse().map(h=>[fmtBR(h.date),h.workout+' · '+h.label,h.done+'/'+h.tot,Math.round(h.done/h.tot*100)+'%']),
+    headStyles:{fillColor:[245,179,1],textColor:[24,24,24],fontStyle:'bold'},
+    styles:{fontSize:9},alternateRowStyles:{fillColor:[246,247,249]}});
+  const rows=[];
+  [...HISTORY].reverse().forEach(h=>{if(h.weights)Object.entries(h.weights).forEach(([vid,w])=>rows.push([fmtBR(h.date),h.workout,vidName(vid),String(w).replace('.',',')+' kg']))});
+  if(rows.length){
+    doc.setFontSize(13);doc.setTextColor(20);
+    const y=doc.lastAutoTable.finalY+12;
+    doc.text('Cargas por exercício',14,y);
+    doc.autoTable({startY:y+4,
+      head:[['Data','Treino','Exercício','Carga']],body:rows,
+      headStyles:{fillColor:[24,24,24]},styles:{fontSize:8.5},
+      alternateRowStyles:{fillColor:[246,247,249]}});
+  }
+  doc.save('iron_treinos_'+todayISO()+'.pdf');
+  toast('PDF gerado ✔');
+}
+
+/* install banner */
+const standalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone;
+if(!standalone&&!load('iron_install_off',false))$('install').classList.remove('hidden');
+function dismissInstall(){$('install').classList.add('hidden');save('iron_install_off',true)}
+
+/* =================== INIT =================== */
+if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'))
+  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+$('date').value=todayISO();
+applyTheme();
+render();
+</script>
+</body>
+</html>
