@@ -295,6 +295,25 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
 
 .exports{display:flex;gap:8px;margin:0 0 16px}
 .exports .abtn{padding:13px;font-size:12.5px}
+.modal-ov{position:fixed;inset:0;background:rgba(8,10,14,.55);z-index:75;display:flex;
+  align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
+.modal{background:var(--panel);border:1px solid var(--line);border-radius:20px;max-width:380px;
+  width:100%;padding:20px;box-shadow:0 24px 60px -20px rgba(0,0,0,.5)}
+.modal h3{font-family:'Anton';font-size:18px;text-transform:uppercase;margin-bottom:4px}
+.modal .sub{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:14px;line-height:1.5}
+.modal input{width:100%;background:var(--panel2);border:1.5px solid var(--line);border-radius:12px;
+  padding:13px 14px;color:var(--ink);font-family:'Manrope';font-weight:600;font-size:14px;margin-bottom:9px}
+.modal input:focus{outline:none;border-color:var(--accent)}
+.modal .mrow{display:flex;gap:8px;margin-top:4px}
+.modal .mbtn{flex:1;border:1px solid var(--line);background:var(--panel2);color:var(--ink);
+  border-radius:12px;padding:13px;font-family:'Manrope';font-weight:800;font-size:13px;cursor:pointer}
+.modal .mbtn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.modal .merr{color:var(--red);font-size:12px;font-weight:700;min-height:16px;margin-top:8px}
+.modal .mfoot{margin-top:12px;text-align:center}
+.modal .mfoot button{background:none;border:none;color:var(--muted2);font-size:12px;font-weight:700;cursor:pointer}
+.modal .who{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px;
+  font-size:13px;font-weight:700;margin-bottom:10px;word-break:break-all}
+.modal .who small{display:block;color:var(--muted);font-weight:600;font-size:11px;margin-top:3px}
 .hidden{display:none!important}
 </style>
 </head>
@@ -307,6 +326,7 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
         <div><b>IRON</b><small>Push · Pull · Legs</small></div>
       </div>
       <div class="hbtns">
+        <button class="thm" id="acct" title="Conta e nuvem">👤</button>
         <button class="thm" id="thm" title="Tema claro/escuro">🌙</button>
         <div class="datebox">
           <label>Dia do treino</label>
@@ -359,6 +379,10 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
     <span>Progresso</span>
   </button>
 </nav>
+
+<div class="modal-ov hidden" id="acctOv">
+  <div class="modal" id="acctModal"></div>
+</div>
 
 <div class="toast" id="toast"></div>
 <div class="cfx hidden" id="cfx"></div>
@@ -1437,24 +1461,24 @@ function updateProgress(){
 
 /* =================== INTERAÇÕES =================== */
 function setVar(baseId,vid){
-  VARIANT[baseId]=vid;save('iron_variant',VARIANT);renderTrain();
+  VARIANT[baseId]=vid;save('iron_variant',VARIANT);cloudSync();renderTrain();
 }
 function findBase(id){for(const k in PROGRAM){const e=PROGRAM[k].ex.find(x=>x.id===id);if(e)return e}}
 function bump(baseId,delta){
   const a=activeOf(findBase(baseId));let v=wOf(a)+delta;if(v<0)v=0;
-  WEIGHTS[a.vid]=Math.round(v*10)/10;save('iron_weights',WEIGHTS);renderTrain();
+  WEIGHTS[a.vid]=Math.round(v*10)/10;save('iron_weights',WEIGHTS);cloudSync();renderTrain();
 }
 function editW(el,baseId){
   const a=activeOf(findBase(baseId));const cur0=wOf(a);
   el.innerHTML=`<input type="number" inputmode="decimal" step="2.5" value="${cur0}">`;
   const inp=el.querySelector('input');inp.focus();inp.select();
   const commit=()=>{let v=parseFloat(String(inp.value).replace(',','.'));if(isNaN(v)||v<0)v=cur0;
-    WEIGHTS[a.vid]=Math.round(v*10)/10;save('iron_weights',WEIGHTS);toast('Peso salvo: '+fmtW(WEIGHTS[a.vid])+' kg');renderTrain()};
+    WEIGHTS[a.vid]=Math.round(v*10)/10;save('iron_weights',WEIGHTS);cloudSync();toast('Peso salvo: '+fmtW(WEIGHTS[a.vid])+' kg');renderTrain()};
   inp.onblur=commit;inp.onkeydown=e=>{if(e.key==='Enter')inp.blur()};
 }
 function toggleSet(baseId,si){
   const ex=findBase(baseId);const a=activeOf(ex);const arr=setsArr(baseId,a.sets);
-  arr[si]=!arr[si];save('iron_session',SESSION);
+  arr[si]=!arr[si];save('iron_session',SESSION);cloudSync();
   const justDone=arr[si];renderTrain();
   if(justDone){if(navigator.vibrate)navigator.vibrate(35);
     const allNow=PROGRAM[cur].ex.every(e=>{const aa=activeOf(e);return setsArr(e.id,aa.sets).every(Boolean)});
@@ -1492,7 +1516,7 @@ $('finBtn').onclick=()=>{
   if(done===0){toast('Marca pelo menos uma série antes 😉');return}
   HISTORY.unshift({date:$('date').value||todayISO(),workout:cur,label:day.label,done,tot,weights:snap,ts:Date.now()});
   save('iron_history',HISTORY);
-  SESSION[cur]={};save('iron_session',SESSION);
+  SESSION[cur]={};save('iron_session',SESSION);cloudSync();
   confetti();toast('🔥 Treino '+cur+' registrado! '+done+'/'+tot+' séries');
   renderTrain();
 };
@@ -1559,7 +1583,7 @@ function calcStreak(){
 }
 function clearHist(){
   if(confirm('Apagar todo o histórico de treinos? Os pesos atuais são mantidos.')){
-    HISTORY=[];save('iron_history',HISTORY);renderProgress();toast('Histórico limpo');
+    HISTORY=[];save('iron_history',HISTORY);cloudSync();renderProgress();toast('Histórico limpo');
   }
 }
 
@@ -1586,6 +1610,129 @@ function confetti(){
   setTimeout(()=>c.classList.add('hidden'),2800);
 }
 
+
+
+/* ============================================================
+   ☁️ NUVEM / CONTA DE USUÁRIO (SUPABASE) · OPCIONAL
+   Como ativar:
+   1) Crie um projeto gratuito em https://supabase.com
+   2) No painel: Settings > API > copie "Project URL" e "anon public"
+   3) Cole os dois valores aqui embaixo, entre as aspas
+   4) Rode o conteúdo do arquivo supabase.sql no SQL Editor
+   (Essa chave anon é pública por design: quem protege os
+    dados são as regras de segurança criadas pelo SQL.)
+   ============================================================ */
+const SUPABASE_URL = '';
+const SUPABASE_ANON_KEY = '';
+
+let sb=null, sbUser=null, syncT=null, authMode='in';
+const SB_ON=()=>SUPABASE_URL.indexOf('https://')===0&&SUPABASE_ANON_KEY.length>20;
+
+async function sbInit(){
+  if(!SB_ON())return;
+  try{
+    await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2');
+    sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+    const {data:{session}}=await sb.auth.getSession();
+    sbUser=session?session.user:null;
+    if(sbUser){await cloudPull()}
+    sb.auth.onAuthStateChange((_e,s)=>{sbUser=s?s.user:null;paintAcctBtn()});
+  }catch(e){}
+  paintAcctBtn();
+}
+function paintAcctBtn(){$('acct').textContent=(sbUser?'☁️':'👤')}
+
+/* ---- sincronização ---- */
+function cloudSync(){if(!sb||!sbUser)return;clearTimeout(syncT);syncT=setTimeout(cloudPush,1500)}
+async function cloudPush(){
+  if(!sb||!sbUser)return;
+  const payload={weights:WEIGHTS,history:HISTORY,variant:VARIANT,session:SESSION,updated:Date.now()};
+  save('iron_updated',payload.updated);
+  try{await sb.from('workout_data').upsert({user_id:sbUser.id,payload,updated_at:new Date().toISOString()})}catch(e){}
+}
+async function cloudPull(){
+  try{
+    const {data,error}=await sb.from('workout_data').select('payload').eq('user_id',sbUser.id).maybeSingle();
+    if(error)return;
+    if(!data){cloudPush();return}
+    const p=data.payload||{};
+    const seen=new Set(HISTORY.map(h=>h.ts));
+    (p.history||[]).forEach(h=>{if(!seen.has(h.ts))HISTORY.push(h)});
+    HISTORY.sort((a,b)=>(b.ts||0)-(a.ts||0));
+    const localUpd=load('iron_updated',0);
+    if((p.updated||0)>localUpd){
+      WEIGHTS={...WEIGHTS,...(p.weights||{})};
+      VARIANT={...VARIANT,...(p.variant||{})};
+      SESSION={...SESSION,...(p.session||{})};
+    }
+    save('iron_history',HISTORY);save('iron_weights',WEIGHTS);
+    save('iron_variant',VARIANT);save('iron_session',SESSION);
+    render();toast('☁️ Dados sincronizados');
+    cloudPush();
+  }catch(e){}
+}
+
+/* ---- UI da conta ---- */
+$('acct').onclick=()=>{renderAcct();$('acctOv').classList.remove('hidden')};
+$('acctOv').onclick=e=>{if(e.target.id==='acctOv')$('acctOv').classList.add('hidden')};
+function closeAcct(){$('acctOv').classList.add('hidden')}
+function renderAcct(){
+  const m=$('acctModal');
+  if(!SB_ON()){
+    m.innerHTML=`<h3>☁️ Nuvem não configurada</h3>
+      <div class="sub">Pra ter conta de usuário e registros salvos na nuvem, siga as instruções do arquivo <b>LEIA-ME.txt</b>: crie um projeto gratuito no Supabase e cole as duas chaves no topo do index.html (busque por SUPABASE_URL).</div>
+      <div class="mrow"><button class="mbtn pri" onclick="closeAcct()">Entendi</button></div>`;
+    return;
+  }
+  if(sbUser){
+    m.innerHTML=`<h3>☁️ Conectado</h3>
+      <div class="who">${sbUser.email}<small>Seus treinos e cargas sincronizam automaticamente neste e em outros aparelhos onde você entrar.</small></div>
+      <div class="mrow">
+        <button class="mbtn" onclick="doSignOut()">Sair</button>
+        <button class="mbtn pri" onclick="cloudPull().then(closeAcct)">Sincronizar agora</button>
+      </div>`;
+    return;
+  }
+  const isIn=authMode==='in';
+  m.innerHTML=`<h3>${isIn?'Entrar':'Criar conta'}</h3>
+    <div class="sub">${isIn?'Entre pra sincronizar seus treinos entre aparelhos.':'Crie sua conta gratuita (senha com 6+ caracteres).'}</div>
+    <input type="email" id="aEmail" placeholder="Seu e-mail" autocomplete="email">
+    <input type="password" id="aPass" placeholder="Senha" autocomplete="${isIn?'current-password':'new-password'}">
+    <div class="mrow">
+      <button class="mbtn" onclick="closeAcct()">Cancelar</button>
+      <button class="mbtn pri" id="aGo">${isIn?'Entrar':'Criar conta'}</button>
+    </div>
+    <div class="merr" id="aErr"></div>
+    <div class="mfoot"><button onclick="authMode='${isIn?'up':'in'}';renderAcct()">${isIn?'Não tem conta? Criar agora':'Já tem conta? Entrar'}</button></div>`;
+  $('aGo').onclick=doAuth;
+}
+async function doAuth(){
+  const email=$('aEmail').value.trim(),pass=$('aPass').value;
+  const err=$('aErr');err.textContent='';
+  if(!email||pass.length<6){err.textContent='Preencha e-mail e senha (mínimo 6 caracteres).';return}
+  $('aGo').textContent='...';
+  try{
+    let r;
+    if(authMode==='in'){r=await sb.auth.signInWithPassword({email,password:pass})}
+    else{r=await sb.auth.signUp({email,password:pass})}
+    if(r.error)throw r.error;
+    sbUser=r.data.user||((r.data.session||{}).user)||null;
+    if(!sbUser&&authMode==='up'){err.textContent='Conta criada! Confirme o e-mail que você recebeu e entre.';$('aGo').textContent='Criar conta';return}
+    closeAcct();toast(authMode==='in'?'Bem-vindo de volta! ☁️':'Conta criada! ☁️');
+    paintAcctBtn();await cloudPull();
+  }catch(e){
+    const msg=String(e.message||e);
+    err.textContent=msg.indexOf('Invalid login')>=0?'E-mail ou senha incorretos.':
+      msg.indexOf('already registered')>=0?'Esse e-mail já tem conta. Use Entrar.':
+      'Erro: '+msg;
+    $('aGo').textContent=authMode==='in'?'Entrar':'Criar conta';
+  }
+}
+async function doSignOut(){
+  try{await sb.auth.signOut()}catch(e){}
+  sbUser=null;paintAcctBtn();closeAcct();
+  toast('Você saiu. Dados continuam neste aparelho.');
+}
 
 /* =================== EXPORTAÇÃO (Excel / PDF) =================== */
 function loadScript(u){return new Promise((ok,err)=>{const s=document.createElement('script');s.src=u;s.onload=ok;s.onerror=err;document.head.appendChild(s)})}
@@ -1657,6 +1804,7 @@ if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostnam
 $('date').value=todayISO();
 applyTheme();
 render();
+sbInit();
 </script>
 </body>
 </html>
