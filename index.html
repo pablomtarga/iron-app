@@ -34,7 +34,6 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:'Manrope',sans-serif;
   overflow-x:hidden;padding-bottom:118px;-webkit-text-size-adjust:100%;
   transition:background .3s,color .3s}
-
 .wrap{position:relative;z-index:2;max-width:560px;margin:0 auto}
 
 /* ---------- HEADER ---------- */
@@ -45,7 +44,7 @@ header{padding:calc(16px + env(safe-area-inset-top)) 18px 6px}
   display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);transition:background .3s}
 .brand .logo svg{width:20px;height:20px}
 .brand b{font-family:'Anton';font-size:21px;letter-spacing:.04em}
-.brand small{display:block;color:var(--muted);font-size:9.5px;letter-spacing:.18em;
+.brand small{display:block;color:var(--muted);font-size:9.5px;letter-spacing:.14em;
   text-transform:uppercase;font-weight:800;margin-top:-2px}
 .hbtns{display:flex;gap:8px;align-items:center}
 .thm{width:38px;height:38px;border-radius:11px;border:1px solid var(--line);background:var(--panel);
@@ -57,7 +56,6 @@ header{padding:calc(16px + env(safe-area-inset-top)) 18px 6px}
 .datebox input{background:none;border:none;color:var(--ink);font-family:'Manrope';
   font-weight:800;font-size:13px;text-align:right;width:112px;color-scheme:light}
 html[data-theme=dark] .datebox input{color-scheme:dark}
-
 .hello{margin-top:14px;font-family:'Anton';font-size:clamp(28px,8.6vw,40px);
   line-height:.95;text-transform:uppercase}
 .hello em{color:var(--accent-text);font-style:normal;transition:color .3s}
@@ -74,10 +72,10 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .tabs{position:sticky;top:0;z-index:30;display:flex;gap:8px;padding:12px 16px 10px;
   background:linear-gradient(180deg,var(--bg) 76%,transparent)}
 .tab{flex:1;border:1px solid var(--line);background:var(--panel);border-radius:15px;
-  padding:10px 6px;cursor:pointer;transition:.2s;position:relative;box-shadow:var(--shadow)}
+  padding:10px 4px;cursor:pointer;transition:.2s;position:relative;box-shadow:var(--shadow)}
 .tab .ltr{font-family:'Anton';font-size:17px;line-height:1;color:var(--muted)}
-.tab .nm{font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--muted2);margin-top:2px}
+.tab .nm{font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tab.on{background:var(--accent);border-color:var(--accent);transform:translateY(-1px)}
 .tab.on .ltr,.tab.on .nm{color:var(--accent-ink)}
 
@@ -92,7 +90,6 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .bar{height:9px;border-radius:6px;background:var(--panel2);overflow:hidden}
 .bar i{display:block;height:100%;width:0;border-radius:6px;background:var(--accent);
   transition:width .5s cubic-bezier(.2,.8,.2,1)}
-
 .dintro{margin:2px 18px 10px;color:var(--muted);font-size:12.5px;line-height:1.55;font-weight:500}
 
 /* ordem do treino */
@@ -104,7 +101,7 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .order>button .cv{margin-left:auto;color:var(--accent-text);transition:.3s}
 .order>button.op .cv{transform:rotate(180deg)}
 .order .bd{max-height:0;overflow:hidden;transition:max-height .45s ease}
-.order .bd.op{max-height:900px}
+.order .bd.op{max-height:1200px}
 .order .bd-i{padding:0 15px 14px}
 .order .oi{display:flex;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
 .order .oi .n{flex:0 0 22px;height:22px;border-radius:7px;background:var(--accent);color:var(--accent-ink);
@@ -119,7 +116,6 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .card.done{border-color:var(--accent)}
 @keyframes rise{to{opacity:1;transform:none}}
 .ssband{height:3px;background:repeating-linear-gradient(90deg,var(--accent) 0 14px,transparent 14px 26px)}
-
 .ctop{display:flex;gap:13px;padding:15px 15px 10px}
 .viz{flex:0 0 96px;width:96px;height:96px;border-radius:15px;
   background:radial-gradient(120% 120% at 35% 12%,var(--viz1),var(--viz2));overflow:hidden;position:relative}
@@ -129,15 +125,12 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .cidx .n{font-family:'Anton';font-size:12px;color:var(--accent-text)}
 .badge{font-size:8.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
   padding:3px 7px;border-radius:6px}
-.badge.new{background:var(--accent);color:var(--accent-ink)}
 .badge.ss{background:var(--panel2);border:1px solid var(--accent);color:var(--accent-text)}
 .cname{font-family:'Anton';font-size:20px;line-height:1.02;margin:3px 0 7px;text-transform:uppercase}
 .meta{display:flex;gap:6px;flex-wrap:wrap}
 .chip{font-size:10.5px;font-weight:700;padding:4px 9px;border-radius:8px;
   background:var(--panel2);border:1px solid var(--line);color:var(--ink)}
 .chip b{color:var(--accent-text)}
-
-/* variações */
 .vars{display:flex;gap:7px;overflow-x:auto;padding:2px 15px 10px;scrollbar-width:none}
 .vars::-webkit-scrollbar{display:none}
 .vlab{flex:0 0 auto;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
@@ -146,8 +139,6 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
   font-family:'Manrope';font-weight:700;font-size:11.5px;padding:7px 12px;border-radius:999px;
   cursor:pointer;transition:.18s;white-space:nowrap}
 .vchip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-
-/* peso + descanso */
 .wt{display:flex;align-items:stretch;gap:8px;padding:0 15px 4px}
 .wt .stp{display:flex;align-items:center;background:var(--panel2);border:1px solid var(--line);
   border-radius:13px;overflow:hidden;flex:1}
@@ -166,8 +157,6 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .wt .rest .t{font-family:'Anton';font-size:17px;line-height:1;color:var(--accent-text)}
 .wt .rest .lb{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);font-weight:800}
 .lastw{padding:5px 17px 2px;font-size:10.5px;color:var(--muted2);font-weight:600}
-
-/* séries */
 .sets{padding:6px 15px 12px}
 .sets .lab{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
   font-weight:800;margin-bottom:7px;display:flex;justify-content:space-between}
@@ -179,14 +168,10 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .dot.fill{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);transform:scale(1.03)}
 .dot.fill::before{content:"✓";font-size:17px}
 .dot.fill span{display:none}
-
-/* nota + ações */
 .drnote{margin:0 15px 10px;background:var(--panel2);border:1px solid var(--line);
   border-left:3px solid var(--accent);border-radius:12px;padding:10px 12px;display:flex;gap:9px}
 .drnote .ic{flex:0 0 auto;font-size:14px}
 .drnote p{font-size:11.5px;line-height:1.5;color:var(--muted);font-weight:500}
-.drnote b{color:var(--ink)}
-
 .acts{display:flex;gap:8px;padding:0 15px 15px}
 .abtn{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;
   border:1px solid var(--line);background:var(--panel2);border-radius:12px;padding:11px;
@@ -196,7 +181,6 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .abtn.vid{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .abtn .cv{color:inherit;transition:.3s;font-size:11px}
 .abtn.op .cv{transform:rotate(180deg)}
-
 .how{max-height:0;overflow:hidden;transition:max-height .4s ease;margin:0 15px}
 .how.op{max-height:560px;margin-bottom:15px}
 .how-i{padding:2px 0 4px;border-top:1px solid var(--line)}
@@ -208,8 +192,6 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .cue{display:flex;gap:8px;font-size:12px;line-height:1.45;padding:8px 0;border-top:1px dashed var(--line);font-weight:600}
 .cue.g{color:var(--green)}.cue.b{color:var(--red)}
 .cue b{font-weight:800}
-
-/* concluir */
 .fin{margin:18px 16px 6px}
 .fin button{width:100%;border:1px solid var(--line);border-radius:16px;padding:17px;font-family:'Anton';
   font-size:19px;letter-spacing:.03em;text-transform:uppercase;cursor:pointer;transition:.2s;
@@ -234,7 +216,6 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .day .ball.hit{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .day .ball.today{border-color:var(--accent);border-width:2px}
 .day small{display:block;font-size:9px;color:var(--muted2);font-weight:800;margin-top:4px}
-
 .sectit{font-family:'Anton';font-size:16px;text-transform:uppercase;margin:4px 2px 10px;
   display:flex;justify-content:space-between;align-items:center}
 .sectit button{background:var(--panel);border:1px solid var(--line);color:var(--muted);border-radius:9px;
@@ -249,7 +230,8 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .hrow .mid small{display:block;color:var(--muted);font-size:11px;margin-top:1px}
 .hrow .pct{font-family:'Anton';font-size:15px;color:var(--accent-text)}
 .empty{text-align:center;color:var(--muted2);font-size:13px;padding:26px 10px;line-height:1.55;font-weight:600}
-
+.exports{display:flex;gap:8px;margin:0 0 16px}
+.exports .abtn{padding:13px;font-size:12.5px}
 .tips{margin-top:18px}
 .tip{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:12px 14px;
   margin-bottom:9px;display:flex;gap:10px;box-shadow:var(--shadow)}
@@ -286,15 +268,14 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
 /* toast + confete */
 .toast{position:fixed;left:50%;bottom:158px;transform:translateX(-50%) translateY(20px);
   background:var(--ink);color:var(--bg);font-weight:800;font-size:13px;padding:11px 18px;
-  border-radius:12px;z-index:90;opacity:0;transition:.3s;pointer-events:none;white-space:nowrap;
+  border-radius:12px;z-index:130;opacity:0;transition:.3s;pointer-events:none;white-space:nowrap;
   box-shadow:0 10px 30px -8px rgba(0,0,0,.35)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .cfx{position:fixed;inset:0;z-index:80;pointer-events:none;overflow:hidden}
 .cf{position:absolute;width:9px;height:14px;top:-20px;border-radius:2px;animation:fall linear forwards}
 @keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.2}}
 
-.exports{display:flex;gap:8px;margin:0 0 16px}
-.exports .abtn{padding:13px;font-size:12.5px}
+/* ---------- MODAIS ---------- */
 .modal-ov{position:fixed;inset:0;background:rgba(8,10,14,.55);z-index:75;display:flex;
   align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
 .modal{background:var(--panel);border:1px solid var(--line);border-radius:20px;max-width:380px;
@@ -314,6 +295,73 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
 .modal .who{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px;
   font-size:13px;font-weight:700;margin-bottom:10px;word-break:break-all}
 .modal .who small{display:block;color:var(--muted);font-weight:600;font-size:11px;margin-top:3px}
+
+/* ---------- ONBOARDING ---------- */
+#ob{position:fixed;inset:0;z-index:100;background:var(--bg);overflow-y:auto;
+  padding:calc(20px + env(safe-area-inset-top)) 18px calc(30px + env(safe-area-inset-bottom))}
+.ob-in{max-width:560px;margin:0 auto}
+.ob-steps{display:flex;gap:6px;margin-bottom:22px}
+.ob-steps i{flex:1;height:4px;border-radius:3px;background:var(--panel2)}
+.ob-steps i.on{background:var(--accent)}
+.ob-hero{text-align:center;padding:34px 6px 10px}
+.ob-hero .logo{width:74px;height:74px;border-radius:22px;background:var(--accent);margin:0 auto 18px;
+  display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+.ob-hero .logo svg{width:42px;height:42px}
+.ob-hero h1{font-family:'Anton';font-size:38px;text-transform:uppercase;line-height:1}
+.ob-hero h1 em{color:var(--accent-text);font-style:normal}
+.ob-hero p{color:var(--muted);font-size:14px;font-weight:600;line-height:1.6;margin:12px auto 26px;max-width:420px}
+.ob-cta{display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto}
+.ob-btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:15px;
+  padding:16px;font-family:'Manrope';font-weight:800;font-size:14.5px;cursor:pointer;box-shadow:var(--shadow)}
+.ob-btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);
+  font-family:'Anton';font-size:18px;letter-spacing:.03em;text-transform:uppercase}
+.ob-btn.ghost{background:none;border:none;box-shadow:none;color:var(--muted2);font-size:12.5px;padding:8px}
+.ob h2{font-family:'Anton';font-size:24px;text-transform:uppercase;margin-bottom:4px}
+.ob .lead{color:var(--muted);font-size:12.5px;font-weight:600;line-height:1.55;margin-bottom:18px}
+.qb{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px;
+  margin-bottom:13px;box-shadow:var(--shadow)}
+.qb h4{font-size:13px;font-weight:800;margin-bottom:3px}
+.qb .hint{font-size:11px;color:var(--muted2);font-weight:600;margin-bottom:11px;line-height:1.45}
+.qchips{display:flex;flex-wrap:wrap;gap:8px}
+.qchip{border:1.5px solid var(--line);background:var(--panel2);color:var(--muted);border-radius:999px;
+  padding:9px 14px;font-family:'Manrope';font-weight:700;font-size:12.5px;cursor:pointer;transition:.15s}
+.qchip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.ob-nav{display:flex;gap:10px;margin-top:20px}
+.ob-nav .ob-btn{flex:1}
+
+/* revisão */
+.rday{background:var(--panel);border:1px solid var(--line);border-radius:18px;margin-bottom:14px;
+  box-shadow:var(--shadow);overflow:hidden}
+.rday .rhead{display:flex;align-items:center;gap:11px;padding:14px 15px;border-bottom:1px solid var(--line)}
+.rday .rhead .lt{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;
+  justify-content:center;font-family:'Anton';font-size:19px;color:#181818}
+.rday .rhead .tx b{display:block;font-family:'Anton';font-size:16px;text-transform:uppercase}
+.rday .rhead .tx small{color:var(--muted);font-size:11px;font-weight:700}
+.rex{display:flex;align-items:center;gap:10px;padding:11px 15px;border-bottom:1px solid var(--line)}
+.rex:last-of-type{border-bottom:none}
+.rex .rn{flex:0 0 20px;height:20px;border-radius:6px;background:var(--panel2);color:var(--muted);
+  font-weight:800;font-size:10.5px;display:flex;align-items:center;justify-content:center}
+.rex .rtx{flex:1;min-width:0}
+.rex .rtx b{display:block;font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rex .rtx small{color:var(--muted2);font-size:10.5px;font-weight:700}
+.rex .rx{width:32px;height:32px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);
+  color:var(--muted);cursor:pointer;font-size:13px}
+.radd{width:calc(100% - 30px);margin:11px 15px 14px;border:1.5px dashed var(--line);background:none;
+  color:var(--muted);border-radius:12px;padding:11px;font-family:'Manrope';font-weight:800;
+  font-size:12px;cursor:pointer}
+/* picker */
+#pickOv{z-index:120}
+.pick{max-width:420px;max-height:82vh;display:flex;flex-direction:column}
+.pick .pgrid{overflow-y:auto;margin:6px -4px 0;padding:0 4px}
+.pchips{display:flex;gap:7px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
+.pchips::-webkit-scrollbar{display:none}
+.prow{display:flex;align-items:center;gap:10px;padding:10px 2px;border-bottom:1px solid var(--line)}
+.prow .rtx{flex:1;min-width:0}
+.prow .rtx b{display:block;font-size:13px;font-weight:800}
+.prow .rtx small{color:var(--muted2);font-size:10.5px;font-weight:700}
+.prow .padd{width:34px;height:34px;border-radius:10px;border:none;background:var(--accent);
+  color:var(--accent-ink);font-size:17px;font-weight:800;cursor:pointer}
+
 .hidden{display:none!important}
 </style>
 </head>
@@ -323,7 +371,7 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
     <div class="htop">
       <div class="brand">
         <div class="logo"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#181818"/></svg></div>
-        <div><b>IRON</b><small>Push · Pull · Legs</small></div>
+        <div><b>IRON</b><small id="brandSub">Meu treino</small></div>
       </div>
       <div class="hbtns">
         <button class="thm" id="acct" title="Conta e nuvem">👤</button>
@@ -380,9 +428,9 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
   </button>
 </nav>
 
-<div class="modal-ov hidden" id="acctOv">
-  <div class="modal" id="acctModal"></div>
-</div>
+<div class="modal-ov hidden" id="acctOv"><div class="modal" id="acctModal"></div></div>
+<div class="modal-ov hidden" id="pickOv"><div class="modal pick" id="pickModal"></div></div>
+<div id="ob" class="hidden"></div>
 
 <div class="toast" id="toast"></div>
 <div class="cfx hidden" id="cfx"></div>
@@ -1112,205 +1160,242 @@ FIG.rower=`<svg viewBox="0 0 120 100"><style>
 </svg>`;
 </script>
 <script>
-/* =================== ACENTOS POR TREINO E TEMA =================== */
+/* =================== ACENTOS =================== */
 const ACCENTS={
-  light:{A:{a:'#F5B301',ink:'#181818',t:'#9A6B00'},B:{a:'#14B8A6',ink:'#12312C',t:'#0E7568'},C:{a:'#FB8A3C',ink:'#3A1D07',t:'#C24E0A'}},
-  dark:{A:{a:'#FFD633',ink:'#181818',t:'#FFD633'},B:{a:'#2DD4BF',ink:'#0E2925',t:'#2DD4BF'},C:{a:'#FB923C',ink:'#331A05',t:'#FB923C'}}
+  light:{A:{a:'#F5B301',ink:'#181818',t:'#9A6B00'},B:{a:'#14B8A6',ink:'#12312C',t:'#0E7568'},
+         C:{a:'#FB8A3C',ink:'#3A1D07',t:'#C24E0A'},D:{a:'#A78BFA',ink:'#241245',t:'#6D28D9'}},
+  dark:{A:{a:'#FFD633',ink:'#181818',t:'#FFD633'},B:{a:'#2DD4BF',ink:'#0E2925',t:'#2DD4BF'},
+        C:{a:'#FB923C',ink:'#331A05',t:'#FB923C'},D:{a:'#A78BFA',ink:'#1E1033',t:'#A78BFA'}}
 };
-const HIST_COLORS={A:'#F5B301',B:'#14B8A6',C:'#FB8A3C'};
-
-/* =================== PROGRAMA =================== */
+const HIST_COLORS={A:'#F5B301',B:'#14B8A6',C:'#FB8A3C',D:'#A78BFA'};
 const YT=q=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q);
-const PROGRAM={
- A:{label:'Push',sub:'Peito · Ombro · Tríceps',
-   intro:'Empurrar. Compostos pesados primeiro (você fresco = mais carga = mais estímulo), isolados depois, core no fim.',
-   ex:[
-    {id:'chestpress',fig:'chestpress',name:'Chest Press',muscle:'Peito',w:30,sets:4,reps:'8–12',rest:90,
-      yt:'seated chest press machine form shorts',
-      why:'Maior composto do empurrar. Vem primeiro porque com você descansado dá pra mover mais carga com forma limpa, e é daqui que sai o principal estímulo de massa do dia.',
-      steps:['Ajuste o banco: pegadores na linha do meio do peito','Costas apoiadas, pés firmes no chão','Empurre à frente sem travar o cotovelo','Volte controlado sentindo o peito alongar'],
-      g:'Escápulas levemente retraídas: protege o ombro.',b:'Não suba os ombros em direção à orelha.',
-      alts:[{id:'dbbench',fig:'dbbench',name:'Supino Halteres (banco)',w:12,yt:'dumbbell bench press form shorts',
-        steps:['Deitado no banco, halteres na linha do peito','Empurre pra cima até quase estender','Desça controlado até a altura do peito','Cotovelos a ~45° do tronco'],
-        g:'Pés firmes no chão dão estabilidade.',b:'Não bata os halteres no topo.'}]},
-    {id:'pecdeck',fig:'pecdeck',name:'Pec Deck',muscle:'Peito (isolado)',w:22.5,sets:3,reps:'12–15',rest:60,
-      yt:'pec deck machine form shorts',
-      why:'Isola o peito logo depois do press, quando ele já está ativado mas o tríceps começa a cansar. Aqui o tríceps não limita nada: é peito puro completando o estímulo.',
-      steps:['Antebraços nas almofadas, cotovelo na altura do ombro','Feche os braços juntando no centro','Segure 1s apertando o peito','Abra devagar até sentir o alongamento'],
-      g:'Movimento vem do peito, não dos braços.',b:'Não deixe a carga puxar o ombro pra trás bruscamente.',
-      alts:[{id:'cablefly',fig:'cablefly',name:'Crucifixo na Polia',w:7.5,yt:'cable chest fly form shorts',
-        steps:['Polias na altura do ombro, um passo à frente','Braços em arco, feche as mãos à frente do peito','Aperte 1s no centro','Abra controlado sem esticar demais'],
-        g:'Cotovelo levemente flexionado o tempo todo.',b:'Não transforme em press dobrando o cotovelo.'}]},
-    {id:'shoulderpress',fig:'shoulderpress',name:'Shoulder Press',muscle:'Ombro',w:20,sets:3,reps:'8–12',rest:90,
-      yt:'shoulder press machine form shorts',
-      why:'Segundo composto do dia. O ombro ainda está forte, e o tríceps (que ajuda aqui) trabalha de novo antes do isolado dele. Depois do peito pra não roubar força do press principal.',
-      steps:['Costas apoiadas, pegada na largura do ombro','Empurre pra cima sem travar o cotovelo','Pare antes de encostar as mãos no topo','Desça até os cotovelos na linha do ombro'],
-      g:'Core firme pra não arquear a lombar.',b:'Não jogue a cabeça à frente ao empurrar.',
-      alts:[{id:'dbshoulder',fig:'shoulderpress',name:'Desenvolvimento Halteres',w:10,yt:'seated dumbbell shoulder press form shorts',
-        steps:['Sentado com encosto, halteres na altura da orelha','Empurre pra cima até quase juntar','Desça controlado até a linha da orelha','Antebraço sempre vertical'],
-        g:'Encosto levemente inclinado protege a lombar.',b:'Não arquee as costas pra empurrar.'}]},
-    {id:'sidelat',fig:'lateralraisedb',name:'Elevação Lateral (halteres)',muscle:'Deltóide lateral',w:8,sets:3,reps:'12–15',rest:45,
-      yt:'dumbbell lateral raise form shorts',
-      why:'Isolado do deltóide lateral, o músculo que dá largura ao ombro. Vem depois dos presses porque se viesse antes, roubaria força deles; e nenhum press atinge bem essa cabeça do ombro.',
-      steps:['Em pé, halteres ao lado do corpo, cotovelo levemente flexionado','Suba pelos lados até a altura do ombro','Lidere com o cotovelo: a mão nunca passa acima dele','Desça lento, sem deixar o peso despencar'],
-      g:'Imagine derramar uma jarra: o mindinho sobe um tiquinho a mais.',b:'Não balance o tronco nem suba acima da linha do ombro.',
-      alts:[{id:'cablelatv',fig:'cablelat',name:'Elevação Lateral na Polia',w:5,yt:'cable lateral raise form shorts',
-        steps:['Polia baixa, de lado pra torre','Suba o braço de fora até o ombro','Tensão constante: desça devagar','Troque o lado ao terminar'],
-        g:'A polia mantém tensão até embaixo, ótima variação.',b:'Não incline o tronco pra ajudar.'}]},
-    {id:'triceps',fig:'triceps',name:'Tríceps Corda (polia)',muscle:'Tríceps',w:12.5,sets:3,reps:'12–15',rest:45,
-      yt:'triceps rope pushdown form shorts',
-      why:'O tríceps já ajudou em todos os presses, então chega aqui pré-fatigado: pouco volume direto já completa o trabalho. Se viesse antes, derrubaria a carga dos compostos.',
-      steps:['Cotovelos colados ao tronco','Empurre a corda pra baixo estendendo o cotovelo','No fim, abra levemente as pontas da corda','Suba controlado até ~90°'],
-      g:'Só o antebraço se move: cotovelo é a dobradiça.',b:'Não afaste o cotovelo do corpo.',
-      alts:[{id:'benchdipv',fig:'benchdip',name:'Mergulho no Banco',bw:true,yt:'bench dips form shorts',
-        steps:['Mãos no banco atrás, pernas à frente','Desça dobrando o cotovelo até ~90°','Empurre de volta estendendo o braço','Costas sempre rente ao banco'],
-        g:'Ombros longe da orelha o tempo todo.',b:'Não desça além de 90° se sentir o ombro.'}]},
-    {id:'absfull',fig:'absfull',name:'Abdominal Completo',muscle:'Abdômen',w:0,bw:true,sets:3,reps:'15–20',rest:45,
-      yt:'crunch proper form shorts',
-      why:'Core fecha o treino de propósito: se cansasse antes, você perderia estabilidade justamente nos exercícios pesados que mais precisam dela.',
-      steps:['Deite, joelhos dobrados','Tire as escápulas do chão enrolando o tronco','Expire ao subir, contraindo o abdômen','Desça sem relaxar totalmente'],
-      g:'Queixo afastado do peito, olhar pro teto.',b:'Não puxe o pescoço com as mãos.',
-      alts:[{id:'plankv',fig:'plank',name:'Prancha',bw:true,reps:'30–45s',yt:'plank form shorts',
-        steps:['Antebraços no chão, corpo reto','Contraia abdômen e glúteo','Respire normal, segure o tempo','Quadril nem alto nem caído'],
-        g:'Corpo em linha reta da cabeça ao calcanhar.',b:'Não deixe a lombar afundar.'}]},
-   ]},
- B:{label:'Pull',sub:'Costas · Posterior · Bíceps',
-   intro:'Puxar. Puxada vertical antes da horizontal (recruta mais massa), detalhe e posterior de ombro no meio, bíceps fecha.',
-   ex:[
-    {id:'latpull',fig:'latpull',name:'Lat Pulldown',muscle:'Dorsal',w:31,sets:4,reps:'8–12',rest:90,
-      yt:'lat pulldown form shorts',
-      why:'Puxada vertical recruta a maior área do dorsal de uma vez. Abre o dia porque é o composto que mais paga quando você está com força total.',
-      steps:['Pegada um pouco mais larga que os ombros','Puxe a barra até a parte alta do peito','Leve os cotovelos pra baixo e pra trás','Suba controlado alongando o dorsal'],
-      g:'Peito pra cima: puxe com as costas, não com o braço.',b:'Não jogue o tronco muito pra trás.',
-      alts:[{id:'neutralpull',fig:'latpull',name:'Pulldown Pegada Neutra',w:31,yt:'neutral grip lat pulldown form shorts',
-        steps:['Use o triângulo ou pegada neutra','Puxe até a parte alta do peito','Cotovelos rente ao corpo','Volte controlado até alongar'],
-        g:'Pegada neutra costuma ser mais confortável pro ombro.',b:'Não balance pra completar a repetição.'}]},
-    {id:'seatedrow',fig:'seatedrow',name:'Remada Sentada (triângulo)',muscle:'Costas (espessura)',w:20,sets:3,reps:'10–12',rest:75,
-      yt:'seated cable row form shorts',
-      why:'Depois da vertical vem a horizontal: é ela que constrói a espessura do meio das costas. Segundo lugar porque ainda exige bastante energia.',
-      steps:['Joelhos levemente dobrados, coluna ereta','Puxe o triângulo em direção ao umbigo','Aperte as escápulas no fim','Volte estendendo os braços sem curvar a lombar'],
-      g:'Cotovelos passam rente ao corpo.',b:'Não arredonde as costas ao voltar.',
-      alts:[{id:'widerow',fig:'seatedrow',name:'Remada Aberta na Polia',w:17.5,yt:'wide grip seated cable row form shorts',
-        steps:['Barra reta, pegada aberta','Puxe em direção à base do peito','Cotovelos abertos na linha do ombro','Volte controlado'],
-        g:'Pegada aberta muda o foco pro meio das costas e posterior.',b:'Não encolha os ombros ao puxar.'}]},
-    {id:'lowrow',fig:'lowrow',name:'Upper Back / Low Row',muscle:'Costas (detalhe)',w:17.5,sets:3,reps:'12',rest:60,
-      yt:'chest supported row machine form shorts',
-      why:'Terceira puxada com carga menor: refina o meio das costas depois que os dois grandes já fizeram o trabalho bruto.',
-      steps:['Peito apoiado se a máquina permitir','Puxe abrindo bem as escápulas','Foque na contração no meio das costas','Retorne controlado'],
-      g:'Pausa de 1s na contração rende mais.',b:'Não use só os braços.',
-      alts:[{id:'facepullv',fig:'facepull',name:'Face Pull',w:10,yt:'face pull form shorts',
-        steps:['Polia alta, corda com as duas mãos','Puxe em direção ao rosto','Abra os cotovelos pra fora no fim','Volte devagar'],
-        g:'Excelente pra postura e saúde do ombro.',b:'Não use carga alta: é exercício de controle.'}]},
-    {id:'reversefly',fig:'reversefly',name:'Crucifixo Inverso',muscle:'Deltóide posterior',w:5,sets:3,reps:'12–15',rest:45,
-      yt:'reverse pec deck form shorts',
-      why:'O posterior de ombro é pequeno e some se ficar só nos grandes. Entra aqui pra equilibrar todo o volume de empurrar da semana: ombro saudável é ombro equilibrado.',
-      steps:['Peito no apoio, braços à frente','Abra os braços pra trás em arco','Aperte a parte de trás do ombro','Volte devagar controlando'],
-      g:'Carga leve e foco: é um músculo pequeno.',b:'Não dobre muito o cotovelo (vira remada).',
-      alts:[{id:'dbrevfly',fig:'reversefly',name:'Crucifixo Inverso (halteres)',w:4,yt:'bent over reverse fly dumbbell form shorts',
-        steps:['Tronco inclinado à frente, costas retas','Abra os halteres pros lados','Aperte as escápulas no topo','Desça sem balançar'],
-        g:'Tronco parado: só o braço se move.',b:'Não levante o tronco a cada repetição.'}]},
-    {id:'biceps',fig:'biceps',name:'Rosca Direta (barra)',muscle:'Bíceps',w:12.5,sets:3,reps:'10–12',rest:60,
-      yt:'barbell curl form shorts',
-      why:'O bíceps já trabalhou em todas as puxadas do dia. Fechando com ele pré-fatigado, pouco volume direto já basta pra completar o estímulo sem exagerar.',
-      steps:['Em pé, cotovelos colados ao tronco','Suba a barra contraindo o bíceps','Não balance o corpo','Desça controlado até estender'],
-      g:'A descida lenta é onde mora o ganho.',b:'Não use impulso de quadril pra subir.',
-      alts:[{id:'hammer',fig:'biceps',name:'Rosca Martelo (halteres)',w:8,yt:'hammer curl form shorts',
-        steps:['Halteres com pegada neutra (palmas se olhando)','Suba sem girar o punho','Cotovelo fixo ao lado do corpo','Desça controlado'],
-        g:'Pega também o braquial: braço mais grosso.',b:'Não deixe o cotovelo ir à frente.'}]},
-    {id:'reversecrunch',fig:'reversecrunch',name:'Abdominal Inverso',muscle:'Abdômen inferior',w:0,bw:true,sets:3,reps:'15',rest:45,
-      yt:'reverse crunch form shorts',
-      why:'Core fecha o dia pelo mesmo motivo do treino A: cansar o estabilizador antes das puxadas pesadas seria dar um tiro no pé.',
-      steps:['Deite, joelhos dobrados a 90°','Enrole o quadril trazendo os joelhos ao peito','Tire o cóccix do chão na subida','Desça sem encostar os pés'],
-      g:'O movimento é o quadril enrolando, não a perna.',b:'Não use balanço pra jogar as pernas.',
-      alts:[{id:'legraisev',fig:'legraise',name:'Elevação de Pernas',bw:true,yt:'lying leg raises form shorts',
-        steps:['Deitado, mãos sob o quadril','Suba as pernas quase retas até 90°','Desça devagar sem tocar o chão','Lombar sempre colada no chão'],
-        g:'Quanto mais lenta a descida, melhor.',b:'Não arqueie a lombar ao descer.'}]},
-   ]},
- C:{label:'Legs',sub:'Pernas · Glúteo · Lombar',
-   intro:'Maior gasto energético da semana. Composto gigante primeiro, isolados de coxa, superset de quadril pra economizar tempo, panturrilha e lombar fecham.',
-   ex:[
-    {id:'legpress',fig:'legpress',name:'Leg Press',muscle:'Quadríceps + glúteo',w:60,sets:4,reps:'10–12',rest:120,
-      yt:'leg press form shorts',
-      why:'O maior recrutamento muscular e a maior carga da semana. Abre o dia porque exige tudo de você: fazer isso cansado seria perder metade do resultado e arriscar a forma.',
-      steps:['Pés na largura do quadril, meio da plataforma','Desça até ~90° no joelho','Empurre pelos calcanhares','Não trave o joelho no topo'],
-      g:'Joelhos acompanham a linha dos pés.',b:'Não deixe a lombar descolar do banco.',
-      alts:[{id:'goblet2',fig:'goblet',name:'Agachamento Goblet',w:16,yt:'goblet squat form shorts',
-        steps:['Halter junto ao peito, pés na largura do ombro','Agache empurrando o quadril pra trás','Desça até a coxa paralela','Suba pelos calcanhares'],
-        g:'Peito aberto, cotovelos entre os joelhos embaixo.',b:'Não deixe o calcanhar levantar.'}]},
-    {id:'legext',fig:'legext',name:'Cadeira Extensora',muscle:'Quadríceps',w:20,sets:3,reps:'12–15',rest:60,
-      yt:'leg extension form shorts',
-      why:'Isola o quadríceps logo depois do composto, quando ele já está ativado. É o "acabamento" da frente da coxa sem exigir mais nada da lombar.',
-      steps:['Costas apoiadas, almofada acima do tornozelo','Estenda até quase travar o joelho','Aperte a coxa 1s no topo','Desça controlado'],
-      g:'Pausa no topo dá um estímulo extra.',b:'Não jogue a perna com impulso.',
-      alts:[{id:'lungev',fig:'lunge',name:'Afundo (halteres)',w:8,yt:'dumbbell lunge form shorts',
-        steps:['Passo à frente, tronco ereto','Desça até o joelho de trás quase tocar','Empurre de volta pelo calcanhar da frente','Alterne as pernas'],
-        g:'Passo longo = mais glúteo; curto = mais quadríceps.',b:'Não deixe o joelho da frente passar muito do pé.'}]},
-    {id:'legcurl',fig:'legcurl',name:'Cadeira Flexora',muscle:'Posterior de coxa',w:25,sets:3,reps:'12–15',rest:60,
-      yt:'seated leg curl form shorts',
-      why:'Na sequência da extensora pra equilibrar: quadríceps forte com posterior fraco é receita de joelho frágil. O par extensora + flexora protege a articulação.',
-      steps:['Almofada na parte de trás do tornozelo','Flexione o joelho puxando o calcanhar','Aperte o posterior no fim','Volte sem deixar a carga cair'],
-      g:'Quadril fixo no banco o tempo todo.',b:'Não levante o quadril pra ajudar.',
-      alts:[{id:'rdlv',fig:'rdl',name:'Stiff Halteres (RDL)',w:14,yt:'dumbbell romanian deadlift form shorts',
-        steps:['Halteres à frente das coxas','Empurre o quadril pra trás descendo o tronco','Desça até sentir alongar o posterior','Suba apertando o glúteo'],
-        g:'Costas retas sempre; o movimento é do quadril.',b:'Não arredonde a lombar pra descer mais.'}]},
-    {id:'glutekick',fig:'glutekick',name:'Glute Kickback',muscle:'Glúteo',w:45,sets:3,reps:'12 / perna',rest:45,
-      yt:'glute kickback machine form shorts',
-      why:'Isola o glúteo com quase zero estresse na lombar, que ainda vai trabalhar no fim. Depois dos compostos porque é refinamento, não base.',
-      steps:['Apoie e estabilize o tronco','Empurre a perna pra trás e cima','Aperte o glúteo no topo','Volte controlado sem arquear a lombar'],
-      g:'Movimento sai do glúteo, não da lombar.',b:'Não hiperestenda a coluna.',
-      alts:[{id:'bridgev',fig:'bridge',name:'Ponte de Glúteo',bw:true,yt:'glute bridge form shorts',
-        steps:['Deitado, joelhos dobrados, pés no chão','Suba o quadril apertando o glúteo','Pausa de 1s no topo','Desça controlado'],
-        g:'Costela pra baixo: o arco é do quadril, não da lombar.',b:'Não empurre com a lombar.'}]},
-    {id:'abductor',fig:'abductor',name:'Cadeira Abdutora',muscle:'Glúteo médio',w:35,sets:3,reps:'15',rest:0,
-      ss:'A',yt:'hip abduction machine form shorts',
-      why:'Superset 1 de 2. Abdutora e adutora usam máquinas vizinhas e músculos opostos: emendar as duas economiza tempo e eleva o gasto calórico sem atrapalhar nada.',
-      steps:['Sentado, joelhos contra as almofadas externas','Abra as pernas contra a resistência','Aperte 1s na abertura máxima','Volte devagar'],
-      g:'Tronco levemente à frente recruta mais glúteo.',b:'Não use balanço pra abrir.',
-      alts:[{id:'bandabd',fig:'abductor',name:'Abdução com Mini Band',bw:true,yt:'banded hip abduction form shorts',
-        steps:['Elástico acima dos joelhos','Sentado ou deitado de lado, abra os joelhos','Segure 1s aberto','Volte com controle'],
-        g:'Ótima opção se a máquina estiver ocupada.',b:'Não deixe o elástico fechar rápido.'}]},
-    {id:'adductor',fig:'adductor',name:'Cadeira Adutora',muscle:'Adutores',w:10,sets:3,reps:'15',rest:45,
-      ss:'A',ssEnd:true,yt:'hip adduction machine form shorts',
-      why:'Superset 2 de 2: emenda direto na abdutora, sem descanso entre elas. Descansa só depois do par completo.',
-      steps:['Logo após a abdutora, sem descanso','Almofadas na parte interna das coxas','Feche as pernas juntando','Volte controlado abrindo'],
-      g:'Em sequência com a abdutora = superset.',b:'Não force amplitude que machuque a virilha.',
-      alts:[{id:'cableadd',fig:'adductor',name:'Adução na Polia',w:5,yt:'cable hip adduction form shorts',
-        steps:['Tornozeleira na perna de dentro','Cruze a perna à frente da outra','Segure 1s e volte devagar','Troque o lado'],
-        g:'Segure em algo pra equilibrar.',b:'Não incline o tronco pra compensar.'}]},
-    {id:'calf',fig:'calf',name:'Panturrilha (máquina)',muscle:'Panturrilha',w:60,sets:4,reps:'15–20',rest:45,
-      yt:'calf raise machine form shorts',
-      why:'Não interfere em nenhum outro exercício, então vai pro fim sem prejuízo. Responde melhor a repetições altas e amplitude total.',
-      steps:['Ponta dos pés na plataforma','Suba o máximo na ponta do pé','Pausa 1s no topo','Desça alongando bem a panturrilha'],
-      g:'Amplitude total: desce bem, sobe bem.',b:'Não faça repetições curtas e rápidas demais.',
-      alts:[{id:'dbcalf',fig:'calf',name:'Panturrilha c/ Halter (degrau)',w:16,yt:'standing dumbbell calf raise form shorts',
-        steps:['Ponta do pé num degrau, halter na mão do mesmo lado','Suba na ponta o máximo que der','Pausa 1s no topo','Desça alongando abaixo do degrau'],
-        g:'Uma perna por vez aumenta a intensidade.',b:'Não faça pela metade.'}]},
-    {id:'lowerback',fig:'lowerback',name:'Extensão Lombar',muscle:'Lombar',w:0,bw:true,sets:3,reps:'12–15',rest:45,
-      yt:'back extension form shorts',
-      why:'A lombar estabiliza tudo no dia de pernas. Se cansasse antes do Leg Press, sua forma iria embora. Por isso o estabilizador é sempre o último a trabalhar.',
-      steps:['Quadril apoiado, tornozelos travados','Desça o tronco flexionando o quadril','Suba até alinhar com as pernas','Não hiperestenda no topo'],
-      g:'Suba até a linha neutra, sem passar.',b:'Não faça com peso cedo demais.',
-      alts:[{id:'supermanv',fig:'superman',name:'Superman (solo)',bw:true,yt:'superman exercise form shorts',
-        steps:['De bruços, braços à frente','Suba braços e pernas juntos','Segure 1-2s no topo','Desça com controle'],
-        g:'Olhar pro chão pra não forçar o pescoço.',b:'Não suba além do confortável.'}]},
-   ]},
-};
-const FINISHER={id:'finisher',fig:'bike',name:'Finisher Cardio (bike)',muscle:'Condicionamento',w:0,bw:true,sets:1,reps:'5–8 min',rest:0,
-  isNew:true,yt:'stationary bike hiit beginner shorts',
-  why:'Fecha o treino com um gasto calórico extra que ajuda no déficit sem roubar energia da musculação (por isso é curto e vem por último).',
-  steps:['Bike no fim do treino','30s forte / 30s leve, alternando','Esforço moderado-alto no tiro','Encerra ao completar 5–8 min'],
-  g:'Soma no déficit sem atrapalhar a recuperação.',b:'Não vire um cardio longo que rouba energia do treino.',
-  alts:[
-   {id:'treadmillv',fig:'treadmill',name:'Esteira Inclinada',bw:true,reps:'8–10 min',yt:'incline treadmill walk benefits shorts',
-    steps:['Inclinação 8–12%, velocidade de caminhada forte','Sem segurar no apoio','Mantém 8–10 min constantes','Postura ereta'],
-    g:'Queima alta com impacto baixíssimo.',b:'Não segure nas barras (corta o esforço pela metade).'},
-   {id:'rowerv',fig:'rower',name:'Remo Ergômetro',bw:true,reps:'5–8 min',yt:'rowing machine proper form shorts',
-    steps:['Ordem do movimento: perna, tronco, braço','Volta na ordem inversa','30s forte / 30s leve','Costas retas sempre'],
-    g:'Corpo inteiro: gasto altíssimo em pouco tempo.',b:'Não puxe com o braço antes de estender a perna.'}]};
-PROGRAM.A.ex.push(JSON.parse(JSON.stringify(FINISHER)));
-PROGRAM.C.ex.push(JSON.parse(JSON.stringify(FINISHER)));
 
-const QUOTES=["Constância vence intensidade.","O treino feito > o treino perfeito adiado.","2 reps na reserva hoje, mais carga na próxima.","Forma primeiro. Sempre.","Disciplina é liberdade.","Cada série marcada é um tijolo."];
+/* =================== BIBLIOTECA DE EXERCÍCIOS =================== */
+/* grp: chest back shoulders arms legs glutes core calf | cat: comp iso core calf lomb cardio */
+const GRP_LABEL={chest:'Peito',back:'Costas',shoulders:'Ombros',arms:'Braços',legs:'Pernas',glutes:'Glúteos',core:'Abdômen',calf:'Panturrilha'};
+const E={
+ chestpress:{name:'Chest Press',fig:'chestpress',grp:'chest',mus:'Peito',cat:'comp',w:30,sets:4,reps:'8–12',rest:90,yt:'seated chest press machine form shorts',
+  steps:['Ajuste o banco: pegadores na linha do meio do peito','Costas apoiadas, pés firmes no chão','Empurre à frente sem travar o cotovelo','Volte controlado sentindo o peito alongar'],
+  g:'Escápulas levemente retraídas: protege o ombro.',b:'Não suba os ombros em direção à orelha.',alts:['dbbench']},
+ dbbench:{name:'Supino Halteres (banco)',fig:'dbbench',grp:'chest',mus:'Peito',cat:'comp',w:12,sets:4,reps:'8–12',rest:90,yt:'dumbbell bench press form shorts',
+  steps:['Deitado no banco, halteres na linha do peito','Empurre pra cima até quase estender','Desça controlado até a altura do peito','Cotovelos a ~45° do tronco'],
+  g:'Pés firmes no chão dão estabilidade.',b:'Não bata os halteres no topo.',alts:['chestpress']},
+ pecdeck:{name:'Pec Deck',fig:'pecdeck',grp:'chest',mus:'Peito (isolado)',cat:'iso',w:22.5,sets:3,reps:'12–15',rest:60,yt:'pec deck machine form shorts',
+  steps:['Antebraços nas almofadas, cotovelo na altura do ombro','Feche os braços juntando no centro','Segure 1s apertando o peito','Abra devagar até sentir o alongamento'],
+  g:'Movimento vem do peito, não dos braços.',b:'Não deixe a carga puxar o ombro pra trás bruscamente.',alts:['cablefly']},
+ cablefly:{name:'Crucifixo na Polia',fig:'cablefly',grp:'chest',mus:'Peito (isolado)',cat:'iso',w:7.5,sets:3,reps:'12–15',rest:60,yt:'cable chest fly form shorts',
+  steps:['Polias na altura do ombro, um passo à frente','Braços em arco, feche as mãos à frente do peito','Aperte 1s no centro','Abra controlado sem esticar demais'],
+  g:'Cotovelo levemente flexionado o tempo todo.',b:'Não transforme em press dobrando o cotovelo.',alts:['pecdeck']},
+ shoulderpress:{name:'Shoulder Press',fig:'shoulderpress',grp:'shoulders',mus:'Ombro',cat:'comp',w:20,sets:3,reps:'8–12',rest:90,yt:'shoulder press machine form shorts',
+  steps:['Costas apoiadas, pegada na largura do ombro','Empurre pra cima sem travar o cotovelo','Pare antes de encostar as mãos no topo','Desça até os cotovelos na linha do ombro'],
+  g:'Core firme pra não arquear a lombar.',b:'Não jogue a cabeça à frente ao empurrar.',alts:['dbshoulder']},
+ dbshoulder:{name:'Desenvolvimento Halteres',fig:'shoulderpress',grp:'shoulders',mus:'Ombro',cat:'comp',w:10,sets:3,reps:'8–12',rest:90,yt:'seated dumbbell shoulder press form shorts',
+  steps:['Sentado com encosto, halteres na altura da orelha','Empurre pra cima até quase juntar','Desça controlado até a linha da orelha','Antebraço sempre vertical'],
+  g:'Encosto levemente inclinado protege a lombar.',b:'Não arquee as costas pra empurrar.',alts:['shoulderpress']},
+ sidelat:{name:'Elevação Lateral (halteres)',fig:'lateralraisedb',grp:'shoulders',mus:'Deltóide lateral',cat:'iso',w:8,sets:3,reps:'12–15',rest:45,yt:'dumbbell lateral raise form shorts',
+  steps:['Em pé, halteres ao lado do corpo, cotovelo levemente flexionado','Suba pelos lados até a altura do ombro','Lidere com o cotovelo: a mão nunca passa acima dele','Desça lento, sem deixar o peso despencar'],
+  g:'Imagine derramar uma jarra: o mindinho sobe um tiquinho a mais.',b:'Não balance o tronco nem suba acima da linha do ombro.',alts:['cablelatv']},
+ cablelatv:{name:'Elevação Lateral na Polia',fig:'cablelat',grp:'shoulders',mus:'Deltóide lateral',cat:'iso',w:5,sets:3,reps:'12–15',rest:45,yt:'cable lateral raise form shorts',
+  steps:['Polia baixa, de lado pra torre','Suba o braço de fora até o ombro','Tensão constante: desça devagar','Troque o lado ao terminar'],
+  g:'A polia mantém tensão até embaixo, ótima variação.',b:'Não incline o tronco pra ajudar.',alts:['sidelat']},
+ reversefly:{name:'Crucifixo Inverso',fig:'reversefly',grp:'shoulders',mus:'Deltóide posterior',cat:'iso',w:5,sets:3,reps:'12–15',rest:45,yt:'reverse pec deck form shorts',
+  steps:['Peito no apoio, braços à frente','Abra os braços pra trás em arco','Aperte a parte de trás do ombro','Volte devagar controlando'],
+  g:'Carga leve e foco: é um músculo pequeno.',b:'Não dobre muito o cotovelo (vira remada).',alts:['dbrevfly']},
+ dbrevfly:{name:'Crucifixo Inverso (halteres)',fig:'reversefly',grp:'shoulders',mus:'Deltóide posterior',cat:'iso',w:4,sets:3,reps:'12–15',rest:45,yt:'bent over reverse fly dumbbell form shorts',
+  steps:['Tronco inclinado à frente, costas retas','Abra os halteres pros lados','Aperte as escápulas no topo','Desça sem balançar'],
+  g:'Tronco parado: só o braço se move.',b:'Não levante o tronco a cada repetição.',alts:['reversefly']},
+ facepullv:{name:'Face Pull',fig:'facepull',grp:'shoulders',mus:'Posterior + postura',cat:'iso',w:10,sets:3,reps:'12–15',rest:45,yt:'face pull form shorts',
+  steps:['Polia alta, corda com as duas mãos','Puxe em direção ao rosto','Abra os cotovelos pra fora no fim','Volte devagar'],
+  g:'Excelente pra postura e saúde do ombro.',b:'Não use carga alta: é exercício de controle.',alts:[]},
+ triceps:{name:'Tríceps Corda (polia)',fig:'triceps',grp:'arms',mus:'Tríceps',cat:'iso',w:12.5,sets:3,reps:'12–15',rest:45,yt:'triceps rope pushdown form shorts',
+  steps:['Cotovelos colados ao tronco','Empurre a corda pra baixo estendendo o cotovelo','No fim, abra levemente as pontas da corda','Suba controlado até ~90°'],
+  g:'Só o antebraço se move: cotovelo é a dobradiça.',b:'Não afaste o cotovelo do corpo.',alts:['benchdipv']},
+ benchdipv:{name:'Mergulho no Banco',fig:'benchdip',grp:'arms',mus:'Tríceps',cat:'iso',bw:true,sets:3,reps:'10–15',rest:45,yt:'bench dips form shorts',
+  steps:['Mãos no banco atrás, pernas à frente','Desça dobrando o cotovelo até ~90°','Empurre de volta estendendo o braço','Costas sempre rente ao banco'],
+  g:'Ombros longe da orelha o tempo todo.',b:'Não desça além de 90° se sentir o ombro.',alts:['triceps']},
+ biceps:{name:'Rosca Direta (barra)',fig:'biceps',grp:'arms',mus:'Bíceps',cat:'iso',w:12.5,sets:3,reps:'10–12',rest:60,yt:'barbell curl form shorts',
+  steps:['Em pé, cotovelos colados ao tronco','Suba a barra contraindo o bíceps','Não balance o corpo','Desça controlado até estender'],
+  g:'A descida lenta é onde mora o ganho.',b:'Não use impulso de quadril pra subir.',alts:['hammer']},
+ hammer:{name:'Rosca Martelo (halteres)',fig:'biceps',grp:'arms',mus:'Bíceps + braquial',cat:'iso',w:8,sets:3,reps:'10–12',rest:60,yt:'hammer curl form shorts',
+  steps:['Halteres com pegada neutra (palmas se olhando)','Suba sem girar o punho','Cotovelo fixo ao lado do corpo','Desça controlado'],
+  g:'Pega também o braquial: braço mais grosso.',b:'Não deixe o cotovelo ir à frente.',alts:['biceps']},
+ latpull:{name:'Lat Pulldown',fig:'latpull',grp:'back',mus:'Dorsal',cat:'comp',w:31,sets:4,reps:'8–12',rest:90,yt:'lat pulldown form shorts',
+  steps:['Pegada um pouco mais larga que os ombros','Puxe a barra até a parte alta do peito','Leve os cotovelos pra baixo e pra trás','Suba controlado alongando o dorsal'],
+  g:'Peito pra cima: puxe com as costas, não com o braço.',b:'Não jogue o tronco muito pra trás.',alts:['neutralpull']},
+ neutralpull:{name:'Pulldown Pegada Neutra',fig:'latpull',grp:'back',mus:'Dorsal',cat:'comp',w:31,sets:4,reps:'8–12',rest:90,yt:'neutral grip lat pulldown form shorts',
+  steps:['Use o triângulo ou pegada neutra','Puxe até a parte alta do peito','Cotovelos rente ao corpo','Volte controlado até alongar'],
+  g:'Pegada neutra costuma ser mais confortável pro ombro.',b:'Não balance pra completar a repetição.',alts:['latpull']},
+ seatedrow:{name:'Remada Sentada (triângulo)',fig:'seatedrow',grp:'back',mus:'Costas (espessura)',cat:'comp',w:20,sets:3,reps:'10–12',rest:75,yt:'seated cable row form shorts',
+  steps:['Joelhos levemente dobrados, coluna ereta','Puxe o triângulo em direção ao umbigo','Aperte as escápulas no fim','Volte estendendo os braços sem curvar a lombar'],
+  g:'Cotovelos passam rente ao corpo.',b:'Não arredonde as costas ao voltar.',alts:['widerow']},
+ widerow:{name:'Remada Aberta na Polia',fig:'seatedrow',grp:'back',mus:'Costas (espessura)',cat:'comp',w:17.5,sets:3,reps:'10–12',rest:75,yt:'wide grip seated cable row form shorts',
+  steps:['Barra reta, pegada aberta','Puxe em direção à base do peito','Cotovelos abertos na linha do ombro','Volte controlado'],
+  g:'Pegada aberta muda o foco pro meio das costas e posterior.',b:'Não encolha os ombros ao puxar.',alts:['seatedrow']},
+ lowrow:{name:'Upper Back / Low Row',fig:'lowrow',grp:'back',mus:'Costas (detalhe)',cat:'iso',w:17.5,sets:3,reps:'12',rest:60,yt:'chest supported row machine form shorts',
+  steps:['Peito apoiado se a máquina permitir','Puxe abrindo bem as escápulas','Foque na contração no meio das costas','Retorne controlado'],
+  g:'Pausa de 1s na contração rende mais.',b:'Não use só os braços.',alts:['facepullv']},
+ legpress:{name:'Leg Press',fig:'legpress',grp:'legs',mus:'Quadríceps + glúteo',cat:'comp',w:60,sets:4,reps:'10–12',rest:120,yt:'leg press form shorts',
+  steps:['Pés na largura do quadril, meio da plataforma','Desça até ~90° no joelho','Empurre pelos calcanhares','Não trave o joelho no topo'],
+  g:'Joelhos acompanham a linha dos pés.',b:'Não deixe a lombar descolar do banco.',alts:['goblet2']},
+ goblet2:{name:'Agachamento Goblet',fig:'goblet',grp:'legs',mus:'Quadríceps + glúteo',cat:'comp',w:16,sets:4,reps:'10–12',rest:90,yt:'goblet squat form shorts',
+  steps:['Halter junto ao peito, pés na largura do ombro','Agache empurrando o quadril pra trás','Desça até a coxa paralela','Suba pelos calcanhares'],
+  g:'Peito aberto, cotovelos entre os joelhos embaixo.',b:'Não deixe o calcanhar levantar.',alts:['legpress']},
+ legext:{name:'Cadeira Extensora',fig:'legext',grp:'legs',mus:'Quadríceps',cat:'iso',w:20,sets:3,reps:'12–15',rest:60,yt:'leg extension form shorts',
+  steps:['Costas apoiadas, almofada acima do tornozelo','Estenda até quase travar o joelho','Aperte a coxa 1s no topo','Desça controlado'],
+  g:'Pausa no topo dá um estímulo extra.',b:'Não jogue a perna com impulso.',alts:['lungev']},
+ lungev:{name:'Afundo (halteres)',fig:'lunge',grp:'legs',mus:'Quadríceps + glúteo',cat:'iso',w:8,sets:3,reps:'10 / perna',rest:60,yt:'dumbbell lunge form shorts',
+  steps:['Passo à frente, tronco ereto','Desça até o joelho de trás quase tocar','Empurre de volta pelo calcanhar da frente','Alterne as pernas'],
+  g:'Passo longo = mais glúteo; curto = mais quadríceps.',b:'Não deixe o joelho da frente passar muito do pé.',alts:['legext']},
+ legcurl:{name:'Cadeira Flexora',fig:'legcurl',grp:'legs',mus:'Posterior de coxa',cat:'iso',w:25,sets:3,reps:'12–15',rest:60,yt:'seated leg curl form shorts',
+  steps:['Almofada na parte de trás do tornozelo','Flexione o joelho puxando o calcanhar','Aperte o posterior no fim','Volte sem deixar a carga cair'],
+  g:'Quadril fixo no banco o tempo todo.',b:'Não levante o quadril pra ajudar.',alts:['rdlv']},
+ rdlv:{name:'Stiff Halteres (RDL)',fig:'rdl',grp:'legs',mus:'Posterior + glúteo',cat:'comp',w:14,sets:3,reps:'10–12',rest:90,yt:'dumbbell romanian deadlift form shorts',
+  steps:['Halteres à frente das coxas','Empurre o quadril pra trás descendo o tronco','Desça até sentir alongar o posterior','Suba apertando o glúteo'],
+  g:'Costas retas sempre; o movimento é do quadril.',b:'Não arredonde a lombar pra descer mais.',alts:['legcurl']},
+ glutekick:{name:'Glute Kickback',fig:'glutekick',grp:'glutes',mus:'Glúteo',cat:'iso',w:45,sets:3,reps:'12 / perna',rest:45,yt:'glute kickback machine form shorts',
+  steps:['Apoie e estabilize o tronco','Empurre a perna pra trás e cima','Aperte o glúteo no topo','Volte controlado sem arquear a lombar'],
+  g:'Movimento sai do glúteo, não da lombar.',b:'Não hiperestenda a coluna.',alts:['bridgev']},
+ bridgev:{name:'Ponte de Glúteo',fig:'bridge',grp:'glutes',mus:'Glúteo',cat:'iso',bw:true,sets:3,reps:'12–15',rest:45,yt:'glute bridge form shorts',
+  steps:['Deitado, joelhos dobrados, pés no chão','Suba o quadril apertando o glúteo','Pausa de 1s no topo','Desça controlado'],
+  g:'Costela pra baixo: o arco é do quadril, não da lombar.',b:'Não empurre com a lombar.',alts:['glutekick']},
+ abductor:{name:'Cadeira Abdutora',fig:'abductor',grp:'glutes',mus:'Glúteo médio',cat:'iso',w:35,sets:3,reps:'15',rest:45,yt:'hip abduction machine form shorts',
+  steps:['Sentado, joelhos contra as almofadas externas','Abra as pernas contra a resistência','Aperte 1s na abertura máxima','Volte devagar'],
+  g:'Tronco levemente à frente recruta mais glúteo.',b:'Não use balanço pra abrir.',alts:['bandabd']},
+ bandabd:{name:'Abdução com Mini Band',fig:'abductor',grp:'glutes',mus:'Glúteo médio',cat:'iso',bw:true,sets:3,reps:'15–20',rest:45,yt:'banded hip abduction form shorts',
+  steps:['Elástico acima dos joelhos','Sentado ou deitado de lado, abra os joelhos','Segure 1s aberto','Volte com controle'],
+  g:'Ótima opção se a máquina estiver ocupada.',b:'Não deixe o elástico fechar rápido.',alts:['abductor']},
+ adductor:{name:'Cadeira Adutora',fig:'adductor',grp:'glutes',mus:'Adutores',cat:'iso',w:10,sets:3,reps:'15',rest:45,yt:'hip adduction machine form shorts',
+  steps:['Almofadas na parte interna das coxas','Feche as pernas juntando','Segure 1s fechado','Volte controlado abrindo'],
+  g:'Combina bem em superset com a abdutora.',b:'Não force amplitude que machuque a virilha.',alts:['cableadd']},
+ cableadd:{name:'Adução na Polia',fig:'adductor',grp:'glutes',mus:'Adutores',cat:'iso',w:5,sets:3,reps:'15',rest:45,yt:'cable hip adduction form shorts',
+  steps:['Tornozeleira na perna de dentro','Cruze a perna à frente da outra','Segure 1s e volte devagar','Troque o lado'],
+  g:'Segure em algo pra equilibrar.',b:'Não incline o tronco pra compensar.',alts:['adductor']},
+ calf:{name:'Panturrilha (máquina)',fig:'calf',grp:'calf',mus:'Panturrilha',cat:'calf',w:60,sets:4,reps:'15–20',rest:45,yt:'calf raise machine form shorts',
+  steps:['Ponta dos pés na plataforma','Suba o máximo na ponta do pé','Pausa 1s no topo','Desça alongando bem a panturrilha'],
+  g:'Amplitude total: desce bem, sobe bem.',b:'Não faça repetições curtas e rápidas demais.',alts:['dbcalf']},
+ dbcalf:{name:'Panturrilha c/ Halter (degrau)',fig:'calf',grp:'calf',mus:'Panturrilha',cat:'calf',w:16,sets:4,reps:'12–15 / perna',rest:45,yt:'standing dumbbell calf raise form shorts',
+  steps:['Ponta do pé num degrau, halter na mão do mesmo lado','Suba na ponta o máximo que der','Pausa 1s no topo','Desça alongando abaixo do degrau'],
+  g:'Uma perna por vez aumenta a intensidade.',b:'Não faça pela metade.',alts:['calf']},
+ lowerback:{name:'Extensão Lombar',fig:'lowerback',grp:'core',mus:'Lombar',cat:'lomb',bw:true,sets:3,reps:'12–15',rest:45,yt:'back extension form shorts',
+  steps:['Quadril apoiado, tornozelos travados','Desça o tronco flexionando o quadril','Suba até alinhar com as pernas','Não hiperestenda no topo'],
+  g:'Suba até a linha neutra, sem passar.',b:'Não faça com peso cedo demais.',alts:['supermanv']},
+ supermanv:{name:'Superman (solo)',fig:'superman',grp:'core',mus:'Lombar',cat:'lomb',bw:true,sets:3,reps:'12–15',rest:45,yt:'superman exercise form shorts',
+  steps:['De bruços, braços à frente','Suba braços e pernas juntos','Segure 1-2s no topo','Desça com controle'],
+  g:'Olhar pro chão pra não forçar o pescoço.',b:'Não suba além do confortável.',alts:['lowerback']},
+ absfull:{name:'Abdominal Completo',fig:'absfull',grp:'core',mus:'Abdômen',cat:'core',bw:true,sets:3,reps:'15–20',rest:45,yt:'crunch proper form shorts',
+  steps:['Deite, joelhos dobrados','Tire as escápulas do chão enrolando o tronco','Expire ao subir, contraindo o abdômen','Desça sem relaxar totalmente'],
+  g:'Queixo afastado do peito, olhar pro teto.',b:'Não puxe o pescoço com as mãos.',alts:['plankv']},
+ plankv:{name:'Prancha',fig:'plank',grp:'core',mus:'Core completo',cat:'core',bw:true,sets:3,reps:'30–45s',rest:45,yt:'plank form shorts',
+  steps:['Antebraços no chão, corpo reto','Contraia abdômen e glúteo','Respire normal, segure o tempo','Quadril nem alto nem caído'],
+  g:'Corpo em linha reta da cabeça ao calcanhar.',b:'Não deixe a lombar afundar.',alts:['absfull']},
+ reversecrunch:{name:'Abdominal Inverso',fig:'reversecrunch',grp:'core',mus:'Abdômen inferior',cat:'core',bw:true,sets:3,reps:'15',rest:45,yt:'reverse crunch form shorts',
+  steps:['Deite, joelhos dobrados a 90°','Enrole o quadril trazendo os joelhos ao peito','Tire o cóccix do chão na subida','Desça sem encostar os pés'],
+  g:'O movimento é o quadril enrolando, não a perna.',b:'Não use balanço pra jogar as pernas.',alts:['legraisev']},
+ legraisev:{name:'Elevação de Pernas',fig:'legraise',grp:'core',mus:'Abdômen inferior',cat:'core',bw:true,sets:3,reps:'12–15',rest:45,yt:'lying leg raises form shorts',
+  steps:['Deitado, mãos sob o quadril','Suba as pernas quase retas até 90°','Desça devagar sem tocar o chão','Lombar sempre colada no chão'],
+  g:'Quanto mais lenta a descida, melhor.',b:'Não arqueie a lombar ao descer.',alts:['reversecrunch']},
+ finisher:{name:'Finisher Cardio (bike)',fig:'bike',grp:'core',mus:'Condicionamento',cat:'cardio',bw:true,sets:1,reps:'5–8 min',rest:0,yt:'stationary bike hiit beginner shorts',
+  steps:['Bike no fim do treino','30s forte / 30s leve, alternando','Esforço moderado-alto no tiro','Encerra ao completar 5–8 min'],
+  g:'Soma no déficit sem atrapalhar a recuperação.',b:'Não vire um cardio longo que rouba energia do treino.',alts:['treadmillv','rowerv']},
+ treadmillv:{name:'Esteira Inclinada',fig:'treadmill',grp:'core',mus:'Condicionamento',cat:'cardio',bw:true,sets:1,reps:'8–10 min',rest:0,yt:'incline treadmill walk benefits shorts',
+  steps:['Inclinação 8–12%, velocidade de caminhada forte','Sem segurar no apoio','Mantém 8–10 min constantes','Postura ereta'],
+  g:'Queima alta com impacto baixíssimo.',b:'Não segure nas barras (corta o esforço pela metade).',alts:['finisher','rowerv']},
+ rowerv:{name:'Remo Ergômetro',fig:'rower',grp:'core',mus:'Condicionamento',cat:'cardio',bw:true,sets:1,reps:'5–8 min',rest:0,yt:'rowing machine proper form shorts',
+  steps:['Ordem do movimento: perna, tronco, braço','Volta na ordem inversa','30s forte / 30s leve','Costas retas sempre'],
+  g:'Corpo inteiro: gasto altíssimo em pouco tempo.',b:'Não puxe com o braço antes de estender a perna.',alts:['finisher','treadmillv']},
+};
+
+/* why genéricos por papel na ordem */
+function whyFor(ex,idx,dayHasComp){
+  if(ex.cat==='cardio')return 'Fecha o treino com gasto extra sem roubar energia da musculação (curto e por último de propósito).';
+  if(ex.cat==='lomb')return 'A lombar estabiliza tudo. Se cansasse antes dos pesados, sua forma iria embora: estabilizador é sempre o último.';
+  if(ex.cat==='core')return 'Core no fim de propósito: cansar o estabilizador antes dos exercícios pesados comprometeria sua execução.';
+  if(ex.cat==='calf')return 'Não interfere em nenhum outro exercício, então vai pro fim. Responde melhor a repetições altas e amplitude total.';
+  if(ex.cat==='comp')return idx===0?'Maior composto do dia: vem primeiro porque com você descansado dá pra mover mais carga com forma limpa, e é daqui que sai o principal estímulo.':'Composto: aproveita a força que ainda resta antes de partir pros isolados.';
+  return 'Isolado de '+ex.mus.toLowerCase()+': completa o estímulo do dia com foco total, sem exigir dos músculos auxiliares já cansados.';
+}
+
+/* =================== DIVISÕES / TEMPLATES =================== */
+const SPLITS={
+ 2:{name:'Upper / Lower',days:[
+   {label:'Upper',sub:'Peito · Costas · Ombros · Braços',pool:['chestpress','latpull','shoulderpress','seatedrow','sidelat','triceps','biceps','reversefly','facepullv','absfull']},
+   {label:'Lower',sub:'Pernas · Glúteos · Panturrilha',pool:['legpress','legcurl','legext','rdlv','glutekick','abductor','adductor','calf','lowerback','reversecrunch']}]},
+ 3:{name:'Push / Pull / Legs',days:[
+   {label:'Push',sub:'Peito · Ombro · Tríceps',pool:['chestpress','shoulderpress','pecdeck','sidelat','triceps','cablefly','benchdipv','absfull','plankv']},
+   {label:'Pull',sub:'Costas · Posterior · Bíceps',pool:['latpull','seatedrow','lowrow','reversefly','biceps','facepullv','hammer','reversecrunch','legraisev']},
+   {label:'Legs',sub:'Pernas · Glúteo · Lombar',pool:['legpress','legext','legcurl','glutekick','abductor','adductor','calf','lowerback','rdlv','bridgev']}]},
+ 4:{name:'ABCD clássico',days:[
+   {label:'Peito + Tríceps',sub:'Empurrar horizontal',pool:['chestpress','dbbench','pecdeck','cablefly','triceps','benchdipv','absfull']},
+   {label:'Costas + Bíceps',sub:'Puxar',pool:['latpull','seatedrow','lowrow','biceps','hammer','facepullv','reversecrunch']},
+   {label:'Pernas + Glúteo',sub:'Inferior completo',pool:['legpress','legext','legcurl','rdlv','glutekick','abductor','adductor','calf','lowerback']},
+   {label:'Ombros + Core',sub:'Deltóides e estabilidade',pool:['shoulderpress','sidelat','reversefly','facepullv','cablelatv','absfull','plankv','legraisev']}]}
+};
+const LETTERS=['A','B','C','D'];
+
+/* =================== GERADOR =================== */
+function buildDay(pool,n,prio){
+  const noPrio=Object.keys(GRP_LABEL).filter(g=>!prio.includes(g));
+  let items=pool.map(id=>({id,...E[id]}));
+  // remove isolados de grupos desmarcados (mantém compostos pra base)
+  let removed=items.filter(x=>x.cat!=='comp'&&noPrio.includes(x.grp)&&prio.length>0&&prio.length<8);
+  items=items.filter(x=>!removed.includes(x));
+  // ordena: comp > iso(prioritário) > iso > calf > core/lomb
+  const rank=x=>x.cat==='comp'?0:(x.cat==='iso'?(prio.includes(x.grp)?1:2):(x.cat==='calf'?3:4));
+  items.sort((a,b)=>rank(a)-rank(b));
+  if(items.length<n)items=items.concat(removed); // repõe se faltar
+  const coresArr=items.filter(x=>['core','lomb'].includes(x.cat));
+  const restArr=items.filter(x=>!['core','lomb'].includes(x.cat));
+  let sel;
+  if(coresArr.length&&n>=4){sel=restArr.slice(0,n-1);sel.push(coresArr[0])}
+  else{sel=items.slice(0,n)}
+  // se dia tem muitos exercícios, compostos extras caem pra 3 séries
+  sel=sel.map((x,i)=>{
+    let sets=x.sets;
+    if(n>=7&&x.cat==='comp'&&i>0)sets=3;
+    return {...x,sets};
+  });
+  // superset abdutora+adutora se ambos presentes: aproxima e marca
+  const ia=sel.findIndex(x=>x.id==='abductor'),ib=sel.findIndex(x=>x.id==='adductor');
+  if(ia>=0&&ib>=0){
+    const [add]=sel.splice(ib,1);
+    sel.splice(sel.findIndex(x=>x.id==='abductor')+1,0,add);
+    sel=sel.map(x=>x.id==='abductor'?{...x,ss:'A',rest:0}:x.id==='adductor'?{...x,ss:'A'}:x);
+  }
+  return sel;
+}
+function generateProgram(setup){
+  const sp=SPLITS[setup.splits];
+  let days=sp.days.map(d=>({...d}));
+  // região prioritária vira treino A
+  const fi=Math.max(0,days.findIndex(d=>d.label===setup.first));
+  days=[...days.slice(fi),...days.slice(0,fi)];
+  const prog={};
+  days.forEach((d,i)=>{
+    const L=LETTERS[i];
+    const sel=buildDay(d.pool,setup.perDay,setup.groups);
+    const ex=sel.map((x,idx)=>({
+      id:x.id,fig:x.fig,name:x.name,muscle:x.mus,w:x.w||0,bw:!!x.bw,
+      sets:x.sets,reps:x.reps,rest:x.ss==='A'&&x.id==='abductor'?0:x.rest,
+      ss:x.ss,yt:x.yt,steps:x.steps,g:x.g,b:x.b,
+      why:whyFor(x,idx,true),
+      alts:(x.alts||[]).map(aid=>({id:aid,fig:E[aid].fig,name:E[aid].name,w:E[aid].w,bw:!!E[aid].bw,reps:E[aid].reps,yt:E[aid].yt,steps:E[aid].steps,g:E[aid].g,b:E[aid].b}))
+    }));
+    if(setup.finisher&&(i===0||i===days.length-1)){
+      const f=E.finisher;
+      ex.push({id:'finisher',fig:f.fig,name:f.name,muscle:f.mus,w:0,bw:true,sets:1,reps:f.reps,rest:0,yt:f.yt,steps:f.steps,g:f.g,b:f.b,why:whyFor(f,99),
+        alts:f.alts.map(aid=>({id:aid,fig:E[aid].fig,name:E[aid].name,bw:true,reps:E[aid].reps,yt:E[aid].yt,steps:E[aid].steps,g:E[aid].g,b:E[aid].b}))});
+    }
+    prog[L]={label:d.label,sub:d.sub,
+      intro:`${sp.name} · ${setup.freq}x por semana. Compostos pesados primeiro (você fresco = mais carga = mais estímulo), isolados completam, core fecha.`,
+      ex};
+  });
+  return prog;
+}
+function weekPlan(setup){
+  const keys=LETTERS.slice(0,setup.splits);
+  let seq=[];for(let i=0;i<setup.freq;i++)seq.push(keys[i%keys.length]);
+  return seq.join(' → ');
+}
 
 /* =================== ESTADO =================== */
 let LS_OK=true; try{localStorage.setItem('__t','1');localStorage.removeItem('__t')}catch(e){LS_OK=false}
@@ -1318,15 +1403,21 @@ const load=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}
 const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 
 let WEIGHTS=load('iron_weights',{});
-let SESSION=load('iron_session',{A:{},B:{},C:{}});
+let SESSION=load('iron_session',{});
 let HISTORY=load('iron_history',[]);
 let VARIANT=load('iron_variant',{});
 let THEME=load('iron_theme','light');
+let SETUP=load('iron_setup',null);
+let PROGRAM=load('iron_program',null);
 let cur='A', view='train';
 
-const todayISO=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)};
+const DEFAULT_SETUP={groups:Object.keys(GRP_LABEL),perDay:6,splits:3,freq:3,first:'Push',finisher:true,default:true};
+function ensureProgram(){
+  if(!PROGRAM){PROGRAM=generateProgram(SETUP||DEFAULT_SETUP)}
+  if(!PROGRAM[cur])cur=Object.keys(PROGRAM)[0];
+}
 
-/* variação ativa de um exercício (mescla base + alt) */
+const todayISO=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)};
 function activeOf(ex){
   const vid=VARIANT[ex.id];
   if(vid&&ex.alts){const alt=ex.alts.find(a=>a.id===vid);
@@ -1335,6 +1426,7 @@ function activeOf(ex){
 }
 const wOf=a=>WEIGHTS[a.vid]!=null?WEIGHTS[a.vid]:(a.w||0);
 function setsArr(baseId,n){
+  if(!SESSION[cur])SESSION[cur]={};
   if(!SESSION[cur][baseId]||SESSION[cur][baseId].length!==n) SESSION[cur][baseId]=Array(n).fill(false);
   return SESSION[cur][baseId];
 }
@@ -1353,22 +1445,25 @@ function applyTheme(){
   applyAccent();
 }
 function applyAccent(){
-  const c=ACCENTS[THEME][cur];
+  const c=ACCENTS[THEME][cur]||ACCENTS[THEME].A;
   const r=document.documentElement.style;
   r.setProperty('--accent',c.a);r.setProperty('--accent-ink',c.ink);r.setProperty('--accent-text',c.t);
 }
 $('thm').onclick=()=>{THEME=THEME==='light'?'dark':'light';save('iron_theme',THEME);applyTheme()};
 
 /* =================== RENDER =================== */
+const QUOTES=["Constância vence intensidade.","O treino feito > o treino perfeito adiado.","2 reps na reserva hoje, mais carga na próxima.","Forma primeiro. Sempre.","Disciplina é liberdade.","Cada série marcada é um tijolo."];
 function render(){
+  ensureProgram();
   applyAccent();
   $('quote').textContent=QUOTES[Math.floor(Math.random()*QUOTES.length)];
+  $('brandSub').textContent=SETUP&&!SETUP.default?`${SPLITS[SETUP.splits].name} · ${SETUP.freq}x/sem`:'Push · Pull · Legs';
   renderTabs();
   if(view==='train'){renderTrain()}else{renderProgress()}
 }
 function renderTabs(){
   const t=$('tabs');t.innerHTML='';
-  for(const k of ['A','B','C']){
+  for(const k of Object.keys(PROGRAM)){
     const p=PROGRAM[k];
     const b=document.createElement('button');
     b.className='tab'+(k===cur?' on':'');
@@ -1380,12 +1475,10 @@ function renderTabs(){
 function renderTrain(){
   const day=PROGRAM[cur];
   $('dintro').textContent=day.intro;
-  // ordem
   $('orderBody').innerHTML=day.ex.map((ex,i)=>{
     const a=activeOf(ex);
     return `<div class="oi"><div class="n">${i+1}</div><div class="tx"><b>${a.name}${ex.ss?' (superset)':''}</b><span>${ex.why}</span></div></div>`;
   }).join('');
-  // cards
   const list=$('list');list.innerHTML='';
   day.ex.forEach((ex,i)=>{
     const a=activeOf(ex);
@@ -1394,9 +1487,7 @@ function renderTrain(){
     const card=document.createElement('div');
     card.className='card'+(done===a.sets?' done':'');
     card.style.animationDelay=(i*40)+'ms';
-    const badges=(ex.isNew?'<span class="badge new">novo</span>':'')+
-                 (ex.ss?'<span class="badge ss">superset</span>':'');
-    // chips de variação
+    const badges=(ex.ss?'<span class="badge ss">superset</span>':'');
     let vhtml='';
     if(ex.alts&&ex.alts.length){
       const opts=[{id:ex.id,name:ex.name},...ex.alts.map(x=>({id:x.id,name:x.name}))];
@@ -1416,7 +1507,7 @@ function renderTrain(){
           <div class="cidx"><span class="n">${String(i+1).padStart(2,'0')}</span>${badges}</div>
           <div class="cname">${a.name}</div>
           <div class="meta">
-            <span class="chip"><b>${a.muscle}</b></span>
+            <span class="chip"><b>${a.muscle||ex.muscle}</b></span>
             <span class="chip">${a.sets}×${a.reps}</span>
           </div>
         </div>
@@ -1424,7 +1515,7 @@ function renderTrain(){
       ${vhtml}
       <div class="wt">
         <div class="stp">${wDisp}</div>
-        ${a.rest?`<div class="rest" onclick="startRest(${a.rest},'${a.name.replace(/'/g,'')}')">
+        ${a.rest?`<div class="rest" onclick="startRest(${a.rest},'${(a.name||'').replace(/'/g,'')}')">
           <div class="t">${a.rest}s</div><div class="lb">Descanso</div></div>`:
           `<div class="rest" style="opacity:.55"><div class="t">${ex.ss?'SS':'GO'}</div><div class="lb">${ex.ss?'Sem pausa':'Contínuo'}</div></div>`}
       </div>
@@ -1460,9 +1551,7 @@ function updateProgress(){
 }
 
 /* =================== INTERAÇÕES =================== */
-function setVar(baseId,vid){
-  VARIANT[baseId]=vid;save('iron_variant',VARIANT);cloudSync();renderTrain();
-}
+function setVar(baseId,vid){VARIANT[baseId]=vid;save('iron_variant',VARIANT);cloudSync();renderTrain()}
 function findBase(id){for(const k in PROGRAM){const e=PROGRAM[k].ex.find(x=>x.id===id);if(e)return e}}
 function bump(baseId,delta){
   const a=activeOf(findBase(baseId));let v=wOf(a)+delta;if(v<0)v=0;
@@ -1542,10 +1631,11 @@ function renderProgress(){
     const d=new Date(h.date+'T00:00');
     const ds=d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});
     const pct=Math.round(h.done/h.tot*100);
-    return `<div class="hrow"><div class="wk" style="background:${HIST_COLORS[h.workout]}">${h.workout}</div>
+    return `<div class="hrow"><div class="wk" style="background:${HIST_COLORS[h.workout]||'#F5B301'}">${h.workout}</div>
       <div class="mid"><b>${h.label} · Treino ${h.workout}</b><small>${ds} · ${h.done}/${h.tot} séries</small></div>
       <div class="pct">${pct}%</div></div>`;
   }).join(''):'<div class="empty">Nenhum treino registrado ainda.<br>Conclua um treino e ele aparece aqui. 📈</div>';
+  const plan=SETUP?`<div class="tip"><div class="ic">📅</div><p><b>Sua semana:</b> ${weekPlan(SETUP)} (${SETUP.freq}x). Nos outros dias, descanso ou caminhada leve.</p></div>`:'';
 
   pv.innerHTML=`
     <div class="stats">
@@ -1558,16 +1648,20 @@ function renderProgress(){
       <button class="abtn vid" onclick="exportXLSX()">📊 Exportar Excel</button>
       <button class="abtn" onclick="exportPDF()">📄 Exportar PDF</button>
     </div>
+    <div class="exports">
+      <button class="abtn" onclick="openWizard(true)">⚙️ Personalizar meu treino</button>
+    </div>
     <div class="sectit">Histórico ${HISTORY.length?`<button onclick="clearHist()">Limpar</button>`:''}</div>
     <div class="hist">${hist}</div>
     <div class="tips">
       <div class="sectit" style="font-size:14px">Princípios do Dr. 🧬</div>
+      ${plan}
       <div class="tip"><div class="ic">📈</div><p><b>Progressão dupla:</b> fechou o topo das reps em todas as séries (com 2 na reserva)? Sobe ~5% na carga e volta pro fundo da faixa.</p></div>
-      <div class="tip"><div class="ic">🔁</div><p><b>Frequência 2×:</b> conseguindo 4–6 dias, repete A-B-C-A-B-C. Cada músculo 2×/semana bate 1× em hipertrofia.</p></div>
-      <div class="tip"><div class="ic">⏳</div><p><b>Readaptação:</b> nas 2–3 primeiras semanas, trabalhe com 2 reps na reserva antes de forçar carga.</p></div>
+      <div class="tip"><div class="ic">🔁</div><p><b>Frequência 2×:</b> treinar cada músculo 2x por semana rende mais hipertrofia que 1x com o mesmo volume.</p></div>
+      <div class="tip"><div class="ic">⏳</div><p><b>Descansos:</b> 90 a 120s nos compostos pesados e 45 a 60s nos isolados é o que a evidência mais recente aponta como ideal.</p></div>
       <div class="tip"><div class="ic">🍽️</div><p><b>Composição:</b> o abdômen aparece no déficit. ~300–500 kcal abaixo do gasto + proteína 1,6–2,2 g/kg.</p></div>
     </div>
-    ${LS_OK?'':'<div class="empty" style="color:var(--red)">⚠️ Este ambiente não salva dados entre sessões. Hospede o arquivo (ex: GitHub Pages) ou abra direto no navegador.</div>'}
+    ${LS_OK?'':'<div class="empty" style="color:var(--red)">⚠️ Este ambiente não salva dados entre sessões. Hospede o arquivo (ex: GitHub Pages).</div>'}
   `;
 }
 function calcStreak(){
@@ -1601,7 +1695,7 @@ function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show')
   clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2200)}
 function confetti(){
   const c=$('cfx');c.classList.remove('hidden');c.innerHTML='';
-  const ac=ACCENTS[THEME][cur].a;
+  const ac=(ACCENTS[THEME][cur]||ACCENTS[THEME].A).a;
   const cols=[ac,'#8AC7FF','#B7F0AD','#FFD1DC','#FFE08A'];
   for(let i=0;i<50;i++){const d=document.createElement('div');d.className='cf';
     d.style.left=Math.random()*100+'%';d.style.background=cols[i%cols.length];
@@ -1609,27 +1703,175 @@ function confetti(){
     d.style.transform=`rotate(${Math.random()*360}deg)`;c.appendChild(d)}
   setTimeout(()=>c.classList.add('hidden'),2800);
 }
+const standalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone;
+if(!standalone&&!load('iron_install_off',false))$('install').classList.remove('hidden');
+function dismissInstall(){$('install').classList.add('hidden');save('iron_install_off',true)}
 
-
+/* =================== ONBOARDING =================== */
+let OBSTEP=0, OBDATA=null, OBPROG=null;
+function openWizard(editing){
+  OBDATA=SETUP&&!SETUP.default?{...SETUP}:{groups:Object.keys(GRP_LABEL),perDay:6,splits:3,freq:3,first:'Push',finisher:true};
+  OBSTEP=editing?1:0;
+  $('ob').classList.remove('hidden');
+  renderOB();
+  window.scrollTo({top:0});
+}
+function closeOB(){$('ob').classList.add('hidden')}
+function renderOB(){
+  const ob=$('ob');
+  const steps=`<div class="ob-steps">${[0,1,2].map(i=>`<i class="${i<=OBSTEP?'on':''}"></i>`).join('')}</div>`;
+  if(OBSTEP===0){
+    const hasData=HISTORY.length>0||Object.keys(WEIGHTS).length>0;
+    ob.innerHTML=`<div class="ob-in">
+      <div class="ob-hero">
+        <div class="logo"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#181818"/></svg></div>
+        <h1>Bem-vindo ao <em>IRON</em></h1>
+        <p>Seu treino de academia, do seu jeito. Responda 5 perguntas rápidas e eu monto seu programa completo: exercícios, ordem, séries, repetições e descansos calibrados pela ciência de hipertrofia mais recente.</p>
+        <div class="ob-cta">
+          <button class="ob-btn pri" onclick="OBSTEP=1;renderOB()">Montar meu treino</button>
+          ${hasData?`<button class="ob-btn" onclick="useDefault()">Continuar com meu treino atual (PPL)</button>`:
+                    `<button class="ob-btn" onclick="useDefault()">Usar o programa padrão (PPL)</button>`}
+          ${SB_ON()?`<button class="ob-btn ghost" onclick="closeOB();$('acct').click()">Já tenho conta ☁️</button>`:''}
+        </div>
+      </div></div>`;
+    return;
+  }
+  if(OBSTEP===1){
+    const sp=SPLITS[OBDATA.splits];
+    if(!sp.days.find(d=>d.label===OBDATA.first))OBDATA.first=sp.days[0].label;
+    ob.innerHTML=`<div class="ob-in">${steps}
+      <h2>Monte seu perfil</h2>
+      <div class="lead">Suas respostas definem o programa. Dá pra ajustar tudo depois.</div>
+      <div class="qb"><h4>Quais grupos você quer priorizar?</h4>
+        <div class="hint">Marcados ganham prioridade na ordem e volume extra. Desmarcados perdem os isolados (os compostos mantêm a base pra evitar desequilíbrio).</div>
+        <div class="qchips">${Object.keys(GRP_LABEL).map(g=>
+          `<button class="qchip${OBDATA.groups.includes(g)?' on':''}" onclick="obTgl('${g}')">${GRP_LABEL[g]}</button>`).join('')}</div>
+      </div>
+      <div class="qb"><h4>Quantos exercícios por dia?</h4>
+        <div class="hint">6 é o ponto ideal pra maioria: volume suficiente sem virar treino de 2 horas.</div>
+        <div class="qchips">${[4,5,6,7].map(n=>`<button class="qchip${OBDATA.perDay===n?' on':''}" onclick="OBDATA.perDay=${n};renderOB()">${n}</button>`).join('')}</div>
+      </div>
+      <div class="qb"><h4>Quantas divisões de treino?</h4>
+        <div class="hint">A-B (Upper/Lower) · A-B-C (Push/Pull/Legs) · A-B-C-D (por grupo).</div>
+        <div class="qchips">${[2,3,4].map(n=>`<button class="qchip${OBDATA.splits===n?' on':''}" onclick="OBDATA.splits=${n};renderOB()">${LETTERS.slice(0,n).join('-')}</button>`).join('')}</div>
+      </div>
+      <div class="qb"><h4>Quantas vezes por semana?</h4>
+        <div class="hint">A ciência é clara: cada músculo 2x por semana rende mais que 1x.</div>
+        <div class="qchips">${[2,3,4,5,6].map(n=>`<button class="qchip${OBDATA.freq===n?' on':''}" onclick="OBDATA.freq=${n};renderOB()">${n}x</button>`).join('')}</div>
+      </div>
+      <div class="qb"><h4>Qual região quer treinar primeiro?</h4>
+        <div class="hint">Essa vira o seu Treino A (o primeiro da rotação).</div>
+        <div class="qchips">${SPLITS[OBDATA.splits].days.map(d=>
+          `<button class="qchip${OBDATA.first===d.label?' on':''}" onclick="OBDATA.first='${d.label}';renderOB()">${d.label}</button>`).join('')}</div>
+      </div>
+      <div class="qb"><h4>Finisher de cardio?</h4>
+        <div class="hint">5 a 8 min de tiros leves no fim de alguns treinos: gasto extra sem roubar recuperação.</div>
+        <div class="qchips">
+          <button class="qchip${OBDATA.finisher?' on':''}" onclick="OBDATA.finisher=true;renderOB()">Sim</button>
+          <button class="qchip${!OBDATA.finisher?' on':''}" onclick="OBDATA.finisher=false;renderOB()">Não</button>
+        </div>
+      </div>
+      <div class="ob-nav">
+        <button class="ob-btn" onclick="OBSTEP=0;renderOB()">Voltar</button>
+        <button class="ob-btn pri" onclick="obGen()">Gerar meu treino →</button>
+      </div></div>`;
+    return;
+  }
+  /* step 2: revisão */
+  const keys=Object.keys(OBPROG);
+  ob.innerHTML=`<div class="ob-in">${steps}
+    <h2>Seu programa está pronto</h2>
+    <div class="lead">Séries, repetições e descansos calibrados: compostos com 8–12 reps e 90–120s de pausa, isolados com 12–15 e 45–60s (faixas com melhor evidência pra hipertrofia). Ajuste como quiser: remova (✕) ou adicione exercícios extras.</div>
+    <div class="qb" style="padding:12px 15px"><h4 style="margin:0">📅 Rotação sugerida: ${weekPlan(OBDATA)} · ${OBDATA.freq}x/semana</h4></div>
+    ${keys.map(k=>{
+      const d=OBPROG[k];const col=HIST_COLORS[k];
+      return `<div class="rday">
+        <div class="rhead"><div class="lt" style="background:${col}">${k}</div>
+          <div class="tx"><b>${d.label}</b><small>${d.ex.length} exercícios · ${d.ex.reduce((s,e)=>s+e.sets,0)} séries</small></div></div>
+        ${d.ex.map((e,i)=>`<div class="rex"><div class="rn">${i+1}</div>
+          <div class="rtx"><b>${e.name}</b><small>${e.muscle} · ${e.sets}×${e.reps}${e.rest?` · ${e.rest}s`:''}</small></div>
+          <button class="rx" onclick="obRm('${k}',${i})">✕</button></div>`).join('')}
+        <button class="radd" onclick="openPicker('${k}')">＋ Adicionar exercício extra</button>
+      </div>`}).join('')}
+    <div class="ob-nav">
+      <button class="ob-btn" onclick="OBSTEP=1;renderOB()">Voltar</button>
+      <button class="ob-btn pri" onclick="obFinish()">Concluir e treinar 🚀</button>
+    </div></div>`;
+}
+function obTgl(g){
+  const i=OBDATA.groups.indexOf(g);
+  if(i>=0){if(OBDATA.groups.length>1)OBDATA.groups.splice(i,1)}
+  else OBDATA.groups.push(g);
+  renderOB();
+}
+function obGen(){OBPROG=generateProgram(OBDATA);OBSTEP=2;renderOB();window.scrollTo({top:0})}
+function obRm(k,i){
+  if(OBPROG[k].ex.length<=2){toast('Deixa pelo menos 2 exercícios no dia');return}
+  OBPROG[k].ex.splice(i,1);renderOB();
+}
+let pickDay=null;
+function openPicker(k){
+  pickDay=k;
+  const used=new Set(OBPROG[k].ex.map(e=>e.id));
+  const rows=g=>Object.keys(E).filter(id=>!used.has(id)&&E[id].cat!=='cardio'&&(g==='all'||E[id].grp===g))
+    .map(id=>`<div class="prow"><div class="rtx"><b>${E[id].name}</b><small>${GRP_LABEL[E[id].grp]} · ${E[id].sets}×${E[id].reps}</small></div>
+      <button class="padd" onclick="obAdd('${id}')">＋</button></div>`).join('')||'<div class="empty">Nada por aqui nesse filtro.</div>';
+  const paint=g=>{
+    $('pickModal').innerHTML=`<h3>Adicionar em ${pickDay} · ${OBPROG[pickDay].label}</h3>
+      <div class="sub">Escolha da biblioteca. O exercício entra com séries e descanso já calibrados.</div>
+      <div class="pchips">${['all',...Object.keys(GRP_LABEL)].map(x=>
+        `<button class="vchip${g===x?' on':''}" data-g="${x}">${x==='all'?'Todos':GRP_LABEL[x]}</button>`).join('')}</div>
+      <div class="pgrid">${rows(g)}</div>
+      <div class="mrow" style="margin-top:12px"><button class="mbtn" onclick="$('pickOv').classList.add('hidden')">Fechar</button></div>`;
+    $('pickModal').querySelectorAll('.pchips .vchip').forEach(b=>b.onclick=()=>paint(b.dataset.g));
+  };
+  paint('all');
+  $('pickOv').classList.remove('hidden');
+}
+$('pickOv').onclick=e=>{if(e.target.id==='pickOv')$('pickOv').classList.add('hidden')};
+function obAdd(id){
+  const x=E[id];
+  const item={id,fig:x.fig,name:x.name,muscle:x.mus,w:x.w||0,bw:!!x.bw,sets:x.sets,reps:x.reps,rest:x.rest,
+    yt:x.yt,steps:x.steps,g:x.g,b:x.b,why:'Extra que você escolheu: '+whyFor(x,5),
+    alts:(x.alts||[]).map(aid=>({id:aid,fig:E[aid].fig,name:E[aid].name,w:E[aid].w,bw:!!E[aid].bw,reps:E[aid].reps,yt:E[aid].yt,steps:E[aid].steps,g:E[aid].g,b:E[aid].b}))};
+  // insere antes de core/cardio pra manter a lógica da ordem
+  const exs=OBPROG[pickDay].ex;
+  let pos=exs.findIndex(e=>{const le=E[e.id];return le&&['core','lomb','cardio'].includes(le.cat)});
+  if(['core','lomb'].includes(x.cat))pos=exs.findIndex(e=>{const le=E[e.id];return le&&le.cat==='cardio'});
+  if(pos<0)pos=exs.length;
+  exs.splice(pos,0,item);
+  $('pickOv').classList.add('hidden');renderOB();toast(x.name+' adicionado em '+pickDay);
+}
+function useDefault(){
+  SETUP={...DEFAULT_SETUP};PROGRAM=generateProgram(SETUP);
+  save('iron_setup',SETUP);save('iron_program',PROGRAM);cloudSync();
+  closeOB();cur='A';render();
+}
+function obFinish(){
+  SETUP={...OBDATA,default:false};PROGRAM=OBPROG;
+  SESSION={};save('iron_session',SESSION);
+  save('iron_setup',SETUP);save('iron_program',PROGRAM);cloudSync();
+  closeOB();cur=Object.keys(PROGRAM)[0];render();
+  confetti();toast('Programa criado! Bora treinar 🚀');
+  if(SB_ON()&&!sbUser)setTimeout(()=>{toast('Dica: crie sua conta no 👤 pra salvar na nuvem')},2600);
+}
 
 /* ============================================================
    ☁️ NUVEM / CONTA DE USUÁRIO (SUPABASE) · OPCIONAL
    Como ativar:
    1) Crie um projeto gratuito em https://supabase.com
-   2) No painel: Settings > API > copie "Project URL" e "anon public"
+   2) No painel: Settings > API > copie "Project URL" e a chave publica
    3) Cole os dois valores aqui embaixo, entre as aspas
    4) Rode o conteúdo do arquivo supabase.sql no SQL Editor
-   (Essa chave anon é pública por design: quem protege os
-    dados são as regras de segurança criadas pelo SQL.)
    ============================================================ */
-const SUPABASE_URL = 'https://vxyicadvizwnmclijofn.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_lRPzAYweHnyvZDktHx5V3A_LTnM8U3D';
+const SUPABASE_URL = '';
+const SUPABASE_ANON_KEY = '';
 
 let sb=null, sbUser=null, syncT=null, authMode='in';
 const SB_ON=()=>SUPABASE_URL.indexOf('https://')===0&&SUPABASE_ANON_KEY.length>20;
 
 async function sbInit(){
-  if(!SB_ON())return;
+  if(!SB_ON()){maybeOnboard();return}
   try{
     await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2');
     sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
@@ -1638,15 +1880,16 @@ async function sbInit(){
     if(sbUser){await cloudPull()}
     sb.auth.onAuthStateChange((_e,s)=>{sbUser=s?s.user:null;paintAcctBtn()});
   }catch(e){}
-  paintAcctBtn();
+  paintAcctBtn();maybeOnboard();
 }
+function maybeOnboard(){if(!SETUP)openWizard(false)}
 function paintAcctBtn(){$('acct').textContent=(sbUser?'☁️':'👤')}
 
-/* ---- sincronização ---- */
+function loadScript(u){return new Promise((ok,err)=>{const s=document.createElement('script');s.src=u;s.onload=ok;s.onerror=err;document.head.appendChild(s)})}
 function cloudSync(){if(!sb||!sbUser)return;clearTimeout(syncT);syncT=setTimeout(cloudPush,1500)}
 async function cloudPush(){
   if(!sb||!sbUser)return;
-  const payload={weights:WEIGHTS,history:HISTORY,variant:VARIANT,session:SESSION,updated:Date.now()};
+  const payload={weights:WEIGHTS,history:HISTORY,variant:VARIANT,session:SESSION,program:PROGRAM,setup:SETUP,updated:Date.now()};
   save('iron_updated',payload.updated);
   try{await sb.from('workout_data').upsert({user_id:sbUser.id,payload,updated_at:new Date().toISOString()})}catch(e){}
 }
@@ -1664,6 +1907,8 @@ async function cloudPull(){
       WEIGHTS={...WEIGHTS,...(p.weights||{})};
       VARIANT={...VARIANT,...(p.variant||{})};
       SESSION={...SESSION,...(p.session||{})};
+      if(p.program){PROGRAM=p.program;save('iron_program',PROGRAM)}
+      if(p.setup){SETUP=p.setup;save('iron_setup',SETUP);closeOB()}
     }
     save('iron_history',HISTORY);save('iron_weights',WEIGHTS);
     save('iron_variant',VARIANT);save('iron_session',SESSION);
@@ -1672,7 +1917,6 @@ async function cloudPull(){
   }catch(e){}
 }
 
-/* ---- UI da conta ---- */
 $('acct').onclick=()=>{renderAcct();$('acctOv').classList.remove('hidden')};
 $('acctOv').onclick=e=>{if(e.target.id==='acctOv')$('acctOv').classList.add('hidden')};
 function closeAcct(){$('acctOv').classList.add('hidden')}
@@ -1686,7 +1930,7 @@ function renderAcct(){
   }
   if(sbUser){
     m.innerHTML=`<h3>☁️ Conectado</h3>
-      <div class="who">${sbUser.email}<small>Seus treinos e cargas sincronizam automaticamente neste e em outros aparelhos onde você entrar.</small></div>
+      <div class="who">${sbUser.email}<small>Seus treinos, cargas e o seu programa personalizado sincronizam automaticamente entre aparelhos.</small></div>
       <div class="mrow">
         <button class="mbtn" onclick="doSignOut()">Sair</button>
         <button class="mbtn pri" onclick="cloudPull().then(closeAcct)">Sincronizar agora</button>
@@ -1735,13 +1979,13 @@ async function doSignOut(){
 }
 
 /* =================== EXPORTAÇÃO (Excel / PDF) =================== */
-function loadScript(u){return new Promise((ok,err)=>{const s=document.createElement('script');s.src=u;s.onload=ok;s.onerror=err;document.head.appendChild(s)})}
 async function ensureXLSX(){if(!window.XLSX)await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js')}
 async function ensurePDF(){
   if(!window.jspdf)await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
   if(!(window.jspdf&&window.jspdf.jsPDF&&window.jspdf.jsPDF.API.autoTable))await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js');
 }
 function vidName(vid){
+  if(E[vid])return E[vid].name;
   for(const k in PROGRAM){for(const ex of PROGRAM[k].ex){
     if(ex.id===vid)return ex.name;
     if(ex.alts){const a=ex.alts.find(x=>x.id===vid);if(a)return a.name}
@@ -1758,7 +2002,7 @@ async function exportXLSX(){
   const s2=[['Data','Treino','Exercício','Carga (kg)']];
   [...HISTORY].reverse().forEach(h=>{if(h.weights)Object.entries(h.weights).forEach(([vid,w])=>s2.push([fmtBR(h.date),h.workout,vidName(vid),w]))});
   const wb=XLSX.utils.book_new();
-  const ws1=XLSX.utils.aoa_to_sheet(s1);ws1['!cols']=[{wch:12},{wch:7},{wch:8},{wch:13},{wch:13},{wch:11}];
+  const ws1=XLSX.utils.aoa_to_sheet(s1);ws1['!cols']=[{wch:12},{wch:7},{wch:16},{wch:13},{wch:13},{wch:11}];
   const ws2=XLSX.utils.aoa_to_sheet(s2);ws2['!cols']=[{wch:12},{wch:7},{wch:30},{wch:11}];
   XLSX.utils.book_append_sheet(wb,ws1,'Sessões');
   XLSX.utils.book_append_sheet(wb,ws2,'Cargas');
@@ -1793,15 +2037,11 @@ async function exportPDF(){
   toast('PDF gerado ✔');
 }
 
-/* install banner */
-const standalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone;
-if(!standalone&&!load('iron_install_off',false))$('install').classList.remove('hidden');
-function dismissInstall(){$('install').classList.add('hidden');save('iron_install_off',true)}
-
 /* =================== INIT =================== */
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'))
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
 $('date').value=todayISO();
+ensureProgram();
 applyTheme();
 render();
 sbInit();
