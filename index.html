@@ -351,6 +351,8 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
   font-size:12px;cursor:pointer}
 /* picker */
 #pickOv{z-index:120}
+#acctOv{z-index:120}
+.brand{cursor:pointer}
 .pick{max-width:420px;max-height:82vh;display:flex;flex-direction:column}
 .pick .pgrid{overflow-y:auto;margin:6px -4px 0;padding:0 4px}
 .pchips{display:flex;gap:7px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
@@ -381,6 +383,43 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
 .hd-row:last-child{border-bottom:none}
 .hd-row span{font-weight:700}
 .hd-row small{color:var(--muted);font-weight:700;white-space:nowrap}
+/* séries com peso individual */
+.prev{margin:6px 17px 2px;font-size:11px;color:var(--muted2);font-weight:700}
+.prev b{color:var(--accent-text);font-weight:800}
+.srows{display:flex;flex-direction:column;gap:7px}
+.srow{display:flex;align-items:center;gap:10px;background:var(--panel2);border:1.5px solid var(--line);
+  border-radius:13px;padding:7px 10px;transition:border-color .2s,background .2s}
+.srow.done{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--panel2))}
+.snum{flex:0 0 24px;height:24px;border-radius:8px;background:var(--panel);border:1px solid var(--line);
+  color:var(--muted);font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center}
+.srow.done .snum{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.swt{flex:1;text-align:center;cursor:text;font-family:'Anton';font-size:19px;line-height:1}
+.swt .u{font-size:10px;color:var(--muted);font-family:'Manrope';font-weight:700;margin-left:3px}
+.swt.bwlab{font-size:13px;color:var(--muted);font-family:'Manrope';font-weight:800;letter-spacing:.04em;text-transform:uppercase;cursor:default}
+.swt input{width:70px;background:var(--panel);border:1.5px solid var(--accent);border-radius:8px;
+  color:var(--ink);font-family:'Anton';font-size:18px;text-align:center;padding:2px}
+.schk{flex:0 0 42px;height:42px;border-radius:12px;border:1.5px solid var(--line);background:var(--panel);
+  color:var(--muted2);font-size:16px;cursor:pointer;transition:.18s}
+.schk.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);transform:scale(1.04)}
+/* modo edição do treino */
+.editrow{margin:0 16px 12px}
+.editbtn{width:100%;border:1.5px dashed var(--line);background:none;color:var(--muted);border-radius:13px;
+  padding:12px;font-family:'Manrope';font-weight:800;font-size:12.5px;cursor:pointer;transition:.2s}
+.editbtn.on{border-style:solid;background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.ebar{display:flex;gap:7px;padding:11px 15px 0}
+.ebtn{border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:10px;
+  padding:9px 11px;font-family:'Manrope';font-weight:800;font-size:12px;cursor:pointer}
+.ebtn:disabled{opacity:.35;cursor:default}
+.ebtn.wide{flex:1}
+.ebtn.danger{color:var(--red);border-color:color-mix(in srgb,var(--red) 35%,var(--line))}
+.radd.big{width:calc(100% - 4px);margin:2px 2px 6px;padding:15px;font-size:13px}
+/* excluir registro do histórico */
+.hdel{width:100%;margin-top:8px;border:1.5px dashed color-mix(in srgb,var(--red) 40%,var(--line));
+  background:none;color:var(--red);border-radius:10px;padding:10px;font-family:'Manrope';
+  font-weight:800;font-size:11.5px;cursor:pointer}
+/* quality floor */
+:where(button,a,input,[onclick]):focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 .hidden{display:none!important}
 </style>
 </head>
@@ -388,7 +427,7 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
 <div class="wrap">
   <header>
     <div class="htop">
-      <div class="brand">
+      <div class="brand" onclick="openWizard(false)" title="Página inicial">
         <div class="logo"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#181818"/></svg></div>
         <div><b>IRON</b><small id="brandSub">Meu treino</small></div>
       </div>
@@ -422,6 +461,7 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
       <button onclick="toggleOrder(this)">🧠 Por que essa ordem? <span class="cv">▾</span></button>
       <div class="bd"><div class="bd-i" id="orderBody"></div></div>
     </div>
+    <div class="editrow"><button class="editbtn" id="editBtn" onclick="toggleEdit()">✎ Editar exercícios deste treino</button></div>
     <div class="list" id="list"></div>
     <div class="fin"><button id="finBtn">Concluir treino</button></div>
   </div>
@@ -1446,8 +1486,18 @@ function activeOf(ex){
 const wOf=a=>WEIGHTS[a.vid]!=null?WEIGHTS[a.vid]:(a.w||0);
 function setsArr(baseId,n){
   if(!SESSION[cur])SESSION[cur]={};
-  if(!SESSION[cur][baseId]||SESSION[cur][baseId].length!==n) SESSION[cur][baseId]=Array(n).fill(false);
-  return SESSION[cur][baseId];
+  let s=SESSION[cur][baseId];
+  if(!s||s.length!==n){s=Array.from({length:n},()=>({d:false,w:null}));SESSION[cur][baseId]=s}
+  else if(typeof s[0]!=='object'||s[0]===null){s=s.map(v=>({d:!!v,w:null}));SESSION[cur][baseId]=s}
+  return s;
+}
+function lastSets(vid,name){
+  for(const h of HISTORY){
+    if(h.items){const it=h.items.find(x=>x.id===vid||x.n===name);
+      if(it)return {sw:it.sw||null,s:it.s,t:it.t,w:it.w!=null?it.w:null}}
+    if(h.weights&&h.weights[vid]!=null)return {sw:null,s:null,t:null,w:h.weights[vid]};
+  }
+  return null;
 }
 function lastW(vid){
   for(const h of HISTORY){if(h.weights&&h.weights[vid]!=null)return h.weights[vid]}
@@ -1495,6 +1545,10 @@ function renderTabs(){
 function renderTrain(){
   const day=PROGRAM[cur];
   $('dintro').textContent=day.intro;
+  const eb=$('editBtn');
+  eb.classList.toggle('on',EDITMODE);
+  eb.textContent=EDITMODE?'✓ Concluir edição':'✎ Editar exercícios deste treino';
+  $('finBtn').parentElement.classList.toggle('hidden',EDITMODE);
   $('orderBody').innerHTML=day.ex.map((ex,i)=>{
     const a=activeOf(ex);
     return `<div class="oi"><div class="n">${i+1}</div><div class="tx"><b>${a.name}${ex.ss?' (superset)':''}</b><span>${ex.why}</span></div></div>`;
@@ -1503,24 +1557,47 @@ function renderTrain(){
   day.ex.forEach((ex,i)=>{
     const a=activeOf(ex);
     const arr=setsArr(ex.id,a.sets);
-    const done=arr.filter(Boolean).length;
+    const done=arr.filter(x=>x.d).length;
     const card=document.createElement('div');
     card.className='card'+(done===a.sets?' done':'');
     card.style.animationDelay=(i*40)+'ms';
     const badges=(ex.ss?'<span class="badge ss">superset</span>':'');
     let vhtml='';
-    if(ex.alts&&ex.alts.length){
+    if(!EDITMODE&&ex.alts&&ex.alts.length){
       const opts=[{id:ex.id,name:ex.name},...ex.alts.map(x=>({id:x.id,name:x.name}))];
       vhtml=`<div class="vars"><span class="vlab">Opções</span>`+opts.map(o=>
         `<button class="vchip${a.vid===o.id?' on':''}" onclick="setVar('${ex.id}','${o.id}')">${o.name}</button>`).join('')+`</div>`;
     }
-    const lw=lastW(a.vid);
+    const ebar=EDITMODE?`<div class="ebar">
+        <button class="ebtn" onclick="progMove(${i},-1)" ${i===0?'disabled':''}>↑</button>
+        <button class="ebtn" onclick="progMove(${i},1)" ${i===day.ex.length-1?'disabled':''}>↓</button>
+        <button class="ebtn wide" onclick="progReplace(${i})">⇄ Substituir</button>
+        <button class="ebtn danger" onclick="progRemove(${i})">Excluir</button>
+      </div>`:'';
+    const base=wOf(a);
+    const prev=lastSets(a.vid,a.name);
+    let prevHtml='';
+    if(!EDITMODE&&prev){
+      if(prev.sw&&prev.sw.length)prevHtml=`<div class="prev">Anterior: <b>${prev.sw.map(fmtW).join(' · ')} kg</b>${prev.s!=null?` (${prev.s}/${prev.t} séries)`:''}</div>`;
+      else if(prev.w!=null)prevHtml=`<div class="prev">Anterior: <b>${fmtW(prev.w)} kg</b></div>`;
+      else if(prev.s!=null)prevHtml=`<div class="prev">Anterior: <b>${prev.s}/${prev.t} séries</b></div>`;
+    }
     const wDisp=a.bw?`<div class="val"><span class="num" style="font-size:19px">Peso corporal</span></div>`:
       `<button onclick="bump('${ex.id}',-2.5)">−</button>
-       <div class="val" onclick="editW(this,'${ex.id}')"><span class="num">${fmtW(wOf(a))}</span><span class="u">kg</span></div>
+       <div class="val" onclick="editW(this,'${ex.id}')"><span class="num">${fmtW(base)}</span><span class="u">kg</span></div>
        <button onclick="bump('${ex.id}',2.5)">+</button>`;
+    const srows=arr.map((s,si)=>{
+      const eff=s.w!=null?s.w:base;
+      const wcell=a.bw?`<div class="swt bwlab">corporal</div>`:
+        `<div class="swt" onclick="editSetW(this,'${ex.id}',${si})">${fmtW(eff)}<span class="u">kg</span></div>`;
+      return `<div class="srow${s.d?' done':''}">
+        <div class="snum">${si+1}</div>${wcell}
+        <button class="schk${s.d?' on':''}" onclick="toggleSet('${ex.id}',${si})">${s.d?'✓':''}</button>
+      </div>`;
+    }).join('');
     card.innerHTML=`
       ${ex.ss?'<div class="ssband"></div>':''}
+      ${ebar}
       <div class="ctop">
         <div class="viz">${FIG[a.fig]||''}</div>
         <div class="cinfo">
@@ -1532,17 +1609,17 @@ function renderTrain(){
           </div>
         </div>
       </div>
-      ${vhtml}
+      ${EDITMODE?'':vhtml+`
       <div class="wt">
         <div class="stp">${wDisp}</div>
         ${a.rest?`<div class="rest" onclick="startRest(${a.rest},'${(a.name||'').replace(/'/g,'')}')">
           <div class="t">${a.rest}s</div><div class="lb">Descanso</div></div>`:
           `<div class="rest" style="opacity:.55"><div class="t">${ex.ss?'SS':'GO'}</div><div class="lb">${ex.ss?'Sem pausa':'Contínuo'}</div></div>`}
       </div>
-      ${(!a.bw&&lw!=null&&lw!==wOf(a))?`<div class="lastw">Último registrado: ${fmtW(lw)} kg</div>`:''}
+      ${prevHtml}
       <div class="sets">
-        <div class="lab"><span>Séries concluídas</span><span>${done}/${a.sets}</span></div>
-        <div class="dots">${arr.map((v,si)=>`<div class="dot${v?' fill':''}" onclick="toggleSet('${ex.id}',${si})"><span>${si+1}</span></div>`).join('')}</div>
+        <div class="lab"><span>Séries e cargas</span><span>${done}/${a.sets}</span></div>
+        <div class="srows">${srows}</div>
       </div>
       <div class="drnote"><span class="ic">🧬</span><p>${ex.why}</p></div>
       <div class="acts">
@@ -1553,16 +1630,22 @@ function renderTrain(){
         <ol>${a.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
         <div class="cue g"><b>✓</b><span>${a.g}</span></div>
         <div class="cue b"><b>✕</b><span>${a.b}</span></div>
-      </div></div>`;
+      </div></div>`}`;
     list.appendChild(card);
   });
+  if(EDITMODE){
+    const ad=document.createElement('button');
+    ad.className='radd big';ad.textContent='＋ Adicionar exercício neste treino';
+    ad.onclick=()=>progAddOpen();
+    list.appendChild(ad);
+  }
   updateProgress();
 }
 function fmtW(n){return Number.isInteger(n)?n:n.toFixed(1).replace('.',',')}
 function updateProgress(){
   const day=PROGRAM[cur];
   let done=0,tot=0;
-  day.ex.forEach(ex=>{const a=activeOf(ex);const arr=setsArr(ex.id,a.sets);done+=arr.filter(Boolean).length;tot+=a.sets});
+  day.ex.forEach(ex=>{const a=activeOf(ex);const arr=setsArr(ex.id,a.sets);done+=arr.filter(x=>x.d).length;tot+=a.sets});
   $('pdone').textContent=done;$('ptot').textContent=tot;
   $('pbar').style.width=(tot?done/tot*100:0)+'%';
   const fb=$('finBtn');
@@ -1587,12 +1670,25 @@ function editW(el,baseId){
 }
 function toggleSet(baseId,si){
   const ex=findBase(baseId);const a=activeOf(ex);const arr=setsArr(baseId,a.sets);
-  arr[si]=!arr[si];save('iron_session',SESSION);cloudSync();
-  const justDone=arr[si];renderTrain();
+  const s=arr[si];
+  s.d=!s.d;
+  if(s.d&&s.w==null&&!a.bw)s.w=wOf(a);
+  save('iron_session',SESSION);cloudSync();
+  const justDone=s.d;renderTrain();
   if(justDone){if(navigator.vibrate)navigator.vibrate(35);
-    const allNow=PROGRAM[cur].ex.every(e=>{const aa=activeOf(e);return setsArr(e.id,aa.sets).every(Boolean)});
+    const allNow=PROGRAM[cur].ex.every(e=>{const aa=activeOf(e);return setsArr(e.id,aa.sets).every(x=>x.d)});
     if(!allNow&&a.rest)startRest(a.rest,a.name);
   }
+}
+function editSetW(el,baseId,si){
+  const ex=findBase(baseId);const a=activeOf(ex);const arr=setsArr(baseId,a.sets);
+  const cur0=arr[si].w!=null?arr[si].w:wOf(a);
+  el.innerHTML=`<input type="number" inputmode="decimal" step="2.5" value="${cur0}">`;
+  const inp=el.querySelector('input');inp.focus();inp.select();
+  const commit=()=>{let v=parseFloat(String(inp.value).replace(',','.'));if(isNaN(v)||v<0)v=cur0;
+    arr[si].w=Math.round(v*10)/10;save('iron_session',SESSION);cloudSync();
+    toast('Série '+(si+1)+': '+fmtW(arr[si].w)+' kg');renderTrain()};
+  inp.onblur=commit;inp.onkeydown=e=>{if(e.key==='Enter')inp.blur()};
 }
 function toggleHow(btn){btn.classList.toggle('op');btn.parentElement.nextElementSibling.classList.toggle('op')}
 function toggleOrder(btn){btn.classList.toggle('op');btn.nextElementSibling.classList.toggle('op')}
@@ -1620,11 +1716,13 @@ $('tx').onclick=()=>{clearInterval(tInt);$('tmr').classList.remove('show')};
 $('finBtn').onclick=()=>{
   const day=PROGRAM[cur];let done=0,tot=0;const snap={};
   day.ex.forEach(ex=>{const a=activeOf(ex);const arr=setsArr(ex.id,a.sets);
-    done+=arr.filter(Boolean).length;tot+=a.sets;
+    done+=arr.filter(x=>x.d).length;tot+=a.sets;
     if(!a.bw)snap[a.vid]=wOf(a)});
   if(done===0){toast('Marca pelo menos uma série antes 😉');return}
   const items=day.ex.map(ex=>{const a=activeOf(ex);const arr=setsArr(ex.id,a.sets);
-    return {n:a.name,s:arr.filter(Boolean).length,t:a.sets,w:a.bw?null:wOf(a)}});
+    const s=arr.filter(x=>x.d).length;
+    const sw=a.bw?null:arr.filter(x=>x.d).map(x=>x.w!=null?x.w:wOf(a));
+    return {id:a.vid,n:a.name,s,t:a.sets,w:a.bw?null:wOf(a),sw}});
   HISTORY.unshift({date:$('date').value||todayISO(),workout:cur,label:day.label,done,tot,weights:snap,items,ts:Date.now()});
   save('iron_history',HISTORY);
   SESSION[cur]={};save('iron_session',SESSION);cloudSync();
@@ -1660,8 +1758,9 @@ function renderProgress(){
     const wk=wkKey(h.date);
     const head=wk!==lastWk?`<div class="wkhead">${wkLabel(wk)}</div>`:'';
     lastWk=wk;
-    const det=h.items?h.items.map(it=>
-      `<div class="hd-row"><span>${it.n}</span><small>${it.s}/${it.t} séries${it.w!=null?' · '+fmtW(it.w)+' kg':''}</small></div>`).join(''):
+    const det=h.items?h.items.map(it=>{
+      const wtx=(it.sw&&it.sw.length)?it.sw.map(fmtW).join(' · ')+' kg':(it.w!=null?fmtW(it.w)+' kg':'');
+      return `<div class="hd-row"><span>${it.n}</span><small>${it.s}/${it.t} séries${wtx?' · '+wtx:''}</small></div>`}).join(''):
       (h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
       `<div class="hd-row"><span>${vidName(vid)}</span><small>${fmtW(w)} kg</small></div>`).join(''):
       '<div class="hd-row"><span>Sem detalhes salvos nesta sessão</span></div>');
@@ -1669,7 +1768,7 @@ function renderProgress(){
       <div class="wk" style="background:${HIST_COLORS[h.workout]||'#F5B301'}">${h.workout}</div>
       <div class="mid"><b>${h.label} · Treino ${h.workout}</b><small>${ds} · ${h.done}/${h.tot} séries</small></div>
       <div class="pct">${pct}%</div><span class="hcv">▾</span></div>
-      <div class="hdetail" id="hd${i}">${det}</div>`;
+      <div class="hdetail" id="hd${i}">${det}<button class="hdel" onclick="delHist(${i})">Excluir este registro</button></div>`;
   }).join(''):'<div class="empty">Nenhum treino registrado ainda.<br>Conclua um treino e ele aparece aqui. 📈</div>';
   const plan=SETUP?`<div class="tip"><div class="ic">📅</div><p><b>Sua semana:</b> ${weekPlan(SETUP)} (${SETUP.freq}x). Nos outros dias, descanso ou caminhada leve.</p></div>`:'';
 
@@ -1699,6 +1798,11 @@ function renderProgress(){
     </div>
     ${LS_OK?'':'<div class="empty" style="color:var(--red)">⚠️ Este ambiente não salva dados entre sessões. Hospede o arquivo (ex: GitHub Pages).</div>'}
   `;
+}
+function delHist(i){
+  if(!confirm('Excluir este registro do histórico?'))return;
+  HISTORY.splice(i,1);save('iron_history',HISTORY);cloudSync();
+  renderProgress();toast('Registro excluído');
 }
 function toggleHist(i){
   const d=$('hd'+i),r=$('hr'+i);
@@ -1770,9 +1874,10 @@ function renderOB(){
         <input class="ob-name" id="obName" placeholder="Seu nome (como quer ser chamado)" value="${OBDATA.name||''}" maxlength="20">
         <div class="ob-cta">
           <button class="ob-btn pri" onclick="obGoForm()">Montar meu treino</button>
-          ${hasData?`<button class="ob-btn" onclick="obUseDefault()">Continuar com meu treino atual (PPL)</button>`:
+          ${SETUP?`<button class="ob-btn" onclick="closeOB()">← Voltar pro meu treino</button>`:
+           hasData?`<button class="ob-btn" onclick="obUseDefault()">Continuar com meu treino atual (PPL)</button>`:
                     `<button class="ob-btn" onclick="obUseDefault()">Usar o programa padrão (PPL)</button>`}
-          ${SB_ON()?`<button class="ob-btn ghost" onclick="closeOB();$('acct').click()">Já tenho conta ☁️</button>`:''}
+          ${SB_ON()&&!sbUser?`<button class="ob-btn ghost" onclick="$('acct').click()">Já tenho conta ☁️ · Entrar</button>`:''}
         </div>
       </div></div>`;
     return;
@@ -1857,16 +1962,27 @@ function obRm(k,i){
   if(OBPROG[k].ex.length<=2){toast('Deixa pelo menos 2 exercícios no dia');return}
   OBPROG[k].ex.splice(i,1);renderOB();
 }
-let pickDay=null;
-function openPicker(k){
-  pickDay=k;
-  const used=new Set(OBPROG[k].ex.map(e=>e.id));
+let PICKCTX=null;
+function buildItem(id,whyTxt){const x=E[id];
+  return {id,fig:x.fig,name:x.name,muscle:x.mus,w:x.w||0,bw:!!x.bw,sets:x.sets,reps:x.reps,rest:x.rest,
+    yt:x.yt,steps:x.steps,g:x.g,b:x.b,why:whyTxt||whyFor(x,5),
+    alts:(x.alts||[]).map(aid=>({id:aid,fig:E[aid].fig,name:E[aid].name,w:E[aid].w,bw:!!E[aid].bw,reps:E[aid].reps,yt:E[aid].yt,steps:E[aid].steps,g:E[aid].g,b:E[aid].b}))};
+}
+function insertPos(arr,cat){
+  let pos=arr.findIndex(e=>{const le=E[e.id];return le&&['core','lomb','cardio'].includes(le.cat)});
+  if(['core','lomb'].includes(cat))pos=arr.findIndex(e=>{const le=E[e.id];return le&&le.cat==='cardio'});
+  return pos<0?arr.length:pos;
+}
+function openLibPicker(ctx){
+  PICKCTX=ctx;
+  const dayEx=ctx.list;
+  const used=new Set(dayEx.map(e=>e.id));
   const rows=g=>Object.keys(E).filter(id=>!used.has(id)&&E[id].cat!=='cardio'&&(g==='all'||E[id].grp===g))
     .map(id=>`<div class="prow"><div class="rtx"><b>${E[id].name}</b><small>${GRP_LABEL[E[id].grp]} · ${E[id].sets}×${E[id].reps}</small></div>
-      <button class="padd" onclick="obAdd('${id}')">＋</button></div>`).join('')||'<div class="empty">Nada por aqui nesse filtro.</div>';
+      <button class="padd" onclick="pickChoose('${id}')">＋</button></div>`).join('')||'<div class="empty">Nada por aqui nesse filtro.</div>';
   const paint=g=>{
-    $('pickModal').innerHTML=`<h3>Adicionar em ${pickDay} · ${OBPROG[pickDay].label}</h3>
-      <div class="sub">Escolha da biblioteca. O exercício entra com séries e descanso já calibrados.</div>
+    $('pickModal').innerHTML=`<h3>${ctx.title}</h3>
+      <div class="sub">${ctx.sub}</div>
       <div class="pchips">${['all',...Object.keys(GRP_LABEL)].map(x=>
         `<button class="vchip${g===x?' on':''}" data-g="${x}">${x==='all'?'Todos':GRP_LABEL[x]}</button>`).join('')}</div>
       <div class="pgrid">${rows(g)}</div>
@@ -1877,18 +1993,57 @@ function openPicker(k){
   $('pickOv').classList.remove('hidden');
 }
 $('pickOv').onclick=e=>{if(e.target.id==='pickOv')$('pickOv').classList.add('hidden')};
-function obAdd(id){
-  const x=E[id];
-  const item={id,fig:x.fig,name:x.name,muscle:x.mus,w:x.w||0,bw:!!x.bw,sets:x.sets,reps:x.reps,rest:x.rest,
-    yt:x.yt,steps:x.steps,g:x.g,b:x.b,why:'Extra que você escolheu: '+whyFor(x,5),
-    alts:(x.alts||[]).map(aid=>({id:aid,fig:E[aid].fig,name:E[aid].name,w:E[aid].w,bw:!!E[aid].bw,reps:E[aid].reps,yt:E[aid].yt,steps:E[aid].steps,g:E[aid].g,b:E[aid].b}))};
-  // insere antes de core/cardio pra manter a lógica da ordem
-  const exs=OBPROG[pickDay].ex;
-  let pos=exs.findIndex(e=>{const le=E[e.id];return le&&['core','lomb','cardio'].includes(le.cat)});
-  if(['core','lomb'].includes(x.cat))pos=exs.findIndex(e=>{const le=E[e.id];return le&&le.cat==='cardio'});
-  if(pos<0)pos=exs.length;
-  exs.splice(pos,0,item);
-  $('pickOv').classList.add('hidden');renderOB();toast(x.name+' adicionado em '+pickDay);
+function pickChoose(id){
+  const ctx=PICKCTX;if(!ctx)return;
+  const item=buildItem(id, ctx.replaceIdx!=null?whyFor(E[id],ctx.replaceIdx):'Extra que você escolheu: '+whyFor(E[id],5));
+  if(ctx.replaceIdx!=null){
+    const old=ctx.list[ctx.replaceIdx];
+    ctx.list.splice(ctx.replaceIdx,1,item);
+    cleanupEx(ctx.dayKey,old.id);
+  }else{
+    ctx.list.splice(insertPos(ctx.list,E[id].cat),0,item);
+  }
+  $('pickOv').classList.add('hidden');
+  if(ctx.mode==='wizard'){renderOB()}
+  else{save('iron_program',PROGRAM);cloudSync();renderTrain()}
+  toast(ctx.replaceIdx!=null?'Substituído por '+item.name:item.name+' adicionado');
+}
+function cleanupEx(dayKey,exId){
+  if(dayKey&&SESSION[dayKey]){delete SESSION[dayKey][exId];save('iron_session',SESSION)}
+  if(VARIANT[exId]!=null){delete VARIANT[exId];save('iron_variant',VARIANT)}
+}
+function openPicker(k){
+  openLibPicker({mode:'wizard',list:OBPROG[k].ex,dayKey:null,replaceIdx:null,
+    title:'Adicionar em '+k+' · '+OBPROG[k].label,
+    sub:'Escolha da biblioteca. O exercício entra com séries e descanso já calibrados.'});
+}
+/* ---- edição do treino atual ---- */
+let EDITMODE=false;
+function toggleEdit(){EDITMODE=!EDITMODE;renderTrain();if(!EDITMODE)toast('Edição salva ✔')}
+function progAddOpen(){
+  openLibPicker({mode:'program',list:PROGRAM[cur].ex,dayKey:cur,replaceIdx:null,
+    title:'Adicionar no Treino '+cur,
+    sub:'O exercício entra na posição certa da ordem, com séries e descanso calibrados.'});
+}
+function progReplace(i){
+  openLibPicker({mode:'program',list:PROGRAM[cur].ex,dayKey:cur,replaceIdx:i,
+    title:'Substituir '+PROGRAM[cur].ex[i].name,
+    sub:'O novo exercício entra na mesma posição do treino.'});
+}
+function progRemove(i){
+  const exs=PROGRAM[cur].ex;
+  if(exs.length<=2){toast('Deixa pelo menos 2 exercícios no treino');return}
+  if(!confirm('Excluir "'+exs[i].name+'" do Treino '+cur+'?'))return;
+  const [rm]=exs.splice(i,1);
+  cleanupEx(cur,rm.id);
+  save('iron_program',PROGRAM);cloudSync();renderTrain();
+  toast(rm.name+' excluído');
+}
+function progMove(i,dir){
+  const exs=PROGRAM[cur].ex;const j=i+dir;
+  if(j<0||j>=exs.length)return;
+  [exs[i],exs[j]]=[exs[j],exs[i]];
+  save('iron_program',PROGRAM);cloudSync();renderTrain();
 }
 function useDefault(){
   SETUP={...DEFAULT_SETUP,name:(OBDATA&&OBDATA.name)||''};PROGRAM=generateProgram(SETUP);
@@ -1912,8 +2067,8 @@ function obFinish(){
    3) Cole os dois valores aqui embaixo, entre as aspas
    4) Rode o conteúdo do arquivo supabase.sql no SQL Editor
    ============================================================ */
-const SUPABASE_URL = 'https://vxyicadvizwnmclijofn.supabase.co/rest/v1/';
-const SUPABASE_ANON_KEY = 'sb_publishable_lRPzAYweHnyvZDktHx5V3A_LTnM8U3D';
+const SUPABASE_URL = '';
+const SUPABASE_ANON_KEY = '';
 
 let sb=null, sbUser=null, syncT=null, authMode='in';
 const SB_ON=()=>SUPABASE_URL.indexOf('https://')===0&&SUPABASE_ANON_KEY.length>20;
@@ -1973,7 +2128,8 @@ function renderAcct(){
   if(!SB_ON()){
     m.innerHTML=`<h3>☁️ Nuvem não configurada</h3>
       <div class="sub">Pra ter conta de usuário e registros salvos na nuvem, siga as instruções do arquivo <b>LEIA-ME.txt</b>: crie um projeto gratuito no Supabase e cole as duas chaves no topo do index.html (busque por SUPABASE_URL).</div>
-      <div class="mrow"><button class="mbtn pri" onclick="closeAcct()">Entendi</button></div>`;
+      <div class="mrow"><button class="mbtn pri" onclick="closeAcct()">Entendi</button></div>
+      <div class="mfoot"><button onclick="closeAcct();openWizard(false)">🏠 Ir para a página inicial</button></div>`;
     return;
   }
   if(sbUser){
@@ -1982,7 +2138,8 @@ function renderAcct(){
       <div class="mrow">
         <button class="mbtn" onclick="doSignOut()">Sair</button>
         <button class="mbtn pri" onclick="cloudPull().then(closeAcct)">Sincronizar agora</button>
-      </div>`;
+      </div>
+      <div class="mfoot"><button onclick="closeAcct();openWizard(false)">🏠 Ir para a página inicial</button></div>`;
     return;
   }
   const isIn=authMode==='in';
@@ -1995,7 +2152,8 @@ function renderAcct(){
       <button class="mbtn pri" id="aGo">${isIn?'Entrar':'Criar conta'}</button>
     </div>
     <div class="merr" id="aErr"></div>
-    <div class="mfoot"><button onclick="authMode='${isIn?'up':'in'}';renderAcct()">${isIn?'Não tem conta? Criar agora':'Já tem conta? Entrar'}</button></div>`;
+    <div class="mfoot"><button onclick="authMode='${isIn?'up':'in'}';renderAcct()">${isIn?'Não tem conta? Criar agora':'Já tem conta? Entrar'}</button></div>
+    <div class="mfoot"><button onclick="closeAcct();openWizard(false)">🏠 Ir para a página inicial</button></div>`;
   $('aGo').onclick=doAuth;
 }
 async function doAuth(){
@@ -2021,9 +2179,16 @@ async function doAuth(){
   }
 }
 async function doSignOut(){
+  if(!confirm('Sair da conta?\n\nOs dados deste aparelho serão limpos para o próximo usuário. Tudo continua salvo na sua conta na nuvem e volta quando você entrar de novo.'))return;
   try{await sb.auth.signOut()}catch(e){}
-  sbUser=null;paintAcctBtn();closeAcct();
-  toast('Você saiu. Dados continuam neste aparelho.');
+  sbUser=null;
+  ['iron_weights','iron_session','iron_history','iron_variant','iron_setup','iron_program','iron_updated'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});
+  WEIGHTS={};SESSION={};HISTORY=[];VARIANT={};SETUP=null;PROGRAM=null;cur='A';
+  ensureProgram();
+  paintAcctBtn();closeAcct();
+  render();
+  openWizard(false);
+  toast('Você saiu. Até a próxima! 👋');
 }
 
 /* =================== EXPORTAÇÃO (Excel / PDF) =================== */
