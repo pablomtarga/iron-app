@@ -290,6 +290,7 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
   border-radius:12px;padding:13px;font-family:'Manrope';font-weight:800;font-size:13px;cursor:pointer}
 .modal .mbtn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .modal .merr{color:var(--red);font-size:12px;font-weight:700;min-height:16px;margin-top:8px}
+.modal .merr.ok{color:var(--green)}
 .modal .mfoot{margin-top:12px;text-align:center}
 .modal .mfoot button{background:none;border:none;color:var(--muted2);font-size:12px;font-weight:700;cursor:pointer}
 .modal .who{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px;
@@ -2067,8 +2068,8 @@ function obFinish(){
    3) Cole os dois valores aqui embaixo, entre as aspas
    4) Rode o conteúdo do arquivo supabase.sql no SQL Editor
    ============================================================ */
-const SUPABASE_URL = 'https://vxyicadvizwnmclijofn.supabase.co/rest/v1/';
-const SUPABASE_ANON_KEY = 'sb_publishable_lRPzAYweHnyvZDktHx5V3A_LTnM8U3D';
+const SUPABASE_URL = '';
+const SUPABASE_ANON_KEY = '';
 
 let sb=null, sbUser=null, syncT=null, authMode='in';
 const SB_ON=()=>SUPABASE_URL.indexOf('https://')===0&&SUPABASE_ANON_KEY.length>20;
@@ -2081,7 +2082,9 @@ async function sbInit(){
     const {data:{session}}=await sb.auth.getSession();
     sbUser=session?session.user:null;
     if(sbUser){await cloudPull()}
-    sb.auth.onAuthStateChange((_e,s)=>{sbUser=s?s.user:null;paintAcctBtn()});
+    sb.auth.onAuthStateChange((ev,s)=>{sbUser=s?s.user:null;paintAcctBtn();
+      if(ev==='PASSWORD_RECOVERY'){authMode='newpass';renderAcct();$('acctOv').classList.remove('hidden');
+        try{history.replaceState(null,'',location.pathname)}catch(e){}}});
   }catch(e){}
   paintAcctBtn();maybeOnboard();
 }
@@ -2132,6 +2135,18 @@ function renderAcct(){
       <div class="mfoot"><button onclick="closeAcct();openWizard(false)">🏠 Ir para a página inicial</button></div>`;
     return;
   }
+  if(authMode==='newpass'){
+    m.innerHTML=`<h3>Criar nova senha</h3>
+      <div class="sub">Você chegou pelo link de redefinição. Escolha sua nova senha (mínimo 6 caracteres).</div>
+      <input type="password" id="aPass" placeholder="Nova senha" autocomplete="new-password">
+      <input type="password" id="aPass2" placeholder="Confirmar nova senha" autocomplete="new-password">
+      <div class="mrow">
+        <button class="mbtn pri" id="aGo" style="flex:1">Salvar nova senha</button>
+      </div>
+      <div class="merr" id="aErr"></div>`;
+    $('aGo').onclick=doNewPass;
+    return;
+  }
   if(sbUser){
     m.innerHTML=`<h3>☁️ Conectado</h3>
       <div class="who">${sbUser.email}<small>Seus treinos, cargas e o seu programa personalizado sincronizam automaticamente entre aparelhos.</small></div>
@@ -2139,7 +2154,21 @@ function renderAcct(){
         <button class="mbtn" onclick="doSignOut()">Sair</button>
         <button class="mbtn pri" onclick="cloudPull().then(closeAcct)">Sincronizar agora</button>
       </div>
+      <div class="mfoot"><button onclick="authMode='newpass';renderAcct()">🔑 Trocar minha senha</button></div>
       <div class="mfoot"><button onclick="closeAcct();openWizard(false)">🏠 Ir para a página inicial</button></div>`;
+    return;
+  }
+  if(authMode==='forgot'){
+    m.innerHTML=`<h3>Redefinir senha</h3>
+      <div class="sub">Digite seu e-mail de cadastro. Vamos enviar um link pra você criar uma senha nova. Abra o link <b>neste mesmo aparelho</b>.</div>
+      <input type="email" id="aEmail" placeholder="Seu e-mail" autocomplete="email">
+      <div class="mrow">
+        <button class="mbtn" onclick="authMode='in';renderAcct()">Cancelar</button>
+        <button class="mbtn pri" id="aGo">Enviar link</button>
+      </div>
+      <div class="merr" id="aErr"></div>
+      <div class="mfoot"><button onclick="authMode='in';renderAcct()">← Voltar pro login</button></div>`;
+    $('aGo').onclick=doForgot;
     return;
   }
   const isIn=authMode==='in';
@@ -2152,6 +2181,7 @@ function renderAcct(){
       <button class="mbtn pri" id="aGo">${isIn?'Entrar':'Criar conta'}</button>
     </div>
     <div class="merr" id="aErr"></div>
+    ${isIn?`<div class="mfoot"><button onclick="authMode='forgot';renderAcct()">Esqueci minha senha</button></div>`:''}
     <div class="mfoot"><button onclick="authMode='${isIn?'up':'in'}';renderAcct()">${isIn?'Não tem conta? Criar agora':'Já tem conta? Entrar'}</button></div>
     <div class="mfoot"><button onclick="closeAcct();openWizard(false)">🏠 Ir para a página inicial</button></div>`;
   $('aGo').onclick=doAuth;
@@ -2176,6 +2206,41 @@ async function doAuth(){
       msg.indexOf('already registered')>=0?'Esse e-mail já tem conta. Use Entrar.':
       'Erro: '+msg;
     $('aGo').textContent=authMode==='in'?'Entrar':'Criar conta';
+  }
+}
+async function doForgot(){
+  const email=$('aEmail').value.trim();
+  const err=$('aErr');err.textContent='';err.classList.remove('ok');
+  if(!email||email.indexOf('@')<1){err.textContent='Digite um e-mail válido.';return}
+  $('aGo').textContent='...';
+  try{
+    const redirect=location.href.split('#')[0].split('?')[0];
+    const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:redirect});
+    if(error)throw error;
+    err.classList.add('ok');
+    err.textContent='Link enviado! Confira seu e-mail (e a caixa de spam) e abra o link neste aparelho.';
+    $('aGo').textContent='Enviar link';
+  }catch(e){
+    const msg=String(e.message||e);
+    err.textContent=msg.indexOf('rate')>=0?'Muitas tentativas. Aguarde alguns minutos.':'Erro: '+msg;
+    $('aGo').textContent='Enviar link';
+  }
+}
+async function doNewPass(){
+  const p1=$('aPass').value,p2=$('aPass2').value;
+  const err=$('aErr');err.textContent='';err.classList.remove('ok');
+  if(p1.length<6){err.textContent='A senha precisa de pelo menos 6 caracteres.';return}
+  if(p1!==p2){err.textContent='As senhas não conferem.';return}
+  $('aGo').textContent='...';
+  try{
+    const {error}=await sb.auth.updateUser({password:p1});
+    if(error)throw error;
+    authMode='in';closeAcct();
+    toast('Senha redefinida ✔ Você já está conectado');
+    paintAcctBtn();await cloudPull();
+  }catch(e){
+    err.textContent='Erro: '+String(e.message||e);
+    $('aGo').textContent='Salvar nova senha';
   }
 }
 async function doSignOut(){
