@@ -182,7 +182,7 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .abtn .cv{color:inherit;transition:.3s;font-size:11px}
 .abtn.op .cv{transform:rotate(180deg)}
 .how{max-height:0;overflow:hidden;transition:max-height .4s ease;margin:0 15px}
-.how.op{max-height:560px;margin-bottom:15px}
+.how.op{max-height:760px;margin-bottom:15px}
 .how-i{padding:2px 0 4px;border-top:1px solid var(--line)}
 .how ol{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:8px;margin:12px 0}
 .how ol li{counter-increment:s;position:relative;padding-left:28px;font-size:13px;line-height:1.5;color:var(--ink);font-weight:500}
@@ -208,6 +208,14 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .stat .k{font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:800;margin-top:4px}
 .week{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;
   margin-bottom:16px;box-shadow:var(--shadow)}
+.wknav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:11px}
+.wknav b{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.wknav button{width:30px;height:30px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);
+  color:var(--ink);font-size:15px;cursor:pointer;padding:0}
+.wknav button:disabled{opacity:.3;cursor:default}
+.wkfoot{margin-top:10px;font-size:10.5px;color:var(--muted2);font-weight:700;text-align:center}
+.day .ball{width:100%;font-family:'Anton';cursor:pointer;padding:0}
+.stat{cursor:pointer;font-family:'Manrope';text-align:center;width:100%}
 .week h4{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800;margin-bottom:11px}
 .days{display:flex;justify-content:space-between;gap:5px}
 .day{flex:1;text-align:center}
@@ -241,7 +249,8 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .tip b{color:var(--ink)}
 
 /* ---------- TIMER ---------- */
-.tmr{position:fixed;left:14px;right:14px;bottom:calc(86px + env(safe-area-inset-bottom));z-index:60;
+body.tmron{padding-top:76px}
+.tmr{position:fixed;left:14px;right:14px;top:calc(8px + env(safe-area-inset-top));z-index:60;
   background:var(--ink);color:var(--bg);border-radius:18px;padding:13px 16px;display:none;
   align-items:center;gap:14px;box-shadow:0 18px 50px -14px rgba(0,0,0,.45);max-width:532px;margin:0 auto}
 html[data-theme=dark] .tmr{background:#fff;color:#111}
@@ -352,6 +361,9 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
   font-size:12px;cursor:pointer}
 /* picker */
 #pickOv{z-index:120}
+#boxOv{z-index:118}
+.modal .mback{background:none;border:none;color:var(--muted);font-family:'Manrope';font-weight:800;font-size:12.5px;cursor:pointer;padding:2px 0 8px}
+.mlist{overflow-y:auto;max-height:56vh;margin:0 -4px;padding:0 4px}
 #acctOv{z-index:120}
 .brand{cursor:pointer}
 .pick{max-width:420px;max-height:82vh;display:flex;flex-direction:column}
@@ -387,65 +399,25 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
 /* séries com peso individual */
 .prev{margin:6px 17px 2px;font-size:11px;color:var(--muted2);font-weight:700}
 .prev b{color:var(--accent-text);font-weight:800}
-.srows{display:flex;flex-direction:column;gap:7px}
-.srow{display:flex;align-items:center;gap:10px;background:var(--panel2);border:1.5px solid var(--line);
-  border-radius:13px;padding:7px 10px;transition:border-color .2s,background .2s}
+.srows{display:flex;flex-direction:column;gap:6px}
+.srow{display:flex;align-items:center;gap:7px;background:var(--panel2);border:1.5px solid var(--line);
+  border-radius:11px;padding:4px 7px;transition:border-color .2s,background .2s}
 .srow.done{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--panel2))}
-.snum{flex:0 0 24px;height:24px;border-radius:8px;background:var(--panel);border:1px solid var(--line);
-  color:var(--muted);font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center}
+.snum{flex:0 0 21px;height:21px;border-radius:7px;background:var(--panel);border:1px solid var(--line);
+  color:var(--muted);font-weight:800;font-size:10.5px;display:flex;align-items:center;justify-content:center}
 .srow.done .snum{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.swt{flex:1;text-align:center;cursor:text;font-family:'Anton';font-size:19px;line-height:1}
-.swt .u{font-size:10px;color:var(--muted);font-family:'Manrope';font-weight:700;margin-left:3px}
-.swt.bwlab{font-size:13px;color:var(--muted);font-family:'Manrope';font-weight:800;letter-spacing:.04em;text-transform:uppercase;cursor:default}
-.swt input{width:70px;background:var(--panel);border:1.5px solid var(--accent);border-radius:8px;
-  color:var(--ink);font-family:'Anton';font-size:18px;text-align:center;padding:2px}
-.schk{flex:0 0 42px;height:42px;border-radius:12px;border:1.5px solid var(--line);background:var(--panel);
-  color:var(--muted2);font-size:16px;cursor:pointer;transition:.18s}
-.schk.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);transform:scale(1.04)}
-/* modo edição do treino */
-.editrow{margin:0 16px 12px}
-.editbtn{width:100%;border:1.5px dashed var(--line);background:none;color:var(--muted);border-radius:13px;
-  padding:12px;font-family:'Manrope';font-weight:800;font-size:12.5px;cursor:pointer;transition:.2s}
-.editbtn.on{border-style:solid;background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.ebar{display:flex;gap:7px;padding:11px 15px 0}
-.ebtn{border:1px solid var(--line);background:var(--panel2);color:var(--ink);border-radius:10px;
-  padding:9px 11px;font-family:'Manrope';font-weight:800;font-size:12px;cursor:pointer}
-.ebtn:disabled{opacity:.35;cursor:default}
-.ebtn.wide{flex:1}
-.ebtn.danger{color:var(--red);border-color:color-mix(in srgb,var(--red) 35%,var(--line))}
-.radd.big{width:calc(100% - 4px);margin:2px 2px 6px;padding:15px;font-size:13px}
-/* excluir registro do histórico */
-.hdel{width:100%;margin-top:8px;border:1.5px dashed color-mix(in srgb,var(--red) 40%,var(--line));
-  background:none;color:var(--red);border-radius:10px;padding:10px;font-family:'Manrope';
-  font-weight:800;font-size:11.5px;cursor:pointer}
-/* quality floor */
-:where(button,a,input,[onclick]):focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
-/* último treino no topo */
-.lastcard{margin:12px 16px 0;background:var(--panel);border:1px solid var(--line);border-radius:16px;
-  box-shadow:var(--shadow);overflow:hidden}
-.lastcard .lhead{display:flex;align-items:center;gap:11px;padding:12px 14px;cursor:pointer;width:100%;
-  background:none;border:none;text-align:left;font-family:'Manrope';color:var(--ink)}
-.lastcard .lbadge{flex:0 0 36px;height:36px;border-radius:11px;display:flex;align-items:center;
-  justify-content:center;font-family:'Anton';font-size:17px;color:#181818}
-.lastcard .ltx{flex:1;min-width:0}
-.lastcard .ltx .lk{display:block;font-size:9px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--muted2);font-weight:800}
-.lastcard .ltx b{display:block;font-size:13.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lastcard .ltx small{color:var(--muted);font-size:11px;font-weight:700}
-.lastcard .lcv{color:var(--accent-text);font-size:12px;transition:.3s}
-.lastcard .lhead.op .lcv{transform:rotate(180deg)}
-.lastcard .lbody{max-height:0;overflow:hidden;transition:max-height .4s ease}
-.lastcard .lbody.op{max-height:1200px}
-.lastcard .lbody-i{padding:2px 14px 12px;border-top:1px solid var(--line)}
-.lastcard .lrow{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
-  padding:8px 0;border-bottom:1px dashed var(--line)}
-.lastcard .lrow:last-child{border-bottom:none}
-.lastcard .lrow span{font-size:12.5px;font-weight:700;min-width:0}
-.lastcard .lrow small{color:var(--muted);font-size:11px;font-weight:700;white-space:nowrap;text-align:right}
-/* hint de carga anterior em cada série */
-.scell{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;min-width:0}
-.sant{font-size:9.5px;color:var(--muted2);font-weight:700;letter-spacing:.02em}
+.sstep{flex:0 0 30px;height:30px;border-radius:9px;border:1px solid var(--line);background:var(--panel);
+  color:var(--ink);font-size:16px;font-weight:700;line-height:1;cursor:pointer;padding:0}
+.sstep:active{background:var(--line)}
+.swt{flex:1;text-align:center;cursor:text;font-family:'Anton';font-size:17px;line-height:1;min-width:0}
+.swt .u{font-size:9.5px;color:var(--muted);font-family:'Manrope';font-weight:700;margin-left:2px}
+.swt.bwlab{font-size:11.5px;color:var(--muted);font-family:'Manrope';font-weight:800;text-transform:uppercase;cursor:default}
+.swt input{width:62px;background:var(--panel);border:1.5px solid var(--accent);border-radius:7px;
+  color:var(--ink);font-family:'Anton';font-size:16px;text-align:center;padding:1px}
+.schk{flex:0 0 34px;height:34px;border-radius:10px;border:1.5px solid var(--line);background:var(--panel);
+  color:var(--muted2);font-size:14px;cursor:pointer;transition:.18s;padding:0}
+.schk.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.sant{font-size:9px;color:var(--muted2);font-weight:700;letter-spacing:.02em}
 /* alerta de treino em aberto */
 .alertc{margin:12px 16px 0;background:color-mix(in srgb,var(--warn) 9%,var(--panel));
   border:1.5px solid color-mix(in srgb,var(--warn) 42%,var(--line));border-radius:16px;
@@ -465,6 +437,17 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
   text-transform:uppercase;padding:3px 7px;border-radius:6px;margin-top:3px}
 .lastcard .ldone.full{background:color-mix(in srgb,var(--green) 15%,transparent);color:var(--green)}
 .lastcard .ldone.part{background:color-mix(in srgb,var(--warn) 15%,transparent);color:var(--warn)}
+/* quadros de posição no passo a passo */
+.frames{display:flex;gap:8px;margin:12px 0 4px}
+.frm{flex:1;text-align:center}
+.frz{border-radius:12px;background:radial-gradient(120% 120% at 35% 12%,var(--viz1),var(--viz2));
+  overflow:hidden;aspect-ratio:1.2/1}
+.frz svg{width:100%;height:100%}
+.frz.f0 svg *,.frz.f1 svg *{animation-play-state:paused!important;animation-duration:2s!important}
+.frz.f0 svg *{animation-delay:0s!important}
+.frz.f1 svg *{animation-delay:-1s!important}
+.frm span{display:block;font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted2);margin-top:5px}
 .hidden{display:none!important}
 </style>
 </head>
@@ -490,12 +473,6 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
   </header>
   <div id="alertCard"></div>
   <div id="lastCard"></div>
-
-  <div class="install hidden" id="install">
-    <span class="ic">📲</span>
-    <p><b>Instale como app:</b> no iPhone, abra no Safari, toque em Compartilhar e depois em <b>Adicionar à Tela de Início</b>. No Android: menu ⋮ e <b>Instalar app</b>.</p>
-    <button onclick="dismissInstall()">✕</button>
-  </div>
 
   <div id="trainView">
     <nav class="tabs" id="tabs"></nav>
@@ -535,6 +512,7 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
 </nav>
 
 <div class="modal-ov hidden" id="acctOv"><div class="modal" id="acctModal"></div></div>
+<div class="modal-ov hidden" id="boxOv"><div class="modal pick" id="boxModal"></div></div>
 <div class="modal-ov hidden" id="pickOv"><div class="modal pick" id="pickModal"></div></div>
 <div id="ob" class="hidden"></div>
 
@@ -1264,6 +1242,145 @@ FIG.rower=`<svg viewBox="0 0 120 100"><style>
  <line x1="76" y1="62" x2="88" y2="74" stroke-width="8"/>
 </g>
 </svg>`;
+
+
+/* ===== figuras específicas (variações) ===== */
+// Desenvolvimento com halteres (sentado)
+FIG.dbshoulder=`<svg viewBox="0 0 120 100"><style>
+ .ds-l{transform-origin:50px 46px;animation:dsl 2s infinite ease-in-out}
+ .ds-r{transform-origin:70px 46px;animation:dsr 2s infinite ease-in-out}
+ @keyframes dsl{0%,100%{transform:rotate(0deg) translateY(0)}50%{transform:rotate(14deg) translateY(-13px)}}
+ @keyframes dsr{0%,100%{transform:rotate(0deg) translateY(0)}50%{transform:rotate(-14deg) translateY(-13px)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="#2a2a2a" stroke-width="3"/>
+<rect x="50" y="72" width="20" height="7" rx="2" fill="#2c2c2c"/>
+<rect x="56" y="40" width="8" height="34" rx="3" fill="#2c2c2c"/>
+<g fill="none" stroke="#FFD633" stroke-linecap="round">
+ <line x1="60" y1="42" x2="60" y2="72" stroke-width="13"/>
+ <g class="ds-l"><line x1="50" y1="46" x2="46" y2="30" stroke-width="7"/>
+  <g transform="translate(46,28)"><rect x="-9" y="-3" width="18" height="6" rx="2" fill="#444"/><rect x="-10" y="-6" width="5" height="12" rx="1.5" fill="#666"/><rect x="5" y="-6" width="5" height="12" rx="1.5" fill="#666"/></g></g>
+ <g class="ds-r"><line x1="70" y1="46" x2="74" y2="30" stroke-width="7"/>
+  <g transform="translate(74,28)"><rect x="-9" y="-3" width="18" height="6" rx="2" fill="#444"/><rect x="-10" y="-6" width="5" height="12" rx="1.5" fill="#666"/><rect x="5" y="-6" width="5" height="12" rx="1.5" fill="#666"/></g></g>
+</g>
+<circle cx="60" cy="30" r="8" fill="#FFD633"/>
+</svg>`;
+// Rosca martelo (pegada neutra)
+FIG.hammer=`<svg viewBox="0 0 120 100"><style>
+ .hm-l{transform-origin:48px 52px;animation:hml 1.9s infinite ease-in-out}
+ .hm-r{transform-origin:72px 52px;animation:hmr 1.9s infinite ease-in-out}
+ @keyframes hml{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-112deg)}}
+ @keyframes hmr{0%,100%{transform:rotate(0deg)}50%{transform:rotate(112deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="#2a2a2a" stroke-width="3"/>
+<g fill="none" stroke="#FFD633" stroke-linecap="round">
+ <line x1="60" y1="40" x2="60" y2="64" stroke-width="13"/>
+ <line x1="56" y1="64" x2="52" y2="90" stroke-width="9"/>
+ <line x1="64" y1="64" x2="68" y2="90" stroke-width="9"/>
+ <line x1="50" y1="46" x2="48" y2="52" stroke-width="7"/>
+ <line x1="70" y1="46" x2="72" y2="52" stroke-width="7"/>
+ <g class="hm-l"><line x1="48" y1="52" x2="46" y2="70" stroke-width="6"/>
+   <g transform="translate(46,72) rotate(90)"><rect x="-8" y="-2.5" width="16" height="5" rx="2" fill="#444"/><rect x="-9" y="-5" width="4.5" height="10" rx="1.5" fill="#666"/><rect x="4.5" y="-5" width="4.5" height="10" rx="1.5" fill="#666"/></g></g>
+ <g class="hm-r"><line x1="72" y1="52" x2="74" y2="70" stroke-width="6"/>
+   <g transform="translate(74,72) rotate(90)"><rect x="-8" y="-2.5" width="16" height="5" rx="2" fill="#444"/><rect x="-9" y="-5" width="4.5" height="10" rx="1.5" fill="#666"/><rect x="4.5" y="-5" width="4.5" height="10" rx="1.5" fill="#666"/></g></g>
+</g>
+<circle cx="60" cy="30" r="8" fill="#FFD633"/>
+</svg>`;
+// Crucifixo inverso com halteres (tronco inclinado)
+FIG.revflybent=`<svg viewBox="0 0 120 100"><style>
+ .rb-l{transform-origin:56px 50px;animation:rbl 2.2s infinite ease-in-out}
+ .rb-r{transform-origin:64px 50px;animation:rbr 2.2s infinite ease-in-out}
+ @keyframes rbl{0%,100%{transform:rotate(0deg)}50%{transform:rotate(62deg)}}
+ @keyframes rbr{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-62deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="#2a2a2a" stroke-width="3"/>
+<g fill="none" stroke="#FFD633" stroke-linecap="round">
+ <line x1="60" y1="48" x2="60" y2="70" stroke-width="9"/>
+ <line x1="58" y1="70" x2="52" y2="90" stroke-width="9"/>
+ <line x1="62" y1="70" x2="70" y2="90" stroke-width="9"/>
+ <line x1="34" y1="44" x2="60" y2="50" stroke-width="12"/>
+ <g class="rb-l"><line x1="56" y1="50" x2="50" y2="70" stroke-width="6"/>
+  <g transform="translate(49,72)"><rect x="-8" y="-2.5" width="16" height="5" rx="2" fill="#444"/><rect x="-9" y="-5" width="4.5" height="10" rx="1.5" fill="#666"/><rect x="4.5" y="-5" width="4.5" height="10" rx="1.5" fill="#666"/></g></g>
+ <g class="rb-r"><line x1="64" y1="50" x2="70" y2="70" stroke-width="6"/>
+  <g transform="translate(71,72)"><rect x="-8" y="-2.5" width="16" height="5" rx="2" fill="#444"/><rect x="-9" y="-5" width="4.5" height="10" rx="1.5" fill="#666"/><rect x="4.5" y="-5" width="4.5" height="10" rx="1.5" fill="#666"/></g></g>
+</g>
+<circle cx="27" cy="42" r="8" fill="#FFD633"/>
+</svg>`;
+// Abdução com elástico (mini band)
+FIG.bandabd=`<svg viewBox="0 0 120 100"><style>
+ .ba-l{transform-origin:60px 56px;animation:bal 2s infinite ease-in-out}
+ .ba-r{transform-origin:60px 56px;animation:bar 2s infinite ease-in-out}
+ .ba-b{animation:bab 2s infinite ease-in-out}
+ @keyframes bal{0%,100%{transform:rotate(0deg)}50%{transform:rotate(24deg)}}
+ @keyframes bar{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-24deg)}}
+ @keyframes bab{0%,100%{transform:scaleX(1)}50%{transform:scaleX(1.5)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="#2a2a2a" stroke-width="3"/>
+<rect x="48" y="56" width="24" height="8" rx="2" fill="#2c2c2c"/>
+<g fill="none" stroke="#FFD633" stroke-linecap="round">
+ <line x1="60" y1="34" x2="60" y2="56" stroke-width="13"/>
+ <g class="ba-l"><line x1="60" y1="56" x2="50" y2="84" stroke-width="9"/></g>
+ <g class="ba-r"><line x1="60" y1="56" x2="70" y2="84" stroke-width="9"/></g>
+</g>
+<g class="ba-b" style="transform-origin:60px 74px">
+ <rect x="46" y="70" width="28" height="7" rx="3.5" fill="none" stroke="#8AC7FF" stroke-width="3"/>
+</g>
+<circle cx="60" cy="24" r="8" fill="#FFD633"/>
+</svg>`;
+// Adução na polia (em pé, uma perna)
+FIG.cableadd=`<svg viewBox="0 0 120 100"><style>
+ .ca-l{transform-origin:62px 58px;animation:cal 2.1s infinite ease-in-out}
+ .ca-c{animation:cac 2.1s infinite ease-in-out}
+ @keyframes cal{0%,100%{transform:rotate(26deg)}50%{transform:rotate(-6deg)}}
+ @keyframes cac{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.72)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="#2a2a2a" stroke-width="3"/>
+<rect x="8" y="20" width="9" height="72" rx="2" fill="#1c1c1c" stroke="#3a3a3a" stroke-width="1.5"/>
+<g class="ca-c" style="transform-origin:17px 86px"><line x1="17" y1="86" x2="50" y2="86" stroke="#7a7a7a" stroke-width="2"/></g>
+<g fill="none" stroke="#FFD633" stroke-linecap="round">
+ <line x1="62" y1="34" x2="62" y2="58" stroke-width="13"/>
+ <line x1="64" y1="58" x2="68" y2="90" stroke-width="9"/>
+ <g class="ca-l"><line x1="62" y1="58" x2="50" y2="86" stroke-width="8"/></g>
+</g>
+<circle cx="62" cy="24" r="8" fill="#FFD633"/>
+</svg>`;
+// Panturrilha unilateral com halter
+FIG.dbcalf=`<svg viewBox="0 0 120 100"><style>
+ .dc{animation:dc 1.6s infinite ease-in-out}
+ @keyframes dc{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+</style>
+<line x1="6" y1="90" x2="114" y2="90" stroke="#2a2a2a" stroke-width="3"/>
+<rect x="44" y="84" width="34" height="6" rx="1" fill="#2c2c2c"/>
+<g class="dc">
+ <g fill="none" stroke="#FFD633" stroke-linecap="round">
+  <line x1="58" y1="38" x2="58" y2="60" stroke-width="13"/>
+  <line x1="58" y1="60" x2="58" y2="84" stroke-width="10"/>
+  <line x1="66" y1="44" x2="72" y2="62" stroke-width="6"/>
+ </g>
+ <circle cx="58" cy="28" r="8" fill="#FFD633"/>
+ <g transform="translate(73,66) rotate(90)"><rect x="-9" y="-3" width="18" height="6" rx="2" fill="#444"/><rect x="-10" y="-6" width="5" height="12" rx="1.5" fill="#666"/><rect x="5" y="-6" width="5" height="12" rx="1.5" fill="#666"/></g>
+ <line x1="52" y1="44" x2="42" y2="52" stroke="#FFD633" stroke-width="6" stroke-linecap="round"/>
+</g>
+<rect x="36" y="30" width="5" height="60" rx="2" fill="#444"/>
+</svg>`;
+// Remada aberta (frente)
+FIG.widerow=`<svg viewBox="0 0 120 100"><style>
+ .wr-l{transform-origin:50px 48px;animation:wrl 2.1s infinite ease-in-out}
+ .wr-r{transform-origin:70px 48px;animation:wrr 2.1s infinite ease-in-out}
+ .wr-b{animation:wrb 2.1s infinite ease-in-out}
+ @keyframes wrl{0%,100%{transform:rotate(-58deg)}50%{transform:rotate(-6deg)}}
+ @keyframes wrr{0%,100%{transform:rotate(58deg)}50%{transform:rotate(6deg)}}
+ @keyframes wrb{0%,100%{transform:translateX(0)}50%{transform:translateX(0) scaleY(1)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="#2a2a2a" stroke-width="3"/>
+<rect x="52" y="74" width="16" height="7" rx="2" fill="#2c2c2c"/>
+<g fill="none" stroke="#FFD633" stroke-linecap="round">
+ <line x1="60" y1="42" x2="60" y2="74" stroke-width="13"/>
+ <g class="wr-l"><line x1="50" y1="48" x2="34" y2="56" stroke-width="7"/></g>
+ <g class="wr-r"><line x1="70" y1="48" x2="86" y2="56" stroke-width="7"/></g>
+</g>
+<rect x="30" y="52" width="60" height="5" rx="2" fill="#444" class="wr-b"/>
+<circle cx="60" cy="32" r="8" fill="#FFD633"/>
+</svg>`;
 </script>
 <script>
 /* =================== ACENTOS =================== */
@@ -1295,7 +1412,7 @@ const E={
  shoulderpress:{name:'Shoulder Press',fig:'shoulderpress',grp:'shoulders',mus:'Ombro',cat:'comp',w:20,sets:3,reps:'8–12',rest:90,yt:'shoulder press machine form shorts',
   steps:['Costas apoiadas, pegada na largura do ombro','Empurre pra cima sem travar o cotovelo','Pare antes de encostar as mãos no topo','Desça até os cotovelos na linha do ombro'],
   g:'Core firme pra não arquear a lombar.',b:'Não jogue a cabeça à frente ao empurrar.',alts:['dbshoulder']},
- dbshoulder:{name:'Desenvolvimento Halteres',fig:'shoulderpress',grp:'shoulders',mus:'Ombro',cat:'comp',w:10,sets:3,reps:'8–12',rest:90,yt:'seated dumbbell shoulder press form shorts',
+ dbshoulder:{name:'Desenvolvimento Halteres',fig:'dbshoulder',grp:'shoulders',mus:'Ombro',cat:'comp',w:10,sets:3,reps:'8–12',rest:90,yt:'seated dumbbell shoulder press form shorts',
   steps:['Sentado com encosto, halteres na altura da orelha','Empurre pra cima até quase juntar','Desça controlado até a linha da orelha','Antebraço sempre vertical'],
   g:'Encosto levemente inclinado protege a lombar.',b:'Não arquee as costas pra empurrar.',alts:['shoulderpress']},
  sidelat:{name:'Elevação Lateral (halteres)',fig:'lateralraisedb',grp:'shoulders',mus:'Deltóide lateral',cat:'iso',w:8,sets:3,reps:'12–15',rest:45,yt:'dumbbell lateral raise form shorts',
@@ -1307,7 +1424,7 @@ const E={
  reversefly:{name:'Crucifixo Inverso',fig:'reversefly',grp:'shoulders',mus:'Deltóide posterior',cat:'iso',w:5,sets:3,reps:'12–15',rest:45,yt:'reverse pec deck form shorts',
   steps:['Peito no apoio, braços à frente','Abra os braços pra trás em arco','Aperte a parte de trás do ombro','Volte devagar controlando'],
   g:'Carga leve e foco: é um músculo pequeno.',b:'Não dobre muito o cotovelo (vira remada).',alts:['dbrevfly']},
- dbrevfly:{name:'Crucifixo Inverso (halteres)',fig:'reversefly',grp:'shoulders',mus:'Deltóide posterior',cat:'iso',w:4,sets:3,reps:'12–15',rest:45,yt:'bent over reverse fly dumbbell form shorts',
+ dbrevfly:{name:'Crucifixo Inverso (halteres)',fig:'revflybent',grp:'shoulders',mus:'Deltóide posterior',cat:'iso',w:4,sets:3,reps:'12–15',rest:45,yt:'bent over reverse fly dumbbell form shorts',
   steps:['Tronco inclinado à frente, costas retas','Abra os halteres pros lados','Aperte as escápulas no topo','Desça sem balançar'],
   g:'Tronco parado: só o braço se move.',b:'Não levante o tronco a cada repetição.',alts:['reversefly']},
  facepullv:{name:'Face Pull',fig:'facepull',grp:'shoulders',mus:'Posterior + postura',cat:'iso',w:10,sets:3,reps:'12–15',rest:45,yt:'face pull form shorts',
@@ -1322,7 +1439,7 @@ const E={
  biceps:{name:'Rosca Direta (barra)',fig:'biceps',grp:'arms',mus:'Bíceps',cat:'iso',w:12.5,sets:3,reps:'10–12',rest:60,yt:'barbell curl form shorts',
   steps:['Em pé, cotovelos colados ao tronco','Suba a barra contraindo o bíceps','Não balance o corpo','Desça controlado até estender'],
   g:'A descida lenta é onde mora o ganho.',b:'Não use impulso de quadril pra subir.',alts:['hammer']},
- hammer:{name:'Rosca Martelo (halteres)',fig:'biceps',grp:'arms',mus:'Bíceps + braquial',cat:'iso',w:8,sets:3,reps:'10–12',rest:60,yt:'hammer curl form shorts',
+ hammer:{name:'Rosca Martelo (halteres)',fig:'hammer',grp:'arms',mus:'Bíceps + braquial',cat:'iso',w:8,sets:3,reps:'10–12',rest:60,yt:'hammer curl form shorts',
   steps:['Halteres com pegada neutra (palmas se olhando)','Suba sem girar o punho','Cotovelo fixo ao lado do corpo','Desça controlado'],
   g:'Pega também o braquial: braço mais grosso.',b:'Não deixe o cotovelo ir à frente.',alts:['biceps']},
  latpull:{name:'Lat Pulldown',fig:'latpull',grp:'back',mus:'Dorsal',cat:'comp',w:31,sets:4,reps:'8–12',rest:90,yt:'lat pulldown form shorts',
@@ -1334,7 +1451,7 @@ const E={
  seatedrow:{name:'Remada Sentada (triângulo)',fig:'seatedrow',grp:'back',mus:'Costas (espessura)',cat:'comp',w:20,sets:3,reps:'10–12',rest:75,yt:'seated cable row form shorts',
   steps:['Joelhos levemente dobrados, coluna ereta','Puxe o triângulo em direção ao umbigo','Aperte as escápulas no fim','Volte estendendo os braços sem curvar a lombar'],
   g:'Cotovelos passam rente ao corpo.',b:'Não arredonde as costas ao voltar.',alts:['widerow']},
- widerow:{name:'Remada Aberta na Polia',fig:'seatedrow',grp:'back',mus:'Costas (espessura)',cat:'comp',w:17.5,sets:3,reps:'10–12',rest:75,yt:'wide grip seated cable row form shorts',
+ widerow:{name:'Remada Aberta na Polia',fig:'widerow',grp:'back',mus:'Costas (espessura)',cat:'comp',w:17.5,sets:3,reps:'10–12',rest:75,yt:'wide grip seated cable row form shorts',
   steps:['Barra reta, pegada aberta','Puxe em direção à base do peito','Cotovelos abertos na linha do ombro','Volte controlado'],
   g:'Pegada aberta muda o foco pro meio das costas e posterior.',b:'Não encolha os ombros ao puxar.',alts:['seatedrow']},
  lowrow:{name:'Upper Back / Low Row',fig:'lowrow',grp:'back',mus:'Costas (detalhe)',cat:'iso',w:17.5,sets:3,reps:'12',rest:60,yt:'chest supported row machine form shorts',
@@ -1367,19 +1484,19 @@ const E={
  abductor:{name:'Cadeira Abdutora',fig:'abductor',grp:'glutes',mus:'Glúteo médio',cat:'iso',w:35,sets:3,reps:'15',rest:45,yt:'hip abduction machine form shorts',
   steps:['Sentado, joelhos contra as almofadas externas','Abra as pernas contra a resistência','Aperte 1s na abertura máxima','Volte devagar'],
   g:'Tronco levemente à frente recruta mais glúteo.',b:'Não use balanço pra abrir.',alts:['bandabd']},
- bandabd:{name:'Abdução com Mini Band',fig:'abductor',grp:'glutes',mus:'Glúteo médio',cat:'iso',bw:true,sets:3,reps:'15–20',rest:45,yt:'banded hip abduction form shorts',
+ bandabd:{name:'Abdução com Mini Band',fig:'bandabd',grp:'glutes',mus:'Glúteo médio',cat:'iso',bw:true,sets:3,reps:'15–20',rest:45,yt:'banded hip abduction form shorts',
   steps:['Elástico acima dos joelhos','Sentado ou deitado de lado, abra os joelhos','Segure 1s aberto','Volte com controle'],
   g:'Ótima opção se a máquina estiver ocupada.',b:'Não deixe o elástico fechar rápido.',alts:['abductor']},
  adductor:{name:'Cadeira Adutora',fig:'adductor',grp:'glutes',mus:'Adutores',cat:'iso',w:10,sets:3,reps:'15',rest:45,yt:'hip adduction machine form shorts',
   steps:['Almofadas na parte interna das coxas','Feche as pernas juntando','Segure 1s fechado','Volte controlado abrindo'],
   g:'Combina bem em superset com a abdutora.',b:'Não force amplitude que machuque a virilha.',alts:['cableadd']},
- cableadd:{name:'Adução na Polia',fig:'adductor',grp:'glutes',mus:'Adutores',cat:'iso',w:5,sets:3,reps:'15',rest:45,yt:'cable hip adduction form shorts',
+ cableadd:{name:'Adução na Polia',fig:'cableadd',grp:'glutes',mus:'Adutores',cat:'iso',w:5,sets:3,reps:'15',rest:45,yt:'cable hip adduction form shorts',
   steps:['Tornozeleira na perna de dentro','Cruze a perna à frente da outra','Segure 1s e volte devagar','Troque o lado'],
   g:'Segure em algo pra equilibrar.',b:'Não incline o tronco pra compensar.',alts:['adductor']},
  calf:{name:'Panturrilha (máquina)',fig:'calf',grp:'calf',mus:'Panturrilha',cat:'calf',w:60,sets:4,reps:'15–20',rest:45,yt:'calf raise machine form shorts',
   steps:['Ponta dos pés na plataforma','Suba o máximo na ponta do pé','Pausa 1s no topo','Desça alongando bem a panturrilha'],
   g:'Amplitude total: desce bem, sobe bem.',b:'Não faça repetições curtas e rápidas demais.',alts:['dbcalf']},
- dbcalf:{name:'Panturrilha c/ Halter (degrau)',fig:'calf',grp:'calf',mus:'Panturrilha',cat:'calf',w:16,sets:4,reps:'12–15 / perna',rest:45,yt:'standing dumbbell calf raise form shorts',
+ dbcalf:{name:'Panturrilha c/ Halter (degrau)',fig:'dbcalf',grp:'calf',mus:'Panturrilha',cat:'calf',w:16,sets:4,reps:'12–15 / perna',rest:45,yt:'standing dumbbell calf raise form shorts',
   steps:['Ponta do pé num degrau, halter na mão do mesmo lado','Suba na ponta o máximo que der','Pausa 1s no topo','Desça alongando abaixo do degrau'],
   g:'Uma perna por vez aumenta a intensidade.',b:'Não faça pela metade.',alts:['calf']},
  lowerback:{name:'Extensão Lombar',fig:'lowerback',grp:'core',mus:'Lombar',cat:'lomb',bw:true,sets:3,reps:'12–15',rest:45,yt:'back extension form shorts',
@@ -1640,6 +1757,7 @@ function renderLastCard(){
   </div>`;
 }
 let LASTOPEN=true;
+let WEEKOFF=0;
 function toggleLast(btn){
   LASTOPEN=!LASTOPEN;
   btn.classList.toggle('op',LASTOPEN);
@@ -1705,11 +1823,13 @@ function renderTrain(){
     const srows=arr.map((s,si)=>{
       const eff=s.w!=null?s.w:base;
       const pv=(psw&&psw[si]!=null)?psw[si]:null;
-      const hint=(!a.bw&&pv!=null)?`<div class="sant">anterior ${fmtW(pv)} kg</div>`:'';
-      const wcell=a.bw?`<div class="scell"><div class="swt bwlab">corporal</div></div>`:
-        `<div class="scell"><div class="swt" onclick="editSetW(this,'${ex.id}',${si})">${fmtW(eff)}<span class="u">kg</span></div>${hint}</div>`;
+      const hint=(!a.bw&&pv!=null)?`<div class="sant">ant. ${fmtW(pv)}</div>`:'';
+      const mid=a.bw?`<div class="scell"><div class="swt bwlab">corporal</div></div>`:
+        `<button class="sstep" onclick="bumpSet('${ex.id}',${si},-2.5)">−</button>
+         <div class="scell"><div class="swt" onclick="editSetW(this,'${ex.id}',${si})">${fmtW(eff)}<span class="u">kg</span></div>${hint}</div>
+         <button class="sstep" onclick="bumpSet('${ex.id}',${si},2.5)">+</button>`;
       return `<div class="srow${s.d?' done':''}">
-        <div class="snum">${si+1}</div>${wcell}
+        <div class="snum">${si+1}</div>${mid}
         <button class="schk${s.d?' on':''}" onclick="toggleSet('${ex.id}',${si})">${s.d?'✓':''}</button>
       </div>`;
     }).join('');
@@ -1745,6 +1865,11 @@ function renderTrain(){
         <button class="abtn" onclick="toggleHow(this)">Passo a passo <span class="cv">▾</span></button>
       </div>
       <div class="how"><div class="how-i">
+        <div class="frames">
+          <div class="frm"><div class="frz f0">${FIG[a.fig]||''}</div><span>Início</span></div>
+          <div class="frm"><div class="frz f1">${FIG[a.fig]||''}</div><span>Fim</span></div>
+          <div class="frm"><div class="frz">${FIG[a.fig]||''}</div><span>Movimento</span></div>
+        </div>
         <ol>${a.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
         <div class="cue g"><b>✓</b><span>${a.g}</span></div>
         <div class="cue b"><b>✕</b><span>${a.b}</span></div>
@@ -1799,6 +1924,13 @@ function toggleSet(baseId,si){
     if(!allNow&&a.rest)startRest(a.rest,a.name);
   }
 }
+function bumpSet(baseId,si,delta){
+  const ex=findBase(baseId);const a=activeOf(ex);const arr=setsArr(baseId,a.sets);
+  const cur0=arr[si].w!=null?arr[si].w:wOf(a);
+  let v=cur0+delta;if(v<0)v=0;
+  arr[si].w=Math.round(v*10)/10;
+  save('iron_session',SESSION);cloudSync();renderTrain();
+}
 function editSetW(el,baseId,si){
   const ex=findBase(baseId);const a=activeOf(ex);const arr=setsArr(baseId,a.sets);
   const cur0=arr[si].w!=null?arr[si].w:wOf(a);
@@ -1818,18 +1950,18 @@ function startRest(sec,name){
   clearInterval(tInt);tLeft=sec;tTotal=sec;
   $('tname').textContent='Descanso · '+sec+'s';
   $('tsub').textContent='Próxima série: '+(name||'');
-  $('tmr').classList.add('show');paintT();
+  $('tmr').classList.add('show');document.body.classList.add('tmron');paintT();
   tInt=setInterval(()=>{tLeft--;if(tLeft<=0){clearInterval(tInt);
     if(navigator.vibrate)navigator.vibrate([120,60,120]);
     $('tbig').textContent='Vai!';$('tname').textContent='Descanso completo';
     $('tsub').textContent='Manda a próxima série 💪';$('tring').style.width='0%';
-    setTimeout(()=>$('tmr').classList.remove('show'),1600);return}
+    setTimeout(()=>{$('tmr').classList.remove('show');document.body.classList.remove('tmron')},1600);return}
     paintT()},1000);
 }
 function paintT(){const m=Math.floor(tLeft/60),s=tLeft%60;
   $('tbig').textContent=`${m}:${String(s).padStart(2,'0')}`;
   $('tring').style.width=(tLeft/tTotal*100)+'%';}
-$('tx').onclick=()=>{clearInterval(tInt);$('tmr').classList.remove('show')};
+$('tx').onclick=()=>{clearInterval(tInt);$('tmr').classList.remove('show');document.body.classList.remove('tmron')};
 
 /* concluir */
 function finishWorkout(key,dateStr){
@@ -1852,18 +1984,25 @@ function finishWorkout(key,dateStr){
   return {done,tot};
 }
 $('finBtn').onclick=()=>{
-  const r=finishWorkout(cur,$('date').value||todayISO());
-  if(!r){toast('Marca pelo menos uma série antes 😉');return}
-  confetti();toast('🔥 Treino '+cur+' registrado! '+r.done+'/'+r.tot+' séries');
-  render();
+  const st=sessionStats(cur);
+  if(!st.done){toast('Marca pelo menos uma série antes 😉');return}
+  const meta=SESSMETA[cur]||{};
+  askDate(meta.d||$('date').value||todayISO(),(d)=>{
+    const r=finishWorkout(cur,d);
+    if(!r)return;
+    confetti();toast('🔥 Treino '+cur+' registrado! '+r.done+'/'+r.tot+' séries');
+    render();
+  });
 };
 /* ---- pendências ---- */
 function alertFinish(key){
   const meta=SESSMETA[key]||{};
-  const r=finishWorkout(key,meta.d||todayISO());
-  if(!r){toast('Nada pra registrar nesse treino');render();return}
-  confetti();toast('✔ Treino '+key+' registrado! '+r.done+'/'+r.tot+' séries');
-  render();
+  askDate(meta.d||todayISO(),(d)=>{
+    const r=finishWorkout(key,d);
+    if(!r){toast('Nada pra registrar nesse treino');render();return}
+    confetti();toast('✔ Treino '+key+' registrado em '+dtBR(d));
+    render();
+  });
 }
 function alertResume(key){
   RESUMED=key;cur=key;view='train';
@@ -1899,25 +2038,211 @@ function renderAlerts(){
   }).join('');
 }
 
+
+/* =================== MODAL GENÉRICO =================== */
+function boxOpen(html){$('boxModal').innerHTML=html;$('boxOv').classList.remove('hidden')}
+function boxClose(){$('boxOv').classList.add('hidden')}
+$('boxOv').onclick=e=>{if(e.target.id==='boxOv')boxClose()};
+const dtBR=iso=>new Date(iso+'T00:00').toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short'});
+
+/* ---- confirmar a data do treino ---- */
+function askDate(defISO,cb){
+  const hoje=todayISO();
+  const y=new Date(hoje+'T00:00');y.setDate(y.getDate()-1);const ont=isoOf(y);
+  boxOpen(`<h3>Quando foi este treino?</h3>
+    <div class="sub">Confirme o dia pra não registrar na data errada.</div>
+    <div class="qchips" style="margin-bottom:10px">
+      <button class="qchip${defISO===hoje?' on':''}" onclick="pickDate('${hoje}')">Hoje</button>
+      <button class="qchip${defISO===ont?' on':''}" onclick="pickDate('${ont}')">Ontem</button>
+    </div>
+    <input type="date" id="askD" value="${defISO}" max="${hoje}" style="width:100%;background:var(--panel2);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;color:var(--ink);font-family:'Manrope';font-weight:700;font-size:14px;margin-bottom:10px">
+    <div class="mrow">
+      <button class="mbtn" onclick="boxClose()">Cancelar</button>
+      <button class="mbtn pri" onclick="confirmDate()">Confirmar</button>
+    </div>`);
+  ASKCB=cb;
+}
+let ASKCB=null;
+function pickDate(iso){$('askD').value=iso;confirmDate()}
+function confirmDate(){
+  const v=$('askD').value||todayISO();
+  boxClose();
+  if(ASKCB){const f=ASKCB;ASKCB=null;f(v)}
+}
+
+/* ---- clicar num dia da semana ---- */
+function openDay(iso){
+  const hits=HISTORY.filter(h=>h.date===iso);
+  if(!hits.length){
+    boxOpen(`<h3>${dtBR(iso)}</h3>
+      <div class="sub">Nenhum treino registrado neste dia.</div>
+      <div class="mrow"><button class="mbtn pri" onclick="boxClose()">Fechar</button></div>`);
+    return;
+  }
+  if(hits.length===1){editHist(hits[0].ts);return}
+  boxOpen(`<h3>${dtBR(iso)}</h3>
+    <div class="sub">${hits.length} treinos neste dia. Escolha qual editar.</div>
+    <div class="mlist">${hits.map(h=>`<div class="prow"><div class="rtx"><b>${h.label} · Treino ${h.workout}</b><small>${h.done}/${h.tot} séries</small></div>
+      <button class="padd" onclick="editHist(${h.ts})">✎</button></div>`).join('')}</div>
+    <div class="mrow" style="margin-top:10px"><button class="mbtn" onclick="boxClose()">← Voltar</button></div>`);
+}
+
+/* ---- editar um treino já registrado ---- */
+let EDITH=null;
+function normRows(h,it){
+  const t=it.t||0;const rows=[];
+  const sw=it.sw||[];
+  if(sw.length===t){for(let i=0;i<t;i++)rows.push({d:sw[i]!=null,w:sw[i]!=null?sw[i]:(it.w!=null?it.w:0)})}
+  else{for(let i=0;i<t;i++){const on=i<(it.s||0);rows.push({d:on,w:on&&sw[i]!=null?sw[i]:(it.w!=null?it.w:0)})}}
+  return rows;
+}
+function editHist(ts){
+  const h=HISTORY.find(x=>x.ts===ts);if(!h){toast('Registro não encontrado');return}
+  if(!h.items||!h.items.length){
+    h.items=Object.entries(h.weights||{}).map(([vid,w])=>({id:vid,n:vidName(vid),s:1,t:1,w,sw:[w]}));
+    if(!h.items.length){toast('Esse registro não tem detalhes pra editar');return}
+  }
+  EDITH={ts,date:h.date,rows:h.items.map(it=>({n:it.n,id:it.id,bw:it.w==null&&!(it.sw&&it.sw.length),sets:normRows(h,it)}))};
+  paintEditH();
+}
+function paintEditH(){
+  const e=EDITH;
+  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
+    <h3>Editar treino</h3>
+    <div class="sub">Ajuste as séries feitas e as cargas. Toque no ✓ pra marcar ou desmarcar.</div>
+    <input type="date" id="ehDate" value="${e.date}" max="${todayISO()}" onchange="EDITH.date=this.value"
+      style="width:100%;background:var(--panel2);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--ink);font-family:'Manrope';font-weight:700;font-size:13.5px;margin-bottom:10px">
+    <div class="mlist">${e.rows.map((r,ri)=>`
+      <div style="margin-bottom:11px">
+        <div style="font-size:12.5px;font-weight:800;margin-bottom:5px">${r.n}</div>
+        <div class="srows">${r.sets.map((s,si)=>`
+          <div class="srow${s.d?' done':''}">
+            <div class="snum">${si+1}</div>
+            ${r.bw?'<div class="scell"><div class="swt bwlab">corporal</div></div>':
+             `<button class="sstep" onclick="ehBump(${ri},${si},-2.5)">−</button>
+              <div class="scell"><div class="swt">${fmtW(s.w)}<span class="u">kg</span></div></div>
+              <button class="sstep" onclick="ehBump(${ri},${si},2.5)">+</button>`}
+            <button class="schk${s.d?' on':''}" onclick="ehTgl(${ri},${si})">${s.d?'✓':''}</button>
+          </div>`).join('')}</div>
+      </div>`).join('')}</div>
+    <div class="mrow" style="margin-top:12px">
+      <button class="mbtn" onclick="boxClose()">Cancelar</button>
+      <button class="mbtn pri" onclick="ehSave()">Salvar</button>
+    </div>`);
+}
+function ehTgl(ri,si){EDITH.rows[ri].sets[si].d=!EDITH.rows[ri].sets[si].d;paintEditH()}
+function ehBump(ri,si,d){const s=EDITH.rows[ri].sets[si];let v=(s.w||0)+d;if(v<0)v=0;s.w=Math.round(v*10)/10;paintEditH()}
+function ehSave(){
+  const e=EDITH;const h=HISTORY.find(x=>x.ts===e.ts);if(!h){boxClose();return}
+  let done=0,tot=0;
+  h.items=h.items.map((it,ri)=>{
+    const r=e.rows[ri];if(!r)return it;
+    const s=r.sets.filter(x=>x.d).length;done+=s;tot+=r.sets.length;
+    const firstW=(r.sets.find(x=>x.d)||{}).w;
+    return {...it,s,t:r.sets.length,
+      w:r.bw?null:(firstW!=null?firstW:it.w),
+      sw:r.bw?null:r.sets.map(x=>x.d?x.w:null)};
+  });
+  h.done=done;h.tot=tot;h.date=e.date;
+  if(!r_hasBW(h))h.weights=Object.fromEntries(h.items.filter(i=>i.w!=null).map(i=>[i.id||i.n,i.w]));
+  HISTORY.sort((a,b)=>(b.date<a.date?-1:b.date>a.date?1:(b.ts||0)-(a.ts||0)));
+  save('iron_history',HISTORY);cloudSync();
+  boxClose();render();toast('Treino atualizado ✔');
+}
+function r_hasBW(h){return false}
+function delHistTs(ts){
+  if(!confirm('Excluir este registro do histórico?'))return;
+  const i=HISTORY.findIndex(x=>x.ts===ts);if(i<0)return;
+  HISTORY.splice(i,1);save('iron_history',HISTORY);cloudSync();render();toast('Registro excluído');
+}
+
+/* ---- estatísticas clicáveis ---- */
+function statWeek(){
+  const now=new Date();
+  const list=HISTORY.filter(h=>{const d=new Date(h.date+'T00:00');const diff=(now-d)/864e5;return diff>=0&&diff<7});
+  const sets=list.reduce((s,h)=>s+h.done,0);
+  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
+    <h3>Últimos 7 dias</h3>
+    <div class="sub">${list.length} treino${list.length===1?'':'s'} · ${sets} séries no total.</div>
+    <div class="mlist">${list.length?list.map(h=>`<div class="prow"><div class="rtx"><b>${h.label} · Treino ${h.workout}</b>
+      <small>${dtBR(h.date)} · ${h.done}/${h.tot} séries</small></div>
+      <button class="padd" onclick="editHist(${h.ts})">✎</button></div>`).join(''):'<div class="empty">Nenhum treino nos últimos 7 dias.</div>'}</div>
+    <div class="mrow" style="margin-top:10px"><button class="mbtn pri" onclick="boxClose()">Fechar</button></div>`);
+}
+function statLast(){
+  const h=HISTORY[0];
+  if(!h){boxOpen(`<h3>Último treino</h3><div class="sub">Você ainda não registrou nenhum treino.</div>
+    <div class="mrow"><button class="mbtn pri" onclick="boxClose()">Fechar</button></div>`);return}
+  const det=(h.items||[]).map(it=>{
+    const sv=(it.sw||[]).filter(v=>v!=null);const wtx=sv.length?sv.map(fmtW).join(' · ')+' kg':(it.w!=null?fmtW(it.w)+' kg':'peso corporal');
+    return `<div class="hd-row"><span>${it.n}</span><small>${it.s}/${it.t} séries<br>${wtx}</small></div>`}).join('');
+  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
+    <h3>${h.label} · Treino ${h.workout}</h3>
+    <div class="sub">${dtBR(h.date)} · ${h.done}/${h.tot} séries (${Math.round(h.done/h.tot*100)}%)</div>
+    <div class="mlist">${det||'<div class="empty">Sem detalhes salvos.</div>'}</div>
+    <div class="mrow" style="margin-top:10px">
+      <button class="mbtn" onclick="boxClose()">Fechar</button>
+      <button class="mbtn pri" onclick="editHist(${h.ts})">✎ Editar</button>
+    </div>`);
+}
+function statTotal(){
+  const by={};
+  HISTORY.forEach(h=>{const k=h.date.slice(0,7);(by[k]=by[k]||[]).push(h)});
+  const keys=Object.keys(by).sort().reverse();
+  const mLbl=k=>{const d=new Date(k+'-01T00:00');return d.toLocaleDateString('pt-BR',{month:'long',year:'numeric'})};
+  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
+    <h3>Total: ${HISTORY.length} treinos</h3>
+    <div class="sub">Agrupados por mês. Toque no ✎ pra editar.</div>
+    <div class="mlist">${keys.length?keys.map(k=>`
+      <div class="wkhead">${mLbl(k)} · ${by[k].length} treino${by[k].length===1?'':'s'}</div>
+      ${by[k].map(h=>`<div class="prow"><div class="rtx"><b>${h.label} · Treino ${h.workout}</b>
+        <small>${dtBR(h.date)} · ${h.done}/${h.tot} séries</small></div>
+        <button class="padd" onclick="editHist(${h.ts})">✎</button></div>`).join('')}
+      `).join(''):'<div class="empty">Nenhum treino registrado.</div>'}</div>
+    <div class="mrow" style="margin-top:10px"><button class="mbtn pri" onclick="boxClose()">Fechar</button></div>`);
+}
+
 /* =================== PROGRESSO =================== */
+function weekMondayOf(off){
+  const now=new Date(todayISO()+'T00:00');
+  const dw=(now.getDay()+6)%7;
+  const m=new Date(now);m.setDate(now.getDate()-dw+(off*7));
+  return m;
+}
+const isoOf=d=>{const x=new Date(d);x.setMinutes(x.getMinutes()-x.getTimezoneOffset());return x.toISOString().slice(0,10)};
+function weekLabel(off){
+  const a=weekMondayOf(off),b=new Date(a);b.setDate(a.getDate()+6);
+  const f=x=>x.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});
+  if(off===0)return 'Esta semana';
+  if(off===-1)return 'Semana passada';
+  return f(a)+' a '+f(b);
+}
+function shiftWeek(n){
+  const nw=WEEKOFF+n;
+  if(nw>0)return;
+  WEEKOFF=nw;renderProgress();
+}
 function renderProgress(){
   const pv=$('progView');
   const now=new Date();
   const last7=new Set();
   HISTORY.forEach(h=>{const d=new Date(h.date+'T00:00');const diff=(now-d)/864e5;if(diff>=0&&diff<7)last7.add(h.date)});
   const total=HISTORY.length;
-  const streak=calcStreak();
+  const lastH=HISTORY[0];
   const wd=['S','T','Q','Q','S','S','D'];
-  const monday=new Date(now);const dow=(now.getDay()+6)%7;monday.setDate(now.getDate()-dow);
+  const monday=weekMondayOf(WEEKOFF);
   let daysHtml='';
   for(let i=0;i<7;i++){const d=new Date(monday);d.setDate(monday.getDate()+i);
-    const iso=d.toISOString().slice(0,10);
-    const hit=HISTORY.find(h=>h.date===iso);
+    const iso=isoOf(d);
+    const hits=HISTORY.filter(h=>h.date===iso);
     const isToday=iso===todayISO();
-    daysHtml+=`<div class="day"><div class="ball${hit?' hit':''}${isToday?' today':''}">${hit?hit.workout:''}</div><small>${wd[i]}</small></div>`;
+    const lbl=hits.length?(hits.length>1?hits.length+'×':hits[0].workout):'';
+    daysHtml+=`<div class="day"><button class="ball${hits.length?' hit':''}${isToday?' today':''}" onclick="openDay('${iso}')">${lbl}</button><small>${wd[i]}</small></div>`;
   }
-  const wkKey=iso=>{const d=new Date(iso+'T00:00');const dw=(d.getDay()+6)%7;d.setDate(d.getDate()-dw);return d.toISOString().slice(0,10)};
-  const wkLabel=mon=>{const a=new Date(mon+'T00:00');const b=new Date(a);b.setDate(a.getDate()+6);
+  const wkCount=(()=>{const a=isoOf(monday);const b=new Date(monday);b.setDate(monday.getDate()+6);const e=isoOf(b);
+    return HISTORY.filter(h=>h.date>=a&&h.date<=e).length})();
+  const wkKey=iso=>{const d=new Date(iso+'T00:00');const dw=(d.getDay()+6)%7;d.setDate(d.getDate()-dw);return isoOf(d)};
+  const wkLbl=mon=>{const a=new Date(mon+'T00:00');const b=new Date(a);b.setDate(a.getDate()+6);
     const f=x=>x.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});return 'Semana de '+f(a)+' a '+f(b)};
   let lastWk=null;
   const hist=HISTORY.length?HISTORY.map((h,i)=>{
@@ -1925,7 +2250,7 @@ function renderProgress(){
     const ds=d.toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short'});
     const pct=Math.round(h.done/h.tot*100);
     const wk=wkKey(h.date);
-    const head=wk!==lastWk?`<div class="wkhead">${wkLabel(wk)}</div>`:'';
+    const head=wk!==lastWk?`<div class="wkhead">${wkLbl(wk)}</div>`:'';
     lastWk=wk;
     const det=h.items?h.items.map(it=>{
       const sv=(it.sw||[]).filter(v=>v!=null);const wtx=sv.length?sv.map(fmtW).join(' · ')+' kg':(it.w!=null?fmtW(it.w)+' kg':'');
@@ -1937,17 +2262,29 @@ function renderProgress(){
       <div class="wk" style="background:${HIST_COLORS[h.workout]||'#F5B301'}">${h.workout}</div>
       <div class="mid"><b>${h.label} · Treino ${h.workout}</b><small>${ds} · ${h.done}/${h.tot} séries</small></div>
       <div class="pct">${pct}%</div><span class="hcv">▾</span></div>
-      <div class="hdetail" id="hd${i}">${det}<button class="hdel" onclick="delHist(${i})">Excluir este registro</button></div>`;
+      <div class="hdetail" id="hd${i}">${det}
+        <div class="mrow" style="margin-top:8px">
+          <button class="mbtn" onclick="event.stopPropagation();editHist(${h.ts})">✎ Editar treino</button>
+          <button class="mbtn" onclick="event.stopPropagation();delHistTs(${h.ts})" style="color:var(--red)">Excluir</button>
+        </div></div>`;
   }).join(''):'<div class="empty">Nenhum treino registrado ainda.<br>Conclua um treino e ele aparece aqui. 📈</div>';
   const plan=SETUP?`<div class="tip"><div class="ic">📅</div><p><b>Sua semana:</b> ${weekPlan(SETUP)} (${SETUP.freq}x). Nos outros dias, descanso ou caminhada leve.</p></div>`:'';
 
   pv.innerHTML=`
     <div class="stats">
-      <div class="stat"><div class="v">${last7.size}</div><div class="k">Esta semana</div></div>
-      <div class="stat"><div class="v">${streak}</div><div class="k">Sequência (sem)</div></div>
-      <div class="stat"><div class="v">${total}</div><div class="k">Total feitos</div></div>
+      <button class="stat" onclick="statWeek()"><div class="v">${last7.size}</div><div class="k">Últimos 7 dias</div></button>
+      <button class="stat" onclick="statLast()"><div class="v">${lastH?lastH.workout:'–'}</div><div class="k">Último treino</div></button>
+      <button class="stat" onclick="statTotal()"><div class="v">${total}</div><div class="k">Total feitos</div></button>
     </div>
-    <div class="week"><h4>Sua semana</h4><div class="days">${daysHtml}</div></div>
+    <div class="week">
+      <div class="wknav">
+        <button onclick="shiftWeek(-1)">‹</button>
+        <b>${weekLabel(WEEKOFF)}</b>
+        <button onclick="shiftWeek(1)" ${WEEKOFF>=0?'disabled':''}>›</button>
+      </div>
+      <div class="days">${daysHtml}</div>
+      <div class="wkfoot">${wkCount} treino${wkCount===1?'':'s'} nesta semana · toque num dia para ver ou editar</div>
+    </div>
     <div class="exports">
       <button class="abtn vid" onclick="exportXLSX()">📊 Exportar Excel</button>
       <button class="abtn" onclick="exportPDF()">📄 Exportar PDF</button>
@@ -1967,15 +2304,6 @@ function renderProgress(){
     </div>
     ${LS_OK?'':'<div class="empty" style="color:var(--red)">⚠️ Este ambiente não salva dados entre sessões. Hospede o arquivo (ex: GitHub Pages).</div>'}
   `;
-}
-function delHist(i){
-  if(!confirm('Excluir este registro do histórico?'))return;
-  HISTORY.splice(i,1);save('iron_history',HISTORY);cloudSync();
-  renderLastCard();renderProgress();toast('Registro excluído');
-}
-function toggleHist(i){
-  const d=$('hd'+i),r=$('hr'+i);
-  if(d){d.classList.toggle('op');r.classList.toggle('op')}
 }
 function calcStreak(){
   if(!HISTORY.length)return 0;
@@ -2016,9 +2344,7 @@ function confetti(){
     d.style.transform=`rotate(${Math.random()*360}deg)`;c.appendChild(d)}
   setTimeout(()=>c.classList.add('hidden'),2800);
 }
-const standalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone;
-if(!standalone&&!load('iron_install_off',false))$('install').classList.remove('hidden');
-function dismissInstall(){$('install').classList.add('hidden');save('iron_install_off',true)}
+
 
 /* =================== ONBOARDING =================== */
 let OBSTEP=0, OBDATA=null, OBPROG=null;
@@ -2150,7 +2476,7 @@ function openLibPicker(ctx){
     .map(id=>`<div class="prow"><div class="rtx"><b>${E[id].name}</b><small>${GRP_LABEL[E[id].grp]} · ${E[id].sets}×${E[id].reps}</small></div>
       <button class="padd" onclick="pickChoose('${id}')">＋</button></div>`).join('')||'<div class="empty">Nada por aqui nesse filtro.</div>';
   const paint=g=>{
-    $('pickModal').innerHTML=`<h3>${ctx.title}</h3>
+    $('pickModal').innerHTML=`<button class="mback" onclick="$('pickOv').classList.add('hidden')">← Voltar</button><h3>${ctx.title}</h3>
       <div class="sub">${ctx.sub}</div>
       <div class="pchips">${['all',...Object.keys(GRP_LABEL)].map(x=>
         `<button class="vchip${g===x?' on':''}" data-g="${x}">${x==='all'?'Todos':GRP_LABEL[x]}</button>`).join('')}</div>
@@ -2237,7 +2563,7 @@ function obFinish(){
    3) Cole os dois valores aqui embaixo, entre as aspas
    4) Rode o conteúdo do arquivo supabase.sql no SQL Editor
    ============================================================ */
-const SUPABASE_URL = 'https://vxyicadvizwnmclijofn.supabase.co/rest/v1/';
+const SUPABASE_URL = 'https://vxyicadvizwnmclijofn.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_lRPzAYweHnyvZDktHx5V3A_LTnM8U3D';
 
 let sb=null, sbUser=null, syncT=null, authMode='in';
