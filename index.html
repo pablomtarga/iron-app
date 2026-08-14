@@ -199,6 +199,8 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .vchip{flex:0 0 auto;border:none;background:var(--fill);color:var(--label2);
   font-weight:500;font-size:13.5px;padding:7px 13px;border-radius:999px;cursor:pointer;white-space:nowrap;letter-spacing:-.01em}
 .vchip.on{background:var(--accent);color:var(--accent-ink);font-weight:600}
+.wtlab{padding:2px 16px 4px;font-size:12px;color:var(--label3)}
+.wtlab span{opacity:.75}
 .wt{display:flex;align-items:stretch;gap:8px;padding:0 14px 6px}
 .wt .stp{display:flex;align-items:center;background:var(--fill);border-radius:var(--r-s);overflow:hidden;flex:1}
 .wt .stp button{width:44px;border:none;background:none;color:var(--accent-text);font-size:20px;
@@ -1666,6 +1668,7 @@ let SESSION=load('iron_session',{});
 let HISTORY=load('iron_history',[]);
 let VARIANT=load('iron_variant',{});
 let SESSMETA=load('iron_sessmeta',{});
+let TRASH=load('iron_trash',[]);
 let THEME=load('iron_theme','light');
 let SETUP=load('iron_setup',null);
 let PROGRAM=load('iron_program',null);
@@ -1885,6 +1888,7 @@ function renderTrain(){
         </div>
       </div>
       ${EDITMODE?'':vhtml+`
+      ${a.bw?'':`<div class="wtlab">Peso base <span>aplica nas séries não marcadas</span></div>`}
       <div class="wt">
         <div class="stp">${wDisp}</div>
         ${a.rest?`<div class="rest" onclick="startRest(${a.rest},'${(a.name||'').replace(/'/g,'')}')">
@@ -1937,8 +1941,16 @@ function updateProgress(){
 function setVar(baseId,vid){VARIANT[baseId]=vid;save('iron_variant',VARIANT);cloudSync();renderTrain()}
 function findBase(id){for(const k in PROGRAM){const e=PROGRAM[k].ex.find(x=>x.id===id);if(e)return e}}
 function bump(baseId,delta){
-  const a=activeOf(findBase(baseId));let v=wOf(a)+delta;if(v<0)v=0;
-  WEIGHTS[a.vid]=Math.round(v*10)/10;save('iron_weights',WEIGHTS);cloudSync();renderTrain();
+  const ex=findBase(baseId);const a=activeOf(ex);let v=wOf(a)+delta;if(v<0)v=0;
+  const nv=Math.round(v*10)/10;
+  WEIGHTS[a.vid]=nv;save('iron_weights',WEIGHTS);
+  // grava o novo peso nas séries ainda NÃO marcadas; as marcadas mantêm o que foi feito
+  const arr=setsArr(baseId,a.sets);
+  let travadas=0;
+  arr.forEach(s=>{if(s.d){travadas++}else{s.w=nv}});
+  save('iron_session',SESSION);cloudSync();
+  const sy=window.scrollY;renderTrain();window.scrollTo(0,sy);
+  if(travadas)toast(travadas+(travadas===1?' série já marcada mantém o peso':' séries já marcadas mantêm o peso'));
 }
 function editW(el,baseId){
   const a=activeOf(findBase(baseId));const cur0=wOf(a);
@@ -2200,12 +2212,82 @@ function ehSave(){
 }
 function r_hasBW(h){return false}
 function delHistTs(ts){
-  if(!confirm('Excluir este registro do histórico?'))return;
   const i=HISTORY.findIndex(x=>x.ts===ts);if(i<0)return;
-  HISTORY.splice(i,1);save('iron_history',HISTORY);cloudSync();render();toast('Registro excluído');
+  const h=HISTORY[i];
+  if(!confirm('Mover para a lixeira?\n\n'+h.label+' · Treino '+h.workout+' ('+dtBR(h.date)+')\n\nVocê pode restaurar depois em "Treinos excluídos".'))return;
+  HISTORY.splice(i,1);
+  TRASH.unshift({...h,delAt:Date.now()});
+  save('iron_history',HISTORY);save('iron_trash',TRASH);cloudSync();
+  boxClose();render();toast('Movido para a lixeira');
+}
+function openTrash(){
+  if(!TRASH.length){
+    boxOpen(`<h3>Treinos excluídos</h3>
+      <div class="sub">A lixeira está vazia. Tudo que você excluir aparece aqui e pode ser restaurado.</div>
+      <div class="mrow"><button class="mbtn pri" onclick="boxClose()">Fechar</button></div>`);
+    return;
+  }
+  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
+    <h3>Treinos excluídos</h3>
+    <div class="sub">${TRASH.length} registro${TRASH.length===1?'':'s'} na lixeira. Restaure o que precisar.</div>
+    <div class="mlist">${TRASH.map((h,i)=>`<div class="prow">
+      <div class="rtx"><b>${h.label} · Treino ${h.workout}</b><small>${dtBR(h.date)} · ${h.done}/${h.tot} séries</small></div>
+      <button class="padd" onclick="restoreTrash(${i})">↩</button></div>`).join('')}</div>
+    <div class="mrow" style="margin-top:12px">
+      <button class="mbtn" onclick="boxClose()">Fechar</button>
+      <button class="mbtn pri" onclick="restoreAll()">Restaurar todos</button>
+    </div>`);
+}
+function restoreTrash(i){
+  const h=TRASH[i];if(!h)return;
+  TRASH.splice(i,1);
+  const {delAt,...clean}=h;
+  HISTORY.push(clean);
+  HISTORY.sort((a,b)=>(b.date<a.date?-1:b.date>a.date?1:(b.ts||0)-(a.ts||0)));
+  save('iron_history',HISTORY);save('iron_trash',TRASH);cloudSync();
+  render();toast('Treino restaurado ✔');
+  if(TRASH.length)openTrash();else boxClose();
+}
+function restoreAll(){
+  if(!TRASH.length)return;
+  TRASH.forEach(h=>{const {delAt,...clean}=h;HISTORY.push(clean)});
+  TRASH=[];
+  HISTORY.sort((a,b)=>(b.date<a.date?-1:b.date>a.date?1:(b.ts||0)-(a.ts||0)));
+  save('iron_history',HISTORY);save('iron_trash',TRASH);cloudSync();
+  boxClose();render();toast('Todos os treinos restaurados ✔');
 }
 
 /* ---- estatísticas clicáveis ---- */
+function openHistMenu(ts){
+  const h=HISTORY.find(x=>x.ts===ts);if(!h){toast('Registro não encontrado');return}
+  const det=(h.items&&h.items.length)?h.items.map(it=>{
+    const sv=(it.sw||[]).filter(v=>v!=null);
+    const wtx=sv.length?sv.map(fmtW).join(' · ')+' kg':(it.w!=null?fmtW(it.w)+' kg':'peso corporal');
+    return `<div class="hd-row"><span>${it.n}</span><small>${it.s}/${it.t} séries<br>${wtx}</small></div>`}).join(''):
+    (h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
+      `<div class="hd-row"><span>${vidName(vid)}</span><small>${fmtW(w)} kg</small></div>`).join(''):
+      '<div class="empty">Sem detalhes salvos nesta sessão.</div>');
+  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
+    <h3>${h.label} · Treino ${h.workout}</h3>
+    <div class="sub">${dtBR(h.date)} · ${h.done}/${h.tot} séries (${Math.round(h.done/h.tot*100)}%)</div>
+    <div class="mlist">${det}</div>
+    <div class="mrow" style="margin-top:12px">
+      <button class="mbtn pri" onclick="editHist(${h.ts})">✎ Editar treino</button>
+    </div>
+    <div class="mrow">
+      <button class="mbtn" onclick="dupHist(${h.ts})">Repetir hoje</button>
+      <button class="mbtn" onclick="delHistTs(${h.ts})" style="color:var(--red)">Excluir</button>
+    </div>`);
+}
+function dupHist(ts){
+  const h=HISTORY.find(x=>x.ts===ts);if(!h)return;
+  const copy=JSON.parse(JSON.stringify(h));
+  copy.date=todayISO();copy.ts=Date.now();
+  HISTORY.unshift(copy);
+  HISTORY.sort((a,b)=>(b.date<a.date?-1:b.date>a.date?1:(b.ts||0)-(a.ts||0)));
+  save('iron_history',HISTORY);cloudSync();boxClose();render();
+  toast('Treino repetido em '+dtBR(copy.date));
+}
 function statWeek(){
   const now=new Date();
   const list=HISTORY.filter(h=>{const d=new Date(h.date+'T00:00');const diff=(now-d)/864e5;return diff>=0&&diff<7});
@@ -2312,15 +2394,10 @@ function renderProgress(){
       (h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
       `<div class="hd-row"><span>${vidName(vid)}</span><small>${fmtW(w)} kg</small></div>`).join(''):
       '<div class="hd-row"><span>Sem detalhes salvos nesta sessão</span></div>');
-    return `${head}<div class="hrow" onclick="toggleHist(${i})" id="hr${i}">
+    return `${head}<div class="hrow" onclick="openHistMenu(${h.ts})">
       <div class="wk" style="background:${HIST_COLORS[h.workout]||'#F5B301'}">${h.workout}</div>
       <div class="mid"><b>${h.label} · Treino ${h.workout}</b><small>${ds} · ${h.done}/${h.tot} séries</small></div>
-      <div class="pct">${pct}%</div><span class="hcv">▾</span></div>
-      <div class="hdetail" id="hd${i}">${det}
-        <div class="mrow" style="margin-top:8px">
-          <button class="mbtn" onclick="event.stopPropagation();editHist(${h.ts})">✎ Editar treino</button>
-          <button class="mbtn" onclick="event.stopPropagation();delHistTs(${h.ts})" style="color:var(--red)">Excluir</button>
-        </div></div>`;
+      <div class="pct">${pct}%</div><span class="hcv" style="transform:rotate(-90deg)">▾</span></div>`;
   }).join(''):'<div class="empty">Nenhum treino registrado ainda.<br>Conclua um treino e ele aparece aqui. 📈</div>';
   const plan=SETUP?`<div class="tip"><div class="ic">📅</div><p><b>Sua semana:</b> ${weekPlan(SETUP)} (${SETUP.freq}x). Nos outros dias, descanso ou caminhada leve.</p></div>`:'';
 
@@ -2342,7 +2419,11 @@ function renderProgress(){
     <div class="exports">
       <button class="abtn" onclick="openWizard(true)">⚙️ Personalizar meu treino</button>
     </div>
-    <div class="sectit">Histórico ${HISTORY.length?`<button onclick="clearHist()">Limpar</button>`:''}</div>
+    <div class="exports">
+      <button class="abtn" onclick="openTrash()">🗑 Treinos excluídos${TRASH.length?' ('+TRASH.length+')':''}</button>
+      <button class="abtn" onclick="openBackup()">💾 Backup</button>
+    </div>
+    <div class="sectit">Histórico ${TRASH.length?`<button onclick="openTrash()">🗑 Excluídos (${TRASH.length})</button>`:''}</div>
     <div class="hist">${hist}</div>
     <div class="tips">
       <div class="sectit" style="font-size:14px">Princípios do Dr. 🧬</div>
@@ -2368,11 +2449,7 @@ function calcStreak(){
   while(weeks.has(now.getFullYear()+'-'+wkNum)){streak++;wkNum--}
   return streak;
 }
-function clearHist(){
-  if(confirm('Apagar todo o histórico de treinos? Os pesos atuais são mantidos.')){
-    HISTORY=[];save('iron_history',HISTORY);cloudSync();renderProgress();toast('Histórico limpo');
-  }
-}
+
 
 /* =================== NAV / FX =================== */
 function setView(v){
@@ -2642,7 +2719,7 @@ function loadScript(u){return new Promise((ok,err)=>{const s=document.createElem
 function cloudSync(){if(!sb||!sbUser)return;clearTimeout(syncT);syncT=setTimeout(cloudPush,1500)}
 async function cloudPush(){
   if(!sb||!sbUser)return;
-  const payload={weights:WEIGHTS,history:HISTORY,variant:VARIANT,session:SESSION,sessmeta:SESSMETA,program:PROGRAM,setup:SETUP,updated:Date.now()};
+  const payload={weights:WEIGHTS,history:HISTORY,trash:TRASH,variant:VARIANT,session:SESSION,sessmeta:SESSMETA,program:PROGRAM,setup:SETUP,updated:Date.now()};
   save('iron_updated',payload.updated);
   try{await sb.from('workout_data').upsert({user_id:sbUser.id,payload,updated_at:new Date().toISOString()})}catch(e){}
 }
@@ -2661,6 +2738,7 @@ async function cloudPull(){
       VARIANT={...VARIANT,...(p.variant||{})};
       SESSION={...SESSION,...(p.session||{})};
       if(p.sessmeta){SESSMETA={...SESSMETA,...p.sessmeta};save('iron_sessmeta',SESSMETA)}
+      if(p.trash){const seenT=new Set(TRASH.map(x=>x.ts));p.trash.forEach(x=>{if(!seenT.has(x.ts))TRASH.push(x)});save('iron_trash',TRASH)}
       if(p.program){PROGRAM=p.program;save('iron_program',PROGRAM)}
       if(p.setup){SETUP=p.setup;save('iron_setup',SETUP);closeOB()}
     }
@@ -2749,10 +2827,7 @@ async function doAuth(){
     closeAcct();toast(authMode==='in'?'Bem-vindo de volta! ☁️':'Conta criada! ☁️');
     paintAcctBtn();await cloudPull();
   }catch(e){
-    const msg=String(e.message||e);
-    err.textContent=msg.indexOf('Invalid login')>=0?'E-mail ou senha incorretos.':
-      msg.indexOf('already registered')>=0?'Esse e-mail já tem conta. Use Entrar.':
-      'Erro: '+msg;
+    err.textContent=authErr(e);
     $('aGo').textContent=authMode==='in'?'Entrar':'Criar conta';
   }
 }
@@ -2769,10 +2844,38 @@ async function doForgot(){
     err.textContent='Link enviado! Confira seu e-mail (e a caixa de spam) e abra o link neste aparelho.';
     $('aGo').textContent='Enviar link';
   }catch(e){
-    const msg=String(e.message||e);
-    err.textContent=msg.indexOf('rate')>=0?'Muitas tentativas. Aguarde alguns minutos.':'Erro: '+msg;
+    err.textContent=authErr(e);
     $('aGo').textContent='Enviar link';
   }
+}
+/* traduz os erros do Supabase para português com a solução */
+function resetHelp(){
+  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
+    <h3>O link de senha não chegou</h3>
+    <div class="sub">Confira nesta ordem:</div>
+    <div class="mlist">
+      <div class="hd-row"><span>1. Caixa de spam e lixo eletrônico</span></div>
+      <div class="hd-row"><span>2. O e-mail vem em inglês, com assunto "Reset Your Password"</span></div>
+      <div class="hd-row"><span>3. Limite do plano gratuito: poucos envios por hora. Espere 30 a 60 min</span></div>
+      <div class="hd-row"><span>4. No Supabase: Authentication &gt; URL Configuration &gt; o endereço do app precisa estar em Site URL e em Redirect URLs</span></div>
+      <div class="hd-row"><span>5. Confirme que o e-mail digitado é o mesmo do cadastro</span></div>
+    </div>
+    <div class="mrow" style="margin-top:12px"><button class="mbtn pri" onclick="boxClose()">Entendi</button></div>`);
+}
+function authErr(e){
+  const m=String((e&&e.message)||e||'').toLowerCase();
+  if(m.indexOf('rate')>=0||m.indexOf('too many')>=0||m.indexOf('429')>=0)
+    return 'Muitos pedidos seguidos. O plano gratuito libera poucos e-mails por hora: espere uns 30 a 60 minutos e tente de novo.';
+  if(m.indexOf('redirect')>=0||m.indexOf('not allowed')>=0||m.indexOf('invalid url')>=0)
+    return 'O endereço de retorno não está liberado. No Supabase: Authentication > URL Configuration > adicione esta página em Site URL e Redirect URLs.';
+  if(m.indexOf('smtp')>=0||m.indexOf('sending')>=0||m.indexOf('email')>=0&&m.indexOf('error')>=0)
+    return 'O servidor de e-mail do Supabase recusou o envio. Verifique Authentication > Emails, ou tente de novo mais tarde.';
+  if(m.indexOf('invalid login')>=0)return 'E-mail ou senha incorretos.';
+  if(m.indexOf('already registered')>=0)return 'Esse e-mail já tem conta. Use Entrar.';
+  if(m.indexOf('user not found')>=0)return 'Não achei conta com esse e-mail. Confira se digitou certo.';
+  if(m.indexOf('signup')>=0&&m.indexOf('disabled')>=0)return 'Cadastro desativado no painel do Supabase (Authentication > Providers > Email).';
+  if(m.indexOf('failed to fetch')>=0||m.indexOf('network')>=0)return 'Sem conexão com o servidor. Verifique a internet e tente de novo.';
+  return 'Erro: '+((e&&e.message)||e);
 }
 async function doNewPass(){
   const p1=$('aPass').value,p2=$('aPass2').value;
@@ -2787,7 +2890,7 @@ async function doNewPass(){
     toast('Senha redefinida ✔ Você já está conectado');
     paintAcctBtn();await cloudPull();
   }catch(e){
-    err.textContent='Erro: '+String(e.message||e);
+    err.textContent=authErr(e);
     $('aGo').textContent='Salvar nova senha';
   }
 }
@@ -2795,13 +2898,55 @@ async function doSignOut(){
   if(!confirm('Sair da conta?\n\nOs dados deste aparelho serão limpos para o próximo usuário. Tudo continua salvo na sua conta na nuvem e volta quando você entrar de novo.'))return;
   try{await sb.auth.signOut()}catch(e){}
   sbUser=null;
-  ['iron_weights','iron_session','iron_sessmeta','iron_history','iron_variant','iron_setup','iron_program','iron_updated'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});
-  WEIGHTS={};SESSION={};SESSMETA={};HISTORY=[];VARIANT={};SETUP=null;PROGRAM=null;cur='A';
+  ['iron_weights','iron_session','iron_sessmeta','iron_history','iron_trash','iron_variant','iron_setup','iron_program','iron_updated'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});
+  WEIGHTS={};SESSION={};SESSMETA={};HISTORY=[];TRASH=[];VARIANT={};SETUP=null;PROGRAM=null;cur='A';
   ensureProgram();
   paintAcctBtn();closeAcct();
   render();
   openWizard(false);
   toast('Você saiu. Até a próxima! 👋');
+}
+
+function openBackup(){
+  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
+    <h3>Backup dos seus dados</h3>
+    <div class="sub">Baixe um arquivo com todo o seu histórico, cargas e programa. Guarde no celular ou no e-mail: se algo for apagado por engano, é só restaurar por aqui.</div>
+    <div class="mrow"><button class="mbtn pri" onclick="doBackup()">💾 Baixar backup</button></div>
+    <div class="mrow"><button class="mbtn" onclick="document.getElementById('bkFile').click()">📂 Restaurar de um arquivo</button></div>
+    <input type="file" id="bkFile" accept="application/json,.json" style="display:none" onchange="doRestore(this)">
+    <div class="merr" id="bkMsg"></div>`);
+}
+function doBackup(){
+  const data={v:1,at:new Date().toISOString(),setup:SETUP,program:PROGRAM,weights:WEIGHTS,
+    history:HISTORY,trash:TRASH,variant:VARIANT,session:SESSION,sessmeta:SESSMETA};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='iron_backup_'+todayISO()+'.json';a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+  toast('Backup baixado ✔');
+}
+function doRestore(inp){
+  const f=inp.files&&inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const d=JSON.parse(r.result);
+      if(!d||!d.history)throw new Error('arquivo sem histórico');
+      const seen=new Set(HISTORY.map(h=>h.ts));
+      let add=0;(d.history||[]).forEach(h=>{if(!seen.has(h.ts)){HISTORY.push(h);add++}});
+      HISTORY.sort((a,b)=>(b.date<a.date?-1:b.date>a.date?1:(b.ts||0)-(a.ts||0)));
+      if(d.weights)WEIGHTS={...d.weights,...WEIGHTS};
+      if(d.program&&!PROGRAM)PROGRAM=d.program;
+      if(d.setup&&!SETUP)SETUP=d.setup;
+      if(d.trash){const st=new Set(TRASH.map(x=>x.ts));(d.trash||[]).forEach(x=>{if(!st.has(x.ts))TRASH.push(x)})}
+      save('iron_history',HISTORY);save('iron_weights',WEIGHTS);save('iron_trash',TRASH);
+      save('iron_program',PROGRAM);save('iron_setup',SETUP);cloudSync();
+      boxClose();render();toast(add+' treino'+(add===1?'':'s')+' restaurado'+(add===1?'':'s')+' ✔');
+    }catch(e){
+      const m=$('bkMsg');if(m)m.textContent='Não consegui ler esse arquivo: '+(e.message||e);
+    }
+  };
+  r.readAsText(f);
 }
 
 /* =================== EXPORTAÇÃO (Excel / PDF) =================== */
