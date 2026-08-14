@@ -260,6 +260,9 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .frz{border-radius:var(--r-s);background:linear-gradient(165deg,var(--viz1),var(--viz2));
   overflow:hidden;aspect-ratio:1.2/1}
 .frz svg{width:100%;height:100%}
+.frz img{width:100%;height:100%;object-fit:cover;display:block}
+.frz.photo{background:var(--fill)}
+.fcredit{font-size:10.5px;color:var(--label3);text-align:center;margin-top:8px;line-height:1.35}
 .frz.f0 svg *,.frz.f1 svg *{animation-play-state:paused!important;animation-duration:2s!important}
 .frz.f0 svg *{animation-delay:0s!important}
 .frz.f1 svg *{animation-delay:-1s!important}
@@ -1429,6 +1432,8 @@ const ACCENTS={
         C:{a:'#FB923C',ink:'#331A05',t:'#FB923C'},D:{a:'#A78BFA',ink:'#1E1033',t:'#A78BFA'}}
 };
 const HIST_COLORS={A:'#F5B301',B:'#14B8A6',C:'#FB8A3C',D:'#A78BFA'};
+const PHOTOS={'chestpress':'Machine Bench Press','dbbench':'Dumbbell Bench Press','pecdeck':'Butterfly','cablefly':'Cable Crossover','shoulderpress':'Machine Shoulder (Military) Press','dbshoulder':'Seated Dumbbell Press','sidelat':'Side Lateral Raise','reversefly':'Reverse Machine Flyes','dbrevfly':'Bent Over Dumbbell Rear Delt Raise With Head On Bench','facepullv':'Face Pull','triceps':'Triceps Pushdown','benchdipv':'Bench Dips','biceps':'Barbell Curl','hammer':'Hammer Curls','latpull':'Wide-Grip Lat Pulldown','neutralpull':'Close-Grip Front Lat Pulldown','seatedrow':'Seated Cable Rows','lowrow':'Lying T-Bar Row','legpress':'Leg Press','goblet2':'Goblet Squat','legext':'Leg Extensions','lungev':'Dumbbell Lunges','legcurl':'Seated Leg Curl','rdlv':'Romanian Deadlift','glutekick':'Glute Kickback','bridgev':'Butt Lift (Bridge)','abductor':'Thigh Abductor','adductor':'Thigh Adductor','cableadd':'Cable Hip Adduction','calf':'Standing Calf Raises','dbcalf':'Standing Dumbbell Calf Raise','lowerback':'Hyperextensions (Back Extensions)','supermanv':'Superman','absfull':'Crunches','plankv':'Plank','reversecrunch':'Reverse Crunch','legraisev':'Flat Bench Lying Leg Raise','finisher':'Bicycling, Stationary','treadmillv':'Walking, Treadmill','rowerv':'Rowing, Stationary','cablelatv':'Cable Seated Lateral Raise','widerow':'Seated Cable Rows','bandabd':'Thigh Abductor'};
+const hasPhoto=id=>!!PHOTOS[id];
 const YT=q=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q);
 
 /* =================== BIBLIOTECA DE EXERCÍCIOS =================== */
@@ -1906,11 +1911,18 @@ function renderTrain(){
         <button class="abtn" onclick="toggleHow(this)">Passo a passo <span class="cv">▾</span></button>
       </div>
       <div class="how"><div class="how-i">
+        ${hasPhoto(a.vid)||hasPhoto(ex.id)?(()=>{const pid=hasPhoto(a.vid)?a.vid:ex.id;return `
+        <div class="frames">
+          <div class="frm"><div class="frz photo"><img src="img/${pid}_0.webp" alt="Posição inicial" loading="lazy"></div><span>Início</span></div>
+          <div class="frm"><div class="frz photo"><img src="img/${pid}_1.webp" alt="Posição final" loading="lazy"></div><span>Fim</span></div>
+          <div class="frm"><div class="frz">${FIG[a.fig]||''}</div><span>Movimento</span></div>
+        </div>
+        <div class="fcredit">Fotos: Free Exercise DB (domínio público)</div>`})():`
         <div class="frames">
           <div class="frm"><div class="frz f0">${FIG[a.fig]||''}</div><span>Início</span></div>
           <div class="frm"><div class="frz f1">${FIG[a.fig]||''}</div><span>Fim</span></div>
           <div class="frm"><div class="frz">${FIG[a.fig]||''}</div><span>Movimento</span></div>
-        </div>
+        </div>`}
         <ol>${a.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
         <div class="cue g"><b>✓</b><span>${a.g}</span></div>
         <div class="cue b"><b>✕</b><span>${a.b}</span></div>
