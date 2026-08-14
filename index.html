@@ -120,17 +120,18 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .lastcard .lrow small{color:var(--label2);font-size:13px;white-space:nowrap;text-align:right}
 
 /* ============ SEGMENTED CONTROL (A/B/C) ============ */
-.tabsbar{position:sticky;top:0;z-index:30;padding:12px var(--sp) 10px;
-  background:var(--chrome);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%)}
+.tabsbar{position:sticky;top:0;z-index:30;padding:12px var(--sp) 8px;background:var(--bg)}
+.tabsbar::after{content:'';position:absolute;left:0;right:0;top:100%;height:16px;pointer-events:none;
+  background:linear-gradient(var(--bg),transparent)}
 .tabs{display:flex;gap:2px;padding:2px;background:var(--fill);border-radius:10px}
 .tab{flex:1;border:none;background:none;border-radius:8px;padding:7px 4px;cursor:pointer;
   transition:background-color .22s var(--ease),box-shadow .22s var(--ease),transform 110ms ease-out}
 .tab .ltr{font-size:15px;font-weight:600;line-height:1.1;color:var(--label2);letter-spacing:-.01em}
 .tab .nm{font-size:11px;font-weight:500;color:var(--label3);margin-top:1px;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tab.on{background:var(--surface);box-shadow:0 .5px 2px rgba(0,0,0,.12),0 3px 8px -4px rgba(0,0,0,.16)}
-.tab.on .ltr{color:var(--label)}
-.tab.on .nm{color:var(--label2)}
+.tab.on{background:var(--tc,var(--surface));box-shadow:0 .5px 2px rgba(0,0,0,.14),0 3px 10px -4px rgba(0,0,0,.20)}
+.tab.on .ltr{color:var(--tci,var(--label))}
+.tab.on .nm{color:var(--tci,var(--label2));opacity:.78}
 
 /* ============ PROGRESSO DO TREINO ============ */
 .prog{margin:0 var(--sp) 10px;background:var(--surface);border-radius:var(--r-m);
@@ -165,7 +166,13 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .editbtn{border:none;background:none;color:var(--accent-text);border-radius:999px;
   padding:6px 10px;font-weight:500;font-size:14.5px;cursor:pointer;letter-spacing:-.01em}
 .editbtn.on{background:var(--accent);color:var(--accent-ink);font-weight:600;padding:8px 14px}
-.ebar{display:flex;gap:8px;padding:12px 14px 0}
+.ebar{display:flex;gap:8px;padding:12px 14px 0;align-items:center}
+.dhandle{flex:0 0 34px;height:34px;border-radius:9px;border:none;background:var(--fill);color:var(--label2);
+  font-size:15px;cursor:grab;touch-action:none;display:flex;align-items:center;justify-content:center}
+.card.dragging{z-index:40;position:relative;box-shadow:var(--shadow-2);transform:scale(1.02);
+  opacity:.96;cursor:grabbing;transition:none}
+.card.shifted{transition:transform .22s var(--ease)}
+.list.dragmode .card:not(.dragging){pointer-events:none}
 .ebtn{border:none;background:var(--fill);color:var(--label);border-radius:9px;
   padding:9px 12px;font-weight:500;font-size:14px;cursor:pointer;letter-spacing:-.01em}
 .ebtn:disabled{opacity:.32;cursor:default}
@@ -1425,13 +1432,21 @@ FIG.widerow=`<svg viewBox="0 0 120 100"><style>
 </script>
 <script>
 /* =================== ACENTOS =================== */
-const ACCENTS={
-  light:{A:{a:'#F5B301',ink:'#181818',t:'#9A6B00'},B:{a:'#14B8A6',ink:'#12312C',t:'#0E7568'},
-         C:{a:'#FB8A3C',ink:'#3A1D07',t:'#C24E0A'},D:{a:'#A78BFA',ink:'#241245',t:'#6D28D9'}},
-  dark:{A:{a:'#FFD633',ink:'#181818',t:'#FFD633'},B:{a:'#2DD4BF',ink:'#0E2925',t:'#2DD4BF'},
-        C:{a:'#FB923C',ink:'#331A05',t:'#FB923C'},D:{a:'#A78BFA',ink:'#1E1033',t:'#A78BFA'}}
+const PALETTE={
+  light:[{a:'#E5A500',ink:'#FFFFFF',t:'#8A6200'},{a:'#0E9F8E',ink:'#FFFFFF',t:'#0E7568'},
+         {a:'#E2703A',ink:'#FFFFFF',t:'#C24E0A'},{a:'#7C5CE6',ink:'#FFFFFF',t:'#6D28D9'},
+         {a:'#C2426B',ink:'#FFFFFF',t:'#A32B52'},{a:'#3A7BD5',ink:'#FFFFFF',t:'#2A5DA8'},
+         {a:'#4E8C3A',ink:'#FFFFFF',t:'#3B6B2B'},{a:'#8A6A3A',ink:'#FFFFFF',t:'#6B5029'}],
+  dark:[{a:'#FFD426',ink:'#1A1A1A',t:'#FFD426'},{a:'#2DD4BF',ink:'#0E2925',t:'#2DD4BF'},
+        {a:'#FB923C',ink:'#331A05',t:'#FB923C'},{a:'#A78BFA',ink:'#1E1033',t:'#A78BFA'},
+        {a:'#F472B6',ink:'#3A0A22',t:'#F472B6'},{a:'#60A5FA',ink:'#0A1E3A',t:'#60A5FA'},
+        {a:'#86D96B',ink:'#0F2A08',t:'#86D96B'},{a:'#D6B36A',ink:'#2A1F08',t:'#D6B36A'}]
 };
-const HIST_COLORS={A:'#F5B301',B:'#14B8A6',C:'#FB8A3C',D:'#A78BFA'};
+function keyIndex(k){const ks=PROGRAM?Object.keys(PROGRAM):['A','B','C'];const i=ks.indexOf(k);
+  return i>=0?i:('ABCDEFGH'.indexOf(k)>=0?'ABCDEFGH'.indexOf(k):0)}
+function accentFor(k,theme){const p=PALETTE[theme||THEME];return p[keyIndex(k)%p.length]}
+const ACCENTS={get light(){return {}},get dark(){return {}}};
+const HIST_COLORS=new Proxy({},{get:(_,k)=>accentFor(String(k),'light').a});
 const PHOTOS={'chestpress':'Machine Bench Press','dbbench':'Dumbbell Bench Press','pecdeck':'Butterfly','cablefly':'Cable Crossover','shoulderpress':'Machine Shoulder (Military) Press','dbshoulder':'Seated Dumbbell Press','sidelat':'Side Lateral Raise','reversefly':'Reverse Machine Flyes','dbrevfly':'Bent Over Dumbbell Rear Delt Raise With Head On Bench','facepullv':'Face Pull','triceps':'Triceps Pushdown','benchdipv':'Bench Dips','biceps':'Barbell Curl','hammer':'Hammer Curls','latpull':'Wide-Grip Lat Pulldown','neutralpull':'Close-Grip Front Lat Pulldown','seatedrow':'Seated Cable Rows','lowrow':'Lying T-Bar Row','legpress':'Leg Press','goblet2':'Goblet Squat','legext':'Leg Extensions','lungev':'Dumbbell Lunges','legcurl':'Seated Leg Curl','rdlv':'Romanian Deadlift','glutekick':'Glute Kickback','bridgev':'Butt Lift (Bridge)','abductor':'Thigh Abductor','adductor':'Thigh Adductor','cableadd':'Cable Hip Adduction','calf':'Standing Calf Raises','dbcalf':'Standing Dumbbell Calf Raise','lowerback':'Hyperextensions (Back Extensions)','supermanv':'Superman','absfull':'Crunches','plankv':'Plank','reversecrunch':'Reverse Crunch','legraisev':'Flat Bench Lying Leg Raise','finisher':'Bicycling, Stationary','treadmillv':'Walking, Treadmill','rowerv':'Rowing, Stationary','cablelatv':'Cable Seated Lateral Raise','widerow':'Seated Cable Rows','bandabd':'Thigh Abductor'};
 const hasPhoto=id=>!!PHOTOS[id];
 const YT=q=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q);
@@ -1748,7 +1763,7 @@ function applyTheme(){
   applyAccent();
 }
 function applyAccent(){
-  const c=ACCENTS[THEME][cur]||ACCENTS[THEME].A;
+  const c=accentFor(cur);
   const r=document.documentElement.style;
   r.setProperty('--accent',c.a);r.setProperty('--accent-ink',c.ink);r.setProperty('--accent-text',c.t);
 }
@@ -1779,7 +1794,7 @@ function renderLastCard(){
   const el=$('lastCard');
   if(!HISTORY.length){el.innerHTML='';return}
   const h=HISTORY[0];
-  const col=HIST_COLORS[h.workout]||'#F5B301';
+  const col=accentFor(h.workout).a;
   const rows=(h.items&&h.items.length)?h.items.map(it=>{
     const sv=(it.sw||[]).filter(v=>v!=null);
     const wtx=sv.length?sv.map(fmtW).join(' · ')+' kg':(it.w!=null?fmtW(it.w)+' kg':'peso corporal');
@@ -1790,7 +1805,7 @@ function renderLastCard(){
   const open=LASTOPEN?' op':'';
   el.innerHTML=`<div class="lastcard">
     <button class="lhead${open}" onclick="toggleLast(this)">
-      <div class="lbadge" style="background:${col}">${h.workout}</div>
+      <div class="lbadge" style="background:${accentFor(h.workout).a};color:${accentFor(h.workout).ink}">${h.workout}</div>
       <div class="ltx"><span class="lk">Último treino</span>
         <b>${h.label} · Treino ${h.workout}</b>
         <small>${relDate(h.date)} · ${h.done}/${h.tot} séries</small>
@@ -1814,6 +1829,8 @@ function renderTabs(){
     const p=PROGRAM[k];
     const b=document.createElement('button');
     b.className='tab'+(k===cur?' on':'');
+    const c=accentFor(k);
+    b.style.setProperty('--tc',c.a);b.style.setProperty('--tci',c.ink);
     b.innerHTML=`<div class="ltr">${k}</div><div class="nm">${p.label}</div>`;
     b.onclick=()=>{cur=k;render();window.scrollTo({top:0,behavior:'smooth'})};
     t.appendChild(b);
@@ -1846,9 +1863,10 @@ function renderTrain(){
         `<button class="vchip${a.vid===o.id?' on':''}" onclick="setVar('${ex.id}','${o.id}')">${o.name}</button>`).join('')+`</div>`;
     }
     const ebar=EDITMODE?`<div class="ebar">
+        <button class="dhandle" onpointerdown="dragStart(event,${i})" title="Arraste para reordenar">≡</button>
         <button class="ebtn" onclick="progMove(${i},-1)" ${i===0?'disabled':''}>↑</button>
         <button class="ebtn" onclick="progMove(${i},1)" ${i===day.ex.length-1?'disabled':''}>↓</button>
-        <button class="ebtn wide" onclick="progReplace(${i})">⇄ Substituir</button>
+        <button class="ebtn wide" onclick="progReplace(${i})">⇄ Trocar</button>
         <button class="ebtn danger" onclick="progRemove(${i})">Excluir</button>
       </div>`:'';
     const base=wOf(a);
@@ -1930,6 +1948,10 @@ function renderTrain(){
     list.appendChild(card);
   });
   if(EDITMODE){
+    const hint=document.createElement('div');
+    hint.className='dintro';hint.style.margin='0 2px 4px';
+    hint.textContent='Arraste pelo ≡ para reordenar, ou use ↑ ↓. Toque em Trocar para substituir o exercício.';
+    list.appendChild(hint);
     const ad=document.createElement('button');
     ad.className='radd big';ad.textContent='＋ Adicionar exercício neste treino';
     ad.onclick=()=>progAddOpen();
@@ -2407,7 +2429,7 @@ function renderProgress(){
       `<div class="hd-row"><span>${vidName(vid)}</span><small>${fmtW(w)} kg</small></div>`).join(''):
       '<div class="hd-row"><span>Sem detalhes salvos nesta sessão</span></div>');
     return `${head}<div class="hrow" onclick="openHistMenu(${h.ts})">
-      <div class="wk" style="background:${HIST_COLORS[h.workout]||'#F5B301'}">${h.workout}</div>
+      <div class="wk" style="background:${accentFor(h.workout).a};color:${accentFor(h.workout).ink}">${h.workout}</div>
       <div class="mid"><b>${h.label} · Treino ${h.workout}</b><small>${ds} · ${h.done}/${h.tot} séries</small></div>
       <div class="pct">${pct}%</div><span class="hcv" style="transform:rotate(-90deg)">▾</span></div>`;
   }).join(''):'<div class="empty">Nenhum treino registrado ainda.<br>Conclua um treino e ele aparece aqui. 📈</div>';
@@ -2477,7 +2499,7 @@ function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show')
   clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2200)}
 function confetti(){
   const c=$('cfx');c.classList.remove('hidden');c.innerHTML='';
-  const ac=(ACCENTS[THEME][cur]||ACCENTS[THEME].A).a;
+  const ac=accentFor(cur).a;
   const cols=[ac,'#8AC7FF','#B7F0AD','#FFD1DC','#FFE08A'];
   for(let i=0;i<50;i++){const d=document.createElement('div');d.className='cf';
     d.style.left=Math.random()*100+'%';d.style.background=cols[i%cols.length];
@@ -2570,9 +2592,9 @@ function renderOB(){
     <div class="lead">Séries, repetições e descansos calibrados: compostos com 8–12 reps e 90–120s de pausa, isolados com 12–15 e 45–60s (faixas com melhor evidência pra hipertrofia). Ajuste como quiser: remova (✕) ou adicione exercícios extras.</div>
     <div class="qb" style="padding:12px 15px"><h4 style="margin:0">📅 Rotação sugerida: ${weekPlan(OBDATA)} · ${OBDATA.freq}x/semana</h4></div>
     ${keys.map(k=>{
-      const d=OBPROG[k];const col=HIST_COLORS[k];
+      const d=OBPROG[k];
       return `<div class="rday">
-        <div class="rhead"><div class="lt" style="background:${col}">${k}</div>
+        <div class="rhead"><div class="lt" style="background:${accentFor(k).a};color:${accentFor(k).ink}">${k}</div>
           <div class="tx"><b>${d.label}</b><small>${d.ex.length} exercícios · ${d.ex.reduce((s,e)=>s+e.sets,0)} séries</small></div></div>
         ${d.ex.map((e,i)=>`<div class="rex"><div class="rn">${i+1}</div>
           <div class="rtx"><b>${e.name}</b><small>${e.muscle} · ${e.sets}×${e.reps}${e.rest?` · ${e.rest}s`:''}</small></div>
@@ -2634,6 +2656,15 @@ function pickChoose(id){
   const item=buildItem(id, ctx.replaceIdx!=null?whyFor(E[id],ctx.replaceIdx):'Extra que você escolheu: '+whyFor(E[id],5));
   if(ctx.replaceIdx!=null){
     const old=ctx.list[ctx.replaceIdx];
+    // aparece em outros treinos? oferece substituir lá também
+    if(ctx.mode==='program'){
+      const outros=Object.keys(PROGRAM).filter(k=>k!==ctx.dayKey&&PROGRAM[k].ex.some(x=>x.id===old.id));
+      if(outros.length){
+        $('pickOv').classList.add('hidden');
+        askScope(old,item,ctx.dayKey,ctx.replaceIdx,outros);
+        return;
+      }
+    }
     ctx.list.splice(ctx.replaceIdx,1,item);
     cleanupEx(ctx.dayKey,old.id);
   }else{
@@ -2643,6 +2674,30 @@ function pickChoose(id){
   if(ctx.mode==='wizard'){renderOB()}
   else{save('iron_program',PROGRAM);cloudSync();renderTrain()}
   toast(ctx.replaceIdx!=null?'Substituído por '+item.name:item.name+' adicionado');
+}
+function askScope(old,item,dayKey,idx,outros){
+  boxOpen(`<h3>Trocar em quais treinos?</h3>
+    <div class="sub"><b>${old.name}</b> também aparece ${outros.length===1?'no treino':'nos treinos'} <b>${outros.join(', ')}</b>. Quer trocar por <b>${item.name}</b> só aqui ou em todos?</div>
+    <div class="mrow"><button class="mbtn" onclick="doScope(false)">Só no treino ${dayKey}</button></div>
+    <div class="mrow"><button class="mbtn pri" onclick="doScope(true)">Trocar em todos (${outros.length+1})</button></div>
+    <div class="mfoot"><button onclick="boxClose()">Cancelar</button></div>`);
+  SCOPE={old,item,dayKey,idx,outros};
+}
+let SCOPE=null;
+function doScope(todos){
+  const s=SCOPE;if(!s)return;
+  PROGRAM[s.dayKey].ex.splice(s.idx,1,JSON.parse(JSON.stringify(s.item)));
+  cleanupEx(s.dayKey,s.old.id);
+  let n=1;
+  if(todos){
+    s.outros.forEach(k=>{
+      PROGRAM[k].ex=PROGRAM[k].ex.map(x=>x.id===s.old.id?JSON.parse(JSON.stringify(s.item)):x);
+      cleanupEx(k,s.old.id);n++;
+    });
+  }
+  save('iron_program',PROGRAM);cloudSync();
+  SCOPE=null;boxClose();renderTrain();
+  toast(todos?'Trocado em '+n+' treinos':'Trocado no treino '+s.dayKey);
 }
 function cleanupEx(dayKey,exId){
   if(dayKey&&SESSION[dayKey]){delete SESSION[dayKey][exId];save('iron_session',SESSION)}
@@ -2674,6 +2729,59 @@ function progRemove(i){
   cleanupEx(cur,rm.id);
   save('iron_program',PROGRAM);cloudSync();renderTrain();
   toast(rm.name+' excluído');
+}
+let DRAG=null;
+function dragStart(e,i){
+  e.preventDefault();e.stopPropagation();
+  const list=$('list');
+  const cards=[...list.querySelectorAll('.card')];
+  const el=cards[i];if(!el)return;
+  const rects=cards.map(c=>c.getBoundingClientRect());
+  DRAG={i,from:i,el,cards,rects,startY:e.clientY,dy:0,h:rects[i].height+12,to:i};
+  el.setPointerCapture(e.pointerId);
+  el.classList.add('dragging');list.classList.add('dragmode');
+  cards.forEach(c=>{if(c!==el)c.classList.add('shifted')});
+  if(navigator.vibrate)navigator.vibrate(14);
+  el.onpointermove=dragMove;el.onpointerup=dragEnd;el.onpointercancel=dragEnd;
+}
+function dragMove(e){
+  if(!DRAG)return;
+  DRAG.dy=e.clientY-DRAG.startY;
+  DRAG.el.style.transform=`translateY(${DRAG.dy}px) scale(1.02)`;
+  const centro=DRAG.rects[DRAG.i].top+DRAG.rects[DRAG.i].height/2+DRAG.dy;
+  let to=DRAG.i;
+  DRAG.rects.forEach((r,j)=>{
+    if(j===DRAG.i)return;
+    const c=r.top+r.height/2;
+    if(DRAG.dy>0&&c<centro&&j>DRAG.i)to=Math.max(to,j);
+    if(DRAG.dy<0&&c>centro&&j<DRAG.i)to=Math.min(to===DRAG.i?j:to,j);
+  });
+  if(to!==DRAG.to){DRAG.to=to;if(navigator.vibrate)navigator.vibrate(8)}
+  DRAG.cards.forEach((c,j)=>{
+    if(c===DRAG.el)return;
+    let shift=0;
+    if(DRAG.to>DRAG.i&&j>DRAG.i&&j<=DRAG.to)shift=-DRAG.h;
+    if(DRAG.to<DRAG.i&&j<DRAG.i&&j>=DRAG.to)shift=DRAG.h;
+    c.style.transform=shift?`translateY(${shift}px)`:'';
+  });
+}
+function dragEnd(e){
+  if(!DRAG)return;
+  const {el,to,from}=DRAG;
+  el.onpointermove=el.onpointerup=el.onpointercancel=null;
+  el.classList.remove('dragging');el.style.transform='';
+  $('list').classList.remove('dragmode');
+  DRAG.cards.forEach(c=>{c.classList.remove('shifted');c.style.transform=''});
+  DRAG=null;
+  if(to!==from){
+    const exs=PROGRAM[cur].ex;
+    const [mv]=exs.splice(from,1);
+    exs.splice(to,0,mv);
+    save('iron_program',PROGRAM);cloudSync();
+    if(navigator.vibrate)navigator.vibrate([12,40,12]);
+    toast('Ordem atualizada');
+  }
+  const sy=window.scrollY;renderTrain();window.scrollTo(0,sy);
 }
 function progMove(i,dir){
   const exs=PROGRAM[cur].ex;const j=i+dir;
