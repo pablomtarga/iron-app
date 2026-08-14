@@ -21,13 +21,13 @@
   --viz1:#1A1C20; --viz2:#0C0D10;
   --shadow:0 1px 2px rgba(16,24,40,.05),0 6px 16px -6px rgba(16,24,40,.10);
   --green:#12805C; --red:#D92D20;
-  --accent:#F5B301; --accent-ink:#181818; --accent-text:#9A6B00;
+  --accent:#F5B301; --accent-ink:#181818; --accent-text:#9A6B00; --warn:#B54708;
 }
 html[data-theme=dark]{
   --bg:#0B0C0E; --panel:#16181C; --panel2:#1E2127; --line:#2A2E36;
   --ink:#F2F3F5; --muted:#9AA1AB; --muted2:#6B7280;
   --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 20px -8px rgba(0,0,0,.55);
-  --green:#39D98A; --red:#FF6B6B;
+  --green:#39D98A; --red:#FF6B6B; --warn:#FDB022;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
@@ -421,6 +421,50 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
 /* quality floor */
 :where(button,a,input,[onclick]):focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+/* último treino no topo */
+.lastcard{margin:12px 16px 0;background:var(--panel);border:1px solid var(--line);border-radius:16px;
+  box-shadow:var(--shadow);overflow:hidden}
+.lastcard .lhead{display:flex;align-items:center;gap:11px;padding:12px 14px;cursor:pointer;width:100%;
+  background:none;border:none;text-align:left;font-family:'Manrope';color:var(--ink)}
+.lastcard .lbadge{flex:0 0 36px;height:36px;border-radius:11px;display:flex;align-items:center;
+  justify-content:center;font-family:'Anton';font-size:17px;color:#181818}
+.lastcard .ltx{flex:1;min-width:0}
+.lastcard .ltx .lk{display:block;font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted2);font-weight:800}
+.lastcard .ltx b{display:block;font-size:13.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lastcard .ltx small{color:var(--muted);font-size:11px;font-weight:700}
+.lastcard .lcv{color:var(--accent-text);font-size:12px;transition:.3s}
+.lastcard .lhead.op .lcv{transform:rotate(180deg)}
+.lastcard .lbody{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.lastcard .lbody.op{max-height:1200px}
+.lastcard .lbody-i{padding:2px 14px 12px;border-top:1px solid var(--line)}
+.lastcard .lrow{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+  padding:8px 0;border-bottom:1px dashed var(--line)}
+.lastcard .lrow:last-child{border-bottom:none}
+.lastcard .lrow span{font-size:12.5px;font-weight:700;min-width:0}
+.lastcard .lrow small{color:var(--muted);font-size:11px;font-weight:700;white-space:nowrap;text-align:right}
+/* hint de carga anterior em cada série */
+.scell{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;min-width:0}
+.sant{font-size:9.5px;color:var(--muted2);font-weight:700;letter-spacing:.02em}
+/* alerta de treino em aberto */
+.alertc{margin:12px 16px 0;background:color-mix(in srgb,var(--warn) 9%,var(--panel));
+  border:1.5px solid color-mix(in srgb,var(--warn) 42%,var(--line));border-radius:16px;
+  padding:13px 14px;box-shadow:var(--shadow)}
+.alertc+.alertc{margin-top:9px}
+.alertc .atop{display:flex;align-items:center;gap:8px;font-family:'Anton';font-size:14px;
+  text-transform:uppercase;color:var(--warn);margin-bottom:5px}
+.alertc p{font-size:12px;line-height:1.5;color:var(--muted);font-weight:600;margin-bottom:11px}
+.alertc p b{color:var(--ink)}
+.alertc .abtns{display:flex;gap:7px}
+.alertc .abtns button{flex:1;border:1px solid var(--line);background:var(--panel);color:var(--ink);
+  border-radius:11px;padding:10px 8px;font-family:'Manrope';font-weight:800;font-size:12px;cursor:pointer}
+.alertc .abtns button.pri{background:var(--warn);border-color:var(--warn);color:#fff}
+.alertc .abtns button.ghost{flex:0 0 auto;color:var(--muted2);border-style:dashed}
+/* badge de completude */
+.lastcard .ldone{display:inline-block;font-size:8.5px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;padding:3px 7px;border-radius:6px;margin-top:3px}
+.lastcard .ldone.full{background:color-mix(in srgb,var(--green) 15%,transparent);color:var(--green)}
+.lastcard .ldone.part{background:color-mix(in srgb,var(--warn) 15%,transparent);color:var(--warn)}
 .hidden{display:none!important}
 </style>
 </head>
@@ -444,6 +488,8 @@ html[data-theme=dark] .tmr{background:#fff;color:#111}
     <div class="hello">Bora, <em id="helloName">Atleta</em>.</div>
     <div class="quote" id="quote"></div>
   </header>
+  <div id="alertCard"></div>
+  <div id="lastCard"></div>
 
   <div class="install hidden" id="install">
     <span class="ic">📲</span>
@@ -1466,6 +1512,7 @@ let WEIGHTS=load('iron_weights',{});
 let SESSION=load('iron_session',{});
 let HISTORY=load('iron_history',[]);
 let VARIANT=load('iron_variant',{});
+let SESSMETA=load('iron_sessmeta',{});
 let THEME=load('iron_theme','light');
 let SETUP=load('iron_setup',null);
 let PROGRAM=load('iron_program',null);
@@ -1485,12 +1532,37 @@ function activeOf(ex){
   return {...ex,baseId:ex.id,vid:ex.id};
 }
 const wOf=a=>WEIGHTS[a.vid]!=null?WEIGHTS[a.vid]:(a.w||0);
-function setsArr(baseId,n){
-  if(!SESSION[cur])SESSION[cur]={};
-  let s=SESSION[cur][baseId];
-  if(!s||s.length!==n){s=Array.from({length:n},()=>({d:false,w:null}));SESSION[cur][baseId]=s}
-  else if(typeof s[0]!=='object'||s[0]===null){s=s.map(v=>({d:!!v,w:null}));SESSION[cur][baseId]=s}
+function setsArr(baseId,n,key){
+  const k=key||cur;
+  if(!SESSION[k])SESSION[k]={};
+  let s=SESSION[k][baseId];
+  if(!s||s.length!==n){s=Array.from({length:n},()=>({d:false,w:null}));SESSION[k][baseId]=s}
+  else if(typeof s[0]!=='object'||s[0]===null){s=s.map(v=>({d:!!v,w:null}));SESSION[k][baseId]=s}
   return s;
+}
+function sessionStats(key){
+  const day=PROGRAM[key];if(!day)return {done:0,tot:0};
+  const s=SESSION[key]||{};let done=0,tot=0;
+  day.ex.forEach(ex=>{const a=activeOf(ex);tot+=a.sets;
+    const arr=s[ex.id];
+    if(Array.isArray(arr))arr.forEach(x=>{if(x&&typeof x==='object'?x.d:x)done++});
+  });
+  return {done,tot};
+}
+let RESUMED=null;
+function pendingDays(){
+  const out=[];
+  Object.keys(PROGRAM).forEach(k=>{
+    const st=sessionStats(k);
+    if(st.done>0){
+      const meta=SESSMETA[k]||{};
+      const d=meta.d||todayISO();
+      const hoje=d===todayISO();
+      const ativo=k===cur&&view==='train'&&(hoje||k===RESUMED);
+      if(!ativo)out.push({key:k,done:st.done,tot:st.tot,date:d,hoje});
+    }
+  });
+  return out;
 }
 function lastSets(vid,name){
   for(const h of HISTORY){
@@ -1529,8 +1601,49 @@ function render(){
   $('quote').textContent=QUOTES[Math.floor(Math.random()*QUOTES.length)];
   $('helloName').textContent=(SETUP&&SETUP.name)?SETUP.name:'Atleta';
   $('brandSub').textContent=SETUP&&!SETUP.default?`${SPLITS[SETUP.splits].name} · ${SETUP.freq}x/sem`:'Push · Pull · Legs';
+  renderAlerts();
+  renderLastCard();
   renderTabs();
   if(view==='train'){renderTrain()}else{renderProgress()}
+}
+function relDate(iso){
+  const d=new Date(iso+'T00:00'),h=new Date(todayISO()+'T00:00');
+  const diff=Math.round((h-d)/864e5);
+  if(diff===0)return 'hoje';
+  if(diff===1)return 'ontem';
+  if(diff>1&&diff<7)return 'há '+diff+' dias';
+  return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});
+}
+function renderLastCard(){
+  const el=$('lastCard');
+  if(!HISTORY.length){el.innerHTML='';return}
+  const h=HISTORY[0];
+  const col=HIST_COLORS[h.workout]||'#F5B301';
+  const rows=(h.items&&h.items.length)?h.items.map(it=>{
+    const sv=(it.sw||[]).filter(v=>v!=null);
+    const wtx=sv.length?sv.map(fmtW).join(' · ')+' kg':(it.w!=null?fmtW(it.w)+' kg':'peso corporal');
+    return `<div class="lrow"><span>${it.n}</span><small>${it.s}/${it.t} séries<br>${wtx}</small></div>`;
+  }).join(''):(h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
+    `<div class="lrow"><span>${vidName(vid)}</span><small>${fmtW(w)} kg</small></div>`).join(''):
+    '<div class="lrow"><span>Sem detalhes salvos nesta sessão</span></div>');
+  const open=LASTOPEN?' op':'';
+  el.innerHTML=`<div class="lastcard">
+    <button class="lhead${open}" onclick="toggleLast(this)">
+      <div class="lbadge" style="background:${col}">${h.workout}</div>
+      <div class="ltx"><span class="lk">Último treino</span>
+        <b>${h.label} · Treino ${h.workout}</b>
+        <small>${relDate(h.date)} · ${h.done}/${h.tot} séries</small>
+        <span class="ldone ${h.done>=h.tot?'full':'part'}">${h.done>=h.tot?'✓ Completo':'Parcial · '+Math.round(h.done/h.tot*100)+'%'}</span></div>
+      <span class="lcv">▾</span>
+    </button>
+    <div class="lbody${open}"><div class="lbody-i">${rows}</div></div>
+  </div>`;
+}
+let LASTOPEN=true;
+function toggleLast(btn){
+  LASTOPEN=!LASTOPEN;
+  btn.classList.toggle('op',LASTOPEN);
+  btn.nextElementSibling.classList.toggle('op',LASTOPEN);
 }
 function renderTabs(){
   const t=$('tabs');t.innerHTML='';
@@ -1579,7 +1692,8 @@ function renderTrain(){
     const prev=lastSets(a.vid,a.name);
     let prevHtml='';
     if(!EDITMODE&&prev){
-      if(prev.sw&&prev.sw.length)prevHtml=`<div class="prev">Anterior: <b>${prev.sw.map(fmtW).join(' · ')} kg</b>${prev.s!=null?` (${prev.s}/${prev.t} séries)`:''}</div>`;
+      const swv=(prev.sw||[]).filter(v=>v!=null);
+      if(swv.length)prevHtml=`<div class="prev">Anterior: <b>${swv.map(fmtW).join(' · ')} kg</b>${prev.s!=null?` (${prev.s}/${prev.t} séries)`:''}</div>`;
       else if(prev.w!=null)prevHtml=`<div class="prev">Anterior: <b>${fmtW(prev.w)} kg</b></div>`;
       else if(prev.s!=null)prevHtml=`<div class="prev">Anterior: <b>${prev.s}/${prev.t} séries</b></div>`;
     }
@@ -1587,10 +1701,13 @@ function renderTrain(){
       `<button onclick="bump('${ex.id}',-2.5)">−</button>
        <div class="val" onclick="editW(this,'${ex.id}')"><span class="num">${fmtW(base)}</span><span class="u">kg</span></div>
        <button onclick="bump('${ex.id}',2.5)">+</button>`;
+    const psw=(prev&&prev.sw)?prev.sw:null;
     const srows=arr.map((s,si)=>{
       const eff=s.w!=null?s.w:base;
-      const wcell=a.bw?`<div class="swt bwlab">corporal</div>`:
-        `<div class="swt" onclick="editSetW(this,'${ex.id}',${si})">${fmtW(eff)}<span class="u">kg</span></div>`;
+      const pv=(psw&&psw[si]!=null)?psw[si]:null;
+      const hint=(!a.bw&&pv!=null)?`<div class="sant">anterior ${fmtW(pv)} kg</div>`:'';
+      const wcell=a.bw?`<div class="scell"><div class="swt bwlab">corporal</div></div>`:
+        `<div class="scell"><div class="swt" onclick="editSetW(this,'${ex.id}',${si})">${fmtW(eff)}<span class="u">kg</span></div>${hint}</div>`;
       return `<div class="srow${s.d?' done':''}">
         <div class="snum">${si+1}</div>${wcell}
         <button class="schk${s.d?' on':''}" onclick="toggleSet('${ex.id}',${si})">${s.d?'✓':''}</button>
@@ -1674,6 +1791,7 @@ function toggleSet(baseId,si){
   const s=arr[si];
   s.d=!s.d;
   if(s.d&&s.w==null&&!a.bw)s.w=wOf(a);
+  SESSMETA[cur]={d:$('date').value||todayISO(),ts:Date.now()};save('iron_sessmeta',SESSMETA);
   save('iron_session',SESSION);cloudSync();
   const justDone=s.d;renderTrain();
   if(justDone){if(navigator.vibrate)navigator.vibrate(35);
@@ -1714,22 +1832,72 @@ function paintT(){const m=Math.floor(tLeft/60),s=tLeft%60;
 $('tx').onclick=()=>{clearInterval(tInt);$('tmr').classList.remove('show')};
 
 /* concluir */
-$('finBtn').onclick=()=>{
-  const day=PROGRAM[cur];let done=0,tot=0;const snap={};
-  day.ex.forEach(ex=>{const a=activeOf(ex);const arr=setsArr(ex.id,a.sets);
-    done+=arr.filter(x=>x.d).length;tot+=a.sets;
-    if(!a.bw)snap[a.vid]=wOf(a)});
-  if(done===0){toast('Marca pelo menos uma série antes 😉');return}
-  const items=day.ex.map(ex=>{const a=activeOf(ex);const arr=setsArr(ex.id,a.sets);
-    const s=arr.filter(x=>x.d).length;
-    const sw=a.bw?null:arr.filter(x=>x.d).map(x=>x.w!=null?x.w:wOf(a));
-    return {id:a.vid,n:a.name,s,t:a.sets,w:a.bw?null:wOf(a),sw}});
-  HISTORY.unshift({date:$('date').value||todayISO(),workout:cur,label:day.label,done,tot,weights:snap,items,ts:Date.now()});
+function finishWorkout(key,dateStr){
+  const day=PROGRAM[key];if(!day)return null;
+  let done=0,tot=0;const snap={};
+  const items=day.ex.map(ex=>{
+    const a=activeOf(ex);const arr=setsArr(ex.id,a.sets,key);
+    const s=arr.filter(x=>x.d).length;done+=s;tot+=a.sets;
+    if(!a.bw)snap[a.vid]=wOf(a);
+    const sw=a.bw?null:arr.map(x=>x.d?(x.w!=null?x.w:wOf(a)):null);
+    return {id:a.vid,n:a.name,s,t:a.sets,w:a.bw?null:wOf(a),sw};
+  });
+  if(done===0)return null;
+  HISTORY.unshift({date:dateStr||todayISO(),workout:key,label:day.label,done,tot,weights:snap,items,ts:Date.now()});
   save('iron_history',HISTORY);
-  SESSION[cur]={};save('iron_session',SESSION);cloudSync();
-  confetti();toast('🔥 Treino '+cur+' registrado! '+done+'/'+tot+' séries');
-  renderTrain();
+  SESSION[key]={};save('iron_session',SESSION);
+  delete SESSMETA[key];save('iron_sessmeta',SESSMETA);
+  if(RESUMED===key)RESUMED=null;
+  cloudSync();
+  return {done,tot};
+}
+$('finBtn').onclick=()=>{
+  const r=finishWorkout(cur,$('date').value||todayISO());
+  if(!r){toast('Marca pelo menos uma série antes 😉');return}
+  confetti();toast('🔥 Treino '+cur+' registrado! '+r.done+'/'+r.tot+' séries');
+  render();
 };
+/* ---- pendências ---- */
+function alertFinish(key){
+  const meta=SESSMETA[key]||{};
+  const r=finishWorkout(key,meta.d||todayISO());
+  if(!r){toast('Nada pra registrar nesse treino');render();return}
+  confetti();toast('✔ Treino '+key+' registrado! '+r.done+'/'+r.tot+' séries');
+  render();
+}
+function alertResume(key){
+  RESUMED=key;cur=key;view='train';
+  $('trainView').classList.remove('hidden');$('progView').classList.add('hidden');
+  $('navTrain').classList.add('on');$('navProg').classList.remove('on');
+  const meta=SESSMETA[key];if(meta&&meta.d)$('date').value=meta.d;
+  render();window.scrollTo({top:0,behavior:'smooth'});
+  toast('Retomando o Treino '+key);
+}
+function alertDiscard(key){
+  if(!confirm('Descartar as séries marcadas do Treino '+key+'? Isso não afeta seu histórico.'))return;
+  SESSION[key]={};save('iron_session',SESSION);
+  delete SESSMETA[key];save('iron_sessmeta',SESSMETA);
+  cloudSync();render();toast('Séries em aberto descartadas');
+}
+function renderAlerts(){
+  const el=$('alertCard');
+  const pend=pendingDays();
+  if(!pend.length){el.innerHTML='';return}
+  el.innerHTML=pend.map(p=>{
+    const pct=Math.round(p.done/p.tot*100);
+    const quando=p.hoje?'hoje':relDate(p.date);
+    const quase=pct>=80?' Faltou pouco pra fechar.':'';
+    return `<div class="alertc">
+      <div class="atop">⚠️ Treino ${p.key} em aberto</div>
+      <p>Você marcou <b>${p.done} de ${p.tot} séries</b> (${pct}%) ${quando} e não concluiu.${quase} Quer registrar agora?</p>
+      <div class="abtns">
+        <button onclick="alertResume('${p.key}')">Retomar</button>
+        <button class="pri" onclick="alertFinish('${p.key}')">Concluir</button>
+        <button class="ghost" onclick="alertDiscard('${p.key}')">Descartar</button>
+      </div>
+    </div>`;
+  }).join('');
+}
 
 /* =================== PROGRESSO =================== */
 function renderProgress(){
@@ -1760,7 +1928,7 @@ function renderProgress(){
     const head=wk!==lastWk?`<div class="wkhead">${wkLabel(wk)}</div>`:'';
     lastWk=wk;
     const det=h.items?h.items.map(it=>{
-      const wtx=(it.sw&&it.sw.length)?it.sw.map(fmtW).join(' · ')+' kg':(it.w!=null?fmtW(it.w)+' kg':'');
+      const sv=(it.sw||[]).filter(v=>v!=null);const wtx=sv.length?sv.map(fmtW).join(' · ')+' kg':(it.w!=null?fmtW(it.w)+' kg':'');
       return `<div class="hd-row"><span>${it.n}</span><small>${it.s}/${it.t} séries${wtx?' · '+wtx:''}</small></div>`}).join(''):
       (h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
       `<div class="hd-row"><span>${vidName(vid)}</span><small>${fmtW(w)} kg</small></div>`).join(''):
@@ -1803,7 +1971,7 @@ function renderProgress(){
 function delHist(i){
   if(!confirm('Excluir este registro do histórico?'))return;
   HISTORY.splice(i,1);save('iron_history',HISTORY);cloudSync();
-  renderProgress();toast('Registro excluído');
+  renderLastCard();renderProgress();toast('Registro excluído');
 }
 function toggleHist(i){
   const d=$('hd'+i),r=$('hr'+i);
@@ -2054,6 +2222,7 @@ function useDefault(){
 function obFinish(){
   SETUP={...OBDATA,default:false};PROGRAM=OBPROG;
   SESSION={};save('iron_session',SESSION);
+  SESSMETA={};save('iron_sessmeta',SESSMETA);
   save('iron_setup',SETUP);save('iron_program',PROGRAM);cloudSync();
   closeOB();cur=Object.keys(PROGRAM)[0];render();
   confetti();toast('Programa criado! Bora treinar 🚀');
@@ -2068,8 +2237,8 @@ function obFinish(){
    3) Cole os dois valores aqui embaixo, entre as aspas
    4) Rode o conteúdo do arquivo supabase.sql no SQL Editor
    ============================================================ */
-const SUPABASE_URL = 'https://vxyicadvizwnmclijofn.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_lRPzAYweHnyvZDktHx5V3A_LTnM8U3D';
+const SUPABASE_URL = '';
+const SUPABASE_ANON_KEY = '';
 
 let sb=null, sbUser=null, syncT=null, authMode='in';
 const SB_ON=()=>SUPABASE_URL.indexOf('https://')===0&&SUPABASE_ANON_KEY.length>20;
@@ -2095,7 +2264,7 @@ function loadScript(u){return new Promise((ok,err)=>{const s=document.createElem
 function cloudSync(){if(!sb||!sbUser)return;clearTimeout(syncT);syncT=setTimeout(cloudPush,1500)}
 async function cloudPush(){
   if(!sb||!sbUser)return;
-  const payload={weights:WEIGHTS,history:HISTORY,variant:VARIANT,session:SESSION,program:PROGRAM,setup:SETUP,updated:Date.now()};
+  const payload={weights:WEIGHTS,history:HISTORY,variant:VARIANT,session:SESSION,sessmeta:SESSMETA,program:PROGRAM,setup:SETUP,updated:Date.now()};
   save('iron_updated',payload.updated);
   try{await sb.from('workout_data').upsert({user_id:sbUser.id,payload,updated_at:new Date().toISOString()})}catch(e){}
 }
@@ -2113,6 +2282,7 @@ async function cloudPull(){
       WEIGHTS={...WEIGHTS,...(p.weights||{})};
       VARIANT={...VARIANT,...(p.variant||{})};
       SESSION={...SESSION,...(p.session||{})};
+      if(p.sessmeta){SESSMETA={...SESSMETA,...p.sessmeta};save('iron_sessmeta',SESSMETA)}
       if(p.program){PROGRAM=p.program;save('iron_program',PROGRAM)}
       if(p.setup){SETUP=p.setup;save('iron_setup',SETUP);closeOB()}
     }
@@ -2247,8 +2417,8 @@ async function doSignOut(){
   if(!confirm('Sair da conta?\n\nOs dados deste aparelho serão limpos para o próximo usuário. Tudo continua salvo na sua conta na nuvem e volta quando você entrar de novo.'))return;
   try{await sb.auth.signOut()}catch(e){}
   sbUser=null;
-  ['iron_weights','iron_session','iron_history','iron_variant','iron_setup','iron_program','iron_updated'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});
-  WEIGHTS={};SESSION={};HISTORY=[];VARIANT={};SETUP=null;PROGRAM=null;cur='A';
+  ['iron_weights','iron_session','iron_sessmeta','iron_history','iron_variant','iron_setup','iron_program','iron_updated'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});
+  WEIGHTS={};SESSION={};SESSMETA={};HISTORY=[];VARIANT={};SETUP=null;PROGRAM=null;cur='A';
   ensureProgram();
   paintAcctBtn();closeAcct();
   render();
