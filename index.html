@@ -509,14 +509,15 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
       </div>
       <div class="hbtns">
         <button class="thm" id="acct" title="Conta e nuvem">👤</button>
+        <button class="thm" id="langBtn" onclick="openLangPicker()" title="Idioma / Language">🌐</button>
         <button class="thm" id="thm" title="Tema claro/escuro">🌙</button>
         <div class="datebox">
-          <label>Dia do treino</label>
+          <label id="dateLbl">Dia do treino</label>
           <input type="date" id="date">
         </div>
       </div>
     </div>
-    <div class="hello">Bora, <em id="helloName">Atleta</em>.</div>
+    <div class="hello"><span id="helloPre">Bora</span>, <em id="helloName">Atleta</em><span id="helloPost">.</span></div>
     <div class="quote" id="quote"></div>
   </header>
   <div id="alertCard"></div>
@@ -525,7 +526,7 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
   <div id="trainView">
     <div class="tabsbar"><nav class="tabs" id="tabs"></nav></div>
     <div class="prog">
-      <div class="row"><span class="l">Progresso do treino</span><span class="r"><em id="pdone">0</em>/<span id="ptot">0</span> séries</span></div>
+      <div class="row"><span class="l" id="progLbl">Progresso do treino</span><span class="r"><em id="pdone">0</em>/<span id="ptot">0</span> <span id="seriesLbl">séries</span></span></div>
       <div class="bar"><i id="pbar"></i></div>
     </div>
     <div class="dintro" id="dintro"></div>
@@ -533,7 +534,7 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
       <button onclick="toggleOrder(this)">🧠 Por que essa ordem? <span class="cv">▾</span></button>
       <div class="bd"><div class="bd-i" id="orderBody"></div></div>
     </div>
-    <div class="editrow"><button class="editbtn" id="editBtn" onclick="toggleEdit()">✎ Editar exercícios deste treino</button></div>
+    <div class="editrow"><button class="editbtn" id="editBtn" onclick="toggleEdit()">✎ Editar exercícios</button></div>
     <div class="list" id="list"></div>
     <div class="fin"><button id="finBtn">Concluir treino</button></div>
   </div>
@@ -551,11 +552,11 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 <nav class="nav">
   <button id="navTrain" class="on" onclick="setView('train')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6.5 6.5 17.5 17.5M4 9l2-2M20 15l-2 2M9 4 7 6M17 20l-2-2M3.5 11.5l9 9"/></svg>
-    <span>Treino</span>
+    <span id="navTrainLbl">Treino</span>
   </button>
   <button id="navProg" onclick="setView('progress')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19V5M4 19h16M8 16l3-4 3 2 4-6"/></svg>
-    <span>Progresso</span>
+    <span id="navProgLbl">Progresso</span>
   </button>
 </nav>
 
@@ -1653,6 +1654,188 @@ FIG.runningv=`<svg viewBox="0 0 120 100"><style>
 </g>
 <circle cx="56" cy="28" r="8" fill="${COL.body}"/>
 </svg>`;
+
+/* ===== funcional / circuito ===== */
+FIG.kettlebellswing=`<svg viewBox="0 0 120 100"><style>
+ .kb-t{transform-origin:58px 58px;animation:kbt 1.3s infinite ease-in-out}
+ @keyframes kbt{0%,100%{transform:rotate(38deg)}50%{transform:rotate(-6deg)}}
+ .kb-w{transform-origin:58px 58px;animation:kbw 1.3s infinite ease-in-out}
+ @keyframes kbw{0%,100%{transform:translate(0,0)}50%{transform:translate(6px,-30px)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="58" y1="58" x2="52" y2="90" stroke-width="9"/>
+ <line x1="58" y1="58" x2="64" y2="90" stroke-width="9"/>
+</g>
+<g class="kb-t">
+ <line x1="58" y1="58" x2="58" y2="36" stroke="${COL.body}" stroke-width="12" stroke-linecap="round"/>
+ <circle cx="58" cy="26" r="8" fill="${COL.body}"/>
+ <line x1="58" y1="44" x2="58" y2="58" stroke="${COL.body}" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g class="kb-w"><circle cx="58" cy="66" r="9" fill="${COL.stack}"/><rect x="54" y="58" width="8" height="6" rx="2" fill="none" stroke="${COL.stack}" stroke-width="2"/></g>
+</svg>`;
+
+FIG.farmercarry=`<svg viewBox="0 0 120 100"><style>
+ .fc-l{transform-origin:56px 60px;animation:fcl .8s infinite ease-in-out}
+ .fc-r{transform-origin:56px 60px;animation:fcr .8s infinite ease-in-out}
+ @keyframes fcl{0%,100%{transform:rotate(26deg)}50%{transform:rotate(-26deg)}}
+ @keyframes fcr{0%,100%{transform:rotate(-26deg)}50%{transform:rotate(26deg)}}
+</style>
+<line x1="6" y1="90" x2="114" y2="90" stroke="${COL.floor}" stroke-width="2" stroke-dasharray="6 6"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="56" y1="36" x2="56" y2="60" stroke-width="12"/>
+ <line x1="46" y1="40" x2="40" y2="70" stroke-width="6"/>
+ <line x1="66" y1="40" x2="72" y2="70" stroke-width="6"/>
+ <g class="fc-l"><line x1="56" y1="60" x2="52" y2="82" stroke-width="8"/></g>
+ <g class="fc-r"><line x1="56" y1="60" x2="60" y2="82" stroke-width="8"/></g>
+</g>
+<rect x="34" y="68" width="10" height="8" rx="2" fill="${COL.stack}"/><rect x="66" y="68" width="10" height="8" rx="2" fill="${COL.stack}"/>
+<circle cx="56" cy="28" r="8" fill="${COL.body}"/>
+</svg>`;
+
+FIG.sledpush=`<svg viewBox="0 0 120 100"><style>
+ .sp2{animation:sp2 1.6s infinite ease-in-out}
+ @keyframes sp2{0%,100%{transform:translateX(0)}50%{transform:translateX(14px)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<g class="sp2">
+ <rect x="80" y="66" width="18" height="20" rx="2" fill="${COL.frameFill}" stroke="${COL.frame}" stroke-width="1.5"/>
+ <rect x="78" y="60" width="4" height="30" fill="${COL.frame}"/>
+ <g fill="none" stroke="${COL.body}" stroke-linecap="round">
+  <line x1="36" y1="50" x2="66" y2="66" stroke-width="11"/>
+  <line x1="66" y1="66" x2="78" y2="70" stroke-width="7"/>
+  <line x1="40" y1="54" x2="30" y2="72" stroke-width="8"/>
+  <line x1="30" y1="72" x2="30" y2="90" stroke-width="7"/>
+  <line x1="52" y1="60" x2="46" y2="80" stroke-width="8"/>
+  <line x1="46" y1="80" x2="52" y2="90" stroke-width="7"/>
+ </g>
+ <circle cx="32" cy="44" r="8" fill="${COL.body}"/>
+</g>
+</svg>`;
+
+FIG.battleropes=`<svg viewBox="0 0 120 100"><style>
+ .bt-l{transform-origin:50px 44px;animation:btl .55s infinite ease-in-out}
+ .bt-r{transform-origin:70px 44px;animation:btr .55s infinite ease-in-out}
+ @keyframes btl{0%,100%{transform:rotate(30deg)}50%{transform:rotate(-30deg)}}
+ @keyframes btr{0%,100%{transform:rotate(-30deg)}50%{transform:rotate(30deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<rect x="94" y="40" width="6" height="50" rx="2" fill="${COL.frameFill}" stroke="${COL.frame}" stroke-width="1.5"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="60" y1="42" x2="58" y2="70" stroke-width="12"/>
+ <line x1="55" y1="70" x2="50" y2="90" stroke-width="9"/>
+ <line x1="62" y1="70" x2="68" y2="90" stroke-width="9"/>
+</g>
+<g class="bt-l"><path d="M50 44 Q70 54 94 46" fill="none" stroke="${COL.cable}" stroke-width="3"/></g>
+<g class="bt-r"><path d="M70 44 Q80 60 96 66" fill="none" stroke="${COL.cable}" stroke-width="3"/></g>
+<circle cx="60" cy="32" r="8" fill="${COL.body}"/>
+</svg>`;
+
+FIG.medicineball=`<svg viewBox="0 0 120 100"><style>
+ .mb-arm{transform-origin:58px 46px;animation:mba 1.5s infinite ease-in-out}
+ @keyframes mba{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-150deg)}}
+ .mb-ball{transform-origin:58px 46px;animation:mbb 1.5s infinite ease-in-out}
+ @keyframes mbb{0%,100%{transform:translateY(0)}50%{transform:translateY(40px)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="58" y1="42" x2="56" y2="66" stroke-width="12"/>
+ <line x1="54" y1="66" x2="48" y2="90" stroke-width="9"/>
+ <line x1="58" y1="66" x2="64" y2="90" stroke-width="9"/>
+</g>
+<g class="mb-arm"><line x1="58" y1="46" x2="58" y2="24" stroke="${COL.body}" stroke-width="7" stroke-linecap="round"/>
+ <g class="mb-ball"><circle cx="58" cy="20" r="8" fill="${COL.stack}"/></g></g>
+<circle cx="58" cy="32" r="8" fill="${COL.body}"/>
+</svg>`;
+
+FIG.boxjump=`<svg viewBox="0 0 120 100"><style>
+ .bj{animation:bj 1.1s infinite ease-in-out}
+ @keyframes bj{0%,40%,100%{transform:translate(0,0)}20%{transform:translate(20px,-28px)}}
+ .bj-leg{transform-origin:60px 60px;animation:bjl 1.1s infinite ease-in-out}
+ @keyframes bjl{0%,40%,100%{transform:rotate(0deg)}20%{transform:rotate(-40deg)}}
+</style>
+<rect x="70" y="66" width="34" height="24" fill="${COL.frameFill}" stroke="${COL.frame}" stroke-width="1.5"/>
+<line x1="6" y1="90" x2="70" y2="90" stroke="${COL.floor}" stroke-width="3"/>
+<g class="bj">
+ <g fill="none" stroke="${COL.body}" stroke-linecap="round">
+  <line x1="40" y1="36" x2="42" y2="58" stroke-width="12"/>
+  <line x1="34" y1="40" x2="26" y2="30" stroke-width="6"/>
+  <line x1="50" y1="40" x2="58" y2="30" stroke-width="6"/>
+  <g class="bj-leg"><line x1="42" y1="58" x2="42" y2="80" stroke-width="9"/></g>
+ </g>
+ <circle cx="40" cy="26" r="8" fill="${COL.body}"/>
+</g>
+</svg>`;
+
+FIG.trxrow=`<svg viewBox="0 0 120 100"><style>
+ .tx-t{transform-origin:56px 60px;animation:txt 1.9s infinite ease-in-out}
+ @keyframes txt{0%,100%{transform:rotate(0deg)}50%{transform:rotate(18deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<line x1="80" y1="10" x2="80" y2="30" stroke="${COL.frame}" stroke-width="4"/>
+<line x1="80" y1="10" x2="30" y2="10" stroke="${COL.frame}" stroke-width="4"/>
+<line x1="80" y1="30" x2="60" y2="46" stroke="${COL.cable}" stroke-width="2"/>
+<g class="tx-t">
+ <line x1="56" y1="60" x2="56" y2="38" stroke="${COL.body}" stroke-width="12" stroke-linecap="round"/>
+ <circle cx="56" cy="28" r="8" fill="${COL.body}"/>
+ <line x1="56" y1="46" x2="60" y2="46" stroke="${COL.body}" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="56" y1="60" x2="52" y2="90" stroke-width="9"/>
+ <line x1="56" y1="60" x2="64" y2="86" stroke-width="9"/>
+</g>
+</svg>`;
+
+FIG.jumpropev=`<svg viewBox="0 0 120 100"><style>
+ .jr{animation:jr .55s infinite ease-in-out}
+ @keyframes jr{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+ .jr-rope{animation:jrr .55s infinite linear}
+ @keyframes jrr{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<g class="jr">
+ <g fill="none" stroke="${COL.body}" stroke-linecap="round">
+  <line x1="58" y1="36" x2="58" y2="60" stroke-width="12"/>
+  <line x1="58" y1="60" x2="52" y2="82" stroke-width="8"/>
+  <line x1="58" y1="60" x2="64" y2="82" stroke-width="8"/>
+  <line x1="52" y1="44" x2="42" y2="52" stroke-width="6"/>
+  <line x1="64" y1="44" x2="74" y2="52" stroke-width="6"/>
+ </g>
+ <circle cx="58" cy="26" r="8" fill="${COL.body}"/>
+ <ellipse class="jr-rope" cx="58" cy="60" rx="26" ry="34" fill="none" stroke="${COL.cable}" stroke-width="2"/>
+</g>
+</svg>`;
+
+FIG.burpeev=`<svg viewBox="0 0 120 100"><style>
+ .bp{transform-origin:58px 90px;animation:bp 1.6s infinite ease-in-out}
+ @keyframes bp{0%,100%{transform:translateY(0) scaleY(1)}35%{transform:translateY(14px) scaleY(.7)}70%{transform:translateY(-14px) scaleY(1.05)}}
+</style>
+<line x1="6" y1="92" x2="114" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<g class="bp">
+ <g fill="none" stroke="${COL.body}" stroke-linecap="round">
+  <line x1="58" y1="40" x2="58" y2="64" stroke-width="12"/>
+  <line x1="58" y1="64" x2="48" y2="88" stroke-width="9"/>
+  <line x1="58" y1="64" x2="68" y2="88" stroke-width="9"/>
+  <line x1="50" y1="44" x2="38" y2="30" stroke-width="6"/>
+  <line x1="66" y1="44" x2="78" y2="30" stroke-width="6"/>
+ </g>
+ <circle cx="58" cy="30" r="8" fill="${COL.body}"/>
+</g>
+</svg>`;
+
+FIG.mountainclimberv=`<svg viewBox="0 0 120 100"><style>
+ .mc-l{transform-origin:66px 78px;animation:mcl .6s infinite ease-in-out}
+ @keyframes mcl{0%,100%{transform:rotate(0deg) translateX(0)}50%{transform:rotate(-58deg) translateX(-18px)}}
+</style>
+<line x1="6" y1="90" x2="114" y2="90" stroke="${COL.floor}" stroke-width="3"/>
+<g fill="none" stroke="${COL.body}" stroke-linecap="round">
+ <line x1="34" y1="66" x2="78" y2="70" stroke-width="11"/>
+ <line x1="38" y1="68" x2="34" y2="86" stroke-width="7"/>
+ <g class="mc-l"><line x1="78" y1="70" x2="94" y2="70" stroke-width="9"/></g>
+ <line x1="78" y1="70" x2="94" y2="86" stroke-width="9"/>
+</g>
+<circle cx="28" cy="62" r="8" fill="${COL.body}"/>
+</svg>`;
 </script>
 <script>
 /* =================== ACENTOS =================== */
@@ -1673,11 +1856,50 @@ const ACCENTS={get light(){return {}},get dark(){return {}}};
 const HIST_COLORS=new Proxy({},{get:(_,k)=>accentFor(String(k),'light').a});
 const PHOTOS={'chestpress':'Machine Bench Press','dbbench':'Dumbbell Bench Press','pecdeck':'Butterfly','cablefly':'Cable Crossover','shoulderpress':'Machine Shoulder (Military) Press','dbshoulder':'Seated Dumbbell Press','sidelat':'Side Lateral Raise','reversefly':'Reverse Machine Flyes','dbrevfly':'Bent Over Dumbbell Rear Delt Raise With Head On Bench','facepullv':'Face Pull','triceps':'Triceps Pushdown','benchdipv':'Bench Dips','biceps':'Barbell Curl','hammer':'Hammer Curls','latpull':'Wide-Grip Lat Pulldown','neutralpull':'Close-Grip Front Lat Pulldown','seatedrow':'Seated Cable Rows','lowrow':'Lying T-Bar Row','legpress':'Leg Press','goblet2':'Goblet Squat','legext':'Leg Extensions','lungev':'Dumbbell Lunges','legcurl':'Seated Leg Curl','rdlv':'Romanian Deadlift','glutekick':'Glute Kickback','bridgev':'Butt Lift (Bridge)','abductor':'Thigh Abductor','adductor':'Thigh Adductor','cableadd':'Cable Hip Adduction','calf':'Standing Calf Raises','dbcalf':'Standing Dumbbell Calf Raise','lowerback':'Hyperextensions (Back Extensions)','supermanv':'Superman','absfull':'Crunches','plankv':'Plank','reversecrunch':'Reverse Crunch','legraisev':'Flat Bench Lying Leg Raise','finisher':'Bicycling, Stationary','treadmillv':'Walking, Treadmill','rowerv':'Rowing, Stationary','cablelatv':'Cable Seated Lateral Raise','widerow':'Seated Cable Rows','bandabd':'Thigh Abductor'};
 const hasPhoto=id=>!!PHOTOS[id];
+const I18N={
+ 'pt-BR':{bora:'Bora',trein:'Treino',prog:'Progresso',diadotreino:'Dia do treino',ultimotreino:'Último treino',
+   completo:'✓ Completo',parcial:'Parcial',series:'séries',progressodotreino:'Progresso do treino',
+   porqueessaordem:'🧠 Por que essa ordem?',editarex:'✎ Editar exercícios',concluirtreino:'Concluir treino',
+   sersemana:'Treinos da semana',ultimos7:'Últimos 7 dias',totalfeitos:'Total feitos',historico:'Histórico',
+   exportarxlsx:'📊 Exportar Excel',exportarpdf:'📄 Exportar PDF',personalizar:'⚙️ Personalizar meu treino',
+   evoluir:'🚀 Evoluir treino',excluidos:'🗑 Treinos excluídos',backup:'💾 Backup',versoesant:'🕒 Versões anteriores do treino',
+   vervideo:'▶ Ver vídeo',passoapasso:'Passo a passo',opcoes:'Opções',anterior:'Anterior',descanso:'Descanso',
+   semdescanso:'Sem pausa',continuo:'Contínuo',addextra:'＋ Adicionar exercício extra hoje',hoje:'hoje',ontem:'ontem'},
+ en:{bora:"Let's go",trein:'Workout',prog:'Progress',diadotreino:'Workout day',ultimotreino:'Last workout',
+   completo:'✓ Complete',parcial:'Partial',series:'sets',progressodotreino:'Workout progress',
+   porqueessaordem:'🧠 Why this order?',editarex:'✎ Edit exercises',concluirtreino:'Finish workout',
+   sersemana:'This week\'s workouts',ultimos7:'Last 7 days',totalfeitos:'Total done',historico:'History',
+   exportarxlsx:'📊 Export Excel',exportarpdf:'📄 Export PDF',personalizar:'⚙️ Customize my workout',
+   evoluir:'🚀 Evolve workout',excluidos:'🗑 Deleted workouts',backup:'💾 Backup',versoesant:'🕒 Previous workout versions',
+   vervideo:'▶ Watch video',passoapasso:'Step by step',opcoes:'Options',anterior:'Last time',descanso:'Rest',
+   semdescanso:'No rest',continuo:'Continuous',addextra:'＋ Add extra exercise today',hoje:'today',ontem:'yesterday'},
+ es:{bora:'Vamos',trein:'Entreno',prog:'Progreso',diadotreino:'Día de entreno',ultimotreino:'Último entreno',
+   completo:'✓ Completo',parcial:'Parcial',series:'series',progressodotreino:'Progreso del entreno',
+   porqueessaordem:'🧠 ¿Por qué este orden?',editarex:'✎ Editar ejercicios',concluirtreino:'Terminar entreno',
+   sersemana:'Entrenos de la semana',ultimos7:'Últimos 7 días',totalfeitos:'Total realizados',historico:'Historial',
+   exportarxlsx:'📊 Exportar Excel',exportarpdf:'📄 Exportar PDF',personalizar:'⚙️ Personalizar mi entreno',
+   evoluir:'🚀 Evolucionar entreno',excluidos:'🗑 Entrenos eliminados',backup:'💾 Copia de seguridad',versoesant:'🕒 Versiones anteriores del entreno',
+   vervideo:'▶ Ver vídeo',passoapasso:'Paso a paso',opcoes:'Opciones',anterior:'Última vez',descanso:'Descanso',
+   semdescanso:'Sin pausa',continuo:'Continuo',addextra:'＋ Añadir ejercicio extra hoy',hoje:'hoy',ontem:'ayer'},
+};
+let LANG='pt-BR';
+function t(k){return (I18N[LANG]&&I18N[LANG][k])||I18N['pt-BR'][k]||k}
+function localeOf(){return LANG==='en'?'en-US':LANG==='es'?'es-ES':'pt-BR'}
+function setLang(l){LANG=l;save('iron_lang',LANG);document.documentElement.lang=l;boxClose();render();
+  toast(l==='pt-BR'?'Idioma: Português':l==='en'?'Language: English':'Idioma: Español')}
+function openLangPicker(){
+  const opts=[['pt-BR','🇧🇷 Português (Brasil)'],['en','🇺🇸 English'],['es','🇪🇸 Español']];
+  boxOpen(`<h3>🌐 Idioma / Language</h3>
+    <div class="sub">Exercícios, dicas e textos longos continuam em português por enquanto. A navegação do app já muda.</div>
+    <div class="mlist">${opts.map(([code,label])=>
+      `<div class="prow"><div class="rtx"><b>${label}</b></div><button class="padd" onclick="setLang('${code}')">${LANG===code?'✓':'→'}</button></div>`).join('')}</div>
+    <div class="mrow" style="margin-top:10px"><button class="mbtn pri" onclick="boxClose()">Fechar</button></div>`);
+}
 const YT=q=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q);
 
 /* =================== BIBLIOTECA DE EXERCÍCIOS =================== */
 /* grp: chest back shoulders arms legs glutes core calf | cat: comp iso core calf lomb cardio */
-const GRP_LABEL={chest:'Peito',back:'Costas',shoulders:'Ombros',arms:'Braços',legs:'Pernas',glutes:'Glúteos',core:'Abdômen',calf:'Panturrilha'};
+const GRP_LABEL={chest:'Peito',back:'Costas',shoulders:'Ombros',arms:'Braços',legs:'Pernas',glutes:'Glúteos',core:'Abdômen',calf:'Panturrilha',functional:'Funcional'};
 const E={
  chestpress:{name:'Chest Press',fig:'chestpress',grp:'chest',mus:'Peito',cat:'comp',w:30,sets:4,reps:'8–12',rest:90,evolve:'barbellbench',yt:'seated chest press machine form shorts',
   steps:['Ajuste o banco: pegadores na linha do meio do peito','Costas apoiadas, pés firmes no chão','Empurre à frente sem travar o cotovelo','Volte controlado sentindo o peito alongar'],
@@ -1853,6 +2075,36 @@ const E={
  runningv:{name:'Corrida ao Ar Livre',fig:'runningv',grp:'core',mus:'Condicionamento',cat:'cardio',bw:true,sets:1,reps:'20–30 min',rest:0,yt:'running form tips',
   steps:['Postura ereta, olhar à frente','Passada curta, cadência alta','Aterrissagem no meio do pé','Braços relaxados a 90°'],
   g:'Comece em ritmo que permita conversar (zona 2).',b:'Não dê passadas longas demais.',alts:['finisher','treadmillv','ellipticalv','stairsv','rowerv']},
+ kettlebellswing:{name:'Kettlebell Swing',fig:'kettlebellswing',grp:'functional',mus:'Posterior + core',cat:'func',w:12,sets:4,reps:'15–20',rest:25,yt:'kettlebell swing form',
+  steps:['Pés um pouco mais largos que o quadril, kettlebell à frente','Dobre o quadril pra trás pegando o peso (hip hinge)','Empurre o quadril à frente com força pra balançar o peso até o peito','Deixe balançar de volta controlado e repita'],
+  g:'A força vem do quadril, não dos braços ou ombros.',b:'Não agache: é dobra de quadril, não de joelho.',alts:[]},
+ farmercarry:{name:"Caminhada do Fazendeiro",fig:'farmercarry',grp:'functional',mus:'Pegada + core',cat:'func',w:20,sets:4,reps:'30–40 metros',rest:40,yt:'farmers carry form',
+  steps:['Halteres ou kettlebells pesados em cada mão','Ombros pra trás, peito aberto, core travado','Caminhe com passos firmes e curtos','Solte com controle ao fim da distância'],
+  g:'Postura ereta o tempo todo: não deixe os ombros caírem.',b:'Não deixe o peso balançar longe do corpo.',alts:[]},
+ sledpush:{name:'Empurrada de Trenó',fig:'sledpush',grp:'functional',mus:'Corpo inteiro',cat:'func',w:20,sets:4,reps:'15–20 metros',rest:50,yt:'sled push form',
+  steps:['Braços estendidos ou cotovelos no encosto do trenó','Incline o tronco à frente, quadril baixo','Passos curtos e potentes empurrando pelo chão','Mantenha ritmo constante até o fim'],
+  g:'Empurre com as pernas, tronco estável.',b:'Não fique ereto demais: perde força.',alts:[]},
+ battleropes:{name:'Corda Naval (Battle Rope)',fig:'battleropes',grp:'functional',mus:'Ombro + core',cat:'func',bw:true,sets:4,reps:'30s',rest:25,yt:'battle ropes form',
+  steps:['Pés na largura do quadril, joelhos levemente flexionados','Uma corda em cada mão, core travado','Bata as cordas alternando os braços com força','Mantenha ritmo alto pelo tempo definido'],
+  g:'O movimento sai do ombro, com o core estabilizando.',b:'Não deixe a lombar arquear.',alts:[]},
+ medicineball:{name:'Arremesso de Medicine Ball',fig:'medicineball',grp:'functional',mus:'Corpo inteiro (potência)',cat:'func',w:6,sets:3,reps:'10–12',rest:35,yt:'medicine ball slam form',
+  steps:['Levante a bola acima da cabeça com os braços estendidos','Contraia o core com força','Arremesse a bola no chão à sua frente','Pegue no rebote e repita'],
+  g:'Usa o corpo inteiro: quadril, core e ombro juntos.',b:'Não arremesse só com o braço.',alts:[]},
+ boxjump:{name:'Salto na Caixa (Box Jump)',fig:'boxjump',grp:'functional',mus:'Potência de pernas',cat:'func',bw:true,sets:4,reps:'8–10',rest:50,yt:'box jump form',
+  steps:['Fique de frente pra caixa, pés na largura do quadril','Agache levemente e balance os braços pra trás','Salte explosivo aterrissando com os dois pés na caixa','Desça com controle e repita'],
+  g:'Aterrisse suave, dobrando os joelhos pra absorver o impacto.',b:'Não pule de uma caixa alta demais pro seu nível.',alts:[]},
+ trxrow:{name:'Remada no TRX',fig:'trxrow',grp:'functional',mus:'Costas + core',cat:'func',bw:true,sets:3,reps:'12–15',rest:35,yt:'trx row form',
+  steps:['Segure as alças, corpo inclinado pra trás em linha reta','Puxe o peito em direção às mãos','Aperte as escápulas no topo','Volte controlado estendendo os braços'],
+  g:'Quanto mais o corpo se inclina, mais difícil fica.',b:'Não deixe o quadril cair durante o movimento.',alts:[]},
+ jumpropev:{name:'Corda de Pular',fig:'jumpropev',grp:'functional',mus:'Condicionamento',cat:'func',bw:true,sets:4,reps:'40s',rest:20,yt:'jump rope form',
+  steps:['Cotovelos próximos ao corpo, gire pelos punhos','Pulos baixos, na ponta dos pés','Mantenha ritmo constante','Respire de forma controlada'],
+  g:'Pulos pequenos economizam energia e protegem o joelho.',b:'Não pule alto demais a cada rotação.',alts:[]},
+ burpeev:{name:'Burpee',fig:'burpeev',grp:'functional',mus:'Corpo inteiro',cat:'func',bw:true,sets:4,reps:'10–15',rest:35,yt:'burpee form',
+  steps:['Em pé, agache e apoie as mãos no chão','Jogue os pés pra trás em posição de prancha','Volte os pés perto das mãos','Salte esticando o corpo todo pra cima'],
+  g:'Mantenha o core firme na fase de prancha.',b:'Não deixe o quadril cair na prancha.',alts:[]},
+ mountainclimberv:{name:'Escalador (Mountain Climber)',fig:'mountainclimberv',grp:'functional',mus:'Core + condicionamento',cat:'func',bw:true,sets:3,reps:'30–40s',rest:25,yt:'mountain climber form',
+  steps:['Posição de prancha, mãos na linha do ombro','Traga um joelho em direção ao peito','Troque de perna rapidamente, tipo corrida no lugar','Mantenha o quadril baixo e estável'],
+  g:'Quadril estável: o movimento é só das pernas.',b:'Não deixe o quadril subir e descer.',alts:[]},
 };
 
 /* why genéricos por papel na ordem */
@@ -1893,11 +2145,16 @@ const GOALS={
    repsComp:'15–20',repsIso:'18–22',restComp:40,restIso:30,finisherDefault:true},
  cardio:{label:'Cardio',icon:'🏃',desc:'Foco total em condicionamento cardiovascular.',
    repsComp:'12–15',repsIso:'15',restComp:45,restIso:30,finisherDefault:true,cardioFocus:true},
+ funcional:{label:'Funcional',icon:'🤸',desc:'Kettlebell, trenó, TRX e cordas em circuito: força que serve pro dia a dia.',
+   repsComp:'12–15',repsIso:'15',restComp:30,restIso:25,finisherDefault:false,functionalFocus:true,circuitPairs:true},
+ circuito:{label:'Circuito (Queima)',icon:'⚡🔥',desc:'Duas máquinas intercaladas sem descanso entre elas: o método mais eficiente pra queimar calorias no seu tempo.',
+   repsComp:'12–15',repsIso:'15–20',restComp:30,restIso:20,finisherDefault:true,circuitPairs:true},
  geral:{label:'Saúde geral',icon:'❤️',desc:'Equilíbrio entre força, cardio e mobilidade.',
    repsComp:'10–12',repsIso:'12–15',restComp:75,restIso:45,finisherDefault:true},
 };
 const CARDIO_IDS=['treadmillv','runningv','ellipticalv','stairsv','rowerv','finisher'];
 const CARDIO_SUPPORT=['plankv','absfull','bridgev','lowerback','reversecrunch'];
+const FUNCTIONAL_POOL=['kettlebellswing','farmercarry','sledpush','battleropes','medicineball','boxjump','trxrow','jumpropev','burpeev','mountainclimberv'];
 function buildCardioDay(dayIdx,n,prefs){
   const base=(prefs&&prefs.length)?prefs.concat(CARDIO_IDS.filter(id=>!prefs.includes(id))):CARDIO_IDS;
   const rot=base.slice(dayIdx%base.length).concat(base.slice(0,dayIdx%base.length));
@@ -1907,6 +2164,21 @@ function buildCardioDay(dayIdx,n,prefs){
   const sup=[];
   for(let i=0;i<supCount;i++){const sid=CARDIO_SUPPORT[(dayIdx+i)%CARDIO_SUPPORT.length];sup.push({id:sid,...E[sid]})}
   return [...chosen,...sup];
+}
+function buildFunctionalDay(dayIdx,n){
+  const rot=FUNCTIONAL_POOL.slice(dayIdx%FUNCTIONAL_POOL.length).concat(FUNCTIONAL_POOL.slice(0,dayIdx%FUNCTIONAL_POOL.length));
+  return rot.slice(0,n).map(id=>({id,...E[id]}));
+}
+/* intercala exercícios em duplas (superset em circuito), sem descanso entre os dois da dupla */
+function pairAsCircuit(sel,restBetween){
+  const out=[];
+  for(let k=0;k<sel.length;k+=2){
+    if(sel[k+1]){
+      out.push({...sel[k],ss:'C'+(k/2),rest:0});
+      out.push({...sel[k+1],ss:'C'+(k/2),rest:restBetween||30});
+    }else{out.push(sel[k])}
+  }
+  return out;
 }
 
 /* =================== GERADOR =================== */
@@ -1947,6 +2219,9 @@ function generateProgram(setup){
   if(gdef.cardioFocus){
     days=Array.from({length:setup.splits},(_,i)=>({cardio:true,idx:i}));
     spName=GOALS.cardio.label;
+  }else if(gdef.functionalFocus){
+    days=Array.from({length:setup.splits},(_,i)=>({functional:true,idx:i}));
+    spName=GOALS.funcional.label;
   }else{
     const sp=SPLITS[setup.splits];spName=sp.name;
     days=sp.days.map(d=>({...d}));
@@ -1956,29 +2231,39 @@ function generateProgram(setup){
   const prog={};
   days.forEach((d,i)=>{
     const L=LETTERS[i];
-    let sel=d.cardio?buildCardioDay(i,setup.perDay,setup.cardioPrefs):buildDay(d.pool,setup.perDay,setup.groups);
+    let sel=d.cardio?buildCardioDay(i,setup.perDay,setup.cardioPrefs):
+             d.functional?buildFunctionalDay(i,setup.perDay):
+             buildDay(d.pool,setup.perDay,setup.groups);
     // calibra reps/descanso conforme o objetivo escolhido
     sel=sel.map(x=>{
       if(x.cat==='comp')return {...x,reps:gdef.repsComp,rest:gdef.restComp};
       if(x.cat==='iso')return {...x,reps:gdef.repsIso,rest:gdef.restIso};
       return x;
     });
+    // circuito: intercala em duplas sem descanso entre elas (o "queima gordura" alternando dois aparelhos)
+    if(gdef.circuitPairs&&!d.cardio)sel=pairAsCircuit(sel,gdef.restComp);
     const ex=sel.map((x,idx)=>({
       id:x.id,fig:x.fig,name:x.name,muscle:x.mus,w:x.w||0,bw:!!x.bw,
-      sets:x.sets,reps:x.reps,rest:x.ss==='A'&&x.id==='abductor'?0:x.rest,
+      sets:x.sets,reps:x.reps,rest:(x.ss==='A'&&x.id==='abductor')?0:x.rest,
       ss:x.ss,yt:x.yt,steps:x.steps,g:x.g,b:x.b,
-      why:d.cardio?(x.cat==='cardio'?'Base do treino de cardio: gasto calórico sustentado e condicionamento.':'Estabilidade central pra sustentar a postura durante o cardio.'):whyFor(x,idx,true),
+      why:d.cardio?(x.cat==='cardio'?'Base do treino de cardio: gasto calórico sustentado e condicionamento.':'Estabilidade central pra sustentar a postura durante o cardio.'):
+          d.functional?'Movimento funcional: treina o corpo como uma unidade, replicando padrões do dia a dia.':
+          (x.ss?'Estação de circuito: intercala com o próximo exercício sem descanso, mantendo a frequência cardíaca elevada pra maximizar a queima.':whyFor(x,idx,true)),
       alts:(x.alts||[]).map(aid=>({id:aid,fig:E[aid].fig,name:E[aid].name,w:E[aid].w,bw:!!E[aid].bw,reps:E[aid].reps,yt:E[aid].yt,steps:E[aid].steps,g:E[aid].g,b:E[aid].b}))
     }));
-    if(setup.finisher&&!d.cardio&&(i===0||i===days.length-1)){
+    if(setup.finisher&&!d.cardio&&!d.functional&&(i===0||i===days.length-1)){
       const f=E.finisher;
       ex.push({id:'finisher',fig:f.fig,name:f.name,muscle:f.mus,w:0,bw:true,sets:1,reps:f.reps,rest:0,yt:f.yt,steps:f.steps,g:f.g,b:f.b,why:whyFor(f,99),
         alts:f.alts.map(aid=>({id:aid,fig:E[aid].fig,name:E[aid].name,bw:true,reps:E[aid].reps,yt:E[aid].yt,steps:E[aid].steps,g:E[aid].g,b:E[aid].b}))});
     }
-    const label=d.cardio?(sel[0]?sel[0].name:'Cardio'):d.label;
-    const sub=d.cardio?'Condicionamento':d.sub;
+    const label=d.cardio?(sel[0]?sel[0].name:'Cardio'):d.functional?'Funcional '+L:d.label;
+    const sub=d.cardio?'Condicionamento':d.functional?'Full body · circuito':d.sub;
     const intro=d.cardio?
       `${gdef.label} · ${setup.freq}x por semana. Máquinas de cardio alternadas com estabilidade central pra sustentar postura e queimar mais.`:
+      d.functional?
+      `${gdef.label} · ${setup.freq}x por semana. Kettlebell, trenó, TRX, cordas e movimentos como burpee, sempre em duplas sem descanso entre elas: mais gasto calórico no mesmo tempo.`:
+      gdef.circuitPairs?
+      `${spName} · ${setup.freq}x por semana · circuito de ${gdef.label.toLowerCase()}. Exercícios alternados em duplas, sem descanso entre eles: mais gasto calórico no mesmo tempo.`:
       `${spName} · ${setup.freq}x por semana · foco em ${gdef.label.toLowerCase()}. Compostos pesados primeiro (você fresco = mais carga = mais estímulo), isolados completam, core fecha.`;
     prog[L]={label,sub,intro,ex};
   });
@@ -2004,6 +2289,7 @@ let TRASH=load('iron_trash',[]);
 let PROG_BACKUPS=load('iron_prog_backups',[]);
 let THEME=load('iron_theme','light');
 let SETUP=load('iron_setup',null);
+LANG=load('iron_lang','pt-BR');
 let PROGRAM=load('iron_program',null);
 let cur='A', view='train';
 
@@ -2084,9 +2370,17 @@ $('thm').onclick=()=>{THEME=THEME==='light'?'dark':'light';save('iron_theme',THE
 
 /* =================== RENDER =================== */
 const QUOTES=["Constância vence intensidade.","O treino feito > o treino perfeito adiado.","2 reps na reserva hoje, mais carga na próxima.","Forma primeiro. Sempre.","Disciplina é liberdade.","Cada série marcada é um tijolo."];
+function applyI18N(){
+  document.documentElement.lang=LANG;
+  const set=(id,k)=>{const el=$(id);if(el)el.textContent=t(k)};
+  set('dateLbl','diadotreino');set('helloPre','bora');set('progLbl','progressodotreino');
+  set('seriesLbl','series');set('navTrainLbl','trein');set('navProgLbl','prog');
+  const eb=$('editBtn');if(eb&&!EDITMODE)eb.textContent=t('editarex');
+}
 function render(){
   ensureProgram();
   applyAccent();
+  applyI18N();
   $('quote').textContent=QUOTES[Math.floor(Math.random()*QUOTES.length)];
   $('helloName').textContent=(SETUP&&SETUP.name)?SETUP.name:'Atleta';
   $('brandSub').textContent=SETUP&&!SETUP.default?`${SPLITS[SETUP.splits].name} · ${SETUP.freq}x/sem`:'Push · Pull · Legs';
@@ -2098,10 +2392,10 @@ function render(){
 function relDate(iso){
   const d=new Date(iso+'T00:00'),h=new Date(todayISO()+'T00:00');
   const diff=Math.round((h-d)/864e5);
-  if(diff===0)return 'hoje';
-  if(diff===1)return 'ontem';
-  if(diff>1&&diff<7)return 'há '+diff+' dias';
-  return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});
+  if(diff===0)return t('hoje');
+  if(diff===1)return t('ontem');
+  if(diff>1&&diff<7)return (LANG==='en'?diff+' days ago':LANG==='es'?'hace '+diff+' días':'há '+diff+' dias');
+  return d.toLocaleDateString(localeOf(),{day:'2-digit',month:'short'});
 }
 function renderLastCard(){
   const el=$('lastCard');
@@ -2119,10 +2413,10 @@ function renderLastCard(){
   el.innerHTML=`<div class="lastcard">
     <button class="lhead${open}" onclick="toggleLast(this)">
       <div class="lbadge" style="background:${accentFor(h.workout).a};color:${accentFor(h.workout).ink}">${h.workout}</div>
-      <div class="ltx"><span class="lk">Último treino</span>
+      <div class="ltx"><span class="lk">${t('ultimotreino')}</span>
         <b>${h.label} · Treino ${h.workout}</b>
         <small>${relDate(h.date)} · ${h.done}/${h.tot} séries</small>
-        <span class="ldone ${h.done>=h.tot?'full':'part'}">${h.done>=h.tot?'✓ Completo':'Parcial · '+Math.round(h.done/h.tot*100)+'%'}</span></div>
+        <span class="ldone ${h.done>=h.tot?'full':'part'}">${h.done>=h.tot?t('completo'):t('parcial')+' · '+Math.round(h.done/h.tot*100)+'%'}</span></div>
       <span class="lcv">▾</span>
     </button>
     <div class="lbody${open}"><div class="lbody-i">${rows}</div></div>
@@ -2154,7 +2448,7 @@ function renderTrain(){
   $('dintro').textContent=day.intro;
   const eb=$('editBtn');
   eb.classList.toggle('on',EDITMODE);
-  eb.textContent=EDITMODE?'✓ Concluir edição':'✎ Editar exercícios';
+  eb.textContent=EDITMODE?(LANG==='en'?'✓ Done editing':LANG==='es'?'✓ Terminar edición':'✓ Concluir edição'):t('editarex');
   $('finBtn').parentElement.classList.toggle('hidden',EDITMODE);
   $('orderBody').innerHTML=day.ex.map((ex,i)=>{
     const a=activeOf(ex);
@@ -2172,7 +2466,7 @@ function renderTrain(){
     let vhtml='';
     if(!EDITMODE&&ex.alts&&ex.alts.length){
       const opts=[{id:ex.id,name:ex.name},...ex.alts.map(x=>({id:x.id,name:x.name}))];
-      vhtml=`<div class="vars"><span class="vlab">Opções</span>`+opts.map(o=>
+      vhtml=`<div class="vars"><span class="vlab">${t('opcoes')}</span>`+opts.map(o=>
         `<button class="vchip${a.vid===o.id?' on':''}" onclick="setVar('${ex.id}','${o.id}')">${o.name}</button>`).join('')+`</div>`;
     }
     const ebar=EDITMODE?`<div class="ebar">
@@ -2187,9 +2481,9 @@ function renderTrain(){
     let prevHtml='';
     if(!EDITMODE&&prev){
       const swv=(prev.sw||[]).filter(v=>v!=null);
-      if(swv.length)prevHtml=`<div class="prev">Anterior: <b>${swv.map(fmtW).join(' · ')} kg</b>${prev.s!=null?` (${prev.s}/${prev.t} séries)`:''}</div>`;
-      else if(prev.w!=null)prevHtml=`<div class="prev">Anterior: <b>${fmtW(prev.w)} kg</b></div>`;
-      else if(prev.s!=null)prevHtml=`<div class="prev">Anterior: <b>${prev.s}/${prev.t} séries</b></div>`;
+      if(swv.length)prevHtml=`<div class="prev">${t('anterior')}: <b>${swv.map(fmtW).join(' · ')} kg</b>${prev.s!=null?` (${prev.s}/${prev.t} ${t('series')})`:''}</div>`;
+      else if(prev.w!=null)prevHtml=`<div class="prev">${t('anterior')}: <b>${fmtW(prev.w)} kg</b></div>`;
+      else if(prev.s!=null)prevHtml=`<div class="prev">${t('anterior')}: <b>${prev.s}/${prev.t} ${t('series')}</b></div>`;
     }
     const wDisp=a.bw?`<div class="val"><span class="num" style="font-size:19px">Peso corporal</span></div>`:
       `<button onclick="bump('${ex.id}',-2.5)">−</button>
@@ -2228,8 +2522,8 @@ function renderTrain(){
       <div class="wt">
         <div class="stp">${wDisp}</div>
         ${a.rest?`<div class="rest" onclick="startRest(${a.rest},'${(a.name||'').replace(/'/g,'')}')">
-          <div class="t">${a.rest}s</div><div class="lb">Descanso</div></div>`:
-          `<div class="rest" style="opacity:.55"><div class="t">${ex.ss?'SS':'GO'}</div><div class="lb">${ex.ss?'Sem pausa':'Contínuo'}</div></div>`}
+          <div class="t">${a.rest}s</div><div class="lb">${t('descanso')}</div></div>`:
+          `<div class="rest" style="opacity:.55"><div class="t">${ex.ss?'SS':'GO'}</div><div class="lb">${ex.ss?t('semdescanso'):t('continuo')}</div></div>`}
       </div>
       ${prevHtml}
       <div class="sets">
@@ -2238,8 +2532,8 @@ function renderTrain(){
       </div>
       <div class="drnote"><span class="ic">🧬</span><p>${ex.why}</p></div>
       <div class="acts">
-        <a class="abtn vid" href="${YT(a.yt)}" target="_blank" rel="noopener">▶ Ver vídeo</a>
-        <button class="abtn" onclick="toggleHow(this)">Passo a passo <span class="cv">▾</span></button>
+        <a class="abtn vid" href="${YT(a.yt)}" target="_blank" rel="noopener">${t('vervideo')}</a>
+        <button class="abtn" onclick="toggleHow(this)">${t('passoapasso')} <span class="cv">▾</span></button>
       </div>
       <div class="how"><div class="how-i">
         ${hasPhoto(a.vid)||hasPhoto(ex.id)?(()=>{const pid=hasPhoto(a.vid)?a.vid:ex.id;return `
@@ -2267,7 +2561,7 @@ function renderTrain(){
     list.appendChild(hint);
   }
   const ad=document.createElement('button');
-  ad.className='radd big';ad.textContent='＋ Adicionar exercício extra hoje';
+  ad.className='radd big';ad.textContent=t('addextra');
   ad.onclick=()=>progAddOpen();
   list.appendChild(ad);
   updateProgress();
@@ -2280,8 +2574,8 @@ function updateProgress(){
   $('pdone').textContent=done;$('ptot').textContent=tot;
   $('pbar').style.width=(tot?done/tot*100:0)+'%';
   const fb=$('finBtn');
-  if(done>=tot&&tot>0){fb.classList.add('ready');fb.textContent='✓ Concluir treino '+cur}
-  else{fb.classList.remove('ready');fb.textContent=`Concluir treino (${done}/${tot})`}
+  if(done>=tot&&tot>0){fb.classList.add('ready');fb.textContent='✓ '+t('concluirtreino')+' '+cur}
+  else{fb.classList.remove('ready');fb.textContent=`${t('concluirtreino')} (${done}/${tot})`}
 }
 
 /* =================== INTERAÇÕES =================== */
@@ -2440,7 +2734,7 @@ function renderAlerts(){
 function boxOpen(html){$('boxModal').innerHTML=html;$('boxOv').classList.remove('hidden')}
 function boxClose(){$('boxOv').classList.add('hidden')}
 $('boxOv').onclick=e=>{if(e.target.id==='boxOv')boxClose()};
-const dtBR=iso=>new Date(iso+'T00:00').toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'short'});
+const dtBR=iso=>new Date(iso+'T00:00').toLocaleDateString(localeOf(),{weekday:'short',day:'2-digit',month:'short'});
 
 /* ---- confirmar a data do treino ---- */
 function askDate(defISO,cb){
@@ -2750,28 +3044,28 @@ function renderProgress(){
 
   pv.innerHTML=`
     <div class="stats">
-      <button class="stat" onclick="statWeek()"><div class="v">${last7.size}</div><div class="k">Últimos 7 dias</div></button>
-      <button class="stat" onclick="statLast()"><div class="v">${lastH?lastH.workout:'–'}</div><div class="k">Último treino</div></button>
-      <button class="stat" onclick="statTotal()"><div class="v">${total}</div><div class="k">Total feitos</div></button>
+      <button class="stat" onclick="statWeek()"><div class="v">${last7.size}</div><div class="k">${t('ultimos7')}</div></button>
+      <button class="stat" onclick="statLast()"><div class="v">${lastH?lastH.workout:'–'}</div><div class="k">${t('ultimotreino')}</div></button>
+      <button class="stat" onclick="statTotal()"><div class="v">${total}</div><div class="k">${t('totalfeitos')}</div></button>
     </div>
     <div class="week">
-      <h4>Treinos da semana</h4>
+      <h4>${t('sersemana')}</h4>
       <div class="wkscroll" id="wkscroll" onscroll="WKSCROLL=this.scrollLeft">${pagesHtml}</div>
       <div class="wkfoot">Arraste para o lado para ver semanas anteriores · toque num dia para ver ou editar</div>
     </div>
     <div class="exports">
-      <button class="abtn vid" onclick="exportXLSX()">📊 Exportar Excel</button>
-      <button class="abtn" onclick="exportPDF()">📄 Exportar PDF</button>
+      <button class="abtn vid" onclick="exportXLSX()">${t('exportarxlsx')}</button>
+      <button class="abtn" onclick="exportPDF()">${t('exportarpdf')}</button>
     </div>
     <div class="exports">
-      <button class="abtn" onclick="openWizard(true)">⚙️ Personalizar meu treino</button>
-      <button class="abtn vid" onclick="askEvolve()">🚀 Evoluir treino</button>
+      <button class="abtn" onclick="openWizard(true)">${t('personalizar')}</button>
+      <button class="abtn vid" onclick="askEvolve()">${t('evoluir')}</button>
     </div>
     <div class="exports">
-      <button class="abtn" onclick="openTrash()">🗑 Treinos excluídos${TRASH.length?' ('+TRASH.length+')':''}</button>
-      <button class="abtn" onclick="openBackup()">💾 Backup</button>
+      <button class="abtn" onclick="openTrash()">${t('excluidos')}${TRASH.length?' ('+TRASH.length+')':''}</button>
+      <button class="abtn" onclick="openBackup()">${t('backup')}</button>
     </div>
-    ${PROG_BACKUPS.length?`<div class="exports"><button class="abtn" onclick="openProgBackups()">🕒 Versões anteriores do treino (${PROG_BACKUPS.length})</button></div>`:''}
+    ${PROG_BACKUPS.length?`<div class="exports"><button class="abtn" onclick="openProgBackups()">${t('versoesant')} (${PROG_BACKUPS.length})</button></div>`:''}
     <div class="sectit">Histórico ${TRASH.length?`<button onclick="openTrash()">🗑 Excluídos (${TRASH.length})</button>`:''}</div>
     <div class="hist">${hist}</div>
     <div class="tips">
@@ -2858,6 +3152,7 @@ function renderOB(){
   if(OBSTEP===1){
     if(!OBDATA.goal)OBDATA.goal='hipertrofia';
     const isCardio=GOALS[OBDATA.goal]&&GOALS[OBDATA.goal].cardioFocus;
+    const isFunctional=GOALS[OBDATA.goal]&&GOALS[OBDATA.goal].functionalFocus;
     const sp=SPLITS[OBDATA.splits];
     if(!sp.days.find(d=>d.label===OBDATA.first))OBDATA.first=sp.days[0].label;
     const groupsBlock=isCardio?`
@@ -2865,19 +3160,22 @@ function renderOB(){
         <div class="hint">A ordem que você marcar define a rotação. Pode escolher mais de um.</div>
         <div class="qchips">${CARDIO_IDS.filter(id=>id!=='finisher').map(id=>
           `<button class="qchip${(OBDATA.cardioPrefs||[]).includes(id)?' on':''}" onclick="obTglCardio('${id}')">${E[id].name}</button>`).join('')}</div>
+      </div>`:isFunctional?`
+      <div class="qb"><h4>Treino funcional em circuito</h4>
+        <div class="hint">Vou intercalar kettlebell, trenó, TRX, cordas navais, medicine ball, burpee e escalador, sempre em duplas sem descanso entre elas. A ordem varia a cada dia pra não repetir.</div>
       </div>`:`
       <div class="qb"><h4>Quais grupos você quer priorizar?</h4>
         <div class="hint">Marcados ganham prioridade na ordem e volume extra. Desmarcados perdem os isolados (os compostos mantêm a base pra evitar desequilíbrio).</div>
-        <div class="qchips">${Object.keys(GRP_LABEL).map(g=>
+        <div class="qchips">${Object.keys(GRP_LABEL).filter(g=>g!=='functional').map(g=>
           `<button class="qchip${OBDATA.groups.includes(g)?' on':''}" onclick="obTgl('${g}')">${GRP_LABEL[g]}</button>`).join('')}</div>
       </div>`;
-    const firstBlock=isCardio?'':`
+    const firstBlock=(isCardio||isFunctional)?'':`
       <div class="qb"><h4>Qual região quer treinar primeiro?</h4>
         <div class="hint">Essa vira o seu Treino A (o primeiro da rotação).</div>
         <div class="qchips">${SPLITS[OBDATA.splits].days.map(d=>
           `<button class="qchip${OBDATA.first===d.label?' on':''}" onclick="OBDATA.first='${d.label}';renderOB()">${d.label}</button>`).join('')}</div>
       </div>`;
-    const finisherBlock=isCardio?'':`
+    const finisherBlock=(isCardio||isFunctional)?'':`
       <div class="qb"><h4>Finisher de cardio?</h4>
         <div class="hint">5 a 8 min de tiros leves no fim de alguns treinos: gasto extra sem roubar recuperação.</div>
         <div class="qchips">
@@ -2903,7 +3201,7 @@ function renderOB(){
         <div class="qchips">${[4,5,6,7].map(n=>`<button class="qchip${OBDATA.perDay===n?' on':''}" onclick="OBDATA.perDay=${n};renderOB()">${n}</button>`).join('')}</div>
       </div>
       <div class="qb"><h4>Quantas divisões de treino?</h4>
-        <div class="hint">${isCardio?'Quantos treinos de cardio diferentes você quer alternar.':'A-B (Upper/Lower) · A-B-C (Push/Pull/Legs) · A-B-C-D (por grupo).'}</div>
+        <div class="hint">${isCardio?'Quantos treinos de cardio diferentes você quer alternar.':isFunctional?'Quantos treinos funcionais diferentes você quer alternar.':'A-B (Upper/Lower) · A-B-C (Push/Pull/Legs) · A-B-C-D (por grupo).'}</div>
         <div class="qchips">${[2,3,4].map(n=>`<button class="qchip${OBDATA.splits===n?' on':''}" onclick="OBDATA.splits=${n};renderOB()">${LETTERS.slice(0,n).join('-')}</button>`).join('')}</div>
       </div>
       <div class="qb"><h4>Quantas vezes por semana?</h4>
