@@ -1836,6 +1836,25 @@ FIG.mountainclimberv=`<svg viewBox="0 0 120 100"><style>
 </g>
 <circle cx="28" cy="62" r="8" fill="${COL.body}"/>
 </svg>`;
+
+FIG.swimmingv=`<svg viewBox="0 0 120 100"><style>
+ .sw-arm{transform-origin:56px 50px;animation:swa 1.1s infinite ease-in-out}
+ @keyframes swa{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-72deg)}}
+ .sw-body{animation:swb 1.1s infinite ease-in-out}
+ @keyframes swb{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+</style>
+<path d="M4 68 Q18 62 32 68 T60 68 T88 68 T116 68" fill="none" stroke="${COL.cable}" stroke-width="2"/>
+<path d="M4 80 Q18 74 32 80 T60 80 T88 80 T116 80" fill="none" stroke="${COL.cable}" stroke-width="2"/>
+<g class="sw-body">
+ <g fill="none" stroke="${COL.body}" stroke-linecap="round">
+  <line x1="30" y1="56" x2="82" y2="58" stroke-width="11"/>
+  <line x1="82" y1="58" x2="100" y2="53" stroke-width="7"/>
+  <line x1="30" y1="57" x2="16" y2="62" stroke-width="7"/>
+  <g class="sw-arm"><line x1="42" y1="56" x2="34" y2="38" stroke-width="6"/></g>
+ </g>
+ <circle cx="24" cy="54" r="8" fill="${COL.body}"/>
+</g>
+</svg>`;
 </script>
 <script>
 /* =================== ACENTOS =================== */
@@ -1899,7 +1918,7 @@ const YT=q=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q
 
 /* =================== BIBLIOTECA DE EXERCÍCIOS =================== */
 /* grp: chest back shoulders arms legs glutes core calf | cat: comp iso core calf lomb cardio */
-const GRP_LABEL={chest:'Peito',back:'Costas',shoulders:'Ombros',arms:'Braços',legs:'Pernas',glutes:'Glúteos',core:'Abdômen',calf:'Panturrilha',functional:'Funcional'};
+const GRP_LABEL={chest:'Peito',back:'Costas',shoulders:'Ombros',arms:'Braços',legs:'Pernas',glutes:'Glúteos',core:'Abdômen',calf:'Panturrilha',functional:'Funcional',cardio:'Cardio'};
 const E={
  chestpress:{name:'Chest Press',fig:'chestpress',grp:'chest',mus:'Peito',cat:'comp',w:30,sets:4,reps:'8–12',rest:90,evolve:'barbellbench',yt:'seated chest press machine form shorts',
   steps:['Ajuste o banco: pegadores na linha do meio do peito','Costas apoiadas, pés firmes no chão','Empurre à frente sem travar o cotovelo','Volte controlado sentindo o peito alongar'],
@@ -2021,13 +2040,13 @@ const E={
  legraisev:{name:'Elevação de Pernas',fig:'legraise',grp:'core',mus:'Abdômen inferior',cat:'core',bw:true,sets:3,reps:'12–15',rest:45,yt:'lying leg raises form shorts',
   steps:['Deitado, mãos sob o quadril','Suba as pernas quase retas até 90°','Desça devagar sem tocar o chão','Lombar sempre colada no chão'],
   g:'Quanto mais lenta a descida, melhor.',b:'Não arqueie a lombar ao descer.',alts:['reversecrunch']},
- finisher:{name:'Finisher Cardio (bike)',fig:'bike',grp:'core',mus:'Condicionamento',cat:'cardio',bw:true,sets:1,reps:'5–8 min',rest:0,yt:'stationary bike hiit beginner shorts',
+ finisher:{name:'Finisher Cardio (bike)',fig:'bike',grp:'cardio',mus:'Condicionamento',cat:'cardio',bw:true,sets:1,reps:'5–8 min',rest:0,yt:'stationary bike hiit beginner shorts',
   steps:['Bike no fim do treino','30s forte / 30s leve, alternando','Esforço moderado-alto no tiro','Encerra ao completar 5–8 min'],
   g:'Soma no déficit sem atrapalhar a recuperação.',b:'Não vire um cardio longo que rouba energia do treino.',alts:['treadmillv','runningv','ellipticalv','stairsv','rowerv']},
- treadmillv:{name:'Esteira Inclinada',fig:'treadmill',grp:'core',mus:'Condicionamento',cat:'cardio',bw:true,sets:1,reps:'8–10 min',rest:0,yt:'incline treadmill walk benefits shorts',
+ treadmillv:{name:'Esteira Inclinada',fig:'treadmill',grp:'cardio',mus:'Condicionamento',cat:'cardio',bw:true,sets:1,reps:'8–10 min',rest:0,yt:'incline treadmill walk benefits shorts',
   steps:['Inclinação 8–12%, velocidade de caminhada forte','Sem segurar no apoio','Mantém 8–10 min constantes','Postura ereta'],
   g:'Queima alta com impacto baixíssimo.',b:'Não segure nas barras (corta o esforço pela metade).',alts:['finisher','runningv','ellipticalv','stairsv','rowerv']},
- rowerv:{name:'Remo Ergômetro',fig:'rower',grp:'core',mus:'Condicionamento',cat:'cardio',bw:true,sets:1,reps:'5–8 min',rest:0,yt:'rowing machine proper form shorts',
+ rowerv:{name:'Remo Ergômetro',fig:'rower',grp:'cardio',mus:'Condicionamento',cat:'cardio',bw:true,sets:1,reps:'5–8 min',rest:0,yt:'rowing machine proper form shorts',
   steps:['Ordem do movimento: perna, tronco, braço','Volta na ordem inversa','30s forte / 30s leve','Costas retas sempre'],
   g:'Corpo inteiro: gasto altíssimo em pouco tempo.',b:'Não puxe com o braço antes de estender a perna.',alts:['finisher','runningv','ellipticalv','stairsv','treadmillv']},
  barbellbench:{name:'Supino Reto com Barra',fig:'barbellbench',grp:'chest',mus:'Peito',cat:'comp',w:20,sets:4,reps:'6–10',rest:120,yt:'barbell bench press form',
@@ -2066,13 +2085,13 @@ const E={
  rdlbarv:{name:'Stiff com Barra',fig:'rdl',grp:'legs',mus:'Posterior + glúteo',cat:'comp',w:20,sets:4,reps:'8–12',rest:100,yt:'barbell romanian deadlift form',
   steps:['Barra à frente das coxas, pegada pronada','Empurre o quadril pra trás descendo a barra','Desça até sentir alongar o posterior','Suba apertando o glúteo'],
   g:'Barra sempre próxima às pernas.',b:'Não arredonde a lombar pra descer mais.',alts:['rdlv','legcurl']},
- ellipticalv:{name:'Elíptico',fig:'ellipticalv',grp:'core',mus:'Condicionamento',cat:'cardio',bw:true,sets:1,reps:'15–20 min',rest:0,yt:'elliptical trainer workout',
+ ellipticalv:{name:'Elíptico',fig:'ellipticalv',grp:'cardio',mus:'Condicionamento',cat:'cardio',bw:true,sets:1,reps:'15–20 min',rest:0,yt:'elliptical trainer workout',
   steps:['Postura ereta, mãos nos apoios móveis','Mantenha ritmo constante nos pedais','Varie a resistência a cada poucos minutos','Braços acompanham o movimento das pernas'],
   g:'Baixo impacto: ótimo pra quem tem dor articular.',b:'Não se apoie todo o peso nos braços.',alts:['finisher','treadmillv','runningv','stairsv','rowerv']},
- stairsv:{name:'Escada (StairMaster)',fig:'stairsv',grp:'core',mus:'Condicionamento',cat:'cardio',bw:true,sets:1,reps:'10–15 min',rest:0,yt:'stairmaster workout',
+ stairsv:{name:'Escada (StairMaster)',fig:'stairsv',grp:'cardio',mus:'Condicionamento',cat:'cardio',bw:true,sets:1,reps:'10–15 min',rest:0,yt:'stairmaster workout',
   steps:['Postura ereta, não se apoie no corrimão','Pise com o pé inteiro em cada degrau','Mantenha ritmo constante','Core contraído pra estabilizar'],
   g:'Um dos exercícios de maior gasto calórico por minuto.',b:'Não se debruce sobre o painel de controle.',alts:['finisher','treadmillv','runningv','ellipticalv','rowerv']},
- runningv:{name:'Corrida ao Ar Livre',fig:'runningv',grp:'core',mus:'Condicionamento',cat:'cardio',bw:true,sets:1,reps:'20–30 min',rest:0,yt:'running form tips',
+ runningv:{name:'Corrida ao Ar Livre',fig:'runningv',grp:'cardio',mus:'Condicionamento',cat:'cardio',bw:true,sets:1,reps:'20–30 min',rest:0,yt:'running form tips',
   steps:['Postura ereta, olhar à frente','Passada curta, cadência alta','Aterrissagem no meio do pé','Braços relaxados a 90°'],
   g:'Comece em ritmo que permita conversar (zona 2).',b:'Não dê passadas longas demais.',alts:['finisher','treadmillv','ellipticalv','stairsv','rowerv']},
  kettlebellswing:{name:'Kettlebell Swing',fig:'kettlebellswing',grp:'functional',mus:'Posterior + core',cat:'func',w:12,sets:4,reps:'15–20',rest:25,yt:'kettlebell swing form',
@@ -2105,6 +2124,9 @@ const E={
  mountainclimberv:{name:'Escalador (Mountain Climber)',fig:'mountainclimberv',grp:'functional',mus:'Core + condicionamento',cat:'func',bw:true,sets:3,reps:'30–40s',rest:25,yt:'mountain climber form',
   steps:['Posição de prancha, mãos na linha do ombro','Traga um joelho em direção ao peito','Troque de perna rapidamente, tipo corrida no lugar','Mantenha o quadril baixo e estável'],
   g:'Quadril estável: o movimento é só das pernas.',b:'Não deixe o quadril subir e descer.',alts:[]},
+ swimmingv:{name:'Natação',fig:'swimmingv',grp:'cardio',mus:'Condicionamento',cat:'cardio',unit:'m',w:1000,bw:false,sets:1,reps:'20–40 min',rest:0,yt:'swimming freestyle technique',
+  steps:['Aquecimento de 200m em ritmo leve','Nade no estilo de sua preferência (livre, costas, peito)','Registre a distância total nadada na sessão','Desaquecimento de 100–200m leve ao final'],
+  g:'Respiração bilateral ajuda no equilíbrio da braçada.',b:'Não force o pescoço olhando pra frente o tempo todo.',alts:[]},
 };
 
 /* why genéricos por papel na ordem */
@@ -2243,13 +2265,13 @@ function generateProgram(setup){
     // circuito: intercala em duplas sem descanso entre elas (o "queima gordura" alternando dois aparelhos)
     if(gdef.circuitPairs&&!d.cardio)sel=pairAsCircuit(sel,gdef.restComp);
     const ex=sel.map((x,idx)=>({
-      id:x.id,fig:x.fig,name:x.name,muscle:x.mus,w:x.w||0,bw:!!x.bw,
+      id:x.id,fig:x.fig,name:x.name,muscle:x.mus,w:x.w||0,bw:!!x.bw,unit:x.unit,
       sets:x.sets,reps:x.reps,rest:(x.ss==='A'&&x.id==='abductor')?0:x.rest,
       ss:x.ss,yt:x.yt,steps:x.steps,g:x.g,b:x.b,
       why:d.cardio?(x.cat==='cardio'?'Base do treino de cardio: gasto calórico sustentado e condicionamento.':'Estabilidade central pra sustentar a postura durante o cardio.'):
           d.functional?'Movimento funcional: treina o corpo como uma unidade, replicando padrões do dia a dia.':
           (x.ss?'Estação de circuito: intercala com o próximo exercício sem descanso, mantendo a frequência cardíaca elevada pra maximizar a queima.':whyFor(x,idx,true)),
-      alts:(x.alts||[]).map(aid=>({id:aid,fig:E[aid].fig,name:E[aid].name,w:E[aid].w,bw:!!E[aid].bw,reps:E[aid].reps,yt:E[aid].yt,steps:E[aid].steps,g:E[aid].g,b:E[aid].b}))
+      alts:(x.alts||[]).map(aid=>({id:aid,fig:E[aid].fig,name:E[aid].name,w:E[aid].w,bw:!!E[aid].bw,unit:E[aid].unit,reps:E[aid].reps,yt:E[aid].yt,steps:E[aid].steps,g:E[aid].g,b:E[aid].b}))
     }));
     if(setup.finisher&&!d.cardio&&!d.functional&&(i===0||i===days.length-1)){
       const f=E.finisher;
@@ -2307,6 +2329,8 @@ function activeOf(ex){
   return {...ex,baseId:ex.id,vid:ex.id};
 }
 const wOf=a=>WEIGHTS[a.vid]!=null?WEIGHTS[a.vid]:(a.w||0);
+function unitOf(vid){return (E[vid]&&E[vid].unit)||'kg'}
+function stepOf(a){return (a&&a.unit==='m')?50:2.5}
 function setsArr(baseId,n,key){
   const k=key||cur;
   if(!SESSION[k])SESSION[k]={};
@@ -2404,10 +2428,11 @@ function renderLastCard(){
   const col=accentFor(h.workout).a;
   const rows=(h.items&&h.items.length)?h.items.map(it=>{
     const sv=(it.sw||[]).filter(v=>v!=null);
-    const wtx=sv.length?sv.map(fmtW).join(' · ')+' kg':(it.w!=null?fmtW(it.w)+' kg':'peso corporal');
+    const u=unitOf(it.id);
+    const wtx=sv.length?sv.map(fmtW).join(' · ')+' '+u:(it.w!=null?fmtW(it.w)+' '+u:'peso corporal');
     return `<div class="lrow"><span>${it.n}</span><small>${it.s}/${it.t} séries<br>${wtx}</small></div>`;
   }).join(''):(h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
-    `<div class="lrow"><span>${vidName(vid)}</span><small>${fmtW(w)} kg</small></div>`).join(''):
+    `<div class="lrow"><span>${vidName(vid)}</span><small>${fmtW(w)} ${unitOf(vid)}</small></div>`).join(''):
     '<div class="lrow"><span>Sem detalhes salvos nesta sessão</span></div>');
   const open=LASTOPEN?' op':'';
   el.innerHTML=`<div class="lastcard">
@@ -2481,23 +2506,23 @@ function renderTrain(){
     let prevHtml='';
     if(!EDITMODE&&prev){
       const swv=(prev.sw||[]).filter(v=>v!=null);
-      if(swv.length)prevHtml=`<div class="prev">${t('anterior')}: <b>${swv.map(fmtW).join(' · ')} kg</b>${prev.s!=null?` (${prev.s}/${prev.t} ${t('series')})`:''}</div>`;
-      else if(prev.w!=null)prevHtml=`<div class="prev">${t('anterior')}: <b>${fmtW(prev.w)} kg</b></div>`;
+      if(swv.length)prevHtml=`<div class="prev">${t('anterior')}: <b>${swv.map(fmtW).join(' · ')} ${a.unit||'kg'}</b>${prev.s!=null?` (${prev.s}/${prev.t} ${t('series')})`:''}</div>`;
+      else if(prev.w!=null)prevHtml=`<div class="prev">${t('anterior')}: <b>${fmtW(prev.w)} ${a.unit||'kg'}</b></div>`;
       else if(prev.s!=null)prevHtml=`<div class="prev">${t('anterior')}: <b>${prev.s}/${prev.t} ${t('series')}</b></div>`;
     }
     const wDisp=a.bw?`<div class="val"><span class="num" style="font-size:19px">Peso corporal</span></div>`:
-      `<button onclick="bump('${ex.id}',-2.5)">−</button>
-       <div class="val" onclick="editW(this,'${ex.id}')"><span class="num">${fmtW(base)}</span><span class="u">kg</span></div>
-       <button onclick="bump('${ex.id}',2.5)">+</button>`;
+      `<button onclick="bump('${ex.id}',${-stepOf(a)})">−</button>
+       <div class="val" onclick="editW(this,'${ex.id}')"><span class="num">${fmtW(base)}</span><span class="u">${a.unit||'kg'}</span></div>
+       <button onclick="bump('${ex.id}',${stepOf(a)})">+</button>`;
     const psw=(prev&&prev.sw)?prev.sw:null;
     const srows=arr.map((s,si)=>{
       const eff=s.w!=null?s.w:base;
       const pv=(psw&&psw[si]!=null)?psw[si]:null;
       const hint=(!a.bw&&pv!=null)?`<div class="sant">ant. ${fmtW(pv)}</div>`:'';
       const mid=a.bw?`<div class="scell"><div class="swt bwlab">corporal</div></div>`:
-        `<button class="sstep" onclick="bumpSet('${ex.id}',${si},-2.5)">−</button>
-         <div class="scell"><div class="swt" onclick="editSetW(this,'${ex.id}',${si})">${fmtW(eff)}<span class="u">kg</span></div>${hint}</div>
-         <button class="sstep" onclick="bumpSet('${ex.id}',${si},2.5)">+</button>`;
+        `<button class="sstep" onclick="bumpSet('${ex.id}',${si},${-stepOf(a)})">−</button>
+         <div class="scell"><div class="swt" onclick="editSetW(this,'${ex.id}',${si})">${fmtW(eff)}<span class="u">${a.unit||'kg'}</span></div>${hint}</div>
+         <button class="sstep" onclick="bumpSet('${ex.id}',${si},${stepOf(a)})">+</button>`;
       return `<div class="srow${s.d?' done':''}">
         <div class="snum">${si+1}</div>${mid}
         <button class="schk${s.d?' on':''}" onclick="toggleSet('${ex.id}',${si})">${s.d?'✓':''}</button>
@@ -2518,7 +2543,7 @@ function renderTrain(){
         </div>
       </div>
       ${EDITMODE?'':vhtml+`
-      ${a.bw?'':`<div class="wtlab">Peso base <span>aplica nas séries não marcadas</span></div>`}
+      ${a.bw?'':`<div class="wtlab">${a.unit==='m'?'Distância base':'Peso base'} <span>aplica nas séries não marcadas</span></div>`}
       <div class="wt">
         <div class="stp">${wDisp}</div>
         ${a.rest?`<div class="rest" onclick="startRest(${a.rest},'${(a.name||'').replace(/'/g,'')}')">
@@ -2595,10 +2620,10 @@ function bump(baseId,delta){
 }
 function editW(el,baseId){
   const a=activeOf(findBase(baseId));const cur0=wOf(a);
-  el.innerHTML=`<input type="number" inputmode="decimal" step="2.5" value="${cur0}">`;
+  el.innerHTML=`<input type="number" inputmode="decimal" step="${stepOf(a)}" value="${cur0}">`;
   const inp=el.querySelector('input');inp.focus();inp.select();
   const commit=()=>{let v=parseFloat(String(inp.value).replace(',','.'));if(isNaN(v)||v<0)v=cur0;
-    WEIGHTS[a.vid]=Math.round(v*10)/10;save('iron_weights',WEIGHTS);cloudSync();toast('Peso salvo: '+fmtW(WEIGHTS[a.vid])+' kg');renderTrain()};
+    WEIGHTS[a.vid]=Math.round(v*10)/10;save('iron_weights',WEIGHTS);cloudSync();toast((a.unit==='m'?'Distância salva: ':'Peso salvo: ')+fmtW(WEIGHTS[a.vid])+' '+(a.unit||'kg'));renderTrain()};
   inp.onblur=commit;inp.onkeydown=e=>{if(e.key==='Enter')inp.blur()};
 }
 function toggleSet(baseId,si){
@@ -2625,11 +2650,11 @@ function bumpSet(baseId,si,delta){
 function editSetW(el,baseId,si){
   const ex=findBase(baseId);const a=activeOf(ex);const arr=setsArr(baseId,a.sets);
   const cur0=arr[si].w!=null?arr[si].w:wOf(a);
-  el.innerHTML=`<input type="number" inputmode="decimal" step="2.5" value="${cur0}">`;
+  el.innerHTML=`<input type="number" inputmode="decimal" step="${stepOf(a)}" value="${cur0}">`;
   const inp=el.querySelector('input');inp.focus();inp.select();
   const commit=()=>{let v=parseFloat(String(inp.value).replace(',','.'));if(isNaN(v)||v<0)v=cur0;
     arr[si].w=Math.round(v*10)/10;save('iron_session',SESSION);cloudSync();
-    toast('Série '+(si+1)+': '+fmtW(arr[si].w)+' kg');const sy=window.scrollY;renderTrain();window.scrollTo(0,sy)};
+    toast('Série '+(si+1)+': '+fmtW(arr[si].w)+' '+(a.unit||'kg'));const sy=window.scrollY;renderTrain();window.scrollTo(0,sy)};
   inp.onblur=commit;inp.onkeydown=e=>{if(e.key==='Enter')inp.blur()};
 }
 function toggleHow(btn){btn.classList.toggle('op');btn.parentElement.nextElementSibling.classList.toggle('op')}
@@ -2793,7 +2818,7 @@ function editHist(ts){
     h.items=Object.entries(h.weights||{}).map(([vid,w])=>({id:vid,n:vidName(vid),s:1,t:1,w,sw:[w]}));
     if(!h.items.length){toast('Esse registro não tem detalhes pra editar');return}
   }
-  EDITH={ts,date:h.date,rows:h.items.map(it=>({n:it.n,id:it.id,bw:it.w==null&&!(it.sw&&it.sw.length),sets:normRows(h,it)}))};
+  EDITH={ts,date:h.date,rows:h.items.map(it=>({n:it.n,id:it.id,u:unitOf(it.id),bw:it.w==null&&!(it.sw&&it.sw.length),sets:normRows(h,it)}))};
   paintEditH();
 }
 function paintEditH(){
@@ -2810,9 +2835,9 @@ function paintEditH(){
           <div class="srow${s.d?' done':''}" data-r="${ri}" data-s="${si}">
             <div class="snum">${si+1}</div>
             ${r.bw?'<div class="scell"><div class="swt bwlab">corporal</div></div>':
-             `<button class="sstep" onclick="ehBump(${ri},${si},-2.5)">−</button>
-              <div class="scell"><div class="swt">${fmtW(s.w)}<span class="u">kg</span></div></div>
-              <button class="sstep" onclick="ehBump(${ri},${si},2.5)">+</button>`}
+             `<button class="sstep" onclick="ehBump(${ri},${si},${r.u==='m'?-50:-2.5})">−</button>
+              <div class="scell"><div class="swt">${fmtW(s.w)}<span class="u">${r.u||'kg'}</span></div></div>
+              <button class="sstep" onclick="ehBump(${ri},${si},${r.u==='m'?50:2.5})">+</button>`}
             <button class="schk${s.d?' on':''}" onclick="ehTgl(${ri},${si})">${s.d?'✓':''}</button>
           </div>`).join('')}</div>
       </div>`).join('')}</div>
@@ -2830,9 +2855,9 @@ function ehTgl(ri,si){
   if(navigator.vibrate)navigator.vibrate(18);
 }
 function ehBump(ri,si,d){
-  const s=EDITH.rows[ri].sets[si];let v=(s.w||0)+d;if(v<0)v=0;s.w=Math.round(v*10)/10;
+  const r=EDITH.rows[ri];const s=r.sets[si];let v=(s.w||0)+d;if(v<0)v=0;s.w=Math.round(v*10)/10;
   const row=ehRow(ri,si);if(!row)return paintEditH();
-  const w=row.querySelector('.swt');if(w)w.innerHTML=fmtW(s.w)+'<span class="u">kg</span>';
+  const w=row.querySelector('.swt');if(w)w.innerHTML=fmtW(s.w)+'<span class="u">'+(r.u||'kg')+'</span>';
 }
 function ehSave(){
   const e=EDITH;const h=HISTORY.find(x=>x.ts===e.ts);if(!h){boxClose();return}
@@ -2903,10 +2928,11 @@ function openHistMenu(ts){
   const h=HISTORY.find(x=>x.ts===ts);if(!h){toast('Registro não encontrado');return}
   const det=(h.items&&h.items.length)?h.items.map(it=>{
     const sv=(it.sw||[]).filter(v=>v!=null);
-    const wtx=sv.length?sv.map(fmtW).join(' · ')+' kg':(it.w!=null?fmtW(it.w)+' kg':'peso corporal');
+    const u=unitOf(it.id);
+    const wtx=sv.length?sv.map(fmtW).join(' · ')+' '+u:(it.w!=null?fmtW(it.w)+' '+u:'peso corporal');
     return `<div class="hd-row"><span>${it.n}</span><small>${it.s}/${it.t} séries<br>${wtx}</small></div>`}).join(''):
     (h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
-      `<div class="hd-row"><span>${vidName(vid)}</span><small>${fmtW(w)} kg</small></div>`).join(''):
+      `<div class="hd-row"><span>${vidName(vid)}</span><small>${fmtW(w)} ${unitOf(vid)}</small></div>`).join(''):
       '<div class="empty">Sem detalhes salvos nesta sessão.</div>');
   boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
     <h3>${h.label} · Treino ${h.workout}</h3>
@@ -2946,7 +2972,7 @@ function statLast(){
   if(!h){boxOpen(`<h3>Último treino</h3><div class="sub">Você ainda não registrou nenhum treino.</div>
     <div class="mrow"><button class="mbtn pri" onclick="boxClose()">Fechar</button></div>`);return}
   const det=(h.items||[]).map(it=>{
-    const sv=(it.sw||[]).filter(v=>v!=null);const wtx=sv.length?sv.map(fmtW).join(' · ')+' kg':(it.w!=null?fmtW(it.w)+' kg':'peso corporal');
+    const u=unitOf(it.id);const sv=(it.sw||[]).filter(v=>v!=null);const wtx=sv.length?sv.map(fmtW).join(' · ')+' '+u:(it.w!=null?fmtW(it.w)+' '+u:'peso corporal');
     return `<div class="hd-row"><span>${it.n}</span><small>${it.s}/${it.t} séries<br>${wtx}</small></div>`}).join('');
   boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
     <h3>${h.label} · Treino ${h.workout}</h3>
@@ -3030,10 +3056,10 @@ function renderProgress(){
     const head=wk!==lastWk?`<div class="wkhead">${wkLbl(wk)}</div>`:'';
     lastWk=wk;
     const det=h.items?h.items.map(it=>{
-      const sv=(it.sw||[]).filter(v=>v!=null);const wtx=sv.length?sv.map(fmtW).join(' · ')+' kg':(it.w!=null?fmtW(it.w)+' kg':'');
+      const u=unitOf(it.id);const sv=(it.sw||[]).filter(v=>v!=null);const wtx=sv.length?sv.map(fmtW).join(' · ')+' '+u:(it.w!=null?fmtW(it.w)+' '+u:'');
       return `<div class="hd-row"><span>${it.n}</span><small>${it.s}/${it.t} séries${wtx?' · '+wtx:''}</small></div>`}).join(''):
       (h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
-      `<div class="hd-row"><span>${vidName(vid)}</span><small>${fmtW(w)} kg</small></div>`).join(''):
+      `<div class="hd-row"><span>${vidName(vid)}</span><small>${fmtW(w)} ${unitOf(vid)}</small></div>`).join(''):
       '<div class="hd-row"><span>Sem detalhes salvos nesta sessão</span></div>');
     return `${head}<div class="hrow" onclick="openHistMenu(${h.ts})">
       <div class="wk" style="background:${accentFor(h.workout).a};color:${accentFor(h.workout).ink}">${h.workout}</div>
@@ -3166,7 +3192,7 @@ function renderOB(){
       </div>`:`
       <div class="qb"><h4>Quais grupos você quer priorizar?</h4>
         <div class="hint">Marcados ganham prioridade na ordem e volume extra. Desmarcados perdem os isolados (os compostos mantêm a base pra evitar desequilíbrio).</div>
-        <div class="qchips">${Object.keys(GRP_LABEL).filter(g=>g!=='functional').map(g=>
+        <div class="qchips">${Object.keys(GRP_LABEL).filter(g=>g!=='functional'&&g!=='cardio').map(g=>
           `<button class="qchip${OBDATA.groups.includes(g)?' on':''}" onclick="obTgl('${g}')">${GRP_LABEL[g]}</button>`).join('')}</div>
       </div>`;
     const firstBlock=(isCardio||isFunctional)?'':`
@@ -3265,9 +3291,9 @@ function obRm(k,i){
 }
 let PICKCTX=null;
 function buildItem(id,whyTxt){const x=E[id];
-  return {id,fig:x.fig,name:x.name,muscle:x.mus,w:x.w||0,bw:!!x.bw,sets:x.sets,reps:x.reps,rest:x.rest,
+  return {id,fig:x.fig,name:x.name,muscle:x.mus,w:x.w||0,bw:!!x.bw,unit:x.unit,sets:x.sets,reps:x.reps,rest:x.rest,
     yt:x.yt,steps:x.steps,g:x.g,b:x.b,why:whyTxt||whyFor(x,5),
-    alts:(x.alts||[]).map(aid=>({id:aid,fig:E[aid].fig,name:E[aid].name,w:E[aid].w,bw:!!E[aid].bw,reps:E[aid].reps,yt:E[aid].yt,steps:E[aid].steps,g:E[aid].g,b:E[aid].b}))};
+    alts:(x.alts||[]).map(aid=>({id:aid,fig:E[aid].fig,name:E[aid].name,w:E[aid].w,bw:!!E[aid].bw,unit:E[aid].unit,reps:E[aid].reps,yt:E[aid].yt,steps:E[aid].steps,g:E[aid].g,b:E[aid].b}))};
 }
 function insertPos(arr,cat){
   let pos=arr.findIndex(e=>{const le=E[e.id];return le&&['core','lomb','cardio'].includes(le.cat)});
@@ -3278,7 +3304,7 @@ function openLibPicker(ctx){
   PICKCTX=ctx;
   const dayEx=ctx.list;
   const used=new Set(dayEx.map(e=>e.id));
-  const rows=g=>Object.keys(E).filter(id=>!used.has(id)&&E[id].cat!=='cardio'&&(g==='all'||E[id].grp===g))
+  const rows=g=>Object.keys(E).filter(id=>!used.has(id)&&(g==='all'||E[id].grp===g))
     .map(id=>`<div class="prow"><div class="rtx"><b>${E[id].name}</b><small>${GRP_LABEL[E[id].grp]} · ${E[id].sets}×${E[id].reps}</small></div>
       <button class="padd" onclick="pickChoose('${id}')">＋</button></div>`).join('')||'<div class="empty">Nada por aqui nesse filtro.</div>';
   const paint=g=>{
@@ -3811,11 +3837,17 @@ async function exportXLSX(){
   try{await ensureXLSX()}catch(e){toast('Precisa de internet pra gerar o arquivo');return}
   const s1=[['Data','Treino','Nome','Séries feitas','Séries totais','Conclusão']];
   [...HISTORY].reverse().forEach(h=>s1.push([fmtBR(h.date),h.workout,h.label,h.done,h.tot,Math.round(h.done/h.tot*100)+'%']));
-  const s2=[['Data','Treino','Exercício','Carga (kg)']];
-  [...HISTORY].reverse().forEach(h=>{if(h.weights)Object.entries(h.weights).forEach(([vid,w])=>s2.push([fmtBR(h.date),h.workout,vidName(vid),w]))});
+  const s2=[['Data','Treino','Exercício','Carga / Distância','Unidade']];
+  [...HISTORY].reverse().forEach(h=>{
+    if(h.items&&h.items.length){h.items.forEach(it=>{
+      const u=unitOf(it.id);
+      (it.sw&&it.sw.length?it.sw.filter(v=>v!=null):(it.w!=null?[it.w]:[])).forEach(w=>s2.push([fmtBR(h.date),h.workout,it.n,w,u]));
+    })}
+    else if(h.weights){Object.entries(h.weights).forEach(([vid,w])=>s2.push([fmtBR(h.date),h.workout,vidName(vid),w,unitOf(vid)]))}
+  });
   const wb=XLSX.utils.book_new();
   const ws1=XLSX.utils.aoa_to_sheet(s1);ws1['!cols']=[{wch:12},{wch:7},{wch:16},{wch:13},{wch:13},{wch:11}];
-  const ws2=XLSX.utils.aoa_to_sheet(s2);ws2['!cols']=[{wch:12},{wch:7},{wch:30},{wch:11}];
+  const ws2=XLSX.utils.aoa_to_sheet(s2);ws2['!cols']=[{wch:12},{wch:7},{wch:30},{wch:16},{wch:9}];
   XLSX.utils.book_append_sheet(wb,ws1,'Sessões');
   XLSX.utils.book_append_sheet(wb,ws2,'Cargas');
   XLSX.writeFile(wb,'iron_treinos_'+todayISO()+'.xlsx');
@@ -3835,13 +3867,20 @@ async function exportPDF(){
     headStyles:{fillColor:[245,179,1],textColor:[24,24,24],fontStyle:'bold'},
     styles:{fontSize:9},alternateRowStyles:{fillColor:[246,247,249]}});
   const rows=[];
-  [...HISTORY].reverse().forEach(h=>{if(h.weights)Object.entries(h.weights).forEach(([vid,w])=>rows.push([fmtBR(h.date),h.workout,vidName(vid),String(w).replace('.',',')+' kg']))});
+  [...HISTORY].reverse().forEach(h=>{
+    if(h.items&&h.items.length){h.items.forEach(it=>{
+      const u=unitOf(it.id);
+      const vals=(it.sw&&it.sw.length?it.sw.filter(v=>v!=null):(it.w!=null?[it.w]:[]));
+      if(vals.length)rows.push([fmtBR(h.date),h.workout,it.n,vals.map(v=>String(v).replace('.',',')).join(' · ')+' '+u]);
+    })}
+    else if(h.weights){Object.entries(h.weights).forEach(([vid,w])=>rows.push([fmtBR(h.date),h.workout,vidName(vid),String(w).replace('.',',')+' '+unitOf(vid)]))}
+  });
   if(rows.length){
     doc.setFontSize(13);doc.setTextColor(20);
     const y=doc.lastAutoTable.finalY+12;
-    doc.text('Cargas por exercício',14,y);
+    doc.text('Cargas e distâncias por exercício',14,y);
     doc.autoTable({startY:y+4,
-      head:[['Data','Treino','Exercício','Carga']],body:rows,
+      head:[['Data','Treino','Exercício','Carga / Distância']],body:rows,
       headStyles:{fillColor:[24,24,24]},styles:{fontSize:8.5},
       alternateRowStyles:{fillColor:[246,247,249]}});
   }
