@@ -496,6 +496,115 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
   :root{--sep:rgba(60,60,67,.5);--label2:rgba(60,60,67,.85)}
   .card,.lastcard,.stat,.hrow,.tip{box-shadow:var(--shadow-1),0 0 0 1px var(--sep)}
 }
+/* ============ CALORIAS (gamificado) ============ */
+.kcal-hero{margin:0 0 16px;background:linear-gradient(165deg,var(--surface),var(--fill));
+  border-radius:var(--r-l);padding:26px 20px 22px;box-shadow:var(--shadow-1);text-align:center;
+  position:relative;overflow:hidden}
+.kcal-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 0%,rgba(255,180,60,.14),transparent 70%);
+  pointer-events:none}
+.kcal-ringwrap{position:relative;width:188px;height:188px;margin:0 auto 6px}
+.kcal-ringwrap svg{width:100%;height:100%;transform:rotate(-90deg)}
+.kcal-ringbg{fill:none;stroke:var(--fill);stroke-width:11}
+.kcal-ringfg{fill:none;stroke:url(#kcalGrad);stroke-width:11;stroke-linecap:round;
+  transition:stroke-dashoffset 1.1s cubic-bezier(.16,1,.3,1)}
+.kcal-ringcenter{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.kcal-num{font-size:44px;font-weight:800;letter-spacing:-.03em;line-height:1;
+  font-variant-numeric:tabular-nums;color:var(--label)}
+.kcal-num .u{font-size:15px;font-weight:600;color:var(--label2);margin-left:2px}
+.kcal-sub{font-size:12.5px;color:var(--label2);margin-top:5px;font-weight:500}
+.kcal-badge{display:inline-flex;align-items:center;gap:5px;margin-top:10px;padding:5px 12px;
+  border-radius:999px;background:rgba(255,150,30,.14);color:#C2600A;font-size:12px;font-weight:700}
+html[data-theme=dark] .kcal-badge{background:rgba(255,170,60,.18);color:#FFB84D}
+.kcal-badge.hot{animation:kcalPulse 1.6s infinite ease-in-out}
+@keyframes kcalPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+.kcal-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.kcal-stat{background:var(--surface);border-radius:var(--r-m);padding:12px 6px;text-align:center;
+  box-shadow:var(--shadow-1)}
+.kcal-stat .v{font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--label);
+  font-variant-numeric:tabular-nums}
+.kcal-stat .k{font-size:10px;color:var(--label3);margin-top:2px;font-weight:600;text-transform:uppercase;letter-spacing:.02em}
+
+.kcal-panel{background:var(--surface);border-radius:var(--r-l);padding:18px;margin-bottom:14px;
+  box-shadow:var(--shadow-1);position:relative;overflow:hidden}
+.kcal-ptitle{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.kcal-ptitle h4{font-size:15px;font-weight:700;letter-spacing:-.01em}
+.kcal-ptitle button{background:var(--fill);border:none;color:var(--label2);border-radius:999px;
+  font-size:11px;font-weight:600;padding:5px 10px;cursor:pointer}
+
+/* moedas */
+.coinrow{display:flex;align-items:center;gap:14px}
+.coin-ic{flex:0 0 auto;width:52px;height:52px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#FFEB99,#F5B301 55%,#B87700 100%);
+  display:flex;align-items:center;justify-content:center;font-size:24px;
+  box-shadow:0 2px 0 #8A5A00,0 6px 14px -4px rgba(184,119,0,.55);
+  position:relative;animation:coinFloat 2.6s infinite ease-in-out}
+.coin-ic::after{content:'';position:absolute;top:8%;left:18%;width:26%;height:26%;border-radius:50%;
+  background:rgba(255,255,255,.55);filter:blur(1px)}
+@keyframes coinFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-4px) rotate(3deg)}}
+.coininfo{flex:1;min-width:0}
+.coin-num{font-size:26px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+  color:var(--label);display:flex;align-items:baseline;gap:5px}
+.coin-num small{font-size:12px;color:var(--label3);font-weight:600}
+.coin-hint{font-size:12px;color:var(--label2);margin-top:2px}
+
+/* barra de progresso pra próxima cruz */
+.crossbar-wrap{margin-top:14px}
+.crossbar{height:12px;border-radius:7px;background:var(--fill);overflow:hidden;position:relative}
+.crossbar i{display:block;height:100%;border-radius:7px;width:0%;
+  background:linear-gradient(90deg,#3FCB6B,#22A555);
+  transition:width 1s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.crossbar i::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.45) 48%,transparent 66%);
+  background-size:220% 100%;animation:shimmerMove 2.2s infinite linear}
+@keyframes shimmerMove{0%{background-position:140% 0}100%{background-position:-40% 0}}
+.crossbar-lab{display:flex;justify-content:space-between;margin-top:6px;font-size:11px;
+  color:var(--label3);font-weight:600;font-variant-numeric:tabular-nums}
+
+/* cruzes conquistadas */
+.crossgrid{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.crossitem{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;
+  font-size:21px;background:linear-gradient(160deg,#3FCB6B,#1C8A46);color:#fff;
+  box-shadow:0 2px 0 #0F5C2C,0 5px 12px -4px rgba(28,138,70,.55);
+  animation:crossPop .5s cubic-bezier(.24,1.4,.4,1) backwards}
+.crossitem.next{background:var(--fill);color:var(--label3);box-shadow:none;
+  border:1.5px dashed var(--sep-strong);position:relative;animation:none}
+.crossitem.next .cxfill{position:absolute;inset:0;border-radius:11px;overflow:hidden}
+.crossitem.next .cxfill i{position:absolute;left:0;bottom:0;width:100%;height:0%;
+  background:linear-gradient(0deg,#3FCB6B,#6EE499);transition:height .9s cubic-bezier(.16,1,.3,1)}
+.crossitem.next span{position:relative;z-index:2}
+@keyframes crossPop{0%{transform:scale(0) rotate(-25deg);opacity:0}70%{transform:scale(1.18) rotate(6deg)}100%{transform:scale(1) rotate(0);opacity:1}}
+.cross-empty{font-size:12.5px;color:var(--label3);padding:6px 2px;line-height:1.5}
+
+/* burst de conquista (cruz nova) */
+.kcal-burst{position:fixed;inset:0;z-index:95;display:flex;align-items:center;justify-content:center;
+  pointer-events:none;opacity:0}
+.kcal-burst.show{opacity:1;animation:burstFade 1.9s ease forwards}
+@keyframes burstFade{0%{opacity:0}12%{opacity:1}78%{opacity:1}100%{opacity:0}}
+.kcal-burst .bx{width:120px;height:120px;border-radius:32px;display:flex;align-items:center;justify-content:center;
+  font-size:56px;color:#fff;background:linear-gradient(160deg,#3FCB6B,#1C8A46);
+  box-shadow:0 8px 0 #0F5C2C,0 20px 50px -10px rgba(28,138,70,.6);
+  animation:burstPop 1.9s cubic-bezier(.2,1.4,.3,1) forwards}
+@keyframes burstPop{0%{transform:scale(.2) rotate(-40deg)}45%{transform:scale(1.22) rotate(8deg)}62%{transform:scale(1) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
+.kcal-burst .blab{position:absolute;margin-top:150px;font-size:16px;font-weight:800;color:#fff;
+  text-shadow:0 2px 10px rgba(0,0,0,.4);white-space:nowrap}
+
+/* peso corporal editável */
+.bodykg-row{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  background:var(--fill);border-radius:var(--r-m);padding:12px 14px;margin-bottom:14px;cursor:pointer}
+.bodykg-row .l{font-size:13px;color:var(--label2);font-weight:600}
+.bodykg-row .v{font-size:15px;font-weight:800;color:var(--label)}
+.bodykg-row .v span{color:var(--label3);font-weight:600;font-size:12px}
+
+/* moedas voadoras */
+.coinfly{position:fixed;z-index:96;pointer-events:none;font-size:20px;
+  animation:coinFly 1.1s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes coinFly{0%{transform:translateY(0) scale(.6);opacity:0}15%{opacity:1;transform:translateY(-10px) scale(1.15)}
+  100%{transform:translateY(-130px) scale(.7);opacity:0}}
+
+@media (prefers-reduced-motion:reduce){
+  .coin-ic,.crossbar i::after,.kcal-badge.hot,.crossitem{animation:none!important}
+}
 .hidden{display:none!important}
 </style>
 </head>
@@ -540,6 +649,7 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
   </div>
 
   <div id="progView" class="pv hidden"></div>
+  <div id="kcalView" class="pv hidden"></div>
 </div>
 
 <div class="tmr" id="tmr">
@@ -557,6 +667,10 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
   <button id="navProg" onclick="setView('progress')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19V5M4 19h16M8 16l3-4 3 2 4-6"/></svg>
     <span id="navProgLbl">Progresso</span>
+  </button>
+  <button id="navKcal" onclick="setView('calories')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2c0 4-5 6-5 11a5 5 0 0 0 10 0c0-2-1-3-1-3s-.5 2-2 2c-2 0-1.5-2.5-1-4 .8-2.2 1-3 1-6-1 1-2 3-2 3z"/></svg>
+    <span id="navKcalLbl">Calorias</span>
   </button>
 </nav>
 
@@ -1883,7 +1997,7 @@ const I18N={
    exportarxlsx:'📊 Exportar Excel',exportarpdf:'📄 Exportar PDF',personalizar:'⚙️ Personalizar meu treino',
    evoluir:'🚀 Evoluir treino',excluidos:'🗑 Treinos excluídos',backup:'💾 Backup',versoesant:'🕒 Versões anteriores do treino',
    vervideo:'▶ Ver vídeo',passoapasso:'Passo a passo',opcoes:'Opções',anterior:'Anterior',descanso:'Descanso',
-   semdescanso:'Sem pausa',continuo:'Contínuo',addextra:'＋ Adicionar exercício extra hoje',hoje:'hoje',ontem:'ontem'},
+   semdescanso:'Sem pausa',continuo:'Contínuo',addextra:'＋ Adicionar exercício extra hoje',hoje:'hoje',ontem:'ontem',kcalnav:'Calorias',kcalhoje:'queimadas hoje',kcalmeta:'Meta',kcalsemana:'Semana',kcalmes:'Mês',kcalano:'Ano',kcalmoedas:'moedas',kcalcruzes:'Cruzes conquistadas',kcalmoedastit:'Suas moedas',kcalcomo:'Como funciona',kcalpeso:'Seu peso corporal',kcalajustar:'toque pra ajustar',kcalbatida:'Meta do dia batida!'},
  en:{bora:"Let's go",trein:'Workout',prog:'Progress',diadotreino:'Workout day',ultimotreino:'Last workout',
    completo:'✓ Complete',parcial:'Partial',series:'sets',progressodotreino:'Workout progress',
    porqueessaordem:'🧠 Why this order?',editarex:'✎ Edit exercises',concluirtreino:'Finish workout',
@@ -1891,7 +2005,7 @@ const I18N={
    exportarxlsx:'📊 Export Excel',exportarpdf:'📄 Export PDF',personalizar:'⚙️ Customize my workout',
    evoluir:'🚀 Evolve workout',excluidos:'🗑 Deleted workouts',backup:'💾 Backup',versoesant:'🕒 Previous workout versions',
    vervideo:'▶ Watch video',passoapasso:'Step by step',opcoes:'Options',anterior:'Last time',descanso:'Rest',
-   semdescanso:'No rest',continuo:'Continuous',addextra:'＋ Add extra exercise today',hoje:'today',ontem:'yesterday'},
+   semdescanso:'No rest',continuo:'Continuous',addextra:'＋ Add extra exercise today',hoje:'today',ontem:'yesterday',kcalnav:'Calories',kcalhoje:'burned today',kcalmeta:'Goal',kcalsemana:'Week',kcalmes:'Month',kcalano:'Year',kcalmoedas:'coins',kcalcruzes:'Crosses earned',kcalmoedastit:'Your coins',kcalcomo:'How it works',kcalpeso:'Your body weight',kcalajustar:'tap to adjust',kcalbatida:'Daily goal hit!'},
  es:{bora:'Vamos',trein:'Entreno',prog:'Progreso',diadotreino:'Día de entreno',ultimotreino:'Último entreno',
    completo:'✓ Completo',parcial:'Parcial',series:'series',progressodotreino:'Progreso del entreno',
    porqueessaordem:'🧠 ¿Por qué este orden?',editarex:'✎ Editar ejercicios',concluirtreino:'Terminar entreno',
@@ -1899,7 +2013,7 @@ const I18N={
    exportarxlsx:'📊 Exportar Excel',exportarpdf:'📄 Exportar PDF',personalizar:'⚙️ Personalizar mi entreno',
    evoluir:'🚀 Evolucionar entreno',excluidos:'🗑 Entrenos eliminados',backup:'💾 Copia de seguridad',versoesant:'🕒 Versiones anteriores del entreno',
    vervideo:'▶ Ver vídeo',passoapasso:'Paso a paso',opcoes:'Opciones',anterior:'Última vez',descanso:'Descanso',
-   semdescanso:'Sin pausa',continuo:'Continuo',addextra:'＋ Añadir ejercicio extra hoy',hoje:'hoy',ontem:'ayer'},
+   semdescanso:'Sin pausa',continuo:'Continuo',addextra:'＋ Añadir ejercicio extra hoy',hoje:'hoy',ontem:'ayer',kcalnav:'Calorías',kcalhoje:'quemadas hoy',kcalmeta:'Meta',kcalsemana:'Semana',kcalmes:'Mes',kcalano:'Año',kcalmoedas:'monedas',kcalcruzes:'Cruces conseguidas',kcalmoedastit:'Tus monedas',kcalcomo:'Cómo funciona',kcalpeso:'Tu peso corporal',kcalajustar:'toca para ajustar',kcalbatida:'¡Meta del día lograda!'},
 };
 let LANG='pt-BR';
 function t(k){return (I18N[LANG]&&I18N[LANG][k])||I18N['pt-BR'][k]||k}
@@ -2203,7 +2317,67 @@ function pairAsCircuit(sel,restBetween){
   return out;
 }
 
+/* =================== CALORIAS (estimativa por MET) =================== */
+const MET_BY_CAT={comp:6,iso:4,core:3.5,lomb:3.5,calf:3,func:7.5,cardio:7};
+const MET_OVERRIDE={
+ treadmillv:9,runningv:10,ellipticalv:6,stairsv:9,rowerv:7,finisher:7,swimmingv:8,
+ kettlebellswing:9,sledpush:8,battleropes:8,boxjump:8,burpeev:10,mountainclimberv:8,
+ jumpropev:11,medicineball:6,farmercarry:5,trxrow:5
+};
+function parseRepsSeconds(reps){
+  if(!reps)return {kind:'reps',avg:10};
+  const r=String(reps).toLowerCase();
+  if(r.indexOf('min')>=0){
+    const nums=(r.match(/\d+/g)||['5']).map(Number);
+    const avg=nums.length>1?(nums[0]+nums[1])/2:nums[0];
+    return {kind:'time',seconds:avg*60};
+  }
+  if(r.indexOf('s')>=0&&r.indexOf('sess')<0){
+    const nums=(r.match(/\d+/g)||['30']).map(Number);
+    const avg=nums.length>1?(nums[0]+nums[1])/2:nums[0];
+    return {kind:'time',seconds:avg};
+  }
+  const nums=r.match(/\d+/g);
+  if(nums){const ns=nums.map(Number);const avg=ns.length>1?(ns[0]+ns[1])/2:ns[0];return {kind:'reps',avg}}
+  return {kind:'reps',avg:10};
+}
+function bodyKg(){return (SETUP&&SETUP.bodyKg)||75}
+function estimateKcalForItem(ex,a,doneCount,meters){
+  if(!doneCount&&!(a.unit==='m'&&meters>0))return 0;
+  const met=MET_OVERRIDE[a.vid]!=null?MET_OVERRIDE[a.vid]:(MET_BY_CAT[ex.cat]||4);
+  let seconds;
+  if(a.unit==='m'){seconds=((meters||0)/36.7)*60}
+  else{
+    const info=parseRepsSeconds(a.reps);
+    const perSet=info.kind==='time'?info.seconds:(info.avg*3);
+    seconds=doneCount*perSet+Math.max(0,doneCount-1)*(a.rest||0);
+  }
+  return met*bodyKg()*(seconds/3600);
+}
+function estimateKcalForHistItem(it){
+  const meta=E[it.id];if(!meta)return 0;
+  const met=MET_OVERRIDE[it.id]!=null?MET_OVERRIDE[it.id]:(MET_BY_CAT[meta.cat]||4);
+  let seconds;
+  if(meta.unit==='m'){
+    const vals=(it.sw||[]).filter(v=>v!=null);
+    const m=vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:(it.w||0);
+    seconds=(m/36.7)*60;
+  }else{
+    const info=parseRepsSeconds(meta.reps);
+    const perSet=info.kind==='time'?info.seconds:(info.avg*3);
+    const doneCount=it.s||0;
+    seconds=doneCount*perSet+Math.max(0,doneCount-1)*(meta.rest||0);
+  }
+  return met*bodyKg()*(seconds/3600);
+}
+function recomputeKcal(h){
+  if(!h.items||!h.items.length)return h.kcal||0;
+  return Math.round(h.items.reduce((s,it)=>s+estimateKcalForHistItem(it),0));
+}
+function kcalOf(h){return h.kcal!=null?h.kcal:recomputeKcal(h)}
+
 /* =================== GERADOR =================== */
+
 function buildDay(pool,n,prio){
   const noPrio=Object.keys(GRP_LABEL).filter(g=>!prio.includes(g));
   let items=pool.map(id=>({id,...E[id]}));
@@ -2309,6 +2483,8 @@ let VARIANT=load('iron_variant',{});
 let SESSMETA=load('iron_sessmeta',{});
 let TRASH=load('iron_trash',[]);
 let PROG_BACKUPS=load('iron_prog_backups',[]);
+let LAST_COINS_SEEN=load('iron_last_coins_seen',0);
+let LAST_CROSSES_SEEN=load('iron_last_crosses_seen',0);
 let THEME=load('iron_theme','light');
 let SETUP=load('iron_setup',null);
 LANG=load('iron_lang','pt-BR');
@@ -2398,7 +2574,7 @@ function applyI18N(){
   document.documentElement.lang=LANG;
   const set=(id,k)=>{const el=$(id);if(el)el.textContent=t(k)};
   set('dateLbl','diadotreino');set('helloPre','bora');set('progLbl','progressodotreino');
-  set('seriesLbl','series');set('navTrainLbl','trein');set('navProgLbl','prog');
+  set('seriesLbl','series');set('navTrainLbl','trein');set('navProgLbl','prog');set('navKcalLbl','kcalnav');
   const eb=$('editBtn');if(eb&&!EDITMODE)eb.textContent=t('editarex');
 }
 function render(){
@@ -2411,7 +2587,7 @@ function render(){
   renderAlerts();
   renderLastCard();
   renderTabs();
-  if(view==='train'){renderTrain()}else{renderProgress()}
+  if(view==='train'){renderTrain()}else if(view==='calories'){renderCalories()}else{renderProgress()}
 }
 function relDate(iso){
   const d=new Date(iso+'T00:00'),h=new Date(todayISO()+'T00:00');
@@ -2680,24 +2856,190 @@ function paintT(){const m=Math.floor(tLeft/60),s=tLeft%60;
 $('tx').onclick=()=>{clearInterval(tInt);$('tmr').classList.remove('show');document.body.classList.remove('tmron')};
 
 /* concluir */
+/* =================== ABA CALORIAS (gamificado) =================== */
+const KCAL_PER_COIN=10, COINS_PER_CROSS=50, KCAL_DAILY_GOAL=400;
+function kcalRangeSum(pred){return HISTORY.filter(pred).reduce((s,h)=>s+kcalOf(h),0)}
+function kcalToday(){const d=todayISO();return Math.round(kcalRangeSum(h=>h.date===d))}
+function kcalThisWeek(){
+  const mon=weekMondayOf(0);const a=isoOf(mon);const b=new Date(mon);b.setDate(mon.getDate()+6);const e=isoOf(b);
+  return Math.round(kcalRangeSum(h=>h.date>=a&&h.date<=e));
+}
+function kcalThisMonth(){const m=todayISO().slice(0,7);return Math.round(kcalRangeSum(h=>h.date.slice(0,7)===m))}
+function kcalThisYear(){const y=todayISO().slice(0,4);return Math.round(kcalRangeSum(h=>h.date.slice(0,4)===y))}
+function kcalAllTime(){return Math.round(kcalRangeSum(()=>true))}
+function animateNumber(el,to,duration){
+  if(!el)return;
+  const from=parseInt(el.dataset.val||'0',10)||0;
+  el.dataset.val=to;
+  const start=performance.now();
+  function frame(now){
+    const p=Math.min(1,(now-start)/duration);
+    const eased=1-Math.pow(1-p,3);
+    const v=Math.round(from+(to-from)*eased);
+    const txt=v.toLocaleString(localeOf());
+    if(el.firstChild&&el.firstChild.nodeType===1){el.firstChild.textContent=txt}else{el.textContent=txt}
+    if(p<1)requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+function renderCalories(){
+  const el=$('kcalView');if(!el)return;
+  const today=kcalToday(),week=kcalThisWeek(),month=kcalThisMonth(),year=kcalThisYear(),allTime=kcalAllTime();
+  const totalCoins=Math.floor(allTime/KCAL_PER_COIN);
+  const totalCrosses=Math.floor(totalCoins/COINS_PER_CROSS);
+  const intoCircle=totalCoins%COINS_PER_CROSS;
+  const pct=Math.round(intoCircle/COINS_PER_CROSS*100);
+  const ringPct=Math.min(100,Math.round(today/KCAL_DAILY_GOAL*100));
+  const circumference=2*Math.PI*52;
+  const dashoffset=circumference*(1-ringPct/100);
+  const overGoal=today>=KCAL_DAILY_GOAL;
+  const bk=bodyKg();
+
+  el.innerHTML=`
+    <div class="kcal-hero">
+      <div class="kcal-ringwrap">
+        <svg viewBox="0 0 120 120">
+          <defs><linearGradient id="kcalGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#FFB23F"/><stop offset="100%" stop-color="#FF7A3D"/>
+          </linearGradient></defs>
+          <circle class="kcal-ringbg" cx="60" cy="60" r="52"/>
+          <circle class="kcal-ringfg" id="kcalRingFg" cx="60" cy="60" r="52"
+            stroke-dasharray="${circumference}" stroke-dashoffset="${circumference}"/>
+        </svg>
+        <div class="kcal-ringcenter">
+          <div class="kcal-num" id="kcalTodayNum" data-val="0"><span>0</span><span class="u">kcal</span></div>
+          <div class="kcal-sub">${t('kcalhoje')}</div>
+        </div>
+      </div>
+      ${overGoal?`<div class="kcal-badge hot">🔥 ${t('kcalbatida')}</div>`:
+        `<div class="kcal-badge">🎯 ${t('kcalmeta')}: ${KCAL_DAILY_GOAL} kcal${LANG==='en'?'/day':LANG==='es'?'/día':'/dia'}</div>`}
+    </div>
+
+    <div class="kcal-stats">
+      <div class="kcal-stat"><div class="v" id="stHoje" data-val="0">0</div><div class="k">${t('hoje')}</div></div>
+      <div class="kcal-stat"><div class="v" id="stSemana" data-val="0">0</div><div class="k">${t('kcalsemana')}</div></div>
+      <div class="kcal-stat"><div class="v" id="stMes" data-val="0">0</div><div class="k">${t('kcalmes')}</div></div>
+      <div class="kcal-stat"><div class="v" id="stAno" data-val="0">0</div><div class="k">${t('kcalano')}</div></div>
+    </div>
+
+    <div class="bodykg-row" onclick="openBodyKgEdit()">
+      <span class="l">⚖️ ${t('kcalpeso')}</span>
+      <span class="v">${fmtW(bk)} kg <span>· ${t('kcalajustar')}</span></span>
+    </div>
+
+    <div class="kcal-panel">
+      <div class="kcal-ptitle"><h4>💰 ${t('kcalmoedastit')}</h4></div>
+      <div class="coinrow">
+        <div class="coin-ic">🪙</div>
+        <div class="coininfo">
+          <div class="coin-num" id="coinNum" data-val="0"><span>0</span><small>${t('kcalmoedas')}</small></div>
+          <div class="coin-hint">A cada ${KCAL_PER_COIN} kcal queimadas = 1 moeda</div>
+        </div>
+      </div>
+      <div class="crossbar-wrap">
+        <div class="crossbar"><i id="crossBarFill" style="width:0%"></i></div>
+        <div class="crossbar-lab"><span>${intoCircle}/${COINS_PER_CROSS} pra próxima cruz</span><span>${pct}%</span></div>
+      </div>
+    </div>
+
+    <div class="kcal-panel">
+      <div class="kcal-ptitle"><h4>✚ ${t('kcalcruzes')}</h4><span style="font-size:13px;color:var(--label2);font-weight:700">${totalCrosses}</span></div>
+      <div class="crossgrid">
+        ${Array.from({length:totalCrosses}).map((_,i)=>`<div class="crossitem" style="animation-delay:${Math.min(i,10)*45}ms">✚</div>`).join('')}
+        <div class="crossitem next"><div class="cxfill"><i id="nextCrossFill" style="height:0%"></i></div><span>✚</span></div>
+      </div>
+      ${totalCrosses===0?'<div class="cross-empty">Queime calorias treinando pra ganhar sua primeira cruz 💪</div>':''}
+    </div>
+
+    <div class="kcal-panel">
+      <div class="kcal-ptitle"><h4>ℹ️ ${t('kcalcomo')}</h4></div>
+      <p style="font-size:12.5px;color:var(--label2);line-height:1.55">
+        Calculamos as calorias de cada treino a partir do seu peso corporal e do tipo de exercício
+        (força, cardio, funcional). É uma estimativa, não uma medição clínica exata: varia conforme
+        seu esforço real. A cada <b>${KCAL_PER_COIN} kcal</b> você ganha <b>1 moeda</b>, e a cada
+        <b>${COINS_PER_CROSS} moedas</b>, uma <b>cruz</b> pra guardar na coleção.
+      </p>
+    </div>
+  `;
+
+  animateNumber($('kcalTodayNum'),today,900);
+  animateNumber($('stHoje'),today,700);
+  animateNumber($('stSemana'),week,900);
+  animateNumber($('stMes'),month,1100);
+  animateNumber($('stAno'),year,1300);
+  animateNumber($('coinNum'),totalCoins,1000);
+
+  requestAnimationFrame(()=>{
+    const ring=$('kcalRingFg');if(ring)ring.style.strokeDashoffset=String(dashoffset);
+    const cb=$('crossBarFill');if(cb)cb.style.width=pct+'%';
+    const nf=$('nextCrossFill');if(nf)nf.style.height=pct+'%';
+  });
+
+  if(totalCoins>LAST_COINS_SEEN)spawnCoinFly(Math.min(10,totalCoins-LAST_COINS_SEEN));
+  if(totalCrosses>LAST_CROSSES_SEEN){const gained=totalCrosses-LAST_CROSSES_SEEN;setTimeout(()=>celebrateCross(gained),550)}
+  LAST_COINS_SEEN=totalCoins;save('iron_last_coins_seen',LAST_COINS_SEEN);
+  LAST_CROSSES_SEEN=totalCrosses;save('iron_last_crosses_seen',LAST_CROSSES_SEEN);
+}
+function spawnCoinFly(n){
+  const host=document.querySelector('.coin-ic');if(!host)return;
+  const r=host.getBoundingClientRect();
+  for(let i=0;i<n;i++){
+    setTimeout(()=>{
+      const d=document.createElement('div');d.className='coinfly';d.textContent='🪙';
+      d.style.left=(r.left+r.width/2-10+(Math.random()*30-15))+'px';
+      d.style.top=(r.top+8)+'px';
+      document.body.appendChild(d);
+      setTimeout(()=>d.remove(),1250);
+    },i*90);
+  }
+  if(navigator.vibrate)navigator.vibrate(12);
+}
+function celebrateCross(n){
+  const b=document.createElement('div');b.className='kcal-burst';
+  b.innerHTML=`<div class="bx">✚</div><div class="blab">+${n} cruz${n>1?'es':''} conquistada${n>1?'s':''}! 🎉</div>`;
+  document.body.appendChild(b);
+  requestAnimationFrame(()=>b.classList.add('show'));
+  if(navigator.vibrate)navigator.vibrate([30,60,30,60,90]);
+  confetti();
+  setTimeout(()=>b.remove(),2000);
+}
+function openBodyKgEdit(){
+  boxOpen(`<h3>⚖️ Seu peso corporal</h3>
+    <div class="sub">Usamos esse valor pra estimar quantas calorias você queima em cada treino.</div>
+    <input type="number" inputmode="decimal" id="bodyKgInput" value="${bodyKg()}" placeholder="Ex: 75">
+    <div class="mrow">
+      <button class="mbtn" onclick="boxClose()">Cancelar</button>
+      <button class="mbtn pri" onclick="saveBodyKg()">Salvar</button>
+    </div>`);
+}
+function saveBodyKg(){
+  const i=$('bodyKgInput');const v=parseFloat((i.value||'').replace(',','.'));
+  if(isNaN(v)||v<=0){toast('Digite um peso válido');return}
+  SETUP=SETUP||{};SETUP.bodyKg=v;save('iron_setup',SETUP);cloudSync();
+  boxClose();toast('Peso atualizado ✔');render();
+}
+
 function finishWorkout(key,dateStr){
   const day=PROGRAM[key];if(!day)return null;
-  let done=0,tot=0;const snap={};
+  let done=0,tot=0,kcalTotal=0;const snap={};
   const items=day.ex.map(ex=>{
     const a=activeOf(ex);const arr=setsArr(ex.id,a.sets,key);
     const s=arr.filter(x=>x.d).length;done+=s;tot+=a.sets;
     if(!a.bw)snap[a.vid]=wOf(a);
     const sw=a.bw?null:arr.map(x=>x.d?(x.w!=null?x.w:wOf(a)):null);
+    const doneMeters=(a.unit==='m'&&s>0)?(()=>{const first=arr.find(x=>x.d);return first&&first.w!=null?first.w:wOf(a)})():0;
+    kcalTotal+=estimateKcalForItem(ex,a,s,doneMeters);
     return {id:a.vid,n:a.name,s,t:a.sets,w:a.bw?null:wOf(a),sw};
   });
   if(done===0)return null;
-  HISTORY.unshift({date:dateStr||todayISO(),workout:key,label:day.label,done,tot,weights:snap,items,ts:Date.now()});
+  const kcal=Math.round(kcalTotal);
+  HISTORY.unshift({date:dateStr||todayISO(),workout:key,label:day.label,done,tot,weights:snap,items,kcal,ts:Date.now()});
   save('iron_history',HISTORY);
   SESSION[key]={};save('iron_session',SESSION);
   delete SESSMETA[key];save('iron_sessmeta',SESSMETA);
   if(RESUMED===key)RESUMED=null;
   cloudSync();
-  return {done,tot};
+  return {done,tot,kcal};
 }
 $('finBtn').onclick=()=>{
   const st=sessionStats(cur);
@@ -2872,6 +3214,7 @@ function ehSave(){
   });
   h.done=done;h.tot=tot;h.date=e.date;
   if(!r_hasBW(h))h.weights=Object.fromEntries(h.items.filter(i=>i.w!=null).map(i=>[i.id||i.n,i.w]));
+  h.kcal=recomputeKcal(h);
   HISTORY.sort((a,b)=>(b.date<a.date?-1:b.date>a.date?1:(b.ts||0)-(a.ts||0)));
   save('iron_history',HISTORY);cloudSync();
   boxClose();render();toast('Treino atualizado ✔');
@@ -3125,8 +3468,10 @@ function setView(v){
   view=v;
   $('trainView').classList.toggle('hidden',v!=='train');
   $('progView').classList.toggle('hidden',v!=='progress');
+  $('kcalView').classList.toggle('hidden',v!=='calories');
   $('navTrain').classList.toggle('on',v==='train');
   $('navProg').classList.toggle('on',v==='progress');
+  $('navKcal').classList.toggle('on',v==='calories');
   render();window.scrollTo({top:0,behavior:'smooth'});
 }
 let toastT=null;
@@ -3216,6 +3561,10 @@ function renderOB(){
         <div class="hint">Aparece na saudação do app.</div>
         <input class="ob-name" id="obName2" placeholder="Seu nome" value="${OBDATA.name||''}" maxlength="20">
       </div>
+      <div class="qb"><h4>Qual seu peso corporal?</h4>
+        <div class="hint">Usado só pra calcular quantas calorias você queima em cada treino (aba Calorias). Pode ajustar quando quiser.</div>
+        <input class="ob-name" id="obBodyKg" type="number" inputmode="decimal" placeholder="Ex: 75" value="${OBDATA.bodyKg||''}" style="text-align:center" maxlength="5">
+      </div>
       <div class="qb"><h4>Qual é o seu objetivo?</h4>
         <div class="hint">${GOALS[OBDATA.goal].icon} ${GOALS[OBDATA.goal].desc}</div>
         <div class="qchips">${Object.keys(GOALS).map(g=>
@@ -3263,7 +3612,8 @@ function renderOB(){
       <button class="ob-btn pri" onclick="obFinish()">Concluir e treinar 🚀</button>
     </div></div>`;
 }
-function obGrabName(){const i=$('obName2')||$('obName');if(i)OBDATA.name=i.value.trim()}
+function obGrabBodyKg(){const i=$('obBodyKg');if(i&&i.value){const v=parseFloat(i.value.replace(',','.'));if(!isNaN(v)&&v>0)OBDATA.bodyKg=v}}
+function obGrabName(){const i=$('obName2')||$('obName');if(i)OBDATA.name=i.value.trim();obGrabBodyKg()}
 function obGoForm(){const i=$('obName');if(i)OBDATA.name=i.value.trim();OBSTEP=1;renderOB();window.scrollTo({top:0})}
 function obUseDefault(){const i=$('obName');if(i)OBDATA.name=i.value.trim();useDefault()}
 function obSetGoal(g){
@@ -3459,7 +3809,7 @@ function progMove(i,dir){
   save('iron_program',PROGRAM);cloudSync();renderTrain();
 }
 function useDefault(){
-  SETUP={...DEFAULT_SETUP,name:(OBDATA&&OBDATA.name)||''};PROGRAM=generateProgram(SETUP);
+  SETUP={...DEFAULT_SETUP,name:(OBDATA&&OBDATA.name)||'',bodyKg:(OBDATA&&OBDATA.bodyKg)||undefined};PROGRAM=generateProgram(SETUP);
   save('iron_setup',SETUP);save('iron_program',PROGRAM);cloudSync();
   closeOB();cur='A';render();
 }

@@ -1,4 +1,4 @@
-const CACHE='iron-v8';
+const CACHE='iron-v9';
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./','./index.html'])));
   self.skipWaiting();
