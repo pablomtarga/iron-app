@@ -419,6 +419,9 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .mlist{overflow-y:auto;-webkit-overflow-scrolling:touch;margin:0 -4px;padding:0 4px;flex:1 1 auto;min-height:0}
 .pick{max-width:560px}
 .pgrid{overflow-y:auto;-webkit-overflow-scrolling:touch;margin:6px -4px 0;padding:0 4px;flex:1 1 auto;min-height:0}
+.picksearch{width:100%;background:var(--fill);border:1.5px solid transparent;border-radius:var(--r-s);
+  padding:11px 14px;color:var(--label);font-weight:500;font-size:15px;margin-bottom:10px;flex:0 0 auto}
+.picksearch:focus{outline:none;border-color:var(--accent);background:var(--surface)}
 .pchips{display:flex;gap:7px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none;flex:0 0 auto}
 .pchips::-webkit-scrollbar{display:none}
 .prow{display:flex;align-items:center;gap:11px;padding:11px 2px;border-bottom:.5px solid var(--sep)}
@@ -2000,7 +2003,74 @@ const I18N={
    semdescanso:'Sem pausa',continuo:'Contínuo',addextra:'＋ Adicionar exercício extra hoje',hoje:'hoje',ontem:'ontem',kcalnav:'Calorias',kcalhoje:'queimadas hoje',kcalmeta:'Meta',kcalsemana:'Semana',kcalmes:'Mês',kcalano:'Ano',kcalmoedas:'moedas',kcalcruzes:'Moedas verdes conquistadas',kcalmoedastit:'Suas moedas amarelas',kcalcomo:'Como funciona',kcalpeso:'Seu peso corporal',kcalajustar:'toque pra ajustar',kcalbatida:'Meta do dia batida!',kcalproxima:'pra próxima moeda verde',kcalempty:'Queime calorias treinando pra ganhar sua primeira moeda verde 💪',kcalverde:'moeda verde',kcalverdes:'moedas verdes',
    askdatetit:'Quando foi este treino?',askdatesub:'Confirme o dia pra não registrar na data errada.',cancelar:'Cancelar',confirmar:'Confirmar',fechar:'Fechar',
    pesosalvo:'Peso salvo: ',distsalva:'Distância salva: ',tempoSalvo:'Tempo salvo: ',registroexcluido:'Registro excluído',marcaruma:'Marca pelo menos uma série antes 😉',
-   wdSeg:'S',wdTer:'T',wdQua:'Q',wdQui:'Q',wdSex:'S',wdSab:'S',wdDom:'D',movidolixeira:'Movido para a lixeira',regnaoenc:'Registro não encontrado'},
+   wdSeg:'S',wdTer:'T',wdQua:'Q',wdQui:'Q',wdSex:'S',wdSab:'S',wdDom:'D',movidolixeira:'Movido para a lixeira',regnaoenc:'Registro não encontrado',
+   backupfiletit:'Backup dos seus dados',backupfilesub:'Baixe um arquivo com todo o seu histórico, cargas e programa. Guarde no celular ou no e-mail: se algo for apagado por engano, é só restaurar por aqui.',baixarbackup:'💾 Baixar backup',restaurararquivo:'📂 Restaurar de um arquivo',backupbaixado:'Backup baixado ✔',arquivosemhist:'arquivo sem histórico',naoconsegulerarquivo:'Não consegui ler esse arquivo: ',treinorestauradoplural:'restaurado',treinosrestauradosplural:'restaurados',voltar:'Voltar',todos:'Todos',pesocorpcurto:'peso corporal',semdetalhes2:'Sem detalhes salvos nesta sessão.',buscarex:'Buscar exercício...',nadaaqui:'Nada por aqui nesse filtro.',
+   pesocorporal:'⚖️ Seu peso corporal',pesousado:'Usamos esse valor pra estimar quantas calorias você queima em cada treino.',
+   pesoinvalido:'Digite um peso válido',pesoatualizado:'Peso atualizado ✔',ex1:'Ex: 75',salvar:'Salvar',
+   nenhumtreinodia:'Nenhum treino registrado neste dia.',treinosnodia:'treinos neste dia. Escolha qual editar.',
+   editartreino:'Editar treino',ajusteseries:'Ajuste as séries feitas e as cargas. Toque no ✓ pra marcar ou desmarcar.',
+   nenhumdetalhe:'Esse registro não tem detalhes pra editar',treinoatualizado:'Treino atualizado ✔',
+   moverlixeira:'Mover para a lixeira?',podevoltarLater:'Você pode restaurar depois em "Treinos excluídos".',
+   lixeiravazia:'Treinos excluídos',lixeiravaziasub:'A lixeira está vazia. Tudo que você excluir aparece aqui e pode ser restaurado.',
+   regnalixeira:'registro',regnalixeiraS:'registros',nalixeira:'na lixeira. Restaure o que precisar.',
+   restaurartodos:'Restaurar todos',treinorestaurado:'Treino restaurado ✔',todosrestaurados:'Todos os treinos restaurados ✔',
+   editarbtn:'✎ Editar treino',repetirhoje:'Repetir hoje',excluirbtn:'Excluir',treinorepetido:'Treino repetido em ',
+   umtreino:'treino',doistreinos:'treinos',nototal:'no total.',nenhumtreino7:'Nenhum treino nos últimos 7 dias.',
+   vocenaoregistrou:'Você ainda não registrou nenhum treino.',semdetalhes:'Sem detalhes salvos.',
+   totalcolon:'Total:',agrupadosmes:'Agrupados por mês. Toque no ✎ pra editar.',
+   trocarem:'Trocar em quais treinos?',tambemaparece:'também aparece',notreino:'no treino',nostreinos:'nos treinos',
+   querttrocar:'Quer trocar por',sopara:'só aqui ou em todos?',sonotreino:'Só no treino',trocaremtodos:'Trocar em todos',
+   substituidopor:'Substituído por',adicionado:'adicionado',montetreino:'Monte um treino primeiro',
+   evoluirtit:'🚀 Evoluir o treino',evoluirsub1:'Eu troco os exercícios básicos do seu programa atual por versões mais avançadas e completas (ex: máquina → barra livre), mantendo a mesma estrutura de dias e a mesma lógica de ordem.',
+   evoluirsub2a:'Isso deve trazer',evoluirsub2b:'exercício novo',evoluirsub2c:'exercícios novos',evoluirsub2d:'como',
+   evoluirsub2e:'Não achei uma evolução óbvia pra alguns exercícios do seu programa atual: eles continuam como estão, e você ainda pode trocar manualmente depois.',
+   evoluirsub3:'Seu treino atual é salvo automaticamente antes, então dá pra voltar quando quiser em "Versões anteriores do treino".',
+   evoluiragora:'Evoluir agora',evoluidotit:'✅ Treino evoluído',exsubstituido:'exercício substituído',exsubstituidos:'exercícios substituídos',
+   nenhumatroca:'Nenhuma troca óbvia foi encontrada desta vez: seu programa continua como estava.',vernovotreino:'Ver meu novo treino',
+   backupsalvo:'🚀 Treino evoluído! Backup salvo.',nenhumaversao:'Nenhuma versão anterior salva ainda',
+   versoesanttit:'Versões anteriores do treino',versoesantsub:'Restaurar troca o seu programa atual por essa versão salva (o atual não se perde: também vira uma versão anterior).',
+   restaurarq:'Restaurar',versaorestaurada:'Versão restaurada ✔',
+   nuvemnaoconfig:'☁️ Nuvem não configurada',nuvemsub:'Pra ter conta de usuário e registros salvos na nuvem, siga as instruções do arquivo',
+   entendi:'Entendi',paginainicial:'🏠 Ir para a página inicial',criarnovasenha:'Criar nova senha',
+   chegouporlink:'Você chegou pelo link de redefinição. Escolha sua nova senha (mínimo 6 caracteres).',
+   novasenha:'Nova senha',confirmarnovasenha:'Confirmar nova senha',salvarnovasenha:'Salvar nova senha',
+   conectado:'☁️ Conectado',sincronizasub:'Seus treinos, cargas e o seu programa personalizado sincronizam automaticamente entre aparelhos.',
+   sair:'Sair',sincronizaragora:'Sincronizar agora',trocarsenha:'🔑 Trocar minha senha',redefinirsenha:'Redefinir senha',
+   digitesenhaemail:'Digite seu e-mail de cadastro. Vamos enviar um link pra você criar uma senha nova. Abra o link neste mesmo aparelho.',
+   seuemail:'Seu e-mail',enviarlink:'Enviar link',voltarlogin:'← Voltar pro login',entrar:'Entrar',criarconta:'Criar conta',
+   entrarsub:'Entre pra sincronizar seus treinos entre aparelhos.',criarcontasub:'Crie sua conta gratuita (senha com 6+ caracteres).',
+   suasenha:'Senha',esquecisenha:'Esqueci minha senha',naotemconta:'Não tem conta? Criar agora',jatemconta:'Já tem conta? Entrar',
+   preenchaemail:'Preencha e-mail e senha (mínimo 6 caracteres).',emailvalido:'Digite um e-mail válido.',
+   linkenviado:'Link enviado! Confira seu e-mail (e a caixa de spam) e abra o link neste aparelho.',
+   linknaochegou:'O link de senha não chegou',confiranaordem:'Confira nesta ordem:',
+   senhaminima:'A senha precisa de pelo menos 6 caracteres.',senhasconferem:'As senhas não conferem.',
+   senharedefinida:'Senha redefinida ✔ Você já está conectado',sairconta:'Sair da conta?',
+   sairsub:'Os dados deste aparelho serão limpos para o próximo usuário. Tudo continua salvo na sua conta na nuvem e volta quando você entrar de novo.',
+   ateaproxima:'Você saiu. Até a próxima! 👋',errinvlogin:'E-mail ou senha incorretos.',erremailcadastrado:'Esse e-mail já tem conta. Use Entrar.',
+   errcontanaoenc:'Não achei conta com esse e-mail. Confira se digitou certo.',errcadastrodesativado:'Cadastro desativado no painel do Supabase (Authentication > Providers > Email).',
+   errsemconexao:'Sem conexão com o servidor. Verifique a internet e tente de novo.',errgenerico:'Erro: ',
+   errmuitospedidos:'Muitos pedidos seguidos. O plano gratuito libera poucos e-mails por hora: espere uns 30 a 60 minutos e tente de novo.',
+   errredirect:'O endereço de retorno não está liberado. No Supabase: Authentication > URL Configuration > adicione esta página em Site URL e Redirect URLs.',
+   errsmtp:'O servidor de e-mail do Supabase recusou o envio. Verifique Authentication > Emails, ou tente de novo mais tarde.',
+   bemvindo:'Bem-vindo ao',heroSub:'Seu treino de academia, do seu jeito. Responda algumas perguntas rápidas e eu monto seu programa completo: exercícios, ordem, séries, repetições e descansos calibrados pela ciência de hipertrofia mais recente.',
+   seunomeph:'Seu nome (como quer ser chamado)',montarmeutreino:'Montar meu treino',voltarpromeutreino:'← Voltar pro meu treino',
+   continuarppl:'Continuar com meu treino atual (PPL)',usarpadraoppl:'Usar o programa padrão (PPL)',jatenhoconta:'Já tenho conta ☁️ · Entrar',
+   qualcardio:'Qual cardio você prefere?',ordemrotacao:'A ordem que você marcar define a rotação. Pode escolher mais de um.',
+   funcionalcircuito:'Treino funcional em circuito',funcionalhint:'Vou intercalar kettlebell, trenó, TRX, cordas navais, medicine ball, burpee e escalador, sempre em duplas sem descanso entre elas. A ordem varia a cada dia pra não repetir.',
+   quaisgrupos:'Quais grupos você quer priorizar?',gruposhint:'Marcados ganham prioridade na ordem e volume extra. Desmarcados perdem os isolados (os compostos mantêm a base pra evitar desequilíbrio).',
+   qualregiao:'Qual região quer treinar primeiro?',regiaohint:'Essa vira o seu Treino A (o primeiro da rotação).',
+   finishercardio:'Finisher de cardio?',finisherhint:'5 a 8 min de tiros leves no fim de alguns treinos: gasto extra sem roubar recuperação.',
+   sim:'Sim',nao:'Não',montarperfil:'Monte seu perfil',perfilLead:'Suas respostas definem o programa. Dá pra ajustar tudo depois.',
+   comochamado:'Como você quer ser chamado?',aparecesaudacao:'Aparece na saudação do app.',
+   qualpeso:'Qual seu peso corporal?',pesohint:'Usado só pra calcular quantas calorias você queima em cada treino (aba Calorias). Pode ajustar quando quiser.',
+   qualobjetivo:'Qual é o seu objetivo?',quantosex:'Quantos exercícios por dia?',quantosexhint:'6 é o ponto ideal pra maioria: volume suficiente sem virar treino de 2 horas.',
+   quantasdiv:'Quantas divisões de treino?',divhintcardio:'Quantos treinos de cardio diferentes você quer alternar.',
+   divhintfunc:'Quantos treinos funcionais diferentes você quer alternar.',divhintnormal:'A-B (Upper/Lower) · A-B-C (Push/Pull/Legs) · A-B-C-D (por grupo).',
+   quantasvezes:'Quantas vezes por semana?',vezeshint:'A ciência é clara: cada músculo 2x por semana rende mais que 1x.',
+   gerarmeutreino:'Gerar meu treino →',programapronto:'Seu programa está pronto',
+   progpronto_lead:'Séries, repetições e descansos calibrados: compostos com 8–12 reps e 90–120s de pausa, isolados com 12–15 e 45–60s (faixas com melhor evidência pra hipertrofia). Ajuste como quiser: remova (✕) ou adicione exercícios extras.',
+   rotacaosugerida:'📅 Rotação sugerida:',porsemana:'x/semana',addexextra:'＋ Adicionar exercício extra',
+   concluirtreinar:'Concluir e treinar 🚀',exercicios:'exercícios',},
  en:{bora:"Let's go",trein:'Workout',prog:'Progress',diadotreino:'Workout day',ultimotreino:'Last workout',
    completo:'✓ Complete',parcial:'Partial',series:'sets',progressodotreino:'Workout progress',
    porqueessaordem:'🧠 Why this order?',editarex:'✎ Edit exercises',concluirtreino:'Finish workout',
@@ -2011,26 +2081,84 @@ const I18N={
    semdescanso:'No rest',continuo:'Continuous',addextra:'＋ Add extra exercise today',hoje:'today',ontem:'yesterday',kcalnav:'Calories',kcalhoje:'burned today',kcalmeta:'Goal',kcalsemana:'Week',kcalmes:'Month',kcalano:'Year',kcalmoedas:'coins',kcalcruzes:'Green coins earned',kcalmoedastit:'Your yellow coins',kcalcomo:'How it works',kcalpeso:'Your body weight',kcalajustar:'tap to adjust',kcalbatida:'Daily goal hit!',kcalproxima:'to next green coin',kcalempty:'Burn calories training to earn your first green coin 💪',kcalverde:'green coin',kcalverdes:'green coins',
    askdatetit:'When was this workout?',askdatesub:'Confirm the day so it doesn\'t log on the wrong date.',cancelar:'Cancel',confirmar:'Confirm',fechar:'Close',
    pesosalvo:'Weight saved: ',distsalva:'Distance saved: ',tempoSalvo:'Time saved: ',registroexcluido:'Entry deleted',marcaruma:'Check at least one set first 😉',
-   wdSeg:'M',wdTer:'T',wdQua:'W',wdQui:'T',wdSex:'F',wdSab:'S',wdDom:'S',movidolixeira:'Moved to trash',regnaoenc:'Entry not found'},
- es:{bora:'Vamos',trein:'Entreno',prog:'Progreso',diadotreino:'Día de entreno',ultimotreino:'Último entreno',
-   completo:'✓ Completo',parcial:'Parcial',series:'series',progressodotreino:'Progreso del entreno',
-   porqueessaordem:'🧠 ¿Por qué este orden?',editarex:'✎ Editar ejercicios',concluirtreino:'Terminar entreno',
-   sersemana:'Entrenos de la semana',ultimos7:'Últimos 7 días',totalfeitos:'Total realizados',historico:'Historial',
-   exportarxlsx:'📊 Exportar Excel',exportarpdf:'📄 Exportar PDF',personalizar:'⚙️ Personalizar mi entreno',
-   evoluir:'🚀 Evolucionar entreno',excluidos:'🗑 Entrenos eliminados',backup:'💾 Copia de seguridad',versoesant:'🕒 Versiones anteriores del entreno',
-   vervideo:'▶ Ver vídeo',passoapasso:'Paso a paso',opcoes:'Opciones',anterior:'Última vez',descanso:'Descanso',
-   semdescanso:'Sin pausa',continuo:'Continuo',addextra:'＋ Añadir ejercicio extra hoy',hoje:'hoy',ontem:'ayer',kcalnav:'Calorías',kcalhoje:'quemadas hoy',kcalmeta:'Meta',kcalsemana:'Semana',kcalmes:'Mes',kcalano:'Año',kcalmoedas:'monedas',kcalcruzes:'Monedas verdes conseguidas',kcalmoedastit:'Tus monedas amarillas',kcalcomo:'Cómo funciona',kcalpeso:'Tu peso corporal',kcalajustar:'toca para ajustar',kcalbatida:'¡Meta del día lograda!',kcalproxima:'para la próxima moneda verde',kcalempty:'Quema calorías entrenando para ganar tu primera moneda verde 💪',kcalverde:'moneda verde',kcalverdes:'monedas verdes',
-   askdatetit:'¿Cuándo fue este entreno?',askdatesub:'Confirma el día para no registrar en la fecha equivocada.',cancelar:'Cancelar',confirmar:'Confirmar',fechar:'Cerrar',
-   pesosalvo:'Peso guardado: ',distsalva:'Distancia guardada: ',tempoSalvo:'Tiempo guardado: ',registroexcluido:'Registro eliminado',marcaruma:'Marca al menos una serie antes 😉',
-   wdSeg:'L',wdTer:'M',wdQua:'X',wdQui:'J',wdSex:'V',wdSab:'S',wdDom:'D',movidolixeira:'Movido a la papelera',regnaoenc:'Registro no encontrado'},
+   wdSeg:'M',wdTer:'T',wdQua:'W',wdQui:'T',wdSex:'F',wdSab:'S',wdDom:'S',movidolixeira:'Moved to trash',regnaoenc:'Entry not found',
+   backupfiletit:'Backup your data',backupfilesub:'Download a file with your full history, loads and program. Keep it on your phone or email: if anything gets deleted by accident, just restore it here.',baixarbackup:'💾 Download backup',restaurararquivo:'📂 Restore from a file',backupbaixado:'Backup downloaded ✔',arquivosemhist:'file has no history',naoconsegulerarquivo:"Couldn't read this file: ",treinorestauradoplural:'restored',treinosrestauradosplural:'restored',voltar:'Back',todos:'All',pesocorpcurto:'body weight',semdetalhes2:'No details saved for this session.',buscarex:'Search exercise...',nadaaqui:'Nothing here for this filter.',
+   pesocorporal:'⚖️ Your body weight',pesousado:'We use this value to estimate how many calories you burn in each workout.',
+   pesoinvalido:'Enter a valid weight',pesoatualizado:'Weight updated ✔',ex1:'e.g: 75',salvar:'Save',
+   nenhumtreinodia:'No workout logged on this day.',treinosnodia:'workouts on this day. Choose which to edit.',
+   editartreino:'Edit workout',ajusteseries:'Adjust the sets done and the loads. Tap ✓ to check or uncheck.',
+   nenhumdetalhe:'This entry has no details to edit',treinoatualizado:'Workout updated ✔',
+   moverlixeira:'Move to trash?',podevoltarLater:'You can restore it later in "Deleted workouts".',
+   lixeiravazia:'Deleted workouts',lixeiravaziasub:'The trash is empty. Everything you delete shows up here and can be restored.',
+   regnalixeira:'entry',regnalixeiraS:'entries',nalixeira:'in the trash. Restore what you need.',
+   restaurartodos:'Restore all',treinorestaurado:'Workout restored ✔',todosrestaurados:'All workouts restored ✔',
+   editarbtn:'✎ Edit workout',repetirhoje:'Repeat today',excluirbtn:'Delete',treinorepetido:'Workout repeated on ',
+   umtreino:'workout',doistreinos:'workouts',nototal:'total.',nenhumtreino7:'No workouts in the last 7 days.',
+   vocenaoregistrou:"You haven't logged any workout yet.",semdetalhes:'No details saved.',
+   totalcolon:'Total:',agrupadosmes:'Grouped by month. Tap ✎ to edit.',
+   trocarem:'Swap in which workouts?',tambemaparece:'also appears',notreino:'in workout',nostreinos:'in workouts',
+   querttrocar:'Want to swap it for',sopara:'just here or in all of them?',sonotreino:'Only in workout',trocaremtodos:'Swap in all',
+   substituidopor:'Replaced with',adicionado:'added',montetreino:'Build a workout first',
+   evoluirtit:'🚀 Evolve the workout',evoluirsub1:"I'll swap the basic exercises in your current program for more advanced, complete versions (e.g. machine → free weight), keeping the same day structure and ordering logic.",
+   evoluirsub2a:'This should bring in',evoluirsub2b:'new exercise',evoluirsub2c:'new exercises',evoluirsub2d:'like',
+   evoluirsub2e:"I couldn't find an obvious upgrade for some exercises in your current program: they stay as they are, and you can still swap them manually later.",
+   evoluirsub3:'Your current workout is automatically saved first, so you can go back anytime under "Previous workout versions".',
+   evoluiragora:'Evolve now',evoluidotit:'✅ Workout evolved',exsubstituido:'exercise replaced',exsubstituidos:'exercises replaced',
+   nenhumatroca:'No obvious swap was found this time: your program stays as it was.',vernovotreino:'See my new workout',
+   backupsalvo:'🚀 Workout evolved! Backup saved.',nenhumaversao:'No previous version saved yet',
+   versoesanttit:'Previous workout versions',versoesantsub:"Restoring swaps your current program for this saved version (the current one isn't lost: it also becomes a previous version).",
+   restaurarq:'Restore',versaorestaurada:'Version restored ✔',
+   nuvemnaoconfig:'☁️ Cloud not set up',nuvemsub:'To have a user account and cloud-saved records, follow the instructions in the file',
+   entendi:'Got it',paginainicial:'🏠 Go to home page',criarnovasenha:'Create new password',
+   chegouporlink:'You arrived via the reset link. Choose your new password (minimum 6 characters).',
+   novasenha:'New password',confirmarnovasenha:'Confirm new password',salvarnovasenha:'Save new password',
+   conectado:'☁️ Connected',sincronizasub:'Your workouts, loads and personalized program sync automatically across devices.',
+   sair:'Sign out',sincronizaragora:'Sync now',trocarsenha:'🔑 Change my password',redefinirsenha:'Reset password',
+   digitesenhaemail:"Enter your account email. We'll send a link to create a new password. Open the link on this same device.",
+   seuemail:'Your email',enviarlink:'Send link',voltarlogin:'← Back to login',entrar:'Sign in',criarconta:'Create account',
+   entrarsub:'Sign in to sync your workouts across devices.',criarcontasub:'Create your free account (password with 6+ characters).',
+   suasenha:'Password',esquecisenha:'Forgot my password',naotemconta:"Don't have an account? Create one",jatemconta:'Already have an account? Sign in',
+   preenchaemail:'Fill in email and password (minimum 6 characters).',emailvalido:'Enter a valid email.',
+   linkenviado:'Link sent! Check your email (and spam folder) and open the link on this device.',
+   linknaochegou:"The password link didn't arrive",confiranaordem:'Check in this order:',
+   senhaminima:'The password needs at least 6 characters.',senhasconferem:"The passwords don't match.",
+   senharedefinida:"Password reset ✔ You're now connected",sairconta:'Sign out?',
+   sairsub:"This device's data will be cleared for the next user. Everything stays saved in your cloud account and comes back when you sign in again.",
+   ateaproxima:'You signed out. See you next time! 👋',errinvlogin:'Incorrect email or password.',erremailcadastrado:'This email already has an account. Use Sign in.',
+   errcontanaoenc:"Couldn't find an account with that email. Double-check it.",errcadastrodesativado:'Sign-up disabled in the Supabase dashboard (Authentication > Providers > Email).',
+   errsemconexao:'No connection to the server. Check your internet and try again.',errgenerico:'Error: ',
+   errmuitospedidos:'Too many requests in a row. The free plan allows few emails per hour: wait 30 to 60 minutes and try again.',
+   errredirect:'The return address is not allowed. In Supabase: Authentication > URL Configuration > add this page to Site URL and Redirect URLs.',
+   errsmtp:"Supabase's email server refused to send. Check Authentication > Emails, or try again later.",
+   bemvindo:'Welcome to',heroSub:"Your gym workout, your way. Answer a few quick questions and I'll build your complete program: exercises, order, sets, reps and rest times calibrated by the latest hypertrophy science.",
+   seunomeph:'Your name (how you want to be called)',montarmeutreino:'Build my workout',voltarpromeutreino:'← Back to my workout',
+   continuarppl:'Continue with my current workout (PPL)',usarpadraoppl:'Use the default program (PPL)',jatenhoconta:'Already have an account ☁️ · Sign in',
+   qualcardio:'Which cardio do you prefer?',ordemrotacao:'The order you pick sets the rotation. You can choose more than one.',
+   funcionalcircuito:'Functional circuit training',funcionalhint:"I'll alternate kettlebell, sled, TRX, battle ropes, medicine ball, burpees and mountain climbers, always in pairs with no rest between them. The order changes each day so it doesn't repeat.",
+   quaisgrupos:'Which muscle groups do you want to prioritize?',gruposhint:'Checked ones get priority in the order and extra volume. Unchecked ones lose their isolation exercises (compound moves stay to avoid imbalance).',
+   qualregiao:'Which area do you want to train first?',regiaohint:'That becomes your Workout A (the first in the rotation).',
+   finishercardio:'Cardio finisher?',finisherhint:'5 to 8 min of light intervals at the end of some workouts: extra burn without hurting recovery.',
+   sim:'Yes',nao:'No',montarperfil:'Build your profile',perfilLead:'Your answers shape the program. You can adjust everything later.',
+   comochamado:'What do you want to be called?',aparecesaudacao:'Shows up in the app greeting.',
+   qualpeso:'What is your body weight?',pesohint:'Only used to calculate how many calories you burn in each workout (Calories tab). You can adjust it anytime.',
+   qualobjetivo:'What is your goal?',quantosex:'How many exercises per day?',quantosexhint:'6 is the sweet spot for most people: enough volume without turning into a 2-hour workout.',
+   quantasdiv:'How many workout splits?',divhintcardio:'How many different cardio workouts you want to alternate.',
+   divhintfunc:'How many different functional workouts you want to alternate.',divhintnormal:'A-B (Upper/Lower) · A-B-C (Push/Pull/Legs) · A-B-C-D (by muscle group).',
+   quantasvezes:'How many times a week?',vezeshint:'The science is clear: each muscle 2x a week beats 1x.',
+   gerarmeutreino:'Generate my workout →',programapronto:'Your program is ready',
+   progpronto_lead:'Sets, reps and rest times calibrated: compounds with 8–12 reps and 90–120s rest, isolations with 12–15 and 45–60s (ranges with the best evidence for hypertrophy). Adjust as you like: remove (✕) or add extra exercises.',
+   rotacaosugerida:'📅 Suggested rotation:',porsemana:'x/week',addexextra:'＋ Add extra exercise',
+   concluirtreinar:'Finish and train 🚀',exercicios:'exercises',}
 };
+
 let LANG='pt-BR';
 function t(k){return (I18N[LANG]&&I18N[LANG][k])||I18N['pt-BR'][k]||k}
-function localeOf(){return LANG==='en'?'en-US':LANG==='es'?'es-ES':'pt-BR'}
+function localeOf(){return LANG==='en'?'en-US':'pt-BR'}
 function setLang(l){LANG=l;save('iron_lang',LANG);document.documentElement.lang=l;boxClose();render();
-  toast(l==='pt-BR'?'Idioma: Português':l==='en'?'Language: English':'Idioma: Español')}
+  const obEl=$('ob');if(obEl&&!obEl.classList.contains('hidden'))renderOB();
+  toast(l==='pt-BR'?'Idioma: Português':'Language: English')}
 function openLangPicker(){
-  const opts=[['pt-BR','🇧🇷 Português (Brasil)'],['en','🇺🇸 English'],['es','🇪🇸 Español']];
+  const opts=[['pt-BR','🇧🇷 Português (Brasil)'],['en','🇺🇸 English']];
   boxOpen(`<h3>🌐 Idioma / Language</h3>
     <div class="sub">Exercícios, dicas e textos longos continuam em português por enquanto. A navegação do app já muda.</div>
     <div class="mlist">${opts.map(([code,label])=>
@@ -2414,6 +2542,18 @@ const GOALS={
  geral:{label:'Saúde geral',icon:'❤️',desc:'Equilíbrio entre força, cardio e mobilidade.',
    repsComp:'10–12',repsIso:'12–15',restComp:75,restIso:45,finisherDefault:true},
 };
+const GOALS_EN={
+ hipertrofia:{label:'Hypertrophy',desc:'Build muscle mass with moderate-high volume.'},
+ forca:{label:'Strength',desc:'Lift heavier: low reps, long rest.'},
+ emagrecimento:{label:'Fat loss',desc:'More calorie burn per workout, short rest.'},
+ resistencia:{label:'Endurance',desc:'Stamina and muscular endurance, high reps.'},
+ cardio:{label:'Cardio',desc:'All-in on cardiovascular conditioning.'},
+ funcional:{label:'Functional',desc:'Kettlebell, sled, TRX and ropes in circuit: strength for everyday life.'},
+ circuito:{label:'Circuit (Burn)',desc:'Two machines alternated with no rest between them: the most efficient way to burn calories in your time.'},
+ geral:{label:'General health',desc:'Balance between strength, cardio and mobility.'},
+};
+function goalLabel(g){return LANG==='en'&&GOALS_EN[g]?GOALS_EN[g].label:GOALS[g].label}
+function goalDesc(g){return LANG==='en'&&GOALS_EN[g]?GOALS_EN[g].desc:GOALS[g].desc}
 const CARDIO_IDS=['treadmillv','runningv','ellipticalv','stairsv','rowerv','finisher'];
 const CARDIO_SUPPORT=['plankv','absfull','bridgev','lowerback','reversecrunch'];
 const FUNCTIONAL_POOL=['kettlebellswing','farmercarry','sledpush','battleropes','medicineball','boxjump','trxrow','jumpropev','burpeev','mountainclimberv'];
@@ -2618,7 +2758,7 @@ let LAST_COINS_SEEN=load('iron_last_coins_seen',0);
 let LAST_CROSSES_SEEN=load('iron_last_crosses_seen',0);
 let THEME=load('iron_theme','light');
 let SETUP=load('iron_setup',null);
-LANG=load('iron_lang','pt-BR');
+LANG=load('iron_lang','pt-BR');if(LANG!=='pt-BR'&&LANG!=='en')LANG='pt-BR';
 let PROGRAM=load('iron_program',null);
 let cur='A', view='train';
 
@@ -2727,7 +2867,7 @@ function relDate(iso){
   const diff=Math.round((h-d)/864e5);
   if(diff===0)return t('hoje');
   if(diff===1)return t('ontem');
-  if(diff>1&&diff<7)return (LANG==='en'?diff+' days ago':LANG==='es'?'hace '+diff+' días':'há '+diff+' dias');
+  if(diff>1&&diff<7)return (LANG==='en'?diff+' days ago':'há '+diff+' dias');
   return d.toLocaleDateString(localeOf(),{day:'2-digit',month:'short'});
 }
 function renderLastCard(){
@@ -2782,7 +2922,7 @@ function renderTrain(){
   $('dintro').textContent=day.intro;
   const eb=$('editBtn');
   eb.classList.toggle('on',EDITMODE);
-  eb.textContent=EDITMODE?(LANG==='en'?'✓ Done editing':LANG==='es'?'✓ Terminar edición':'✓ Concluir edição'):t('editarex');
+  eb.textContent=EDITMODE?(LANG==='en'?'✓ Done editing':'✓ Concluir edição'):t('editarex');
   $('finBtn').parentElement.classList.toggle('hidden',EDITMODE);
   $('orderBody').innerHTML=day.ex.map((ex,i)=>{
     const a=activeOf(ex);
@@ -3045,7 +3185,7 @@ function renderCalories(){
         </div>
       </div>
       ${overGoal?`<div class="kcal-badge hot">🔥 ${t('kcalbatida')}</div>`:
-        `<div class="kcal-badge">🎯 ${t('kcalmeta')}: ${KCAL_DAILY_GOAL} kcal${LANG==='en'?'/day':LANG==='es'?'/día':'/dia'}</div>`}
+        `<div class="kcal-badge">🎯 ${t('kcalmeta')}: ${KCAL_DAILY_GOAL} kcal${LANG==='en'?'/day':'/dia'}</div>`}
     </div>
 
     <div class="kcal-stats">
@@ -3138,19 +3278,19 @@ function celebrateCross(n){
   setTimeout(()=>b.remove(),2000);
 }
 function openBodyKgEdit(){
-  boxOpen(`<h3>⚖️ Seu peso corporal</h3>
-    <div class="sub">Usamos esse valor pra estimar quantas calorias você queima em cada treino.</div>
-    <input type="number" inputmode="decimal" id="bodyKgInput" value="${bodyKg()}" placeholder="Ex: 75">
+  boxOpen(`<h3>${t('pesocorporal')}</h3>
+    <div class="sub">${t('pesousado')}</div>
+    <input type="number" inputmode="decimal" id="bodyKgInput" value="${bodyKg()}" placeholder="${t('ex1')}">
     <div class="mrow">
-      <button class="mbtn" onclick="boxClose()">Cancelar</button>
-      <button class="mbtn pri" onclick="saveBodyKg()">Salvar</button>
+      <button class="mbtn" onclick="boxClose()">${t('cancelar')}</button>
+      <button class="mbtn pri" onclick="saveBodyKg()">${t('salvar')}</button>
     </div>`);
 }
 function saveBodyKg(){
   const i=$('bodyKgInput');const v=parseFloat((i.value||'').replace(',','.'));
-  if(isNaN(v)||v<=0){toast('Digite um peso válido');return}
+  if(isNaN(v)||v<=0){toast(t('pesoinvalido'));return}
   SETUP=SETUP||{};SETUP.bodyKg=v;save('iron_setup',SETUP);cloudSync();
-  boxClose();toast('Peso atualizado ✔');render();
+  boxClose();toast(t('pesoatualizado'));render();
 }
 
 function finishWorkout(key,dateStr){
@@ -3267,16 +3407,16 @@ function openDay(iso){
   const hits=HISTORY.filter(h=>h.date===iso);
   if(!hits.length){
     boxOpen(`<h3>${dtBR(iso)}</h3>
-      <div class="sub">Nenhum treino registrado neste dia.</div>
-      <div class="mrow"><button class="mbtn pri" onclick="boxClose()">Fechar</button></div>`);
+      <div class="sub">${t('nenhumtreinodia')}</div>
+      <div class="mrow"><button class="mbtn pri" onclick="boxClose()">${t('fechar')}</button></div>`);
     return;
   }
   if(hits.length===1){editHist(hits[0].ts);return}
   boxOpen(`<h3>${dtBR(iso)}</h3>
-    <div class="sub">${hits.length} treinos neste dia. Escolha qual editar.</div>
-    <div class="mlist">${hits.map(h=>`<div class="prow"><div class="rtx"><b>${h.label} · Treino ${h.workout}</b><small>${h.done}/${h.tot} séries</small></div>
+    <div class="sub">${hits.length} ${t('treinosnodia')}</div>
+    <div class="mlist">${hits.map(h=>`<div class="prow"><div class="rtx"><b>${h.label} · ${t('trein')} ${h.workout}</b><small>${h.done}/${h.tot} ${t('series')}</small></div>
       <button class="padd" onclick="editHist(${h.ts})">✎</button></div>`).join('')}</div>
-    <div class="mrow" style="margin-top:10px"><button class="mbtn" onclick="boxClose()">← Voltar</button></div>`);
+    <div class="mrow" style="margin-top:10px"><button class="mbtn" onclick="boxClose()">← ${t('voltar')}</button></div>`);
 }
 
 /* ---- editar um treino já registrado ---- */
@@ -3292,16 +3432,16 @@ function editHist(ts){
   const h=HISTORY.find(x=>x.ts===ts);if(!h){toast(t('regnaoenc'));return}
   if(!h.items||!h.items.length){
     h.items=Object.entries(h.weights||{}).map(([vid,w])=>({id:vid,n:vidName(vid),s:1,t:1,w,sw:[w]}));
-    if(!h.items.length){toast('Esse registro não tem detalhes pra editar');return}
+    if(!h.items.length){toast(t('nenhumdetalhe'));return}
   }
   EDITH={ts,date:h.date,rows:h.items.map(it=>({n:it.n,id:it.id,u:unitOf(it.id),bw:it.w==null&&!(it.sw&&it.sw.length),sets:normRows(h,it)}))};
   paintEditH();
 }
 function paintEditH(){
   const e=EDITH;
-  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
-    <h3>Editar treino</h3>
-    <div class="sub">Ajuste as séries feitas e as cargas. Toque no ✓ pra marcar ou desmarcar.</div>
+  boxOpen(`<button class="mback" onclick="boxClose()">← ${t('voltar')}</button>
+    <h3>${t('editartreino')}</h3>
+    <div class="sub">${t('ajusteseries')}</div>
     <input type="date" id="ehDate" value="${e.date}" max="${todayISO()}" onchange="EDITH.date=this.value"
       style="width:100%;background:var(--panel2);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--ink);font-family:'Manrope';font-weight:700;font-size:13.5px;margin-bottom:10px">
     <div class="mlist">${e.rows.map((r,ri)=>`
@@ -3318,8 +3458,8 @@ function paintEditH(){
           </div>`).join('')}</div>
       </div>`).join('')}</div>
     <div class="mrow" style="margin-top:12px">
-      <button class="mbtn" onclick="boxClose()">Cancelar</button>
-      <button class="mbtn pri" onclick="ehSave()">Salvar</button>
+      <button class="mbtn" onclick="boxClose()">${t('cancelar')}</button>
+      <button class="mbtn pri" onclick="ehSave()">${t('salvar')}</button>
     </div>`);
 }
 function ehRow(ri,si){return document.querySelector(`#boxModal .srow[data-r="${ri}"][data-s="${si}"]`)}
@@ -3351,13 +3491,13 @@ function ehSave(){
   h.kcal=recomputeKcal(h);
   HISTORY.sort((a,b)=>(b.date<a.date?-1:b.date>a.date?1:(b.ts||0)-(a.ts||0)));
   save('iron_history',HISTORY);cloudSync();
-  boxClose();render();toast('Treino atualizado ✔');
+  boxClose();render();toast(t('treinoatualizado'));
 }
 function r_hasBW(h){return false}
 function delHistTs(ts){
   const i=HISTORY.findIndex(x=>x.ts===ts);if(i<0)return;
   const h=HISTORY[i];
-  if(!confirm('Mover para a lixeira?\n\n'+h.label+' · Treino '+h.workout+' ('+dtBR(h.date)+')\n\nVocê pode restaurar depois em "Treinos excluídos".'))return;
+  if(!confirm(t('moverlixeira')+'\n\n'+h.label+' · '+t('trein')+' '+h.workout+' ('+dtBR(h.date)+')\n\n'+t('podevoltarLater')))return;
   HISTORY.splice(i,1);
   TRASH.unshift({...h,delAt:Date.now()});
   save('iron_history',HISTORY);save('iron_trash',TRASH);cloudSync();
@@ -3365,20 +3505,20 @@ function delHistTs(ts){
 }
 function openTrash(){
   if(!TRASH.length){
-    boxOpen(`<h3>Treinos excluídos</h3>
-      <div class="sub">A lixeira está vazia. Tudo que você excluir aparece aqui e pode ser restaurado.</div>
-      <div class="mrow"><button class="mbtn pri" onclick="boxClose()">Fechar</button></div>`);
+    boxOpen(`<h3>${t('lixeiravazia')}</h3>
+      <div class="sub">${t('lixeiravaziasub')}</div>
+      <div class="mrow"><button class="mbtn pri" onclick="boxClose()">${t('fechar')}</button></div>`);
     return;
   }
-  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
-    <h3>Treinos excluídos</h3>
-    <div class="sub">${TRASH.length} registro${TRASH.length===1?'':'s'} na lixeira. Restaure o que precisar.</div>
+  boxOpen(`<button class="mback" onclick="boxClose()">← ${t('voltar')}</button>
+    <h3>${t('lixeiravazia')}</h3>
+    <div class="sub">${TRASH.length} ${TRASH.length===1?t('regnalixeira'):t('regnalixeiraS')} ${t('nalixeira')}</div>
     <div class="mlist">${TRASH.map((h,i)=>`<div class="prow">
-      <div class="rtx"><b>${h.label} · Treino ${h.workout}</b><small>${dtBR(h.date)} · ${h.done}/${h.tot} séries</small></div>
+      <div class="rtx"><b>${h.label} · ${t('trein')} ${h.workout}</b><small>${dtBR(h.date)} · ${h.done}/${h.tot} ${t('series')}</small></div>
       <button class="padd" onclick="restoreTrash(${i})">↩</button></div>`).join('')}</div>
     <div class="mrow" style="margin-top:12px">
-      <button class="mbtn" onclick="boxClose()">Fechar</button>
-      <button class="mbtn pri" onclick="restoreAll()">Restaurar todos</button>
+      <button class="mbtn" onclick="boxClose()">${t('fechar')}</button>
+      <button class="mbtn pri" onclick="restoreAll()">${t('restaurartodos')}</button>
     </div>`);
 }
 function restoreTrash(i){
@@ -3388,7 +3528,7 @@ function restoreTrash(i){
   HISTORY.push(clean);
   HISTORY.sort((a,b)=>(b.date<a.date?-1:b.date>a.date?1:(b.ts||0)-(a.ts||0)));
   save('iron_history',HISTORY);save('iron_trash',TRASH);cloudSync();
-  render();toast('Treino restaurado ✔');
+  render();toast(t('treinorestaurado'));
   if(TRASH.length)openTrash();else boxClose();
 }
 function restoreAll(){
@@ -3397,7 +3537,7 @@ function restoreAll(){
   TRASH=[];
   HISTORY.sort((a,b)=>(b.date<a.date?-1:b.date>a.date?1:(b.ts||0)-(a.ts||0)));
   save('iron_history',HISTORY);save('iron_trash',TRASH);cloudSync();
-  boxClose();render();toast('Todos os treinos restaurados ✔');
+  boxClose();render();toast(t('todosrestaurados'));
 }
 
 /* ---- estatísticas clicáveis ---- */
@@ -3406,21 +3546,21 @@ function openHistMenu(ts){
   const det=(h.items&&h.items.length)?h.items.map(it=>{
     const sv=(it.sw||[]).filter(v=>v!=null);
     const u=unitOf(it.id);
-    const wtx=sv.length?sv.map(fmtW).join(' · ')+' '+u:(it.w!=null?fmtW(it.w)+' '+u:'peso corporal');
-    return `<div class="hd-row"><span>${it.n}</span><small>${it.s}/${it.t} séries<br>${wtx}</small></div>`}).join(''):
+    const wtx=sv.length?sv.map(fmtW).join(' · ')+' '+u:(it.w!=null?fmtW(it.w)+' '+u:t('pesocorpcurto'));
+    return `<div class="hd-row"><span>${it.n}</span><small>${it.s}/${it.t} ${t('series')}<br>${wtx}</small></div>`}).join(''):
     (h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
       `<div class="hd-row"><span>${vidName(vid)}</span><small>${fmtW(w)} ${unitOf(vid)}</small></div>`).join(''):
-      '<div class="empty">Sem detalhes salvos nesta sessão.</div>');
-  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
-    <h3>${h.label} · Treino ${h.workout}</h3>
-    <div class="sub">${dtBR(h.date)} · ${h.done}/${h.tot} séries (${Math.round(h.done/h.tot*100)}%)</div>
+      `<div class="empty">${t('semdetalhes2')}</div>`);
+  boxOpen(`<button class="mback" onclick="boxClose()">← ${t('voltar')}</button>
+    <h3>${h.label} · ${t('trein')} ${h.workout}</h3>
+    <div class="sub">${dtBR(h.date)} · ${h.done}/${h.tot} ${t('series')} (${Math.round(h.done/h.tot*100)}%)</div>
     <div class="mlist">${det}</div>
     <div class="mrow" style="margin-top:12px">
-      <button class="mbtn pri" onclick="editHist(${h.ts})">✎ Editar treino</button>
+      <button class="mbtn pri" onclick="editHist(${h.ts})">${t('editarbtn')}</button>
     </div>
     <div class="mrow">
-      <button class="mbtn" onclick="dupHist(${h.ts})">Repetir hoje</button>
-      <button class="mbtn" onclick="delHistTs(${h.ts})" style="color:var(--red)">Excluir</button>
+      <button class="mbtn" onclick="dupHist(${h.ts})">${t('repetirhoje')}</button>
+      <button class="mbtn" onclick="delHistTs(${h.ts})" style="color:var(--red)">${t('excluirbtn')}</button>
     </div>`);
 }
 function dupHist(ts){
@@ -3430,34 +3570,34 @@ function dupHist(ts){
   HISTORY.unshift(copy);
   HISTORY.sort((a,b)=>(b.date<a.date?-1:b.date>a.date?1:(b.ts||0)-(a.ts||0)));
   save('iron_history',HISTORY);cloudSync();boxClose();render();
-  toast('Treino repetido em '+dtBR(copy.date));
+  toast(t('treinorepetido')+dtBR(copy.date));
 }
 function statWeek(){
   const now=new Date();
   const list=HISTORY.filter(h=>{const d=new Date(h.date+'T00:00');const diff=(now-d)/864e5;return diff>=0&&diff<7});
   const sets=list.reduce((s,h)=>s+h.done,0);
-  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
-    <h3>Últimos 7 dias</h3>
-    <div class="sub">${list.length} treino${list.length===1?'':'s'} · ${sets} séries no total.</div>
-    <div class="mlist">${list.length?list.map(h=>`<div class="prow"><div class="rtx"><b>${h.label} · Treino ${h.workout}</b>
-      <small>${dtBR(h.date)} · ${h.done}/${h.tot} séries</small></div>
-      <button class="padd" onclick="editHist(${h.ts})">✎</button></div>`).join(''):'<div class="empty">Nenhum treino nos últimos 7 dias.</div>'}</div>
-    <div class="mrow" style="margin-top:10px"><button class="mbtn pri" onclick="boxClose()">Fechar</button></div>`);
+  boxOpen(`<button class="mback" onclick="boxClose()">← ${t('voltar')}</button>
+    <h3>${t('ultimos7')}</h3>
+    <div class="sub">${list.length} ${list.length===1?t('umtreino'):t('doistreinos')} · ${sets} ${t('series')} ${t('nototal')}</div>
+    <div class="mlist">${list.length?list.map(h=>`<div class="prow"><div class="rtx"><b>${h.label} · ${t('trein')} ${h.workout}</b>
+      <small>${dtBR(h.date)} · ${h.done}/${h.tot} ${t('series')}</small></div>
+      <button class="padd" onclick="editHist(${h.ts})">✎</button></div>`).join(''):`<div class="empty">${t('nenhumtreino7')}</div>`}</div>
+    <div class="mrow" style="margin-top:10px"><button class="mbtn pri" onclick="boxClose()">${t('fechar')}</button></div>`);
 }
 function statLast(){
   const h=HISTORY[0];
-  if(!h){boxOpen(`<h3>Último treino</h3><div class="sub">Você ainda não registrou nenhum treino.</div>
-    <div class="mrow"><button class="mbtn pri" onclick="boxClose()">Fechar</button></div>`);return}
+  if(!h){boxOpen(`<h3>${t('ultimotreino')}</h3><div class="sub">${t('vocenaoregistrou')}</div>
+    <div class="mrow"><button class="mbtn pri" onclick="boxClose()">${t('fechar')}</button></div>`);return}
   const det=(h.items||[]).map(it=>{
-    const u=unitOf(it.id);const sv=(it.sw||[]).filter(v=>v!=null);const wtx=sv.length?sv.map(fmtW).join(' · ')+' '+u:(it.w!=null?fmtW(it.w)+' '+u:'peso corporal');
-    return `<div class="hd-row"><span>${it.n}</span><small>${it.s}/${it.t} séries<br>${wtx}</small></div>`}).join('');
-  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
-    <h3>${h.label} · Treino ${h.workout}</h3>
-    <div class="sub">${dtBR(h.date)} · ${h.done}/${h.tot} séries (${Math.round(h.done/h.tot*100)}%)</div>
-    <div class="mlist">${det||'<div class="empty">Sem detalhes salvos.</div>'}</div>
+    const u=unitOf(it.id);const sv=(it.sw||[]).filter(v=>v!=null);const wtx=sv.length?sv.map(fmtW).join(' · ')+' '+u:(it.w!=null?fmtW(it.w)+' '+u:t('pesocorpcurto'));
+    return `<div class="hd-row"><span>${it.n}</span><small>${it.s}/${it.t} ${t('series')}<br>${wtx}</small></div>`}).join('');
+  boxOpen(`<button class="mback" onclick="boxClose()">← ${t('voltar')}</button>
+    <h3>${h.label} · ${t('trein')} ${h.workout}</h3>
+    <div class="sub">${dtBR(h.date)} · ${h.done}/${h.tot} ${t('series')} (${Math.round(h.done/h.tot*100)}%)</div>
+    <div class="mlist">${det||`<div class="empty">${t('semdetalhes')}</div>`}</div>
     <div class="mrow" style="margin-top:10px">
-      <button class="mbtn" onclick="boxClose()">Fechar</button>
-      <button class="mbtn pri" onclick="editHist(${h.ts})">✎ Editar</button>
+      <button class="mbtn" onclick="boxClose()">${t('fechar')}</button>
+      <button class="mbtn pri" onclick="editHist(${h.ts})">${t('editarbtn')}</button>
     </div>`);
 }
 function statTotal(){
@@ -3465,9 +3605,9 @@ function statTotal(){
   HISTORY.forEach(h=>{const k=h.date.slice(0,7);(by[k]=by[k]||[]).push(h)});
   const keys=Object.keys(by).sort().reverse();
   const mLbl=k=>{const d=new Date(k+'-01T00:00');return d.toLocaleDateString('pt-BR',{month:'long',year:'numeric'})};
-  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
-    <h3>Total: ${HISTORY.length} treinos</h3>
-    <div class="sub">Agrupados por mês. Toque no ✎ pra editar.</div>
+  boxOpen(`<button class="mback" onclick="boxClose()">← ${t('voltar')}</button>
+    <h3>${t('totalcolon')} ${HISTORY.length} ${t('doistreinos')}</h3>
+    <div class="sub">${t('agrupadosmes')}</div>
     <div class="mlist">${keys.length?keys.map(k=>`
       <div class="wkhead">${mLbl(k)} · ${by[k].length} treino${by[k].length===1?'':'s'}</div>
       ${by[k].map(h=>`<div class="prow"><div class="rtx"><b>${h.label} · Treino ${h.workout}</b>
@@ -3641,15 +3781,15 @@ function renderOB(){
     ob.innerHTML=`<div class="ob-in">
       <div class="ob-hero">
         <div class="logo"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#181818"/></svg></div>
-        <h1>Bem-vindo ao <em>IRON</em></h1>
-        <p>Seu treino de academia, do seu jeito. Responda algumas perguntas rápidas e eu monto seu programa completo: exercícios, ordem, séries, repetições e descansos calibrados pela ciência de hipertrofia mais recente.</p>
-        <input class="ob-name" id="obName" placeholder="Seu nome (como quer ser chamado)" value="${OBDATA.name||''}" maxlength="20">
+        <h1>${t('bemvindo')} <em>IRON</em></h1>
+        <p>${t('heroSub')}</p>
+        <input class="ob-name" id="obName" placeholder="${t('seunomeph')}" value="${OBDATA.name||''}" maxlength="20">
         <div class="ob-cta">
-          <button class="ob-btn pri" onclick="obGoForm()">Montar meu treino</button>
-          ${SETUP?`<button class="ob-btn" onclick="closeOB()">← Voltar pro meu treino</button>`:
-           hasData?`<button class="ob-btn" onclick="obUseDefault()">Continuar com meu treino atual (PPL)</button>`:
-                    `<button class="ob-btn" onclick="obUseDefault()">Usar o programa padrão (PPL)</button>`}
-          ${SB_ON()&&!sbUser?`<button class="ob-btn ghost" onclick="$('acct').click()">Já tenho conta ☁️ · Entrar</button>`:''}
+          <button class="ob-btn pri" onclick="obGoForm()">${t('montarmeutreino')}</button>
+          ${SETUP?`<button class="ob-btn" onclick="closeOB()">${t('voltarpromeutreino')}</button>`:
+           hasData?`<button class="ob-btn" onclick="obUseDefault()">${t('continuarppl')}</button>`:
+                    `<button class="ob-btn" onclick="obUseDefault()">${t('usarpadraoppl')}</button>`}
+          ${SB_ON()&&!sbUser?`<button class="ob-btn ghost" onclick="$('acct').click()">${t('jatenhoconta')}</button>`:''}
         </div>
       </div></div>`;
     return;
@@ -3661,89 +3801,89 @@ function renderOB(){
     const sp=SPLITS[OBDATA.splits];
     if(!sp.days.find(d=>d.label===OBDATA.first))OBDATA.first=sp.days[0].label;
     const groupsBlock=isCardio?`
-      <div class="qb"><h4>Qual cardio você prefere?</h4>
-        <div class="hint">A ordem que você marcar define a rotação. Pode escolher mais de um.</div>
+      <div class="qb"><h4>${t('qualcardio')}</h4>
+        <div class="hint">${t('ordemrotacao')}</div>
         <div class="qchips">${CARDIO_IDS.filter(id=>id!=='finisher').map(id=>
           `<button class="qchip${(OBDATA.cardioPrefs||[]).includes(id)?' on':''}" onclick="obTglCardio('${id}')">${E[id].name}</button>`).join('')}</div>
       </div>`:isFunctional?`
-      <div class="qb"><h4>Treino funcional em circuito</h4>
-        <div class="hint">Vou intercalar kettlebell, trenó, TRX, cordas navais, medicine ball, burpee e escalador, sempre em duplas sem descanso entre elas. A ordem varia a cada dia pra não repetir.</div>
+      <div class="qb"><h4>${t('funcionalcircuito')}</h4>
+        <div class="hint">${t('funcionalhint')}</div>
       </div>`:`
-      <div class="qb"><h4>Quais grupos você quer priorizar?</h4>
-        <div class="hint">Marcados ganham prioridade na ordem e volume extra. Desmarcados perdem os isolados (os compostos mantêm a base pra evitar desequilíbrio).</div>
+      <div class="qb"><h4>${t('quaisgrupos')}</h4>
+        <div class="hint">${t('gruposhint')}</div>
         <div class="qchips">${Object.keys(GRP_LABEL).filter(g=>g!=='functional'&&g!=='cardio').map(g=>
           `<button class="qchip${OBDATA.groups.includes(g)?' on':''}" onclick="obTgl('${g}')">${GRP_LABEL[g]}</button>`).join('')}</div>
       </div>`;
     const firstBlock=(isCardio||isFunctional)?'':`
-      <div class="qb"><h4>Qual região quer treinar primeiro?</h4>
-        <div class="hint">Essa vira o seu Treino A (o primeiro da rotação).</div>
+      <div class="qb"><h4>${t('qualregiao')}</h4>
+        <div class="hint">${t('regiaohint')}</div>
         <div class="qchips">${SPLITS[OBDATA.splits].days.map(d=>
           `<button class="qchip${OBDATA.first===d.label?' on':''}" onclick="OBDATA.first='${d.label}';renderOB()">${d.label}</button>`).join('')}</div>
       </div>`;
     const finisherBlock=(isCardio||isFunctional)?'':`
-      <div class="qb"><h4>Finisher de cardio?</h4>
-        <div class="hint">5 a 8 min de tiros leves no fim de alguns treinos: gasto extra sem roubar recuperação.</div>
+      <div class="qb"><h4>${t('finishercardio')}</h4>
+        <div class="hint">${t('finisherhint')}</div>
         <div class="qchips">
-          <button class="qchip${OBDATA.finisher?' on':''}" onclick="OBDATA.finisher=true;renderOB()">Sim</button>
-          <button class="qchip${!OBDATA.finisher?' on':''}" onclick="OBDATA.finisher=false;renderOB()">Não</button>
+          <button class="qchip${OBDATA.finisher?' on':''}" onclick="OBDATA.finisher=true;renderOB()">${t('sim')}</button>
+          <button class="qchip${!OBDATA.finisher?' on':''}" onclick="OBDATA.finisher=false;renderOB()">${t('nao')}</button>
         </div>
       </div>`;
     ob.innerHTML=`<div class="ob-in">${steps}
-      <h2>Monte seu perfil</h2>
-      <div class="lead">Suas respostas definem o programa. Dá pra ajustar tudo depois.</div>
-      <div class="qb"><h4>Como você quer ser chamado?</h4>
-        <div class="hint">Aparece na saudação do app.</div>
-        <input class="ob-name" id="obName2" placeholder="Seu nome" value="${OBDATA.name||''}" maxlength="20">
+      <h2>${t('montarperfil')}</h2>
+      <div class="lead">${t('perfilLead')}</div>
+      <div class="qb"><h4>${t('comochamado')}</h4>
+        <div class="hint">${t('aparecesaudacao')}</div>
+        <input class="ob-name" id="obName2" placeholder="${t('seunomeph')}" value="${OBDATA.name||''}" maxlength="20">
       </div>
-      <div class="qb"><h4>Qual seu peso corporal?</h4>
-        <div class="hint">Usado só pra calcular quantas calorias você queima em cada treino (aba Calorias). Pode ajustar quando quiser.</div>
-        <input class="ob-name" id="obBodyKg" type="number" inputmode="decimal" placeholder="Ex: 75" value="${OBDATA.bodyKg||''}" style="text-align:center" maxlength="5">
+      <div class="qb"><h4>${t('qualpeso')}</h4>
+        <div class="hint">${t('pesohint')}</div>
+        <input class="ob-name" id="obBodyKg" type="number" inputmode="decimal" placeholder="${t('ex1')}" value="${OBDATA.bodyKg||''}" style="text-align:center" maxlength="5">
       </div>
-      <div class="qb"><h4>Qual é o seu objetivo?</h4>
-        <div class="hint">${GOALS[OBDATA.goal].icon} ${GOALS[OBDATA.goal].desc}</div>
+      <div class="qb"><h4>${t('qualobjetivo')}</h4>
+        <div class="hint">${GOALS[OBDATA.goal].icon} ${goalDesc(OBDATA.goal)}</div>
         <div class="qchips">${Object.keys(GOALS).map(g=>
-          `<button class="qchip${OBDATA.goal===g?' on':''}" onclick="obSetGoal('${g}')">${GOALS[g].icon} ${GOALS[g].label}</button>`).join('')}</div>
+          `<button class="qchip${OBDATA.goal===g?' on':''}" onclick="obSetGoal('${g}')">${GOALS[g].icon} ${goalLabel(g)}</button>`).join('')}</div>
       </div>
       ${groupsBlock}
-      <div class="qb"><h4>Quantos exercícios por dia?</h4>
-        <div class="hint">6 é o ponto ideal pra maioria: volume suficiente sem virar treino de 2 horas.</div>
+      <div class="qb"><h4>${t('quantosex')}</h4>
+        <div class="hint">${t('quantosexhint')}</div>
         <div class="qchips">${[4,5,6,7].map(n=>`<button class="qchip${OBDATA.perDay===n?' on':''}" onclick="OBDATA.perDay=${n};renderOB()">${n}</button>`).join('')}</div>
       </div>
-      <div class="qb"><h4>Quantas divisões de treino?</h4>
-        <div class="hint">${isCardio?'Quantos treinos de cardio diferentes você quer alternar.':isFunctional?'Quantos treinos funcionais diferentes você quer alternar.':'A-B (Upper/Lower) · A-B-C (Push/Pull/Legs) · A-B-C-D (por grupo).'}</div>
+      <div class="qb"><h4>${t('quantasdiv')}</h4>
+        <div class="hint">${isCardio?t('divhintcardio'):isFunctional?t('divhintfunc'):t('divhintnormal')}</div>
         <div class="qchips">${[2,3,4].map(n=>`<button class="qchip${OBDATA.splits===n?' on':''}" onclick="OBDATA.splits=${n};renderOB()">${LETTERS.slice(0,n).join('-')}</button>`).join('')}</div>
       </div>
-      <div class="qb"><h4>Quantas vezes por semana?</h4>
-        <div class="hint">A ciência é clara: cada músculo 2x por semana rende mais que 1x.</div>
+      <div class="qb"><h4>${t('quantasvezes')}</h4>
+        <div class="hint">${t('vezeshint')}</div>
         <div class="qchips">${[2,3,4,5,6].map(n=>`<button class="qchip${OBDATA.freq===n?' on':''}" onclick="OBDATA.freq=${n};renderOB()">${n}x</button>`).join('')}</div>
       </div>
       ${firstBlock}
       ${finisherBlock}
       <div class="ob-nav">
-        <button class="ob-btn" onclick="obGrabName();OBSTEP=0;renderOB()">Voltar</button>
-        <button class="ob-btn pri" onclick="obGrabName();obGen()">Gerar meu treino →</button>
+        <button class="ob-btn" onclick="obGrabName();OBSTEP=0;renderOB()">${t('voltar')}</button>
+        <button class="ob-btn pri" onclick="obGrabName();obGen()">${t('gerarmeutreino')}</button>
       </div></div>`;
     return;
   }
   /* step 2: revisão */
   const keys=Object.keys(OBPROG);
   ob.innerHTML=`<div class="ob-in">${steps}
-    <h2>Seu programa está pronto</h2>
-    <div class="lead">Séries, repetições e descansos calibrados: compostos com 8–12 reps e 90–120s de pausa, isolados com 12–15 e 45–60s (faixas com melhor evidência pra hipertrofia). Ajuste como quiser: remova (✕) ou adicione exercícios extras.</div>
-    <div class="qb" style="padding:12px 15px"><h4 style="margin:0">📅 Rotação sugerida: ${weekPlan(OBDATA)} · ${OBDATA.freq}x/semana</h4></div>
+    <h2>${t('programapronto')}</h2>
+    <div class="lead">${t('progpronto_lead')}</div>
+    <div class="qb" style="padding:12px 15px"><h4 style="margin:0">${t('rotacaosugerida')} ${weekPlan(OBDATA)} · ${OBDATA.freq}${t('porsemana')}</h4></div>
     ${keys.map(k=>{
       const d=OBPROG[k];
       return `<div class="rday">
         <div class="rhead"><div class="lt" style="background:${accentFor(k).a};color:${accentFor(k).ink}">${k}</div>
-          <div class="tx"><b>${d.label}</b><small>${d.ex.length} exercícios · ${d.ex.reduce((s,e)=>s+e.sets,0)} séries</small></div></div>
+          <div class="tx"><b>${d.label}</b><small>${d.ex.length} ${t('exercicios')} · ${d.ex.reduce((s,e)=>s+e.sets,0)} ${t('series')}</small></div></div>
         ${d.ex.map((e,i)=>`<div class="rex"><div class="rn">${i+1}</div>
           <div class="rtx"><b>${e.name}</b><small>${e.muscle} · ${e.sets}×${e.reps}${e.rest?` · ${e.rest}s`:''}</small></div>
           <button class="rx" onclick="obRm('${k}',${i})">✕</button></div>`).join('')}
-        <button class="radd" onclick="openPicker('${k}')">＋ Adicionar exercício extra</button>
+        <button class="radd" onclick="openPicker('${k}')">${t('addexextra')}</button>
       </div>`}).join('')}
     <div class="ob-nav">
-      <button class="ob-btn" onclick="OBSTEP=1;renderOB()">Voltar</button>
-      <button class="ob-btn pri" onclick="obFinish()">Concluir e treinar 🚀</button>
+      <button class="ob-btn" onclick="OBSTEP=1;renderOB()">${t('voltar')}</button>
+      <button class="ob-btn pri" onclick="obFinish()">${t('concluirtreinar')}</button>
     </div></div>`;
 }
 function obGrabBodyKg(){const i=$('obBodyKg');if(i&&i.value){const v=parseFloat(i.value.replace(',','.'));if(!isNaN(v)&&v>0)OBDATA.bodyKg=v}}
@@ -3788,20 +3928,31 @@ function openLibPicker(ctx){
   PICKCTX=ctx;
   const dayEx=ctx.list;
   const used=new Set(dayEx.map(e=>e.id));
-  const rows=g=>Object.keys(E).filter(id=>!used.has(id)&&(g==='all'||E[id].grp===g))
-    .map(id=>`<div class="prow"><div class="rtx"><b>${E[id].name}</b><small>${GRP_LABEL[E[id].grp]} · ${E[id].sets}×${E[id].reps}</small></div>
-      <button class="padd" onclick="pickChoose('${id}')">＋</button></div>`).join('')||'<div class="empty">Nada por aqui nesse filtro.</div>';
-  const paint=g=>{
-    $('pickModal').innerHTML=`<button class="mback" onclick="$('pickOv').classList.add('hidden')">← Voltar</button><h3>${ctx.title}</h3>
-      <div class="sub">${ctx.sub}</div>
-      <div class="pchips">${['all',...Object.keys(GRP_LABEL)].map(x=>
-        `<button class="vchip${g===x?' on':''}" data-g="${x}">${x==='all'?'Todos':GRP_LABEL[x]}</button>`).join('')}</div>
-      <div class="pgrid">${rows(g)}</div>
-      <div class="mrow" style="margin-top:12px"><button class="mbtn" onclick="$('pickOv').classList.add('hidden')">Fechar</button></div>`;
-    $('pickModal').querySelectorAll('.pchips .vchip').forEach(b=>b.onclick=()=>paint(b.dataset.g));
+  const norm=s=>(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const rows=(g,q)=>{
+    const qn=norm(q);
+    const ids=Object.keys(E).filter(id=>!used.has(id)&&(g==='all'||E[id].grp===g)&&(!qn||norm(E[id].name).indexOf(qn)>=0));
+    ids.sort((a,b)=>E[a].name.localeCompare(E[b].name,LANG==='en'?'en':'pt'));
+    return ids.map(id=>`<div class="prow"><div class="rtx"><b>${E[id].name}</b><small>${GRP_LABEL[E[id].grp]} · ${E[id].sets}×${E[id].reps}</small></div>
+      <button class="padd" onclick="pickChoose('${id}')">＋</button></div>`).join('')||`<div class="empty">${t('nadaaqui')}</div>`;
   };
-  paint('all');
+  let curG='all',curQ='';
+  const paint=()=>{
+    $('pickModal').innerHTML=`<button class="mback" onclick="$('pickOv').classList.add('hidden')">← ${t('voltar')}</button><h3>${ctx.title}</h3>
+      <div class="sub">${ctx.sub}</div>
+      <input type="text" id="pickSearch" class="picksearch" placeholder="${t('buscarex')}" value="${curQ}" autocomplete="off">
+      <div class="pchips">${['all',...Object.keys(GRP_LABEL)].map(x=>
+        `<button class="vchip${curG===x?' on':''}" data-g="${x}">${x==='all'?t('todos'):GRP_LABEL[x]}</button>`).join('')}</div>
+      <div class="pgrid" id="pickGrid">${rows(curG,curQ)}</div>
+      <div class="mrow" style="margin-top:12px"><button class="mbtn" onclick="$('pickOv').classList.add('hidden')">${t('fechar')}</button></div>`;
+    $('pickModal').querySelectorAll('.pchips .vchip').forEach(b=>b.onclick=()=>{curG=b.dataset.g;paint();});
+    const inp=$('pickSearch');
+    inp.oninput=()=>{curQ=inp.value;$('pickGrid').innerHTML=rows(curG,curQ)};
+    if(document.activeElement!==inp){/* mantém foco só se o usuário já estava digitando */}
+  };
+  paint();
   $('pickOv').classList.remove('hidden');
+  setTimeout(()=>{const inp=$('pickSearch');if(inp)inp.focus()},260);
 }
 $('pickOv').onclick=e=>{if(e.target.id==='pickOv')$('pickOv').classList.add('hidden')};
 function pickChoose(id){
@@ -3826,14 +3977,14 @@ function pickChoose(id){
   $('pickOv').classList.add('hidden');
   if(ctx.mode==='wizard'){renderOB()}
   else{save('iron_program',PROGRAM);cloudSync();renderTrain()}
-  toast(ctx.replaceIdx!=null?'Substituído por '+item.name:item.name+' adicionado');
+  toast(ctx.replaceIdx!=null?t('substituidopor')+' '+item.name:item.name+' '+t('adicionado'));
 }
 function askScope(old,item,dayKey,idx,outros){
-  boxOpen(`<h3>Trocar em quais treinos?</h3>
-    <div class="sub"><b>${old.name}</b> também aparece ${outros.length===1?'no treino':'nos treinos'} <b>${outros.join(', ')}</b>. Quer trocar por <b>${item.name}</b> só aqui ou em todos?</div>
-    <div class="mrow"><button class="mbtn" onclick="doScope(false)">Só no treino ${dayKey}</button></div>
-    <div class="mrow"><button class="mbtn pri" onclick="doScope(true)">Trocar em todos (${outros.length+1})</button></div>
-    <div class="mfoot"><button onclick="boxClose()">Cancelar</button></div>`);
+  boxOpen(`<h3>${t('trocarem')}</h3>
+    <div class="sub"><b>${old.name}</b> ${t('tambemaparece')} ${outros.length===1?t('notreino'):t('nostreinos')} <b>${outros.join(', ')}</b>. ${t('querttrocar')} <b>${item.name}</b> ${t('sopara')}</div>
+    <div class="mrow"><button class="mbtn" onclick="doScope(false)">${t('sonotreino')} ${dayKey}</button></div>
+    <div class="mrow"><button class="mbtn pri" onclick="doScope(true)">${t('trocaremtodos')} (${outros.length+1})</button></div>
+    <div class="mfoot"><button onclick="boxClose()">${t('cancelar')}</button></div>`);
   SCOPE={old,item,dayKey,idx,outros};
 }
 let SCOPE=null;
@@ -4030,67 +4181,67 @@ function closeAcct(){$('acctOv').classList.add('hidden')}
 function renderAcct(){
   const m=$('acctModal');
   if(!SB_ON()){
-    m.innerHTML=`<h3>☁️ Nuvem não configurada</h3>
-      <div class="sub">Pra ter conta de usuário e registros salvos na nuvem, siga as instruções do arquivo <b>LEIA-ME.txt</b>: crie um projeto gratuito no Supabase e cole as duas chaves no topo do index.html (busque por SUPABASE_URL).</div>
-      <div class="mrow"><button class="mbtn pri" onclick="closeAcct()">Entendi</button></div>
-      <div class="mfoot"><button onclick="closeAcct();openWizard(false)">🏠 Ir para a página inicial</button></div>`;
+    m.innerHTML=`<h3>${t('nuvemnaoconfig')}</h3>
+      <div class="sub">${t('nuvemsub')} <b>LEIA-ME.txt</b>: crie um projeto gratuito no Supabase e cole as duas chaves no topo do index.html (busque por SUPABASE_URL).</div>
+      <div class="mrow"><button class="mbtn pri" onclick="closeAcct()">${t('entendi')}</button></div>
+      <div class="mfoot"><button onclick="closeAcct();openWizard(false)">${t('paginainicial')}</button></div>`;
     return;
   }
   if(authMode==='newpass'){
-    m.innerHTML=`<h3>Criar nova senha</h3>
-      <div class="sub">Você chegou pelo link de redefinição. Escolha sua nova senha (mínimo 6 caracteres).</div>
-      <input type="password" id="aPass" placeholder="Nova senha" autocomplete="new-password">
-      <input type="password" id="aPass2" placeholder="Confirmar nova senha" autocomplete="new-password">
+    m.innerHTML=`<h3>${t('criarnovasenha')}</h3>
+      <div class="sub">${t('chegouporlink')}</div>
+      <input type="password" id="aPass" placeholder="${t('novasenha')}" autocomplete="new-password">
+      <input type="password" id="aPass2" placeholder="${t('confirmarnovasenha')}" autocomplete="new-password">
       <div class="mrow">
-        <button class="mbtn pri" id="aGo" style="flex:1">Salvar nova senha</button>
+        <button class="mbtn pri" id="aGo" style="flex:1">${t('salvarnovasenha')}</button>
       </div>
       <div class="merr" id="aErr"></div>`;
     $('aGo').onclick=doNewPass;
     return;
   }
   if(sbUser){
-    m.innerHTML=`<h3>☁️ Conectado</h3>
-      <div class="who">${sbUser.email}<small>Seus treinos, cargas e o seu programa personalizado sincronizam automaticamente entre aparelhos.</small></div>
+    m.innerHTML=`<h3>${t('conectado')}</h3>
+      <div class="who">${sbUser.email}<small>${t('sincronizasub')}</small></div>
       <div class="mrow">
-        <button class="mbtn" onclick="doSignOut()">Sair</button>
-        <button class="mbtn pri" onclick="cloudPull().then(closeAcct)">Sincronizar agora</button>
+        <button class="mbtn" onclick="doSignOut()">${t('sair')}</button>
+        <button class="mbtn pri" onclick="cloudPull().then(closeAcct)">${t('sincronizaragora')}</button>
       </div>
-      <div class="mfoot"><button onclick="authMode='newpass';renderAcct()">🔑 Trocar minha senha</button></div>
-      <div class="mfoot"><button onclick="closeAcct();openWizard(false)">🏠 Ir para a página inicial</button></div>`;
+      <div class="mfoot"><button onclick="authMode='newpass';renderAcct()">${t('trocarsenha')}</button></div>
+      <div class="mfoot"><button onclick="closeAcct();openWizard(false)">${t('paginainicial')}</button></div>`;
     return;
   }
   if(authMode==='forgot'){
-    m.innerHTML=`<h3>Redefinir senha</h3>
-      <div class="sub">Digite seu e-mail de cadastro. Vamos enviar um link pra você criar uma senha nova. Abra o link <b>neste mesmo aparelho</b>.</div>
-      <input type="email" id="aEmail" placeholder="Seu e-mail" autocomplete="email">
+    m.innerHTML=`<h3>${t('redefinirsenha')}</h3>
+      <div class="sub">${t('digitesenhaemail')}</div>
+      <input type="email" id="aEmail" placeholder="${t('seuemail')}" autocomplete="email">
       <div class="mrow">
-        <button class="mbtn" onclick="authMode='in';renderAcct()">Cancelar</button>
-        <button class="mbtn pri" id="aGo">Enviar link</button>
+        <button class="mbtn" onclick="authMode='in';renderAcct()">${t('cancelar')}</button>
+        <button class="mbtn pri" id="aGo">${t('enviarlink')}</button>
       </div>
       <div class="merr" id="aErr"></div>
-      <div class="mfoot"><button onclick="authMode='in';renderAcct()">← Voltar pro login</button></div>`;
+      <div class="mfoot"><button onclick="authMode='in';renderAcct()">${t('voltarlogin')}</button></div>`;
     $('aGo').onclick=doForgot;
     return;
   }
   const isIn=authMode==='in';
-  m.innerHTML=`<h3>${isIn?'Entrar':'Criar conta'}</h3>
-    <div class="sub">${isIn?'Entre pra sincronizar seus treinos entre aparelhos.':'Crie sua conta gratuita (senha com 6+ caracteres).'}</div>
-    <input type="email" id="aEmail" placeholder="Seu e-mail" autocomplete="email">
-    <input type="password" id="aPass" placeholder="Senha" autocomplete="${isIn?'current-password':'new-password'}">
+  m.innerHTML=`<h3>${isIn?t('entrar'):t('criarconta')}</h3>
+    <div class="sub">${isIn?t('entrarsub'):t('criarcontasub')}</div>
+    <input type="email" id="aEmail" placeholder="${t('seuemail')}" autocomplete="email">
+    <input type="password" id="aPass" placeholder="${t('suasenha')}" autocomplete="${isIn?'current-password':'new-password'}">
     <div class="mrow">
-      <button class="mbtn" onclick="closeAcct()">Cancelar</button>
-      <button class="mbtn pri" id="aGo">${isIn?'Entrar':'Criar conta'}</button>
+      <button class="mbtn" onclick="closeAcct()">${t('cancelar')}</button>
+      <button class="mbtn pri" id="aGo">${isIn?t('entrar'):t('criarconta')}</button>
     </div>
     <div class="merr" id="aErr"></div>
-    ${isIn?`<div class="mfoot"><button onclick="authMode='forgot';renderAcct()">Esqueci minha senha</button></div>`:''}
-    <div class="mfoot"><button onclick="authMode='${isIn?'up':'in'}';renderAcct()">${isIn?'Não tem conta? Criar agora':'Já tem conta? Entrar'}</button></div>
-    <div class="mfoot"><button onclick="closeAcct();openWizard(false)">🏠 Ir para a página inicial</button></div>`;
+    ${isIn?`<div class="mfoot"><button onclick="authMode='forgot';renderAcct()">${t('esquecisenha')}</button></div>`:''}
+    <div class="mfoot"><button onclick="authMode='${isIn?'up':'in'}';renderAcct()">${isIn?t('naotemconta'):t('jatemconta')}</button></div>
+    <div class="mfoot"><button onclick="closeAcct();openWizard(false)">${t('paginainicial')}</button></div>`;
   $('aGo').onclick=doAuth;
 }
 async function doAuth(){
   const email=$('aEmail').value.trim(),pass=$('aPass').value;
   const err=$('aErr');err.textContent='';
-  if(!email||pass.length<6){err.textContent='Preencha e-mail e senha (mínimo 6 caracteres).';return}
+  if(!email||pass.length<6){err.textContent=t('preenchaemail');return}
   $('aGo').textContent='...';
   try{
     let r;
@@ -4109,14 +4260,14 @@ async function doAuth(){
 async function doForgot(){
   const email=$('aEmail').value.trim();
   const err=$('aErr');err.textContent='';err.classList.remove('ok');
-  if(!email||email.indexOf('@')<1){err.textContent='Digite um e-mail válido.';return}
+  if(!email||email.indexOf('@')<1){err.textContent=t('emailvalido');return}
   $('aGo').textContent='...';
   try{
     const redirect=location.href.split('#')[0].split('?')[0];
     const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:redirect});
     if(error)throw error;
     err.classList.add('ok');
-    err.textContent='Link enviado! Confira seu e-mail (e a caixa de spam) e abra o link neste aparelho.';
+    err.textContent=t('linkenviado');
     $('aGo').textContent='Enviar link';
   }catch(e){
     err.textContent=authErr(e);
@@ -4125,44 +4276,42 @@ async function doForgot(){
 }
 /* traduz os erros do Supabase para português com a solução */
 function resetHelp(){
-  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
-    <h3>O link de senha não chegou</h3>
-    <div class="sub">Confira nesta ordem:</div>
-    <div class="mlist">
-      <div class="hd-row"><span>1. Caixa de spam e lixo eletrônico</span></div>
-      <div class="hd-row"><span>2. O e-mail vem em inglês, com assunto "Reset Your Password"</span></div>
-      <div class="hd-row"><span>3. Limite do plano gratuito: poucos envios por hora. Espere 30 a 60 min</span></div>
-      <div class="hd-row"><span>4. No Supabase: Authentication &gt; URL Configuration &gt; o endereço do app precisa estar em Site URL e em Redirect URLs</span></div>
-      <div class="hd-row"><span>5. Confirme que o e-mail digitado é o mesmo do cadastro</span></div>
-    </div>
-    <div class="mrow" style="margin-top:12px"><button class="mbtn pri" onclick="boxClose()">Entendi</button></div>`);
+  const items=LANG==='en'?
+    ['1. Spam and junk mail folder','2. The email comes in English, subject "Reset Your Password"',
+     '3. Free plan limit: few emails per hour. Wait 30 to 60 min','4. In Supabase: Authentication &gt; URL Configuration &gt; the app URL needs to be in Site URL and Redirect URLs',
+     '5. Confirm the email you typed matches the one you signed up with']:
+    ['1. Caixa de spam e lixo eletrônico','2. O e-mail vem em inglês, com assunto "Reset Your Password"',
+     '3. Limite do plano gratuito: poucos envios por hora. Espere 30 a 60 min','4. No Supabase: Authentication &gt; URL Configuration &gt; o endereço do app precisa estar em Site URL e em Redirect URLs',
+     '5. Confirme que o e-mail digitado é o mesmo do cadastro'];
+  boxOpen(`<button class="mback" onclick="boxClose()">← ${t('voltar')}</button>
+    <h3>${t('linknaochegou')}</h3>
+    <div class="sub">${t('confiranaordem')}</div>
+    <div class="mlist">${items.map(x=>`<div class="hd-row"><span>${x}</span></div>`).join('')}</div>
+    <div class="mrow" style="margin-top:12px"><button class="mbtn pri" onclick="boxClose()">${t('entendi')}</button></div>`);
 }
 function authErr(e){
   const m=String((e&&e.message)||e||'').toLowerCase();
-  if(m.indexOf('rate')>=0||m.indexOf('too many')>=0||m.indexOf('429')>=0)
-    return 'Muitos pedidos seguidos. O plano gratuito libera poucos e-mails por hora: espere uns 30 a 60 minutos e tente de novo.';
-  if(m.indexOf('redirect')>=0||m.indexOf('not allowed')>=0||m.indexOf('invalid url')>=0)
-    return 'O endereço de retorno não está liberado. No Supabase: Authentication > URL Configuration > adicione esta página em Site URL e Redirect URLs.';
-  if(m.indexOf('smtp')>=0||m.indexOf('sending')>=0||m.indexOf('email')>=0&&m.indexOf('error')>=0)
-    return 'O servidor de e-mail do Supabase recusou o envio. Verifique Authentication > Emails, ou tente de novo mais tarde.';
-  if(m.indexOf('invalid login')>=0)return 'E-mail ou senha incorretos.';
-  if(m.indexOf('already registered')>=0)return 'Esse e-mail já tem conta. Use Entrar.';
-  if(m.indexOf('user not found')>=0)return 'Não achei conta com esse e-mail. Confira se digitou certo.';
-  if(m.indexOf('signup')>=0&&m.indexOf('disabled')>=0)return 'Cadastro desativado no painel do Supabase (Authentication > Providers > Email).';
-  if(m.indexOf('failed to fetch')>=0||m.indexOf('network')>=0)return 'Sem conexão com o servidor. Verifique a internet e tente de novo.';
-  return 'Erro: '+((e&&e.message)||e);
+  if(m.indexOf('rate')>=0||m.indexOf('too many')>=0||m.indexOf('429')>=0)return t('errmuitospedidos');
+  if(m.indexOf('redirect')>=0||m.indexOf('not allowed')>=0||m.indexOf('invalid url')>=0)return t('errredirect');
+  if(m.indexOf('smtp')>=0||m.indexOf('sending')>=0||m.indexOf('email')>=0&&m.indexOf('error')>=0)return t('errsmtp');
+  if(m.indexOf('invalid login')>=0)return t('errinvlogin');
+  if(m.indexOf('already registered')>=0)return t('erremailcadastrado');
+  if(m.indexOf('user not found')>=0)return t('errcontanaoenc');
+  if(m.indexOf('signup')>=0&&m.indexOf('disabled')>=0)return t('errcadastrodesativado');
+  if(m.indexOf('failed to fetch')>=0||m.indexOf('network')>=0)return t('errsemconexao');
+  return t('errgenerico')+((e&&e.message)||e);
 }
 async function doNewPass(){
   const p1=$('aPass').value,p2=$('aPass2').value;
   const err=$('aErr');err.textContent='';err.classList.remove('ok');
-  if(p1.length<6){err.textContent='A senha precisa de pelo menos 6 caracteres.';return}
-  if(p1!==p2){err.textContent='As senhas não conferem.';return}
+  if(p1.length<6){err.textContent=t('senhaminima');return}
+  if(p1!==p2){err.textContent=t('senhasconferem');return}
   $('aGo').textContent='...';
   try{
     const {error}=await sb.auth.updateUser({password:p1});
     if(error)throw error;
     authMode='in';closeAcct();
-    toast('Senha redefinida ✔ Você já está conectado');
+    toast(t('senharedefinida'));
     paintAcctBtn();await cloudPull();
   }catch(e){
     err.textContent=authErr(e);
@@ -4170,7 +4319,7 @@ async function doNewPass(){
   }
 }
 async function doSignOut(){
-  if(!confirm('Sair da conta?\n\nOs dados deste aparelho serão limpos para o próximo usuário. Tudo continua salvo na sua conta na nuvem e volta quando você entrar de novo.'))return;
+  if(!confirm(t('sairconta')+'\n\n'+t('sairsub')))return;
   try{await sb.auth.signOut()}catch(e){}
   sbUser=null;
   ['iron_weights','iron_session','iron_sessmeta','iron_history','iron_trash','iron_variant','iron_setup','iron_program','iron_updated'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});
@@ -4179,11 +4328,11 @@ async function doSignOut(){
   paintAcctBtn();closeAcct();
   render();
   openWizard(false);
-  toast('Você saiu. Até a próxima! 👋');
+  toast(t('ateaproxima'));
 }
 
 function askEvolve(){
-  if(!PROGRAM||!Object.keys(PROGRAM).length){toast('Monte um treino primeiro');return}
+  if(!PROGRAM||!Object.keys(PROGRAM).length){toast(t('montetreino'));return}
   const preview=[];
   Object.keys(PROGRAM).forEach(k=>{
     PROGRAM[k].ex.forEach(ex=>{
@@ -4192,13 +4341,13 @@ function askEvolve(){
     });
   });
   const uniq=[...new Set(preview)];
-  boxOpen(`<h3>🚀 Evoluir o treino</h3>
-    <div class="sub">Eu troco os exercícios básicos do seu programa atual por versões mais avançadas e completas (ex: máquina → barra livre), mantendo a mesma estrutura de dias e a mesma lógica de ordem.</div>
-    <div class="sub">${uniq.length?`Isso deve trazer <b>${uniq.length} exercício${uniq.length===1?'':'s'} novo${uniq.length===1?'':'s'}</b>, como ${uniq.slice(0,3).map(id=>E[id].name).join(', ')}${uniq.length>3?'...':''}.`:'Não achei uma evolução óbvia pra alguns exercícios do seu programa atual — eles continuam como estão, e você ainda pode trocar manualmente depois.'}</div>
-    <div class="sub"><b>Seu treino atual é salvo automaticamente antes</b>, então dá pra voltar quando quiser em "Versões anteriores do treino".</div>
+  boxOpen(`<h3>${t('evoluirtit')}</h3>
+    <div class="sub">${t('evoluirsub1')}</div>
+    <div class="sub">${uniq.length?`${t('evoluirsub2a')} <b>${uniq.length} ${uniq.length===1?t('evoluirsub2b'):t('evoluirsub2c')}</b>, ${t('evoluirsub2d')} ${uniq.slice(0,3).map(id=>E[id].name).join(', ')}${uniq.length>3?'...':''}.`:t('evoluirsub2e')}</div>
+    <div class="sub"><b>${t('evoluirsub3')}</b></div>
     <div class="mrow">
-      <button class="mbtn" onclick="boxClose()">Cancelar</button>
-      <button class="mbtn pri" onclick="doEvolve()">Evoluir agora</button>
+      <button class="mbtn" onclick="boxClose()">${t('cancelar')}</button>
+      <button class="mbtn pri" onclick="doEvolve()">${t('evoluiragora')}</button>
     </div>`);
 }
 function doEvolve(){
@@ -4229,25 +4378,25 @@ function doEvolve(){
   PROGRAM=newProgram;
   save('iron_program',PROGRAM);cloudSync();
 
-  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
-    <h3>✅ Treino evoluído</h3>
-    <div class="sub">${changes.length?changes.length+' exercício'+(changes.length===1?'':'s')+' substituído'+(changes.length===1?'':'s')+':':'Nenhuma troca óbvia foi encontrada desta vez — seu programa continua como estava.'}</div>
+  boxOpen(`<button class="mback" onclick="boxClose()">← ${t('voltar')}</button>
+    <h3>${t('evoluidotit')}</h3>
+    <div class="sub">${changes.length?changes.length+' '+(changes.length===1?t('exsubstituido'):t('exsubstituidos'))+':':t('nenhumatroca')}</div>
     <div class="mlist">${changes.map(c=>`<div class="hd-row"><span>${c.day} · ${c.from} → <b>${c.to}</b></span></div>`).join('')}</div>
-    <div class="mrow" style="margin-top:10px"><button class="mbtn pri" onclick="boxClose();render()">Ver meu novo treino</button></div>`);
-  toast('🚀 Treino evoluído! Backup salvo.');
+    <div class="mrow" style="margin-top:10px"><button class="mbtn pri" onclick="boxClose();render()">${t('vernovotreino')}</button></div>`);
+  toast(t('backupsalvo'));
 }
 function openProgBackups(){
-  if(!PROG_BACKUPS.length){toast('Nenhuma versão anterior salva ainda');return}
-  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
-    <h3>Versões anteriores do treino</h3>
-    <div class="sub">Restaurar troca o seu programa atual por essa versão salva (o atual não se perde: também vira uma versão anterior).</div>
-    <div class="mlist">${PROG_BACKUPS.map((b,i)=>`<div class="prow"><div class="rtx"><b>${b.label}</b><small>${Object.keys(b.program).length} treinos · ${Object.values(b.program).reduce((s,d)=>s+d.ex.length,0)} exercícios</small></div>
+  if(!PROG_BACKUPS.length){toast(t('nenhumaversao'));return}
+  boxOpen(`<button class="mback" onclick="boxClose()">← ${t('voltar')}</button>
+    <h3>${t('versoesanttit')}</h3>
+    <div class="sub">${t('versoesantsub')}</div>
+    <div class="mlist">${PROG_BACKUPS.map((b,i)=>`<div class="prow"><div class="rtx"><b>${b.label}</b><small>${Object.keys(b.program).length} ${t('doistreinos')} · ${Object.values(b.program).reduce((s,d)=>s+d.ex.length,0)} exercícios</small></div>
       <button class="padd" onclick="restoreProgBackup(${i})">↩</button></div>`).join('')}</div>
-    <div class="mrow" style="margin-top:10px"><button class="mbtn" onclick="boxClose()">Fechar</button></div>`);
+    <div class="mrow" style="margin-top:10px"><button class="mbtn" onclick="boxClose()">${t('fechar')}</button></div>`);
 }
 function restoreProgBackup(i){
   const b=PROG_BACKUPS[i];if(!b)return;
-  if(!confirm('Restaurar "'+b.label+'"? Seu treino atual também será salvo como versão anterior.'))return;
+  if(!confirm(t('restaurarq')+' "'+b.label+'"?'))return;
   const current={ts:Date.now(),label:(SETUP&&SETUP.name?SETUP.name+' · ':'')+'Antes de restaurar · '+new Date().toLocaleDateString('pt-BR'),
     setup:JSON.parse(JSON.stringify(SETUP)),program:JSON.parse(JSON.stringify(PROGRAM))};
   PROG_BACKUPS.splice(i,1);
@@ -4256,14 +4405,14 @@ function restoreProgBackup(i){
   SETUP=b.setup;PROGRAM=b.program;
   save('iron_setup',SETUP);save('iron_program',PROGRAM);save('iron_prog_backups',PROG_BACKUPS);cloudSync();
   boxClose();cur=Object.keys(PROGRAM)[0];render();
-  toast('Versão restaurada ✔');
+  toast(t('versaorestaurada'));
 }
 function openBackup(){
-  boxOpen(`<button class="mback" onclick="boxClose()">← Voltar</button>
-    <h3>Backup dos seus dados</h3>
-    <div class="sub">Baixe um arquivo com todo o seu histórico, cargas e programa. Guarde no celular ou no e-mail: se algo for apagado por engano, é só restaurar por aqui.</div>
-    <div class="mrow"><button class="mbtn pri" onclick="doBackup()">💾 Baixar backup</button></div>
-    <div class="mrow"><button class="mbtn" onclick="document.getElementById('bkFile').click()">📂 Restaurar de um arquivo</button></div>
+  boxOpen(`<button class="mback" onclick="boxClose()">← ${t('voltar')}</button>
+    <h3>${t('backupfiletit')}</h3>
+    <div class="sub">${t('backupfilesub')}</div>
+    <div class="mrow"><button class="mbtn pri" onclick="doBackup()">${t('baixarbackup')}</button></div>
+    <div class="mrow"><button class="mbtn" onclick="document.getElementById('bkFile').click()">${t('restaurararquivo')}</button></div>
     <input type="file" id="bkFile" accept="application/json,.json" style="display:none" onchange="doRestore(this)">
     <div class="merr" id="bkMsg"></div>`);
 }
@@ -4274,7 +4423,7 @@ function doBackup(){
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);
   a.download='iron_backup_'+todayISO()+'.json';a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href),2000);
-  toast('Backup baixado ✔');
+  toast(t('backupbaixado'));
 }
 function doRestore(inp){
   const f=inp.files&&inp.files[0];if(!f)return;
@@ -4282,7 +4431,7 @@ function doRestore(inp){
   r.onload=()=>{
     try{
       const d=JSON.parse(r.result);
-      if(!d||!d.history)throw new Error('arquivo sem histórico');
+      if(!d||!d.history)throw new Error(t('arquivosemhist'));
       const seen=new Set(HISTORY.map(h=>h.ts));
       let add=0;(d.history||[]).forEach(h=>{if(!seen.has(h.ts)){HISTORY.push(h);add++}});
       HISTORY.sort((a,b)=>(b.date<a.date?-1:b.date>a.date?1:(b.ts||0)-(a.ts||0)));
@@ -4292,9 +4441,9 @@ function doRestore(inp){
       if(d.trash){const st=new Set(TRASH.map(x=>x.ts));(d.trash||[]).forEach(x=>{if(!st.has(x.ts))TRASH.push(x)})}
       save('iron_history',HISTORY);save('iron_weights',WEIGHTS);save('iron_trash',TRASH);
       save('iron_program',PROGRAM);save('iron_setup',SETUP);cloudSync();
-      boxClose();render();toast(add+' treino'+(add===1?'':'s')+' restaurado'+(add===1?'':'s')+' ✔');
+      boxClose();render();toast(add+' '+(add===1?t('umtreino'):t('doistreinos'))+' '+(add===1?t('treinorestauradoplural'):t('treinosrestauradosplural'))+' ✔');
     }catch(e){
-      const m=$('bkMsg');if(m)m.textContent='Não consegui ler esse arquivo: '+(e.message||e);
+      const m=$('bkMsg');if(m)m.textContent=t('naoconsegulerarquivo')+(e.message||e);
     }
   };
   r.readAsText(f);
@@ -4373,7 +4522,7 @@ async function exportPDF(){
 }
 
 /* =================== INIT =================== */
-const APP_VERSION='iron-v11';
+const APP_VERSION='iron-v12';
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){
   navigator.serviceWorker.register('./sw.js').then(reg=>{
     reg.update(); // força checar por versão nova agora, sem esperar o intervalo padrão do navegador
