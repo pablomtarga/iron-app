@@ -2035,7 +2035,19 @@ function openLangPicker(){
     <div class="sub">Exercícios, dicas e textos longos continuam em português por enquanto. A navegação do app já muda.</div>
     <div class="mlist">${opts.map(([code,label])=>
       `<div class="prow"><div class="rtx"><b>${label}</b></div><button class="padd" onclick="setLang('${code}')">${LANG===code?'✓':'→'}</button></div>`).join('')}</div>
-    <div class="mrow" style="margin-top:10px"><button class="mbtn pri" onclick="boxClose()">Fechar</button></div>`);
+    <div class="mrow" style="margin-top:10px"><button class="mbtn pri" onclick="boxClose()">Fechar</button></div>
+    <div class="mfoot"><button onclick="forceRefresh()">🔄 Verificar atualização (${typeof APP_VERSION!=='undefined'?APP_VERSION:'?'})</button></div>`);
+}
+async function forceRefresh(){
+  toast('Verificando atualização...');
+  try{
+    if('serviceWorker' in navigator){
+      const regs=await navigator.serviceWorker.getRegistrations();
+      for(const r of regs){await r.update();await r.unregister()}
+    }
+    if(window.caches){const keys=await caches.keys();await Promise.all(keys.map(k=>caches.delete(k)))}
+  }catch(e){}
+  location.reload(true);
 }
 const YT=q=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q);
 
@@ -4361,8 +4373,24 @@ async function exportPDF(){
 }
 
 /* =================== INIT =================== */
-if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'))
-  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+const APP_VERSION='iron-v11';
+if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){
+  navigator.serviceWorker.register('./sw.js').then(reg=>{
+    reg.update(); // força checar por versão nova agora, sem esperar o intervalo padrão do navegador
+    setInterval(()=>reg.update(),60*60*1000); // e a cada 1h enquanto o app fica aberto
+    reg.addEventListener('updatefound',()=>{
+      const nw=reg.installing;if(!nw)return;
+      nw.addEventListener('statechange',()=>{
+        if(nw.state==='activated')toast('Atualizado ✔');
+      });
+    });
+  }).catch(()=>{});
+  let swReloaded=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{
+    if(swReloaded)return;swReloaded=true;
+    window.location.reload();
+  });
+}
 $('date').value=todayISO();
 ensureProgram();
 applyTheme();
