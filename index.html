@@ -166,7 +166,7 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .editbtn{border:none;background:none;color:var(--accent-text);border-radius:999px;
   padding:6px 10px;font-weight:500;font-size:14.5px;cursor:pointer;letter-spacing:-.01em}
 .editbtn.on{background:var(--accent);color:var(--accent-ink);font-weight:600;padding:8px 14px}
-.ebar{display:flex;gap:8px;padding:12px 14px 0;align-items:center}
+.ebar{display:flex;flex-wrap:wrap;gap:8px;padding:12px 14px 0;align-items:center}
 .dhandle{flex:0 0 34px;height:34px;border-radius:9px;border:none;background:var(--fill);color:var(--label2);
   font-size:15px;cursor:grab;touch-action:none;display:flex;align-items:center;justify-content:center}
 .card.dragging{z-index:40;position:relative;box-shadow:var(--shadow-2);transform:scale(1.02);
@@ -178,6 +178,8 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .ebtn:disabled{opacity:.32;cursor:default}
 .ebtn.wide{flex:1}
 .ebtn.danger{color:var(--red)}
+.ebtn.combo{color:var(--accent-text)}
+.ebtn.combo.on{background:var(--accent);color:var(--accent-ink)}
 
 /* ============ CARD DE EXERCÍCIO ============ */
 .list{padding:0 var(--sp) 4px;display:flex;flex-direction:column;gap:12px}
@@ -2052,6 +2054,30 @@ const I18N={
    errmuitospedidos:'Muitos pedidos seguidos. O plano gratuito libera poucos e-mails por hora: espere uns 30 a 60 minutos e tente de novo.',
    errredirect:'O endereço de retorno não está liberado. No Supabase: Authentication > URL Configuration > adicione esta página em Site URL e Redirect URLs.',
    errsmtp:'O servidor de e-mail do Supabase recusou o envio. Verifique Authentication > Emails, ou tente de novo mais tarde.',
+   seriesecargas:'Séries e cargas',aplicanaomarcadas:'aplica nas séries não marcadas',
+   inicio:'Início',fim:'Fim',fotoscredit:'Fotos: Free Exercise DB (domínio público)',
+   proximaserie:'Próxima série: ',mandaproxima:'Manda a próxima série 💪',
+   pesojamarcado:'série já marcada mantém o peso',pesosjamarcados:'séries já marcadas mantêm o peso',
+   serietxt:'Série ',edicaosalva:'Edição salva ✔',exexcluido:' excluído',
+   deixapelomenos2dia:'Deixa pelo menos 2 exercícios no dia',deixapelomenos2treino:'Deixa pelo menos 2 exercícios no treino',
+   escolhabiblioteca:'Escolha da biblioteca. O exercício entra com séries e descanso já calibrados.',
+   exentraposicao:'O exercício entra na posição certa da ordem, com séries e descanso calibrados.',
+   exentramesma:'O novo exercício entra na mesma posição do treino.',
+   descartarseries:'Descartar as séries marcadas do Treino ',descartarsub:'? Isso não afeta seu histórico.',
+   seriesabertas:'Séries em aberto descartadas',treinoregistrado:'Treino ',registradoexcl:' registrado! ',
+   marcadasnaoconcluiu:' e não concluiu.',fatoupouco:' Faltou pouco pra fechar.',quervmarcar:' Quer registrar agora?',
+   vocemarcou:'Você marcou ',de:' de ',semdetalhessessao:'Sem detalhes salvos nesta sessão',
+   principiosdr:'Princípios do Dr. 🧬',progressaodupla:'Progressão dupla:',progressaoduplatxt:'fechou o topo das reps em todas as séries (com 2 na reserva)? Sobe ~5% na carga e volta pro fundo da faixa.',
+   frequencia2x:'Frequência 2×:',frequencia2xtxt:'treinar cada músculo 2x por semana rende mais hipertrofia que 1x com o mesmo volume.',
+   descansostip:'Descansos:',descansostiptxt:'90 a 120s nos compostos pesados e 45 a 60s nos isolados é o que a evidência mais recente aponta como ideal.',
+   composicaotip:'Composição:',composicaotiptxt:'o abdômen aparece no déficit. ~300–500 kcal abaixo do gasto + proteína 1,6–2,2 g/kg.',
+   ambientenaosalva:'⚠️ Este ambiente não salva dados entre sessões. Hospede o arquivo (ex: GitHub Pages).',
+   arrastarreordenar:'Arraste para reordenar',trocarbtn:'Trocar',combobtn:'Combo',desfazercombo:'Desfazer',
+   criarcombo:'Criar combo (superset)',combosub:'Escolha outro exercício deste treino pra revezar sem descanso entre os dois, tipo Abdutora + Adutora.',
+   jaemcombo:' · já em combo',combocriado:'Combo criado! Os dois viram um só bloco sem descanso.',combodesfeito:'Combo desfeito',
+   semoutroexcombo:'Adicione mais um exercício neste treino pra poder criar um combo.',excluirconfirm:'Excluir',doTreino:' do Treino ',
+   idiomalangsub:'Exercícios, dicas e textos longos continuam em português por enquanto. A navegação do app já muda.',
+   verificaratualiz:'🔄 Verificar atualização',verificandoatualiz:'Verificando atualização...',movimento:'Movimento',nadapraregistrar:'Nada pra registrar nesse treino',retomandotreino:'Retomando o Treino ',emaberto:' em aberto',retomarbtn:'Retomar',concluirbtn:'Concluir',descartarbtn:'Descartar',kcalcomotxt:'Calculamos as calorias de cada treino a partir do seu peso corporal e do tipo de exercício (força, cardio, funcional). É uma estimativa, não uma medição clínica exata: varia conforme seu esforço real. A cada {p} kcal você ganha 1 moeda amarela, e a cada {c} moedas amarelas, uma moeda verde pra guardar na coleção.',
    bemvindo:'Bem-vindo ao',heroSub:'Seu treino de academia, do seu jeito. Responda algumas perguntas rápidas e eu monto seu programa completo: exercícios, ordem, séries, repetições e descansos calibrados pela ciência de hipertrofia mais recente.',
    seunomeph:'Seu nome (como quer ser chamado)',montarmeutreino:'Montar meu treino',voltarpromeutreino:'← Voltar pro meu treino',
    continuarppl:'Continuar com meu treino atual (PPL)',usarpadraoppl:'Usar o programa padrão (PPL)',jatenhoconta:'Já tenho conta ☁️ · Entrar',
@@ -2130,6 +2156,30 @@ const I18N={
    errmuitospedidos:'Too many requests in a row. The free plan allows few emails per hour: wait 30 to 60 minutes and try again.',
    errredirect:'The return address is not allowed. In Supabase: Authentication > URL Configuration > add this page to Site URL and Redirect URLs.',
    errsmtp:"Supabase's email server refused to send. Check Authentication > Emails, or try again later.",
+   seriesecargas:'Sets and loads',aplicanaomarcadas:'applies to unchecked sets',
+   inicio:'Start',fim:'End',fotoscredit:'Photos: Free Exercise DB (public domain)',
+   proximaserie:'Next set: ',mandaproxima:"Bring the next set 💪",
+   pesojamarcado:'set already checked keeps its weight',pesosjamarcados:'sets already checked keep their weight',
+   serietxt:'Set ',edicaosalva:'Edit saved ✔',exexcluido:' deleted',
+   deixapelomenos2dia:'Keep at least 2 exercises on the day',deixapelomenos2treino:'Keep at least 2 exercises in the workout',
+   escolhabiblioteca:'Choose from the library. The exercise comes in with sets and rest already calibrated.',
+   exentraposicao:'The exercise enters at the right spot in the order, with sets and rest calibrated.',
+   exentramesma:'The new exercise takes the same spot in the workout.',
+   descartarseries:'Discard the checked sets from Workout ',descartarsub:"? This won't affect your history.",
+   seriesabertas:'Open sets discarded',treinoregistrado:'Workout ',registradoexcl:' logged! ',
+   marcadasnaoconcluiu:" and didn't finish.",fatoupouco:' Almost there.',quervmarcar:' Want to log it now?',
+   vocemarcou:'You checked ',de:' of ',semdetalhessessao:'No details saved for this session',
+   principiosdr:"Dr.'s Principles 🧬",progressaodupla:'Double progression:',progressaoduplatxt:'hit the top of the rep range on every set (with 2 in reserve)? Add ~5% load and drop back to the bottom of the range.',
+   frequencia2x:'2× frequency:',frequencia2xtxt:'training each muscle 2x a week builds more muscle than 1x with the same volume.',
+   descansostip:'Rest times:',descansostiptxt:'90 to 120s on heavy compounds and 45 to 60s on isolations is what the latest evidence points to as ideal.',
+   composicaotip:'Body composition:',composicaotiptxt:'abs show up in a deficit. ~300–500 kcal below maintenance + 1.6–2.2 g/kg protein.',
+   ambientenaosalva:"⚠️ This environment doesn't save data between sessions. Host the file (e.g. GitHub Pages).",
+   arrastarreordenar:'Drag to reorder',trocarbtn:'Swap',combobtn:'Combo',desfazercombo:'Undo',
+   criarcombo:'Create combo (superset)',combosub:'Pick another exercise in this workout to alternate with, no rest between them, like Abductor + Adductor.',
+   jaemcombo:' · already in a combo',combocriado:"Combo created! The two become one block with no rest between them.",combodesfeito:'Combo undone',
+   semoutroexcombo:'Add one more exercise to this workout to create a combo.',excluirconfirm:'Delete',doTreino:' from Workout ',
+   idiomalangsub:"Exercises, tips and long texts stay in Portuguese for now. The app's navigation already switches.",
+   verificaratualiz:'🔄 Check for updates',verificandoatualiz:'Checking for updates...',movimento:'Movement',nadapraregistrar:'Nothing to log for this workout',retomandotreino:'Resuming Workout ',emaberto:' in progress',retomarbtn:'Resume',concluirbtn:'Finish',descartarbtn:'Discard',kcalcomotxt:'We calculate calories for each workout from your body weight and the type of exercise (strength, cardio, functional). This is an estimate, not an exact clinical measurement: it varies with your real effort. Every {p} kcal earns 1 yellow coin, and every {c} yellow coins earns 1 green coin to keep in your collection.',
    bemvindo:'Welcome to',heroSub:"Your gym workout, your way. Answer a few quick questions and I'll build your complete program: exercises, order, sets, reps and rest times calibrated by the latest hypertrophy science.",
    seunomeph:'Your name (how you want to be called)',montarmeutreino:'Build my workout',voltarpromeutreino:'← Back to my workout',
    continuarppl:'Continue with my current workout (PPL)',usarpadraoppl:'Use the default program (PPL)',jatenhoconta:'Already have an account ☁️ · Sign in',
@@ -2160,14 +2210,14 @@ function setLang(l){LANG=l;save('iron_lang',LANG);document.documentElement.lang=
 function openLangPicker(){
   const opts=[['pt-BR','🇧🇷 Português (Brasil)'],['en','🇺🇸 English']];
   boxOpen(`<h3>🌐 Idioma / Language</h3>
-    <div class="sub">Exercícios, dicas e textos longos continuam em português por enquanto. A navegação do app já muda.</div>
+    <div class="sub">${t('idiomalangsub')}</div>
     <div class="mlist">${opts.map(([code,label])=>
       `<div class="prow"><div class="rtx"><b>${label}</b></div><button class="padd" onclick="setLang('${code}')">${LANG===code?'✓':'→'}</button></div>`).join('')}</div>
     <div class="mrow" style="margin-top:10px"><button class="mbtn pri" onclick="boxClose()">Fechar</button></div>
-    <div class="mfoot"><button onclick="forceRefresh()">🔄 Verificar atualização (${typeof APP_VERSION!=='undefined'?APP_VERSION:'?'})</button></div>`);
+    <div class="mfoot"><button onclick="forceRefresh()">${t('verificaratualiz')} (${typeof APP_VERSION!=='undefined'?APP_VERSION:'?'})</button></div>`);
 }
 async function forceRefresh(){
-  toast('Verificando atualização...');
+  toast(t('verificandoatualiz'));
   try{
     if('serviceWorker' in navigator){
       const regs=await navigator.serviceWorker.getRegistrations();
@@ -2182,6 +2232,10 @@ const YT=q=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q
 /* =================== BIBLIOTECA DE EXERCÍCIOS =================== */
 /* grp: chest back shoulders arms legs glutes core calf | cat: comp iso core calf lomb cardio */
 const GRP_LABEL={chest:'Peito',back:'Costas',shoulders:'Ombros',arms:'Braços',legs:'Pernas',glutes:'Glúteos',core:'Abdômen',calf:'Panturrilha',functional:'Funcional',cardio:'Cardio'};
+const GRP_LABEL_EN={chest:'Chest',back:'Back',shoulders:'Shoulders',arms:'Arms',legs:'Legs',glutes:'Glutes',core:'Abs',calf:'Calves',functional:'Functional',cardio:'Cardio'};
+const MUS_EN={'Abdômen':'Abs','Abdômen inferior':'Lower abs','Adutores':'Adductors','Bíceps':'Biceps','Bíceps (pico)':'Biceps (peak)','Bíceps + braquial':'Biceps + brachialis','Bíceps + dorsal':'Biceps + lats','Condicionamento':'Conditioning','Core (estabilidade)':'Core (stability)','Core + condicionamento':'Core + conditioning','Core completo':'Full core','Corpo inteiro':'Full body','Corpo inteiro (potência)':'Full body (power)','Costas (detalhe)':'Back (detail)','Costas (espessura)':'Back (thickness)','Costas (um lado)':'Back (one side)','Costas + core':'Back + core','Deltóide anterior':'Front delt','Deltóide lateral':'Side delt','Deltóide posterior':'Rear delt','Dorsal':'Lats','Dorsal (isolado)':'Lats (isolated)','Glúteo':'Glutes','Glúteo + quadríceps':'Glutes + quads','Glúteo médio':'Glute medius','Lombar':'Lower back','Oblíquos':'Obliques','Oblíquos + rotação':'Obliques + rotation','Ombro':'Shoulder','Ombro (completo)':'Shoulder (full)','Ombro + core':'Shoulder + core','Ombro + trapézio':'Shoulder + traps','Panturrilha':'Calves','Panturrilha (sóleo)':'Calves (soleus)','Pegada + core':'Grip + core','Peito':'Chest','Peito (isolado)':'Chest (isolated)','Peito + tríceps':'Chest + triceps','Peito inferior':'Lower chest','Peito superior':'Upper chest','Posterior + core':'Hamstrings + core','Posterior + costas':'Hamstrings + back','Posterior + glúteo':'Hamstrings + glutes','Posterior + lombar':'Hamstrings + lower back','Posterior + postura':'Hamstrings + posture','Posterior de coxa':'Hamstrings','Potência de pernas':'Leg power','Quadríceps':'Quads','Quadríceps (um lado)':'Quads (one side)','Quadríceps + glúteo':'Quads + glutes','Trapézio':'Traps','Tríceps':'Triceps','Tríceps (cabeça longa)':'Triceps (long head)','Tríceps + peito':'Triceps + chest'};
+function grpLabel(g){return LANG==='en'?(GRP_LABEL_EN[g]||GRP_LABEL[g]):GRP_LABEL[g]}
+function musLabel(m){return LANG==='en'?(MUS_EN[m]||m):m}
 const E={
  chestpress:{name:'Chest Press',fig:'chestpress',grp:'chest',mus:'Peito',cat:'comp',w:30,sets:4,reps:'8–12',rest:90,evolve:'barbellbench',yt:'seated chest press machine form shorts',
   steps:['Ajuste o banco: pegadores na linha do meio do peito','Costas apoiadas, pés firmes no chão','Empurre à frente sem travar o cotovelo','Volte controlado sentindo o peito alongar'],
@@ -2679,6 +2733,39 @@ function buildDay(pool,n,prio){
   }
   return sel;
 }
+const SPLIT_NAME_EN={'ABCD clássico':'ABCD classic'};
+const SPLIT_LABEL_EN={'Peito + Tríceps':'Chest + Triceps','Costas + Bíceps':'Back + Biceps',
+ 'Pernas + Glúteo':'Legs + Glutes','Ombros + Core':'Shoulders + Core'};
+function trSplitName(n){return (LANG==='en'&&SPLIT_NAME_EN[n])||n}
+function buildDayIntro(meta){
+  if(!meta)return '';
+  const gl=goalLabel(meta.goal).toLowerCase();
+  const spN=trSplitName(meta.spName);
+  if(meta.kind==='cardio')return LANG==='en'?
+    `${goalLabel('cardio')} · ${meta.freq}x per week. Cardio machines alternated with core stability to hold posture and burn more.`:
+    `${goalLabel('cardio')} · ${meta.freq}x por semana. Máquinas de cardio alternadas com estabilidade central pra sustentar postura e queimar mais.`;
+  if(meta.kind==='functional')return LANG==='en'?
+    `${goalLabel('funcional')} · ${meta.freq}x per week. Kettlebell, sled, TRX, ropes and moves like burpees, always in pairs with no rest between them: more calorie burn in the same time.`:
+    `${goalLabel('funcional')} · ${meta.freq}x por semana. Kettlebell, trenó, TRX, cordas e movimentos como burpee, sempre em duplas sem descanso entre elas: mais gasto calórico no mesmo tempo.`;
+  if(meta.circuitPairs)return LANG==='en'?
+    `${spN} · ${meta.freq}x per week · ${gl} circuit. Exercises alternated in pairs, no rest between them: more calorie burn in the same time.`:
+    `${spN} · ${meta.freq}x por semana · circuito de ${gl}. Exercícios alternados em duplas, sem descanso entre eles: mais gasto calórico no mesmo tempo.`;
+  return LANG==='en'?
+    `${spN} · ${meta.freq}x per week · focus on ${gl}. Heavy compounds first (fresh you = more weight = more stimulus), isolations complete it, core wraps it up.`:
+    `${spN} · ${meta.freq}x por semana · foco em ${gl}. Compostos pesados primeiro (você fresco = mais carga = mais estímulo), isolados completam, core fecha.`;
+}
+function buildDayLabel(meta,fallback){
+  if(!meta)return fallback;
+  if(meta.kind==='cardio')return meta.cardioName||fallback;
+  if(meta.kind==='functional')return (LANG==='en'?'Functional ':'Funcional ')+meta.letter;
+  return (LANG==='en'&&SPLIT_LABEL_EN[fallback])||fallback;
+}
+function buildDaySub(meta,fallback){
+  if(!meta)return fallback;
+  if(meta.kind==='cardio')return LANG==='en'?'Conditioning':'Condicionamento';
+  if(meta.kind==='functional')return LANG==='en'?'Full body · circuit':'Full body · circuito';
+  return fallback;
+}
 function generateProgram(setup){
   const goal=setup.goal||'hipertrofia';
   const gdef=GOALS[goal]||GOALS.hipertrofia;
@@ -2723,16 +2810,12 @@ function generateProgram(setup){
       ex.push({id:'finisher',fig:f.fig,name:f.name,muscle:f.mus,w:0,bw:true,sets:1,reps:f.reps,rest:0,yt:f.yt,steps:f.steps,g:f.g,b:f.b,why:whyFor(f,99),
         alts:f.alts.map(aid=>({id:aid,fig:E[aid].fig,name:E[aid].name,bw:true,reps:E[aid].reps,yt:E[aid].yt,steps:E[aid].steps,g:E[aid].g,b:E[aid].b}))});
     }
-    const label=d.cardio?(sel[0]?sel[0].name:'Cardio'):d.functional?'Funcional '+L:d.label;
-    const sub=d.cardio?'Condicionamento':d.functional?'Full body · circuito':d.sub;
-    const intro=d.cardio?
-      `${gdef.label} · ${setup.freq}x por semana. Máquinas de cardio alternadas com estabilidade central pra sustentar postura e queimar mais.`:
-      d.functional?
-      `${gdef.label} · ${setup.freq}x por semana. Kettlebell, trenó, TRX, cordas e movimentos como burpee, sempre em duplas sem descanso entre elas: mais gasto calórico no mesmo tempo.`:
-      gdef.circuitPairs?
-      `${spName} · ${setup.freq}x por semana · circuito de ${gdef.label.toLowerCase()}. Exercícios alternados em duplas, sem descanso entre eles: mais gasto calórico no mesmo tempo.`:
-      `${spName} · ${setup.freq}x por semana · foco em ${gdef.label.toLowerCase()}. Compostos pesados primeiro (você fresco = mais carga = mais estímulo), isolados completam, core fecha.`;
-    prog[L]={label,sub,intro,ex};
+    const meta={kind:d.cardio?'cardio':d.functional?'functional':'normal',freq:setup.freq,spName,
+      goal:goal,letter:L,cardioName:sel[0]?sel[0].name:'Cardio',circuitPairs:!!gdef.circuitPairs};
+    const label=buildDayLabel(meta,d.label);
+    const sub=buildDaySub(meta,d.sub);
+    const intro=buildDayIntro(meta);
+    prog[L]={label,sub,intro,meta,ex};
   });
   return prog;
 }
@@ -2763,9 +2846,26 @@ let PROGRAM=load('iron_program',null);
 let cur='A', view='train';
 
 const DEFAULT_SETUP={groups:Object.keys(GRP_LABEL),perDay:6,splits:3,freq:3,first:'Push',finisher:true,default:true};
+function migrateProgramUnits(){
+  if(!PROGRAM)return;
+  let changed=false;
+  Object.keys(PROGRAM).forEach(k=>{
+    const day=PROGRAM[k];if(!day||!day.ex)return;
+    day.ex.forEach(ex=>{
+      const meta=E[ex.id];
+      if(meta&&meta.unit&&ex.unit!==meta.unit){ex.unit=meta.unit;ex.bw=!!meta.bw;changed=true}
+      if(ex.alts)ex.alts.forEach(alt=>{
+        const am=E[alt.id];
+        if(am&&am.unit&&alt.unit!==am.unit){alt.unit=am.unit;alt.bw=!!am.bw;changed=true}
+      });
+    });
+  });
+  if(changed){save('iron_program',PROGRAM)}
+}
 function ensureProgram(){
   if(!PROGRAM){PROGRAM=generateProgram(SETUP||DEFAULT_SETUP)}
   if(!PROGRAM[cur])cur=Object.keys(PROGRAM)[0];
+  migrateProgramUnits();
 }
 
 const todayISO=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)};
@@ -2843,6 +2943,7 @@ $('thm').onclick=()=>{THEME=THEME==='light'?'dark':'light';save('iron_theme',THE
 
 /* =================== RENDER =================== */
 const QUOTES=["Constância vence intensidade.","O treino feito > o treino perfeito adiado.","2 reps na reserva hoje, mais carga na próxima.","Forma primeiro. Sempre.","Disciplina é liberdade.","Cada série marcada é um tijolo."];
+const QUOTES_EN=["Consistency beats intensity.","The workout you do > the perfect one you keep postponing.","2 reps in reserve today, more weight next time.","Form first. Always.","Discipline is freedom.","Every set you check off is a brick."];
 function applyI18N(){
   document.documentElement.lang=LANG;
   const set=(id,k)=>{const el=$(id);if(el)el.textContent=t(k)};
@@ -2854,9 +2955,10 @@ function render(){
   ensureProgram();
   applyAccent();
   applyI18N();
-  $('quote').textContent=QUOTES[Math.floor(Math.random()*QUOTES.length)];
+  const qArr=LANG==='en'?QUOTES_EN:QUOTES;
+  $('quote').textContent=qArr[Math.floor(Math.random()*qArr.length)];
   $('helloName').textContent=(SETUP&&SETUP.name)?SETUP.name:'Atleta';
-  $('brandSub').textContent=SETUP&&!SETUP.default?`${SPLITS[SETUP.splits].name} · ${SETUP.freq}x/sem`:'Push · Pull · Legs';
+  $('brandSub').textContent=SETUP&&!SETUP.default?`${SPLITS[SETUP.splits].name} · ${SETUP.freq}x/${LANG==='en'?'wk':'sem'}`:(LANG==='en'?'Push · Pull · Legs':'Push · Pull · Legs');
   renderAlerts();
   renderLastCard();
   renderTabs();
@@ -2882,14 +2984,14 @@ function renderLastCard(){
     return `<div class="lrow"><span>${it.n}</span><small>${it.s}/${it.t} séries<br>${wtx}</small></div>`;
   }).join(''):(h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
     `<div class="lrow"><span>${vidName(vid)}</span><small>${fmtW(w)} ${unitOf(vid)}</small></div>`).join(''):
-    '<div class="lrow"><span>Sem detalhes salvos nesta sessão</span></div>');
+    `<div class="lrow"><span>${t('semdetalhessessao')}</span></div>`);
   const open=LASTOPEN?' op':'';
   el.innerHTML=`<div class="lastcard">
     <button class="lhead${open}" onclick="toggleLast(this)">
       <div class="lbadge" style="background:${accentFor(h.workout).a};color:${accentFor(h.workout).ink}">${h.workout}</div>
       <div class="ltx"><span class="lk">${t('ultimotreino')}</span>
         <b>${h.label} · Treino ${h.workout}</b>
-        <small>${relDate(h.date)} · ${h.done}/${h.tot} séries</small>
+        <small>${relDate(h.date)} · ${h.done}/${h.tot} ${t('series')}</small>
         <span class="ldone ${h.done>=h.tot?'full':'part'}">${h.done>=h.tot?t('completo'):t('parcial')+' · '+Math.round(h.done/h.tot*100)+'%'}</span></div>
       <span class="lcv">▾</span>
     </button>
@@ -2912,14 +3014,15 @@ function renderTabs(){
     b.className='tab'+(k===cur?' on':'');
     const c=accentFor(k);
     b.style.setProperty('--tc',c.a);b.style.setProperty('--tci',c.ink);
-    b.innerHTML=`<div class="ltr">${k}</div><div class="nm">${p.label}</div>`;
+    const lbl=p.meta?buildDayLabel(p.meta,p.label):p.label;
+    b.innerHTML=`<div class="ltr">${k}</div><div class="nm">${lbl}</div>`;
     b.onclick=()=>{cur=k;render();window.scrollTo({top:0,behavior:'smooth'})};
     t.appendChild(b);
   }
 }
 function renderTrain(){
   const day=PROGRAM[cur];
-  $('dintro').textContent=day.intro;
+  $('dintro').textContent=day.meta?buildDayIntro(day.meta):day.intro;
   const eb=$('editBtn');
   eb.classList.toggle('on',EDITMODE);
   eb.textContent=EDITMODE?(LANG==='en'?'✓ Done editing':'✓ Concluir edição'):t('editarex');
@@ -2944,11 +3047,13 @@ function renderTrain(){
         `<button class="vchip${a.vid===o.id?' on':''}" onclick="setVar('${ex.id}','${o.id}')">${o.name}</button>`).join('')+`</div>`;
     }
     const ebar=EDITMODE?`<div class="ebar">
-        <button class="dhandle" onpointerdown="dragStart(event,${i})" title="Arraste para reordenar">≡</button>
+        <button class="dhandle" onpointerdown="dragStart(event,${i})" title="${t('arrastarreordenar')}">≡</button>
         <button class="ebtn" onclick="progMove(${i},-1)" ${i===0?'disabled':''}>↑</button>
         <button class="ebtn" onclick="progMove(${i},1)" ${i===day.ex.length-1?'disabled':''}>↓</button>
-        <button class="ebtn wide" onclick="progReplace(${i})">⇄ Trocar</button>
-        <button class="ebtn danger" onclick="progRemove(${i})">Excluir</button>
+        <button class="ebtn wide" onclick="progReplace(${i})">⇄ ${t('trocarbtn')}</button>
+        ${ex.ss?`<button class="ebtn combo on" onclick="progUncombo(${i})">🔗 ${t('desfazercombo')}</button>`:
+                `<button class="ebtn combo" onclick="progCombo(${i})">🔗 ${t('combobtn')}</button>`}
+        <button class="ebtn danger" onclick="progRemove(${i})">${t('excluirbtn')}</button>
       </div>`:'';
     const base=wOf(a);
     const prev=lastSets(a.vid,a.name);
@@ -2986,13 +3091,13 @@ function renderTrain(){
           <div class="cidx"><span class="n">${String(i+1).padStart(2,'0')}</span>${badges}</div>
           <div class="cname">${a.name}</div>
           <div class="meta">
-            <span class="chip"><b>${a.muscle||ex.muscle}</b></span>
+            <span class="chip"><b>${musLabel(a.muscle||ex.muscle)}</b></span>
             <span class="chip">${a.sets}×${a.reps}</span>
           </div>
         </div>
       </div>
       ${EDITMODE?'':vhtml+`
-      ${a.bw?'':`<div class="wtlab">${a.unit==='m'?'Distância base':a.unit==='min'?'Tempo base':'Peso base'} <span>aplica nas séries não marcadas</span></div>`}
+      ${a.bw?'':`<div class="wtlab">${a.unit==='m'?(LANG==='en'?'Base distance':'Distância base'):a.unit==='min'?(LANG==='en'?'Base time':'Tempo base'):(LANG==='en'?'Base weight':'Peso base')} <span>${t('aplicanaomarcadas')}</span></div>`}
       <div class="wt">
         <div class="stp">${wDisp}</div>
         ${a.rest?`<div class="rest" onclick="startRest(${a.rest},'${(a.name||'').replace(/'/g,'')}')">
@@ -3001,7 +3106,7 @@ function renderTrain(){
       </div>
       ${prevHtml}
       <div class="sets">
-        <div class="lab"><span>Séries e cargas</span><span>${done}/${a.sets}</span></div>
+        <div class="lab"><span>${t('seriesecargas')}</span><span>${done}/${a.sets}</span></div>
         <div class="srows">${srows}</div>
       </div>
       <div class="drnote"><span class="ic">🧬</span><p>${ex.why}</p></div>
@@ -3012,15 +3117,15 @@ function renderTrain(){
       <div class="how"><div class="how-i">
         ${hasPhoto(a.vid)||hasPhoto(ex.id)?(()=>{const pid=hasPhoto(a.vid)?a.vid:ex.id;return `
         <div class="frames">
-          <div class="frm"><div class="frz photo"><img src="img/${pid}_0.webp" alt="Posição inicial" loading="lazy"></div><span>Início</span></div>
-          <div class="frm"><div class="frz photo"><img src="img/${pid}_1.webp" alt="Posição final" loading="lazy"></div><span>Fim</span></div>
-          <div class="frm"><div class="frz">${FIG[a.fig]||''}</div><span>Movimento</span></div>
+          <div class="frm"><div class="frz photo"><img src="img/${pid}_0.webp" alt="${t('inicio')}" loading="lazy"></div><span>${t('inicio')}</span></div>
+          <div class="frm"><div class="frz photo"><img src="img/${pid}_1.webp" alt="${t('fim')}" loading="lazy"></div><span>${t('fim')}</span></div>
+          <div class="frm"><div class="frz">${FIG[a.fig]||''}</div><span>${t('movimento')}</span></div>
         </div>
-        <div class="fcredit">Fotos: Free Exercise DB (domínio público)</div>`})():`
+        <div class="fcredit">${t('fotoscredit')}</div>`})():`
         <div class="frames">
-          <div class="frm"><div class="frz f0">${FIG[a.fig]||''}</div><span>Início</span></div>
-          <div class="frm"><div class="frz f1">${FIG[a.fig]||''}</div><span>Fim</span></div>
-          <div class="frm"><div class="frz">${FIG[a.fig]||''}</div><span>Movimento</span></div>
+          <div class="frm"><div class="frz f0">${FIG[a.fig]||''}</div><span>${t('inicio')}</span></div>
+          <div class="frm"><div class="frz f1">${FIG[a.fig]||''}</div><span>${t('fim')}</span></div>
+          <div class="frm"><div class="frz">${FIG[a.fig]||''}</div><span>${t('movimento')}</span></div>
         </div>`}
         <ol>${a.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
         <div class="cue g"><b>✓</b><span>${a.g}</span></div>
@@ -3065,7 +3170,7 @@ function bump(baseId,delta){
   arr.forEach(s=>{if(s.d){travadas++}else{s.w=nv}});
   save('iron_session',SESSION);cloudSync();
   const sy=window.scrollY;renderTrain();window.scrollTo(0,sy);
-  if(travadas)toast(travadas+(travadas===1?' série já marcada mantém o peso':' séries já marcadas mantêm o peso'));
+  if(travadas)toast(travadas+' '+(travadas===1?t('pesojamarcado'):t('pesosjamarcados')));
 }
 function editW(el,baseId){
   const a=activeOf(findBase(baseId));const cur0=wOf(a);
@@ -3103,7 +3208,7 @@ function editSetW(el,baseId,si){
   const inp=el.querySelector('input');inp.focus();inp.select();
   const commit=()=>{let v=parseFloat(String(inp.value).replace(',','.'));if(isNaN(v)||v<0)v=cur0;
     arr[si].w=Math.round(v*10)/10;save('iron_session',SESSION);cloudSync();
-    toast('Série '+(si+1)+': '+fmtW(arr[si].w)+' '+(a.unit||'kg'));const sy=window.scrollY;renderTrain();window.scrollTo(0,sy)};
+    toast(t('serietxt')+(si+1)+': '+fmtW(arr[si].w)+' '+(a.unit||'kg'));const sy=window.scrollY;renderTrain();window.scrollTo(0,sy)};
   inp.onblur=commit;inp.onkeydown=e=>{if(e.key==='Enter')inp.blur()};
 }
 function toggleHow(btn){btn.classList.toggle('op');btn.parentElement.nextElementSibling.classList.toggle('op')}
@@ -3114,12 +3219,12 @@ let tInt=null,tLeft=0,tTotal=0;
 function startRest(sec,name){
   clearInterval(tInt);tLeft=sec;tTotal=sec;
   $('tname').textContent='Descanso · '+sec+'s';
-  $('tsub').textContent='Próxima série: '+(name||'');
+  $('tsub').textContent=t('proximaserie')+(name||'');
   $('tmr').classList.add('show');document.body.classList.add('tmron');paintT();
   tInt=setInterval(()=>{tLeft--;if(tLeft<=0){clearInterval(tInt);
     if(navigator.vibrate)navigator.vibrate([120,60,120]);
     $('tbig').textContent='Vai!';$('tname').textContent='Descanso completo';
-    $('tsub').textContent='Manda a próxima série 💪';$('tring').style.width='0%';
+    $('tsub').textContent=t('mandaproxima');$('tring').style.width='0%';
     setTimeout(()=>{$('tmr').classList.remove('show');document.body.classList.remove('tmron')},1600);return}
     paintT()},1000);
 }
@@ -3226,12 +3331,7 @@ function renderCalories(){
 
     <div class="kcal-panel">
       <div class="kcal-ptitle"><h4>ℹ️ ${t('kcalcomo')}</h4></div>
-      <p style="font-size:12.5px;color:var(--label2);line-height:1.55">
-        Calculamos as calorias de cada treino a partir do seu peso corporal e do tipo de exercício
-        (força, cardio, funcional). É uma estimativa, não uma medição clínica exata: varia conforme
-        seu esforço real. A cada <b>${KCAL_PER_COIN} kcal</b> você ganha <b>1 moeda amarela</b>, e a cada
-        <b>${COINS_PER_CROSS} moedas amarelas</b>, uma <b>moeda verde</b> pra guardar na coleção.
-      </p>
+      <p style="font-size:12.5px;color:var(--label2);line-height:1.55">${t('kcalcomotxt').replace('{p}','<b>'+KCAL_PER_COIN+' kcal</b>').replace('{c}','<b>'+COINS_PER_CROSS+'</b>')}</p>
     </div>
   `;
 
@@ -3317,12 +3417,12 @@ function finishWorkout(key,dateStr){
 }
 $('finBtn').onclick=()=>{
   const st=sessionStats(cur);
-  if(!st.done){toast('Marca pelo menos uma série antes 😉');return}
+  if(!st.done){toast(t('marcaruma'));return}
   const meta=SESSMETA[cur]||{};
   askDate(meta.d||$('date').value||todayISO(),(d)=>{
     const r=finishWorkout(cur,d);
     if(!r)return;
-    confetti();toast('🔥 Treino '+cur+' registrado! '+r.done+'/'+r.tot+' séries');
+    confetti();toast('🔥 '+t('treinoregistrado')+cur+t('registradoexcl')+r.done+'/'+r.tot+' '+t('series'));
     render();
   });
 };
@@ -3331,8 +3431,8 @@ function alertFinish(key){
   const meta=SESSMETA[key]||{};
   askDate(meta.d||todayISO(),(d)=>{
     const r=finishWorkout(key,d);
-    if(!r){toast('Nada pra registrar nesse treino');render();return}
-    confetti();toast('✔ Treino '+key+' registrado em '+dtBR(d));
+    if(!r){toast(t('nadapraregistrar'));render();return}
+    confetti();toast('✔ '+t('treinoregistrado')+key+t('registradoexcl').replace('! ',' ')+dtBR(d));
     render();
   });
 }
@@ -3342,13 +3442,13 @@ function alertResume(key){
   $('navTrain').classList.add('on');$('navProg').classList.remove('on');
   const meta=SESSMETA[key];if(meta&&meta.d)$('date').value=meta.d;
   render();window.scrollTo({top:0,behavior:'smooth'});
-  toast('Retomando o Treino '+key);
+  toast(t('retomandotreino')+key);
 }
 function alertDiscard(key){
-  if(!confirm('Descartar as séries marcadas do Treino '+key+'? Isso não afeta seu histórico.'))return;
+  if(!confirm(t('descartarseries')+key+t('descartarsub')))return;
   SESSION[key]={};save('iron_session',SESSION);
   delete SESSMETA[key];save('iron_sessmeta',SESSMETA);
-  cloudSync();render();toast('Séries em aberto descartadas');
+  cloudSync();render();toast(t('seriesabertas'));
 }
 function renderAlerts(){
   const el=$('alertCard');
@@ -3356,15 +3456,15 @@ function renderAlerts(){
   if(!pend.length){el.innerHTML='';return}
   el.innerHTML=pend.map(p=>{
     const pct=Math.round(p.done/p.tot*100);
-    const quando=p.hoje?'hoje':relDate(p.date);
-    const quase=pct>=80?' Faltou pouco pra fechar.':'';
+    const quando=p.hoje?t('hoje'):relDate(p.date);
+    const quase=pct>=80?t('fatoupouco'):'';
     return `<div class="alertc">
-      <div class="atop">⚠️ Treino ${p.key} em aberto</div>
-      <p>Você marcou <b>${p.done} de ${p.tot} séries</b> (${pct}%) ${quando} e não concluiu.${quase} Quer registrar agora?</p>
+      <div class="atop">⚠️ ${t('trein')} ${p.key}${t('emaberto')}</div>
+      <p>${t('vocemarcou')}<b>${p.done}${t('de')}${p.tot} ${t('series')}</b> (${pct}%) ${quando}${t('marcadasnaoconcluiu')}${quase}${t('quervmarcar')}</p>
       <div class="abtns">
-        <button onclick="alertResume('${p.key}')">Retomar</button>
-        <button class="pri" onclick="alertFinish('${p.key}')">Concluir</button>
-        <button class="ghost" onclick="alertDiscard('${p.key}')">Descartar</button>
+        <button onclick="alertResume('${p.key}')">${t('retomarbtn')}</button>
+        <button class="pri" onclick="alertFinish('${p.key}')">${t('concluirbtn')}</button>
+        <button class="ghost" onclick="alertDiscard('${p.key}')">${t('descartarbtn')}</button>
       </div>
     </div>`;
   }).join('');
@@ -3611,7 +3711,7 @@ function statTotal(){
     <div class="mlist">${keys.length?keys.map(k=>`
       <div class="wkhead">${mLbl(k)} · ${by[k].length} treino${by[k].length===1?'':'s'}</div>
       ${by[k].map(h=>`<div class="prow"><div class="rtx"><b>${h.label} · Treino ${h.workout}</b>
-        <small>${dtBR(h.date)} · ${h.done}/${h.tot} séries</small></div>
+        <small>${dtBR(h.date)} · ${h.done}/${h.tot} ${t('series')}</small></div>
         <button class="padd" onclick="editHist(${h.ts})">✎</button></div>`).join('')}
       `).join(''):'<div class="empty">Nenhum treino registrado.</div>'}</div>
     <div class="mrow" style="margin-top:10px"><button class="mbtn pri" onclick="boxClose()">Fechar</button></div>`);
@@ -3677,10 +3777,10 @@ function renderProgress(){
       return `<div class="hd-row"><span>${it.n}</span><small>${it.s}/${it.t} séries${wtx?' · '+wtx:''}</small></div>`}).join(''):
       (h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
       `<div class="hd-row"><span>${vidName(vid)}</span><small>${fmtW(w)} ${unitOf(vid)}</small></div>`).join(''):
-      '<div class="hd-row"><span>Sem detalhes salvos nesta sessão</span></div>');
+      `<div class="hd-row"><span>${t('semdetalhessessao')}</span></div>`);
     return `${head}<div class="hrow" onclick="openHistMenu(${h.ts})">
       <div class="wk" style="background:${accentFor(h.workout).a};color:${accentFor(h.workout).ink}">${h.workout}</div>
-      <div class="mid"><b>${h.label} · Treino ${h.workout}</b><small>${ds} · ${h.done}/${h.tot} séries</small></div>
+      <div class="mid"><b>${h.label} · ${t('trein')} ${h.workout}</b><small>${ds} · ${h.done}/${h.tot} ${t('series')}</small></div>
       <div class="pct">${pct}%</div><span class="hcv" style="transform:rotate(-90deg)">▾</span></div>`;
   }).join(''):'<div class="empty">Nenhum treino registrado ainda.<br>Conclua um treino e ele aparece aqui. 📈</div>';
   const plan=SETUP?`<div class="tip"><div class="ic">📅</div><p><b>Sua semana:</b> ${weekPlan(SETUP)} (${SETUP.freq}x). Nos outros dias, descanso ou caminhada leve.</p></div>`:'';
@@ -3709,17 +3809,17 @@ function renderProgress(){
       <button class="abtn" onclick="openBackup()">${t('backup')}</button>
     </div>
     ${PROG_BACKUPS.length?`<div class="exports"><button class="abtn" onclick="openProgBackups()">${t('versoesant')} (${PROG_BACKUPS.length})</button></div>`:''}
-    <div class="sectit">Histórico ${TRASH.length?`<button onclick="openTrash()">🗑 Excluídos (${TRASH.length})</button>`:''}</div>
+    <div class="sectit">${t('historico')} ${TRASH.length?`<button onclick="openTrash()">${t('lixeiravazia')} (${TRASH.length})</button>`:''}</div>
     <div class="hist">${hist}</div>
     <div class="tips">
-      <div class="sectit" style="font-size:14px">Princípios do Dr. 🧬</div>
+      <div class="sectit" style="font-size:14px">${t('principiosdr')}</div>
       ${plan}
-      <div class="tip"><div class="ic">📈</div><p><b>Progressão dupla:</b> fechou o topo das reps em todas as séries (com 2 na reserva)? Sobe ~5% na carga e volta pro fundo da faixa.</p></div>
-      <div class="tip"><div class="ic">🔁</div><p><b>Frequência 2×:</b> treinar cada músculo 2x por semana rende mais hipertrofia que 1x com o mesmo volume.</p></div>
-      <div class="tip"><div class="ic">⏳</div><p><b>Descansos:</b> 90 a 120s nos compostos pesados e 45 a 60s nos isolados é o que a evidência mais recente aponta como ideal.</p></div>
-      <div class="tip"><div class="ic">🍽️</div><p><b>Composição:</b> o abdômen aparece no déficit. ~300–500 kcal abaixo do gasto + proteína 1,6–2,2 g/kg.</p></div>
+      <div class="tip"><div class="ic">📈</div><p><b>${t('progressaodupla')}</b> ${t('progressaoduplatxt')}</p></div>
+      <div class="tip"><div class="ic">🔁</div><p><b>${t('frequencia2x')}</b> ${t('frequencia2xtxt')}</p></div>
+      <div class="tip"><div class="ic">⏳</div><p><b>${t('descansostip')}</b> ${t('descansostiptxt')}</p></div>
+      <div class="tip"><div class="ic">🍽️</div><p><b>${t('composicaotip')}</b> ${t('composicaotiptxt')}</p></div>
     </div>
-    ${LS_OK?'':'<div class="empty" style="color:var(--red)">⚠️ Este ambiente não salva dados entre sessões. Hospede o arquivo (ex: GitHub Pages).</div>'}
+    ${LS_OK?'':`<div class="empty" style="color:var(--red)">${t('ambientenaosalva')}</div>`}
   `;
   const ws=$('wkscroll');
   if(ws)requestAnimationFrame(()=>{ws.scrollLeft=(WKSCROLL!=null?WKSCROLL:ws.scrollWidth)});
@@ -3812,7 +3912,7 @@ function renderOB(){
       <div class="qb"><h4>${t('quaisgrupos')}</h4>
         <div class="hint">${t('gruposhint')}</div>
         <div class="qchips">${Object.keys(GRP_LABEL).filter(g=>g!=='functional'&&g!=='cardio').map(g=>
-          `<button class="qchip${OBDATA.groups.includes(g)?' on':''}" onclick="obTgl('${g}')">${GRP_LABEL[g]}</button>`).join('')}</div>
+          `<button class="qchip${OBDATA.groups.includes(g)?' on':''}" onclick="obTgl('${g}')">${grpLabel(g)}</button>`).join('')}</div>
       </div>`;
     const firstBlock=(isCardio||isFunctional)?'':`
       <div class="qb"><h4>${t('qualregiao')}</h4>
@@ -3910,7 +4010,7 @@ function obTgl(g){
 }
 function obGen(){OBPROG=generateProgram(OBDATA);OBSTEP=2;renderOB();window.scrollTo({top:0})}
 function obRm(k,i){
-  if(OBPROG[k].ex.length<=2){toast('Deixa pelo menos 2 exercícios no dia');return}
+  if(OBPROG[k].ex.length<=2){toast(t('deixapelomenos2dia'));return}
   OBPROG[k].ex.splice(i,1);renderOB();
 }
 let PICKCTX=null;
@@ -3933,7 +4033,7 @@ function openLibPicker(ctx){
     const qn=norm(q);
     const ids=Object.keys(E).filter(id=>!used.has(id)&&(g==='all'||E[id].grp===g)&&(!qn||norm(E[id].name).indexOf(qn)>=0));
     ids.sort((a,b)=>E[a].name.localeCompare(E[b].name,LANG==='en'?'en':'pt'));
-    return ids.map(id=>`<div class="prow"><div class="rtx"><b>${E[id].name}</b><small>${GRP_LABEL[E[id].grp]} · ${E[id].sets}×${E[id].reps}</small></div>
+    return ids.map(id=>`<div class="prow"><div class="rtx"><b>${E[id].name}</b><small>${grpLabel(E[id].grp)} · ${E[id].sets}×${E[id].reps}</small></div>
       <button class="padd" onclick="pickChoose('${id}')">＋</button></div>`).join('')||`<div class="empty">${t('nadaaqui')}</div>`;
   };
   let curG='all',curQ='';
@@ -3942,7 +4042,7 @@ function openLibPicker(ctx){
       <div class="sub">${ctx.sub}</div>
       <input type="text" id="pickSearch" class="picksearch" placeholder="${t('buscarex')}" value="${curQ}" autocomplete="off">
       <div class="pchips">${['all',...Object.keys(GRP_LABEL)].map(x=>
-        `<button class="vchip${curG===x?' on':''}" data-g="${x}">${x==='all'?t('todos'):GRP_LABEL[x]}</button>`).join('')}</div>
+        `<button class="vchip${curG===x?' on':''}" data-g="${x}">${x==='all'?t('todos'):grpLabel(x)}</button>`).join('')}</div>
       <div class="pgrid" id="pickGrid">${rows(curG,curQ)}</div>
       <div class="mrow" style="margin-top:12px"><button class="mbtn" onclick="$('pickOv').classList.add('hidden')">${t('fechar')}</button></div>`;
     $('pickModal').querySelectorAll('.pchips .vchip').forEach(b=>b.onclick=()=>{curG=b.dataset.g;paint();});
@@ -4010,29 +4110,59 @@ function cleanupEx(dayKey,exId){
 function openPicker(k){
   openLibPicker({mode:'wizard',list:OBPROG[k].ex,dayKey:null,replaceIdx:null,
     title:'Adicionar em '+k+' · '+OBPROG[k].label,
-    sub:'Escolha da biblioteca. O exercício entra com séries e descanso já calibrados.'});
+    sub:t('escolhabiblioteca')});
 }
 /* ---- edição do treino atual ---- */
 let EDITMODE=false;
-function toggleEdit(){EDITMODE=!EDITMODE;renderTrain();if(!EDITMODE)toast('Edição salva ✔')}
+function toggleEdit(){EDITMODE=!EDITMODE;renderTrain();if(!EDITMODE)toast(t('edicaosalva'))}
 function progAddOpen(){
   openLibPicker({mode:'program',list:PROGRAM[cur].ex,dayKey:cur,replaceIdx:null,
     title:'Adicionar no Treino '+cur,
-    sub:'O exercício entra na posição certa da ordem, com séries e descanso calibrados.'});
+    sub:t('exentraposicao')});
 }
 function progReplace(i){
   openLibPicker({mode:'program',list:PROGRAM[cur].ex,dayKey:cur,replaceIdx:i,
     title:'Substituir '+PROGRAM[cur].ex[i].name,
-    sub:'O novo exercício entra na mesma posição do treino.'});
+    sub:t('exentramesma')});
+}
+function progCombo(i){
+  const arr=PROGRAM[cur].ex;
+  const others=arr.map((e,idx)=>({e,idx})).filter(o=>o.idx!==i);
+  if(!others.length){toast(t('semoutroexcombo'));return}
+  boxOpen(`<button class="mback" onclick="boxClose()">← ${t('voltar')}</button>
+    <h3>🔗 ${t('criarcombo')}</h3>
+    <div class="sub">${t('combosub')}</div>
+    <div class="mlist">${others.map(o=>`<div class="prow"><div class="rtx"><b>${o.e.name}</b>${o.e.ss?`<small>${t('jaemcombo')}</small>`:''}</div>
+      <button class="padd" onclick="doCombo(${i},${o.idx})">🔗</button></div>`).join('')}</div>`);
+}
+function doCombo(i,j){
+  const arr=PROGRAM[cur].ex;
+  const gid='C'+Date.now();
+  const exI=arr[i],exJ=arr[j];
+  exI.ss=gid;exI.rest=0;
+  exJ.ss=gid;
+  arr.splice(j,1);
+  const newI=arr.indexOf(exI);
+  arr.splice(newI+1,0,exJ);
+  save('iron_program',PROGRAM);cloudSync();
+  boxClose();renderTrain();
+  toast(t('combocriado'));
+}
+function progUncombo(i){
+  const arr=PROGRAM[cur].ex;
+  const ex=arr[i];const gid=ex.ss;if(!gid)return;
+  arr.forEach(e=>{if(e.ss===gid){delete e.ss;const meta=E[e.id];if(meta)e.rest=meta.rest}});
+  save('iron_program',PROGRAM);cloudSync();renderTrain();
+  toast(t('combodesfeito'));
 }
 function progRemove(i){
   const exs=PROGRAM[cur].ex;
-  if(exs.length<=2){toast('Deixa pelo menos 2 exercícios no treino');return}
-  if(!confirm('Excluir "'+exs[i].name+'" do Treino '+cur+'?'))return;
+  if(exs.length<=2){toast(t('deixapelomenos2treino'));return}
+  if(!confirm(t('excluirconfirm')+' "'+exs[i].name+'"'+t('doTreino')+cur+'?'))return;
   const [rm]=exs.splice(i,1);
   cleanupEx(cur,rm.id);
   save('iron_program',PROGRAM);cloudSync();renderTrain();
-  toast(rm.name+' excluído');
+  toast(rm.name+t('exexcluido'));
 }
 let DRAG=null;
 function dragStart(e,i){
@@ -4522,7 +4652,7 @@ async function exportPDF(){
 }
 
 /* =================== INIT =================== */
-const APP_VERSION='iron-v12';
+const APP_VERSION='iron-v13';
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){
   navigator.serviceWorker.register('./sw.js').then(reg=>{
     reg.update(); // força checar por versão nova agora, sem esperar o intervalo padrão do navegador
