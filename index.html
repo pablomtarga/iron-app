@@ -2006,7 +2006,7 @@ const I18N={
    askdatetit:'Quando foi este treino?',askdatesub:'Confirme o dia pra não registrar na data errada.',cancelar:'Cancelar',confirmar:'Confirmar',fechar:'Fechar',
    pesosalvo:'Peso salvo: ',distsalva:'Distância salva: ',tempoSalvo:'Tempo salvo: ',registroexcluido:'Registro excluído',marcaruma:'Marca pelo menos uma série antes 😉',
    wdSeg:'S',wdTer:'T',wdQua:'Q',wdQui:'Q',wdSex:'S',wdSab:'S',wdDom:'D',movidolixeira:'Movido para a lixeira',regnaoenc:'Registro não encontrado',
-   backupfiletit:'Backup dos seus dados',backupfilesub:'Baixe um arquivo com todo o seu histórico, cargas e programa. Guarde no celular ou no e-mail: se algo for apagado por engano, é só restaurar por aqui.',baixarbackup:'💾 Baixar backup',restaurararquivo:'📂 Restaurar de um arquivo',backupbaixado:'Backup baixado ✔',arquivosemhist:'arquivo sem histórico',naoconsegulerarquivo:'Não consegui ler esse arquivo: ',treinorestauradoplural:'restaurado',treinosrestauradosplural:'restaurados',voltar:'Voltar',todos:'Todos',pesocorpcurto:'peso corporal',semdetalhes2:'Sem detalhes salvos nesta sessão.',buscarex:'Buscar exercício...',nadaaqui:'Nada por aqui nesse filtro.',
+   backupfiletit:'Backup dos seus dados',backupfilesub:'Baixe um arquivo com todo o seu histórico, cargas e programa. Guarde no celular ou no e-mail: se algo for apagado por engano, é só restaurar por aqui.',baixarbackup:'💾 Baixar backup',restaurararquivo:'📂 Restaurar de um arquivo',backupbaixado:'Backup baixado ✔',arquivosemhist:'arquivo sem histórico',naoconsegulerarquivo:'Não consegui ler esse arquivo: ',treinorestauradoplural:'restaurado',treinosrestauradosplural:'restaurados',voltar:'Voltar',todos:'Todos',pesocorpcurto:'peso corporal',semdetalhes2:'Sem detalhes salvos nesta sessão.',buscarex:'Buscar exercício...',nadaaqui:'Nada por aqui nesse filtro.',supersettxt:'superset',
    pesocorporal:'⚖️ Seu peso corporal',pesousado:'Usamos esse valor pra estimar quantas calorias você queima em cada treino.',
    pesoinvalido:'Digite um peso válido',pesoatualizado:'Peso atualizado ✔',ex1:'Ex: 75',salvar:'Salvar',
    nenhumtreinodia:'Nenhum treino registrado neste dia.',treinosnodia:'treinos neste dia. Escolha qual editar.',
@@ -2108,7 +2108,7 @@ const I18N={
    askdatetit:'When was this workout?',askdatesub:'Confirm the day so it doesn\'t log on the wrong date.',cancelar:'Cancel',confirmar:'Confirm',fechar:'Close',
    pesosalvo:'Weight saved: ',distsalva:'Distance saved: ',tempoSalvo:'Time saved: ',registroexcluido:'Entry deleted',marcaruma:'Check at least one set first 😉',
    wdSeg:'M',wdTer:'T',wdQua:'W',wdQui:'T',wdSex:'F',wdSab:'S',wdDom:'S',movidolixeira:'Moved to trash',regnaoenc:'Entry not found',
-   backupfiletit:'Backup your data',backupfilesub:'Download a file with your full history, loads and program. Keep it on your phone or email: if anything gets deleted by accident, just restore it here.',baixarbackup:'💾 Download backup',restaurararquivo:'📂 Restore from a file',backupbaixado:'Backup downloaded ✔',arquivosemhist:'file has no history',naoconsegulerarquivo:"Couldn't read this file: ",treinorestauradoplural:'restored',treinosrestauradosplural:'restored',voltar:'Back',todos:'All',pesocorpcurto:'body weight',semdetalhes2:'No details saved for this session.',buscarex:'Search exercise...',nadaaqui:'Nothing here for this filter.',
+   backupfiletit:'Backup your data',backupfilesub:'Download a file with your full history, loads and program. Keep it on your phone or email: if anything gets deleted by accident, just restore it here.',baixarbackup:'💾 Download backup',restaurararquivo:'📂 Restore from a file',backupbaixado:'Backup downloaded ✔',arquivosemhist:'file has no history',naoconsegulerarquivo:"Couldn't read this file: ",treinorestauradoplural:'restored',treinosrestauradosplural:'restored',voltar:'Back',todos:'All',pesocorpcurto:'body weight',semdetalhes2:'No details saved for this session.',buscarex:'Search exercise...',nadaaqui:'Nothing here for this filter.',supersettxt:'superset',
    pesocorporal:'⚖️ Your body weight',pesousado:'We use this value to estimate how many calories you burn in each workout.',
    pesoinvalido:'Enter a valid weight',pesoatualizado:'Weight updated ✔',ex1:'e.g: 75',salvar:'Save',
    nenhumtreinodia:'No workout logged on this day.',treinosnodia:'workouts on this day. Choose which to edit.',
@@ -2233,6 +2233,118 @@ const YT=q=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q
 /* grp: chest back shoulders arms legs glutes core calf | cat: comp iso core calf lomb cardio */
 const GRP_LABEL={chest:'Peito',back:'Costas',shoulders:'Ombros',arms:'Braços',legs:'Pernas',glutes:'Glúteos',core:'Abdômen',calf:'Panturrilha',functional:'Funcional',cardio:'Cardio'};
 const GRP_LABEL_EN={chest:'Chest',back:'Back',shoulders:'Shoulders',arms:'Arms',legs:'Legs',glutes:'Glutes',core:'Abs',calf:'Calves',functional:'Functional',cardio:'Cardio'};
+const EX_EN={
+ chestpress:{name:'Chest Press',steps:['Adjust the bench: handles at mid-chest height','Back supported, feet flat on the floor','Press forward without locking the elbow','Return with control feeling the chest stretch'],g:'Shoulder blades slightly retracted: protects the shoulder.',b:'Don\'t shrug your shoulders toward your ears.'},
+ dbbench:{name:'Dumbbell Bench Press',steps:['Lying on the bench, dumbbells at chest height','Press up until almost extended','Lower with control to chest height','Elbows at ~45° from the torso'],g:'Feet flat on the floor give you stability.',b:'Don\'t bang the dumbbells together at the top.'},
+ pecdeck:{name:'Pec Deck',steps:['Forearms on the pads, elbow at shoulder height','Close your arms together at the center','Hold 1s squeezing the chest','Open slowly until you feel the stretch'],g:'The movement comes from the chest, not the arms.',b:'Don\'t let the weight yank your shoulder back abruptly.'},
+ cablefly:{name:'Cable Fly',steps:['Pulleys at shoulder height, one step forward','Arms in an arc, close your hands in front of your chest','Squeeze 1s at the center','Open with control, don\'t overextend'],g:'Elbow slightly bent the whole time.',b:'Don\'t turn it into a press by bending the elbow.'},
+ inclinebench:{name:'Incline Barbell Bench Press',steps:['Bench at 30–45°, grip a bit wider than shoulders','Lower the bar to the upper chest','Press back up without locking the elbow','Keep the shoulder blades retracted'],g:'Targets the upper chest, a great complement to the flat bench press.',b:'Don\'t set the bench past 45°: it becomes more shoulder than chest.'},
+ inclinedb:{name:'Incline Dumbbell Press',steps:['Bench at 30–45°, dumbbells at chest height','Press up until almost extended','Lower with control feeling the chest stretch','Elbows at ~45° from the torso'],g:'More range than the bar: a more comfortable stretch at the bottom.',b:'Don\'t bang the dumbbells together forcefully at the top.'},
+ declinebench:{name:'Decline Bench Press',steps:['Decline bench, feet locked in the pads','Lower the bar to the lower chest','Press back up with control','Keep the core tight'],g:'Emphasizes the lower portion of the pecs.',b:'Don\'t drop too fast: you\'ll lose control.'},
+ cablecrossover:{name:'Cable Crossover',steps:['High pulleys, one step forward between the towers','Pull the cables down and toward the center','Squeeze the chest at the end point','Return with control, stretching'],g:'The X path recruits the whole chest.',b:'Don\'t just use the arm: the movement comes from the chest.'},
+ pushupv:{name:'Push-Up',steps:['Hands a bit wider than the shoulders','Body straight from head to heels','Lower until the chest nearly touches the floor','Push back up without losing the body line'],g:'A braced core keeps the hips aligned.',b:'Don\'t let the hips sag or pike up too much.'},
+ shoulderpress:{name:'Shoulder Press',steps:['Back supported, grip at shoulder width','Press up without locking the elbow','Stop before your hands touch at the top','Lower until upper arms are parallel to the floor'],g:'Brace your core so you don\'t arch the lower back.',b:'Don\'t throw your head forward as you press.'},
+ dbshoulder:{name:'Dumbbell Shoulder Press',steps:['Seated with backrest, dumbbells at ear height','Press up until almost meeting at the top','Lower with control to ear height','Forearms stay roughly vertical'],g:'A slightly reclined backrest protects the lower back.',b:'Don\'t arch your back to press the weight up.'},
+ sidelat:{name:'Lateral Raise (dumbbells)',steps:['Standing, dumbbells at your sides, elbow slightly bent','Raise out to the sides up to shoulder height','Lead with the elbow: the hand never rises above it','Lower with control'],g:'Imagine pouring a jug: the pinky tips up just a touch more.',b:'Don\'t swing your torso or raise above shoulder height.'},
+ cablelatv:{name:'Cable Lateral Raise',steps:['Low pulley, standing sideways to the tower','Raise the outside arm up to shoulder height','Constant tension: lower slowly','Switch sides when done'],g:'The cable keeps tension all the way down, a great variation.',b:'Don\'t lean your torso to help lift it.'},
+ reversefly:{name:'Reverse Fly',steps:['Chest on the pad, arms out in front','Open the arms back in an arc','Squeeze the rear delts','Return slowly with control'],g:'Light load and focus: it\'s a small muscle.',b:'Don\'t bend the elbow too much (turns into a row).'},
+ dbrevfly:{name:'Reverse Fly (dumbbells)',steps:['Torso bent forward, back flat','Open the dumbbells out to the sides','Squeeze the shoulder blades at the top','Lower without swinging'],g:'Torso stays still: only the arms move.',b:'Don\'t raise the torso on every rep.'},
+ facepullv:{name:'Face Pull',steps:['High pulley, rope with both hands','Pull toward your face','Flare the elbows out at the end','Return slowly'],g:'Excellent for posture and shoulder health.',b:'Don\'t use heavy load: it\'s a control exercise.'},
+ arnoldpress:{name:'Arnold Press',steps:['Dumbbells in front of the shoulder, palms facing you','Press up while rotating the palms forward','Extend the arm at the top','Lower reversing the rotation'],g:'The rotation recruits more of the deltoid fibers.',b:'Don\'t rush the rotation: you\'ll lose control of the load.'},
+ uprightrow:{name:'Upright Row',steps:['Bar or dumbbells in front of the body','Pull up leading with the elbows above the hands','Stop at chest height','Lower with control'],g:'Elbows lead the movement, always above the hands.',b:'Don\'t pull past chest height: it overloads the shoulder.'},
+ frontraise:{name:'Front Raise',steps:['Dumbbells in front of the thighs','Raise one or both arms to shoulder height','Brief pause at the top','Lower with control'],g:'No need to go above shoulder height.',b:'Don\'t swing the torso to build momentum.'},
+ triceps:{name:'Triceps Rope Pushdown',steps:['Elbows glued to your torso','Push the rope down, extending the elbow','At the bottom, spread the rope ends slightly','Rise with control back to start'],g:'Only the forearm moves: the elbow is the hinge.',b:'Don\'t let your elbow drift away from your body.'},
+ benchdipv:{name:'Bench Dip',steps:['Hands on the bench behind you, legs out in front','Lower by bending the elbow to ~90°','Push back up extending the arm','Back stays close to the bench'],g:'Keep the shoulders away from the ears the whole time.',b:'Don\'t go past 90° if you feel it in the shoulder.'},
+ biceps:{name:'Barbell Curl',steps:['Standing, elbows glued to your torso','Curl the bar up squeezing the biceps','Don\'t swing your body','Lower with control to full extension'],g:'The slow lowering is where the gains live.',b:'Don\'t use hip momentum to curl it up.'},
+ hammer:{name:'Hammer Curl',steps:['Dumbbells with a neutral grip (palms facing each other)','Curl up without rotating the wrist','Elbow fixed at your side','Lower with control'],g:'Also hits the brachialis: thicker-looking arm.',b:'Don\'t let the elbow drift forward.'},
+ preachercurl:{name:'Preacher Curl',steps:['Arm resting on the preacher bench','Lower the weight with control until nearly extended','Curl up squeezing the biceps','Don\'t lock the elbow at the top'],g:'The support prevents swinging, isolating the biceps well.',b:'Don\'t drop too fast: you\'ll lose tension.'},
+ concentrationcurl:{name:'Concentration Curl',steps:['Seated, elbow resting on the thigh','Curl the dumbbell up squeezing the biceps','Hold 1s at the top','Lower with control'],g:'Great for biceps detail and peak.',b:'Don\'t use the shoulder to help curl it up.'},
+ cablecurl:{name:'Cable Curl',steps:['Straight bar on the low pulley','Curl up squeezing the biceps','Elbows fixed at your sides','Lower with control keeping tension'],g:'Constant tension start to finish, unlike a dumbbell.',b:'Don\'t swing your body to finish the curl.'},
+ skullcrusher:{name:'Skull Crusher',steps:['Lying down, bar or dumbbells above the chest','Bend the elbow lowering to the forehead','Extend back without moving the shoulder','Elbows fixed, pointing at the ceiling'],g:'Only the forearm moves: the elbow is the hinge.',b:'Don\'t let the elbows flare out to the sides.'},
+ overheadtriceps:{name:'Overhead Triceps Extension',steps:['Dumbbell overhead with both hands','Lower behind the head, bending the elbow','Extend back squeezing the triceps','Elbows fixed, pointing forward'],g:'Stretches the long head of the triceps well.',b:'Don\'t let the elbows flare out on the way down.'},
+ closegrip:{name:'Close-Grip Bench Press',steps:['Grip at shoulder width or slightly narrower','Lower the bar to the chest, elbows close to the body','Press back up focusing on the triceps','Don\'t flare the elbows'],g:'A heavy compound that prioritizes the triceps.',b:'Don\'t grip too narrow: it overloads the wrist.'},
+ chinupv:{name:'Chin-Up',steps:['Supinated grip, palms facing you','Pull up until your chin clears the bar','Lower with control until the arm extends','Elbows close to the body'],g:'Recruits more biceps than the pronated grip.',b:'Don\'t swing your body to gain momentum.'},
+ dipsweightedv:{name:'Weighted Dip',steps:['Arms extended on the parallel bars, body upright','Lower until the shoulder is level with the elbow','Push back up extending the arm','Add weight at the waist once it gets easy'],g:'Lean the torso slightly forward to target the triceps.',b:'Don\'t go past what\'s comfortable for your shoulder.'},
+ latpull:{name:'Lat Pulldown',steps:['Grip a bit wider than the shoulders','Pull the bar to the upper chest','Drive the elbows down and back','Rise with control back to start'],g:'Chest up: pull with your back, not your arms.',b:'Don\'t lean your torso too far back.'},
+ neutralpull:{name:'Neutral-Grip Pulldown',steps:['Use the V-handle or neutral grip','Pull to the upper chest','Elbows close to the body','Return with control to full stretch'],g:'A neutral grip is usually more comfortable for the shoulder.',b:'Don\'t swing to finish the rep.'},
+ seatedrow:{name:'Seated Cable Row (V-handle)',steps:['Knees slightly bent, spine upright','Pull the handle toward your belly button','Squeeze the shoulder blades at the end','Return extending the arms without rounding the back'],g:'Elbows travel close to the body.',b:'Don\'t round your back on the way back.'},
+ widerow:{name:'Wide-Grip Cable Row',steps:['Straight bar, wide grip','Pull toward the base of the chest','Elbows flared at shoulder height','Return with control'],g:'A wide grip shifts the focus to the mid-back and rear delts.',b:'Don\'t shrug your shoulders as you pull.'},
+ lowrow:{name:'Low Row (Machine)',steps:['Chest supported if the machine allows','Pull wide, opening the shoulder blades','Focus on the squeeze in the mid-back','Return with control'],g:'A 1-second pause at peak contraction pays off.',b:'Don\'t use only your arms.'},
+ tbar:{name:'T-Bar Row',steps:['Torso bent ~45°, firm grip on the T-bar','Pull toward your abdomen','Squeeze the shoulder blades at the top','Lower with control without rounding the lower back'],g:'Great for back thickness with heavy loads.',b:'Don\'t use torso momentum to pull.'},
+ onearmrow:{name:'One-Arm Dumbbell Row',steps:['One knee and one hand on the bench','Pull the dumbbell toward your hip','Squeeze the shoulder blade at the top','Lower with control, stretching'],g:'Trains each side independently, correcting imbalances.',b:'Don\'t twist your torso to help pull.'},
+ shrugv:{name:'Shrug',steps:['Dumbbells at your sides, arms extended','Raise the shoulders toward the ears','Hold 1s at the top','Lower with control without rolling the shoulders'],g:'Straight up-and-down motion, no rolling.',b:'Don\'t roll the shoulders backward: injury risk.'},
+ straightarm:{name:'Straight-Arm Pulldown',steps:['High bar, arms extended','Pull down keeping the elbow nearly straight','Squeeze the lats at the bottom','Return with control'],g:'Isolates the lats without help from the biceps.',b:'Don\'t bend the elbow during the movement.'},
+ bentrow:{name:'Bent-Over Barbell Row',steps:['Torso bent ~45°, knees slightly bent','Pull the bar toward your belly button','Squeeze the shoulder blades at the top','Lower with control without rounding the lower back'],g:'Keep the spine neutral the whole time.',b:'Don\'t use torso momentum to pull.'},
+ legpress:{name:'Leg Press',steps:['Feet at hip width, middle of the platform','Lower to ~90° at the knee','Press through your heels','Don\'t lock the knee at the top'],g:'Knees track the line of your feet.',b:'Don\'t let your lower back lift off the pad.'},
+ goblet2:{name:'Goblet Squat',steps:['Dumbbell held at chest, feet at shoulder width','Squat down pushing the hips back','Lower until the thighs are parallel','Rise through your heels'],g:'Open chest, elbows between the knees at the bottom.',b:'Don\'t let your heels lift off the floor.'},
+ legext:{name:'Leg Extension',steps:['Back supported, pad above the ankle','Extend until nearly locking the knee','Squeeze the thigh 1s at the top','Lower with control'],g:'A pause at the top gives an extra stimulus.',b:'Don\'t kick the weight up with momentum.'},
+ lungev:{name:'Dumbbell Lunge',steps:['Step forward, torso upright','Lower until the back knee nearly touches','Push back up through the front heel','Alternate legs'],g:'Long step = more glute; short step = more quad.',b:'Don\'t let the front knee pass too far over the toes.'},
+ legcurl:{name:'Seated Leg Curl',steps:['Pad behind the ankle','Curl the knee, pulling the heel in','Squeeze the hamstrings at the end','Return without letting the weight drop'],g:'Hips fixed on the bench the whole time.',b:'Don\'t lift your hips to help.'},
+ rdlv:{name:'Dumbbell RDL',steps:['Dumbbells in front of the thighs','Push the hips back, lowering the torso','Lower until you feel the hamstrings stretch','Rise squeezing the glutes'],g:'Back always straight; the movement is from the hips.',b:'Don\'t round your lower back to go lower.'},
+ backsquat:{name:'Barbell Back Squat',steps:['Bar resting on the upper back','Feet at shoulder width','Squat down until the thighs are parallel','Push through your heels keeping the chest up'],g:'Knees track the line of your feet the whole time.',b:'Don\'t let the knees cave inward.'},
+ deadliftv:{name:'Deadlift',steps:['Bar close to your shins, feet at hip width','Hips down, back straight','Pull the bar up close to your body until standing','Return with control reversing the motion'],g:'Back stays straight start to finish: never round it.',b:'Don\'t pull with a rounded lower back.'},
+ rdlbarv:{name:'Barbell Stiff-Leg Deadlift',steps:['Bar in front of the thighs, pronated grip','Push the hips back, lowering the bar','Lower until you feel the hamstrings stretch','Rise squeezing the glutes'],g:'Keep the bar close to your legs at all times.',b:'Don\'t round your lower back to go lower.'},
+ goodmorningv:{name:'Barbell Good Morning',steps:['Bar on the upper back, feet at hip width','Bend the torso forward, pushing the hips back','Lower until you feel the hamstrings stretch','Rise squeezing the glutes'],g:'Knees slightly bent, back always straight.',b:'Don\'t round your lower back as you lower.'},
+ bulgarian:{name:'Bulgarian Split Squat',steps:['Rear foot resting on a bench','Lower the front knee to nearly 90°','Push through the front heel','Switch legs at the end of the set'],g:'Excellent for unilateral strength and balance.',b:'Don\'t let the front knee pass too far over the toes.'},
+ hacksquat:{name:'Hack Squat',steps:['Back and shoulders supported by the machine','Lower to 90° at the knee','Push through your heels','Don\'t lock the knee at the top'],g:'Back support isolates the quads well.',b:'Don\'t go past what\'s comfortable for your knee.'},
+ legpresssingle:{name:'Single-Leg Press',steps:['One foot centered on the platform','Lower with control to 90°','Push through your heel','Switch legs at the end'],g:'Fixes strength differences between legs.',b:'Don\'t let the knee collapse inward.'},
+ walkinglunge:{name:'Walking Lunge',steps:['Dumbbells at your sides','Step forward, lowering the back knee','Push up, advancing into the next step','Keep the torso upright'],g:'A dynamic version of the lunge, great for conditioning.',b:'Don\'t lean the torso forward.'},
+ frontsquat:{name:'Front Squat',steps:['Bar resting in front of the shoulders','Elbows high, torso upright','Squat down to parallel','Rise keeping the torso straight'],g:'More quad, less lower back than the traditional squat.',b:'Don\'t let the elbows drop.'},
+ cableadd:{name:'Cable Hip Adduction',steps:['Ankle strap on the low pulley','Pull the outside leg across the body','Constant tension: slow down','Switch legs when done'],g:'Hold on to something to steady yourself.',b:'Don\'t lean the torso to compensate.'},
+ glutekick:{name:'Glute Kickback (Machine)',steps:['Brace and stabilize your torso','Push the leg back and up','Squeeze the glute at the top','Return with control without arching the lower back'],g:'The motion comes from the glute, not the lower back.',b:'Don\'t hyperextend your spine.'},
+ bridgev:{name:'Glute Bridge',steps:['Lying down, knees bent, feet on the floor','Raise the hips squeezing the glute','Pause 1s at the top','Lower with control'],g:'Ribs down: the arch comes from the hips, not the lower back.',b:'Don\'t push through your lower back.'},
+ abductor:{name:'Hip Abduction Machine',steps:['Seated, knees against the outer pads','Push the legs open against the resistance','Squeeze 1s at full opening','Return slowly'],g:'Leaning the torso slightly forward recruits more glute.',b:'Don\'t use momentum to open.'},
+ bandabd:{name:'Band Hip Abduction',steps:['Band above the knees','Seated or lying on your side, open your knees','Hold 1s open','Return with control'],g:'A great option when the machine is busy.',b:'Don\'t let the band snap closed quickly.'},
+ adductor:{name:'Hip Adduction Machine',steps:['Seated, knees against the inner pads','Squeeze the legs together against the resistance','Hold 1s at full close','Open slowly'],g:'Pairs well as a superset with the abductor.',b:'Don\'t force a range that hurts the groin.'},
+ hipthrustv:{name:'Barbell Hip Thrust',steps:['Upper back on the bench, bar over the hips','Feet planted, knees at 90°','Drive the hips up squeezing the glutes','Lower with control without touching the floor'],g:'Squeeze hard at the top for 1s.',b:'Don\'t hyperextend your lower back at the top.'},
+ cablekickback:{name:'Cable Kickback',steps:['Ankle strap on the low pulley','Push the leg back and up','Squeeze the glute at the top','Return with control without touching the floor'],g:'Constant cable tension, different from the machine.',b:'Don\'t arch your lower back to gain range.'},
+ hipthrustmachine:{name:'Machine Hip Thrust',steps:['Upper back against the machine\'s backrest','Feet planted on the platform','Drive the hips up squeezing the glutes','Lower with control'],g:'More stable than the free-weight version.',b:'Don\'t hyperextend your lower back at the top.'},
+ stepup:{name:'Dumbbell Step-Up',steps:['Dumbbells in hand, a bench or box in front','Step up carrying your full weight on one leg','Extend the hip at the top','Lower with control and alternate'],g:'Functional and great for glutes and balance.',b:'Don\'t push off the back leg to climb up.'},
+ calf:{name:'Calf Raise (Machine)',steps:['Balls of your feet on the platform','Rise as high as you can onto your toes','Pause 1s at the top','Lower stretching the calf fully'],g:'Full range: go all the way down, all the way up.',b:'Don\'t do short, rushed reps.'},
+ dbcalf:{name:'Single-Leg Dumbbell Calf Raise',steps:['Toes on a step, dumbbell in the matching hand','Rise onto your toes as high as you can','Pause 1s at the top','Lower stretching below the step'],g:'One leg at a time boosts the intensity.',b:'Don\'t do it halfway.'},
+ seatedcalf:{name:'Seated Calf Raise',steps:['Seated, knees under the pad','Rise onto your toes','Pause 1s at the top','Lower stretching fully'],g:'With the knee bent, it targets the soleus more.',b:'Don\'t do a partial range.'},
+ legpresscalf:{name:'Calf Press on Leg Press',steps:['Feet low on the platform, legs nearly extended','Push using just the balls of your feet','Pause at the top','Lower stretching'],g:'A good alternative when the calf machine is busy.',b:'Don\'t fully extend the knee: you\'ll lose tension.'},
+ lowerback:{name:'Back Extension',steps:['Hips supported, ankles locked','Lower the torso by hinging at the hips','Rise until aligned with your legs','Don\'t hyperextend at the top'],g:'Rise to neutral, without going past it.',b:'Don\'t add weight too soon.'},
+ supermanv:{name:'Superman',steps:['Lying face down, arms in front','Raise arms and legs together','Hold 1-2s at the top','Lower with control'],g:'Look at the floor to avoid straining your neck.',b:'Don\'t rise past what\'s comfortable.'},
+ absfull:{name:'Full Crunch',steps:['Lie down, knees bent','Curl your shoulder blades off the floor, rolling the torso','Exhale as you rise, contracting the abs','Lower without fully relaxing'],g:'Chin away from your chest, look at the ceiling.',b:'Don\'t pull your neck with your hands.'},
+ plankv:{name:'Plank',steps:['Forearms on the floor, body straight','Brace your abs and glutes','Breathe normally, hold the time','Hips neither high nor sagging'],g:'Body in a straight line from head to heels.',b:'Don\'t let your lower back sag.'},
+ reversecrunch:{name:'Reverse Crunch',steps:['Lie down, knees bent to 90°','Curl your hips, bringing the knees to your chest','Lift your tailbone off the floor at the top','Lower without letting your feet touch'],g:'The movement is the hips curling, not the legs.',b:'Don\'t swing to throw the legs up.'},
+ legraisev:{name:'Leg Raise',steps:['Lying down, hands under your hips','Raise your legs almost straight to 90°','Lower slowly without touching the floor','Lower back stays glued to the floor'],g:'The slower the descent, the better.',b:'Don\'t arch your lower back as you lower.'},
+ russiantwist:{name:'Russian Twist',steps:['Seated, torso leaning slightly back','Feet on the floor or raised for more difficulty','Rotate your torso, moving your hands side to side','Keep the core braced the whole time'],g:'Controlled motion beats speed.',b:'Don\'t over-round your lower back.'},
+ abwheel:{name:'Ab Wheel Rollout',steps:['Kneeling, wheel in your hands out front','Roll forward keeping the core braced','Go as far as you can control','Pull back contracting the abs'],g:'Advanced move: start with a short range.',b:'Don\'t let your lower back arch as you extend.'},
+ sideplank:{name:'Side Plank',steps:['Propped on one forearm, body sideways','Hips raised, body in a straight line','Hold for the set time','Switch sides'],g:'Hips stay high the whole time, no sagging.',b:'Don\'t let your hips drop.'},
+ deadbug:{name:'Dead Bug',steps:['Lying down, arms and legs up at 90°','Extend one arm and the opposite leg together','Return to center without touching the floor','Alternate sides with control'],g:'Lower back always glued to the floor.',b:'Don\'t let your lower back arch as you extend.'},
+ cablewoodchop:{name:'Cable Woodchopper',steps:['High pulley, standing sideways to the tower','Pull the cable diagonally to the opposite hip height','Rotate your torso with control','Return slowly and repeat'],g:'Functional rotational movement, mimics everyday motions.',b:'Don\'t rotate with just the arm: the torso leads.'},
+ finisher:{name:'Cardio Finisher (bike)',steps:['Bike at the end of your workout','30s hard / 30s easy, alternating','Moderate-high effort on the hard intervals','Finish once you hit 5–8 min'],g:'Adds to the deficit without hurting recovery.',b:'Don\'t let it turn into long cardio that steals workout energy.'},
+ treadmillv:{name:'Incline Treadmill',steps:['8–12% incline, brisk walking pace','Don\'t hold onto the rails','Hold steady for 8–10 min','Upright posture'],g:'High burn with very low impact.',b:'Don\'t hold the handrails (cuts your effort in half).'},
+ rowerv:{name:'Rowing Machine',steps:['Movement order: legs, torso, arms','Return in reverse order','30s hard / 30s easy','Back straight throughout'],g:'Full body: very high burn in a short time.',b:'Don\'t pull with the arms before extending the legs.'},
+ ellipticalv:{name:'Elliptical',steps:['Upright posture, hands on the moving handles','Keep a steady pace on the pedals','Vary the resistance every few minutes','Arms follow the leg motion'],g:'Low impact: great if you have joint pain.',b:'Don\'t put all your weight on your arms.'},
+ stairsv:{name:'Stairs (StairMaster)',steps:['Upright posture, don\'t lean on the rail','Step with your whole foot on each stair','Keep a steady pace','Core braced to stabilize'],g:'One of the highest calorie burns per minute.',b:'Don\'t lean over the control panel.'},
+ runningv:{name:'Outdoor Running',steps:['Upright posture, eyes forward','Short stride, high cadence','Land on the midfoot','Arms relaxed at 90°'],g:'Start at a pace you could hold a conversation at (zone 2).',b:'Don\'t overstride.'},
+ swimmingv:{name:'Swimming',steps:['200m warm-up at an easy pace','Swim in your preferred stroke (freestyle, back, breast)','Track the total distance for the session','100–200m easy cooldown at the end'],g:'Bilateral breathing helps balance your stroke.',b:'Don\'t strain your neck by looking forward the whole time.'},
+ assaultbike:{name:'Assault Bike',steps:['Sit and adjust the seat to hip height','Pedal while pushing and pulling the arms together','Alternate hard intervals with an easy pace','Keep your back upright'],g:'Works arms and legs together: extremely high burn.',b:'Don\'t let your back arch backward.'},
+ kettlebellswing:{name:'Kettlebell Swing',steps:['Feet a bit wider than hip-width, kettlebell out front','Hinge at the hips to grab the weight','Drive the hips forward hard to swing it up to chest height','Let it swing back down with control and repeat'],g:'The power comes from the hips, not the arms or shoulders.',b:'Don\'t squat: it\'s a hip hinge, not a knee bend.'},
+ farmercarry:{name:'Farmer\'s Carry',steps:['Heavy dumbbells or kettlebells in each hand','Shoulders back, chest open, core braced','Walk with firm, short steps','Set down with control at the end of the distance'],g:'Stay upright the whole time: don\'t let your shoulders sag.',b:'Don\'t let the weights swing away from your body.'},
+ sledpush:{name:'Sled Push',steps:['Arms extended or elbows on the sled\'s pads','Lean the torso forward, hips low','Short, powerful steps driving through the floor','Keep a steady pace to the end'],g:'Push with your legs, torso stable.',b:'Don\'t stand too upright: you\'ll lose power.'},
+ battleropes:{name:'Battle Ropes',steps:['Feet at hip width, knees slightly bent','One rope in each hand, core braced','Whip the ropes hard, alternating arms','Keep a high pace for the set time'],g:'The motion comes from the shoulder, with the core stabilizing.',b:'Don\'t let your lower back arch.'},
+ medicineball:{name:'Medicine Ball Slam',steps:['Raise the ball overhead with arms extended','Brace your core hard','Slam the ball into the floor in front of you','Catch it on the bounce and repeat'],g:'Uses the whole body: hips, core and shoulder together.',b:'Don\'t throw it with just your arm.'},
+ boxjump:{name:'Box Jump',steps:['Face the box, feet at hip width','Bend slightly and swing your arms back','Jump explosively, landing with both feet on the box','Step down with control and repeat'],g:'Land soft, bending the knees to absorb the impact.',b:'Don\'t jump onto a box that\'s too high for your level.'},
+ trxrow:{name:'TRX Row',steps:['Grab the handles, body leaning back in a straight line','Pull your chest toward your hands','Squeeze the shoulder blades at the top','Return with control extending the arms'],g:'The more your body leans, the harder it gets.',b:'Don\'t let your hips sag during the movement.'},
+ jumpropev:{name:'Jump Rope',steps:['Elbows close to your body, turn from the wrists','Small jumps, on the balls of your feet','Keep a steady pace','Breathe in a controlled way'],g:'Small jumps save energy and protect your knees.',b:'Don\'t jump too high on every turn.'},
+ burpeev:{name:'Burpee',steps:['Standing, squat down and place your hands on the floor','Kick your feet back into a plank position','Bring your feet back near your hands','Jump up, extending your whole body'],g:'Keep the core tight during the plank phase.',b:'Don\'t let your hips sag in the plank.'},
+ mountainclimberv:{name:'Mountain Climber',steps:['Plank position, hands under the shoulders','Drive one knee toward your chest','Switch legs quickly, like running in place','Keep the hips low and stable'],g:'Stable hips: only the legs move.',b:'Don\'t let your hips rise and fall.'},
+ sledpull:{name:'Sled Pull',steps:['Rope or strap attached to the sled','Pull while walking backward with firm steps','Keep your core braced','Steady pace to the end'],g:'Works the posterior chain differently than pushing.',b:'Don\'t pull with just your arm.'},
+ barbellbench:{name:'Barbell Bench Press',steps:['Lie on the bench, feet planted on the floor','Grip a bit wider than shoulder width','Lower the bar until it touches your chest','Press back up without locking the elbow'],g:'Shoulder blades retracted and chest up the whole time.',b:'Don\'t bounce the bar off your chest.'},
+ pullupv:{name:'Pull-Up',steps:['Pronated grip, a bit wider than the shoulders','Pull your body up until your chin clears the bar','Lower with control until the arm extends','Avoid swinging'],g:'Pull with your back, elbows down and back.',b:'Don\'t use leg momentum to help you up.'},
+ ohpv:{name:'Overhead Barbell Press',steps:['Standing, bar at collarbone height','Press up until the arm extends','Head passes under the bar at the top','Lower with control back to start'],g:'Glutes and abs braced to protect your lower back.',b:'Don\'t overarch your back.'},
+ hangingraisev:{name:'Hanging Leg Raise',steps:['Hanging from the bar, arms extended','Raise your legs up to waist height','Lower with control without swinging','Avoid using body momentum'],g:'The slower, the more effective.',b:'Don\'t swing your body to gain height.'},
+};
+/* tradução do conteúdo dos exercícios (nome, passo a passo, dicas) — busca por id, funciona mesmo em programas já gerados */
+function exName(id,fallback){return (LANG==='en'&&EX_EN[id])?EX_EN[id].name:(fallback||(E[id]&&E[id].name)||id)}
+function exSteps(id,fallback){return (LANG==='en'&&EX_EN[id])?EX_EN[id].steps:(fallback||(E[id]&&E[id].steps)||[])}
+function exG(id,fallback){return (LANG==='en'&&EX_EN[id])?EX_EN[id].g:(fallback||(E[id]&&E[id].g)||'')}
+function exB(id,fallback){return (LANG==='en'&&EX_EN[id])?EX_EN[id].b:(fallback||(E[id]&&E[id].b)||'')}
+
 const MUS_EN={'Abdômen':'Abs','Abdômen inferior':'Lower abs','Adutores':'Adductors','Bíceps':'Biceps','Bíceps (pico)':'Biceps (peak)','Bíceps + braquial':'Biceps + brachialis','Bíceps + dorsal':'Biceps + lats','Condicionamento':'Conditioning','Core (estabilidade)':'Core (stability)','Core + condicionamento':'Core + conditioning','Core completo':'Full core','Corpo inteiro':'Full body','Corpo inteiro (potência)':'Full body (power)','Costas (detalhe)':'Back (detail)','Costas (espessura)':'Back (thickness)','Costas (um lado)':'Back (one side)','Costas + core':'Back + core','Deltóide anterior':'Front delt','Deltóide lateral':'Side delt','Deltóide posterior':'Rear delt','Dorsal':'Lats','Dorsal (isolado)':'Lats (isolated)','Glúteo':'Glutes','Glúteo + quadríceps':'Glutes + quads','Glúteo médio':'Glute medius','Lombar':'Lower back','Oblíquos':'Obliques','Oblíquos + rotação':'Obliques + rotation','Ombro':'Shoulder','Ombro (completo)':'Shoulder (full)','Ombro + core':'Shoulder + core','Ombro + trapézio':'Shoulder + traps','Panturrilha':'Calves','Panturrilha (sóleo)':'Calves (soleus)','Pegada + core':'Grip + core','Peito':'Chest','Peito (isolado)':'Chest (isolated)','Peito + tríceps':'Chest + triceps','Peito inferior':'Lower chest','Peito superior':'Upper chest','Posterior + core':'Hamstrings + core','Posterior + costas':'Hamstrings + back','Posterior + glúteo':'Hamstrings + glutes','Posterior + lombar':'Hamstrings + lower back','Posterior + postura':'Hamstrings + posture','Posterior de coxa':'Hamstrings','Potência de pernas':'Leg power','Quadríceps':'Quads','Quadríceps (um lado)':'Quads (one side)','Quadríceps + glúteo':'Quads + glutes','Trapézio':'Traps','Tríceps':'Triceps','Tríceps (cabeça longa)':'Triceps (long head)','Tríceps + peito':'Triceps + chest'};
 function grpLabel(g){return LANG==='en'?(GRP_LABEL_EN[g]||GRP_LABEL[g]):GRP_LABEL[g]}
 function musLabel(m){return LANG==='en'?(MUS_EN[m]||m):m}
@@ -2553,6 +2665,14 @@ const E={
 
 /* why genéricos por papel na ordem */
 function whyFor(ex,idx,dayHasComp){
+  if(LANG==='en'){
+    if(ex.cat==='cardio')return 'Closes the workout with extra burn without stealing energy from the lifting (short and deliberately last).';
+    if(ex.cat==='lomb')return "The lower back stabilizes everything. If it got tired before the heavy lifts, your form would fall apart: stabilizers always go last.";
+    if(ex.cat==='core')return "Core at the end on purpose: tiring the stabilizer before the heavy lifts would compromise your form.";
+    if(ex.cat==='calf')return "Doesn't interfere with any other exercise, so it goes last. Responds better to high reps and full range.";
+    if(ex.cat==='comp')return idx===0?"Biggest compound of the day: goes first because you're fresh, so you can move more weight with clean form, and that's where the main stimulus comes from.":'Compound: uses the strength you have left before moving to isolations.';
+    return 'Isolation for the '+musLabel(ex.mus).toLowerCase()+': rounds out the day with full focus, without needing tired supporting muscles.';
+  }
   if(ex.cat==='cardio')return 'Fecha o treino com gasto extra sem roubar energia da musculação (curto e por último de propósito).';
   if(ex.cat==='lomb')return 'A lombar estabiliza tudo. Se cansasse antes dos pesados, sua forma iria embora: estabilizador é sempre o último.';
   if(ex.cat==='core')return 'Core no fim de propósito: cansar o estabilizador antes dos exercícios pesados comprometeria sua execução.';
@@ -2800,9 +2920,9 @@ function generateProgram(setup){
       id:x.id,fig:x.fig,name:x.name,muscle:x.mus,w:x.w||0,bw:!!x.bw,unit:x.unit,
       sets:x.sets,reps:x.reps,rest:(x.ss==='A'&&x.id==='abductor')?0:x.rest,
       ss:x.ss,yt:x.yt,steps:x.steps,g:x.g,b:x.b,
-      why:d.cardio?(x.cat==='cardio'?'Base do treino de cardio: gasto calórico sustentado e condicionamento.':'Estabilidade central pra sustentar a postura durante o cardio.'):
-          d.functional?'Movimento funcional: treina o corpo como uma unidade, replicando padrões do dia a dia.':
-          (x.ss?'Estação de circuito: intercala com o próximo exercício sem descanso, mantendo a frequência cardíaca elevada pra maximizar a queima.':whyFor(x,idx,true)),
+      why:d.cardio?(x.cat==='cardio'?(LANG==='en'?'Base of the cardio workout: sustained calorie burn and conditioning.':'Base do treino de cardio: gasto calórico sustentado e condicionamento.'):(LANG==='en'?'Core stability to support your posture during the cardio.':'Estabilidade central pra sustentar a postura durante o cardio.')):
+          d.functional?(LANG==='en'?'Functional movement: trains the body as one unit, mirroring everyday patterns.':'Movimento funcional: treina o corpo como uma unidade, replicando padrões do dia a dia.'):
+          (x.ss?(LANG==='en'?'Circuit station: alternates with the next exercise with no rest, keeping your heart rate up to maximize the burn.':'Estação de circuito: intercala com o próximo exercício sem descanso, mantendo a frequência cardíaca elevada pra maximizar a queima.'):whyFor(x,idx,true)),
       alts:(x.alts||[]).map(aid=>({id:aid,fig:E[aid].fig,name:E[aid].name,w:E[aid].w,bw:!!E[aid].bw,unit:E[aid].unit,reps:E[aid].reps,yt:E[aid].yt,steps:E[aid].steps,g:E[aid].g,b:E[aid].b}))
     }));
     if(setup.finisher&&!d.cardio&&!d.functional&&(i===0||i===days.length-1)){
@@ -2853,14 +2973,23 @@ function migrateProgramUnits(){
     const day=PROGRAM[k];if(!day||!day.ex)return;
     day.ex.forEach(ex=>{
       const meta=E[ex.id];
-      if(meta&&meta.unit&&ex.unit!==meta.unit){ex.unit=meta.unit;ex.bw=!!meta.bw;changed=true}
+      if(meta&&meta.unit&&ex.unit!==meta.unit){
+        ex.unit=meta.unit;ex.bw=!!meta.bw;
+        if(!ex.w)ex.w=meta.w||0;
+        if(WEIGHTS[ex.id]==null||WEIGHTS[ex.id]===0)WEIGHTS[ex.id]=meta.w||0;
+        changed=true;
+      }
       if(ex.alts)ex.alts.forEach(alt=>{
         const am=E[alt.id];
-        if(am&&am.unit&&alt.unit!==am.unit){alt.unit=am.unit;alt.bw=!!am.bw;changed=true}
+        if(am&&am.unit&&alt.unit!==am.unit){
+          alt.unit=am.unit;alt.bw=!!am.bw;
+          if(!alt.w)alt.w=am.w||0;
+          changed=true;
+        }
       });
     });
   });
-  if(changed){save('iron_program',PROGRAM)}
+  if(changed){save('iron_program',PROGRAM);save('iron_weights',WEIGHTS)}
 }
 function ensureProgram(){
   if(!PROGRAM){PROGRAM=generateProgram(SETUP||DEFAULT_SETUP)}
@@ -2981,7 +3110,7 @@ function renderLastCard(){
     const sv=(it.sw||[]).filter(v=>v!=null);
     const u=unitOf(it.id);
     const wtx=sv.length?sv.map(fmtW).join(' · ')+' '+u:(it.w!=null?fmtW(it.w)+' '+u:'peso corporal');
-    return `<div class="lrow"><span>${it.n}</span><small>${it.s}/${it.t} séries<br>${wtx}</small></div>`;
+    return `<div class="lrow"><span>${exName(it.id,it.n)}</span><small>${it.s}/${it.t} séries<br>${wtx}</small></div>`;
   }).join(''):(h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
     `<div class="lrow"><span>${vidName(vid)}</span><small>${fmtW(w)} ${unitOf(vid)}</small></div>`).join(''):
     `<div class="lrow"><span>${t('semdetalhessessao')}</span></div>`);
@@ -3039,12 +3168,12 @@ function renderTrain(){
     const card=document.createElement('div');
     card.className='card'+(done===a.sets?' done':'');
     card.style.animationDelay=(i*40)+'ms';
-    const badges=(ex.ss?'<span class="badge ss">superset</span>':'');
+    const badges=(ex.ss?`<span class="badge ss">${t('supersettxt')}</span>`:'');
     let vhtml='';
     if(!EDITMODE&&ex.alts&&ex.alts.length){
       const opts=[{id:ex.id,name:ex.name},...ex.alts.map(x=>({id:x.id,name:x.name}))];
       vhtml=`<div class="vars"><span class="vlab">${t('opcoes')}</span>`+opts.map(o=>
-        `<button class="vchip${a.vid===o.id?' on':''}" onclick="setVar('${ex.id}','${o.id}')">${o.name}</button>`).join('')+`</div>`;
+        `<button class="vchip${a.vid===o.id?' on':''}" onclick="setVar('${ex.id}','${o.id}')">${exName(o.id,o.name)}</button>`).join('')+`</div>`;
     }
     const ebar=EDITMODE?`<div class="ebar">
         <button class="dhandle" onpointerdown="dragStart(event,${i})" title="${t('arrastarreordenar')}">≡</button>
@@ -3089,7 +3218,7 @@ function renderTrain(){
         <div class="viz">${FIG[a.fig]||''}</div>
         <div class="cinfo">
           <div class="cidx"><span class="n">${String(i+1).padStart(2,'0')}</span>${badges}</div>
-          <div class="cname">${a.name}</div>
+          <div class="cname">${exName(a.vid,a.name)}</div>
           <div class="meta">
             <span class="chip"><b>${musLabel(a.muscle||ex.muscle)}</b></span>
             <span class="chip">${a.sets}×${a.reps}</span>
@@ -3127,9 +3256,9 @@ function renderTrain(){
           <div class="frm"><div class="frz f1">${FIG[a.fig]||''}</div><span>${t('fim')}</span></div>
           <div class="frm"><div class="frz">${FIG[a.fig]||''}</div><span>${t('movimento')}</span></div>
         </div>`}
-        <ol>${a.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
-        <div class="cue g"><b>✓</b><span>${a.g}</span></div>
-        <div class="cue b"><b>✕</b><span>${a.b}</span></div>
+        <ol>${exSteps(a.vid,a.steps).map(s=>`<li>${s}</li>`).join('')}</ol>
+        <div class="cue g"><b>✓</b><span>${exG(a.vid,a.g)}</span></div>
+        <div class="cue b"><b>✕</b><span>${exB(a.vid,a.b)}</span></div>
       </div></div>`}`;
     list.appendChild(card);
   });
@@ -3647,7 +3776,7 @@ function openHistMenu(ts){
     const sv=(it.sw||[]).filter(v=>v!=null);
     const u=unitOf(it.id);
     const wtx=sv.length?sv.map(fmtW).join(' · ')+' '+u:(it.w!=null?fmtW(it.w)+' '+u:t('pesocorpcurto'));
-    return `<div class="hd-row"><span>${it.n}</span><small>${it.s}/${it.t} ${t('series')}<br>${wtx}</small></div>`}).join(''):
+    return `<div class="hd-row"><span>${exName(it.id,it.n)}</span><small>${it.s}/${it.t} ${t('series')}<br>${wtx}</small></div>`}).join(''):
     (h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
       `<div class="hd-row"><span>${vidName(vid)}</span><small>${fmtW(w)} ${unitOf(vid)}</small></div>`).join(''):
       `<div class="empty">${t('semdetalhes2')}</div>`);
@@ -3690,7 +3819,7 @@ function statLast(){
     <div class="mrow"><button class="mbtn pri" onclick="boxClose()">${t('fechar')}</button></div>`);return}
   const det=(h.items||[]).map(it=>{
     const u=unitOf(it.id);const sv=(it.sw||[]).filter(v=>v!=null);const wtx=sv.length?sv.map(fmtW).join(' · ')+' '+u:(it.w!=null?fmtW(it.w)+' '+u:t('pesocorpcurto'));
-    return `<div class="hd-row"><span>${it.n}</span><small>${it.s}/${it.t} ${t('series')}<br>${wtx}</small></div>`}).join('');
+    return `<div class="hd-row"><span>${exName(it.id,it.n)}</span><small>${it.s}/${it.t} ${t('series')}<br>${wtx}</small></div>`}).join('');
   boxOpen(`<button class="mback" onclick="boxClose()">← ${t('voltar')}</button>
     <h3>${h.label} · ${t('trein')} ${h.workout}</h3>
     <div class="sub">${dtBR(h.date)} · ${h.done}/${h.tot} ${t('series')} (${Math.round(h.done/h.tot*100)}%)</div>
@@ -3774,7 +3903,7 @@ function renderProgress(){
     lastWk=wk;
     const det=h.items?h.items.map(it=>{
       const u=unitOf(it.id);const sv=(it.sw||[]).filter(v=>v!=null);const wtx=sv.length?sv.map(fmtW).join(' · ')+' '+u:(it.w!=null?fmtW(it.w)+' '+u:'');
-      return `<div class="hd-row"><span>${it.n}</span><small>${it.s}/${it.t} séries${wtx?' · '+wtx:''}</small></div>`}).join(''):
+      return `<div class="hd-row"><span>${exName(it.id,it.n)}</span><small>${it.s}/${it.t} séries${wtx?' · '+wtx:''}</small></div>`}).join(''):
       (h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
       `<div class="hd-row"><span>${vidName(vid)}</span><small>${fmtW(w)} ${unitOf(vid)}</small></div>`).join(''):
       `<div class="hd-row"><span>${t('semdetalhessessao')}</span></div>`);
@@ -3904,7 +4033,7 @@ function renderOB(){
       <div class="qb"><h4>${t('qualcardio')}</h4>
         <div class="hint">${t('ordemrotacao')}</div>
         <div class="qchips">${CARDIO_IDS.filter(id=>id!=='finisher').map(id=>
-          `<button class="qchip${(OBDATA.cardioPrefs||[]).includes(id)?' on':''}" onclick="obTglCardio('${id}')">${E[id].name}</button>`).join('')}</div>
+          `<button class="qchip${(OBDATA.cardioPrefs||[]).includes(id)?' on':''}" onclick="obTglCardio('${id}')">${exName(id)}</button>`).join('')}</div>
       </div>`:isFunctional?`
       <div class="qb"><h4>${t('funcionalcircuito')}</h4>
         <div class="hint">${t('funcionalhint')}</div>
@@ -3977,7 +4106,7 @@ function renderOB(){
         <div class="rhead"><div class="lt" style="background:${accentFor(k).a};color:${accentFor(k).ink}">${k}</div>
           <div class="tx"><b>${d.label}</b><small>${d.ex.length} ${t('exercicios')} · ${d.ex.reduce((s,e)=>s+e.sets,0)} ${t('series')}</small></div></div>
         ${d.ex.map((e,i)=>`<div class="rex"><div class="rn">${i+1}</div>
-          <div class="rtx"><b>${e.name}</b><small>${e.muscle} · ${e.sets}×${e.reps}${e.rest?` · ${e.rest}s`:''}</small></div>
+          <div class="rtx"><b>${exName(e.id,e.name)}</b><small>${musLabel(e.muscle)} · ${e.sets}×${e.reps}${e.rest?` · ${e.rest}s`:''}</small></div>
           <button class="rx" onclick="obRm('${k}',${i})">✕</button></div>`).join('')}
         <button class="radd" onclick="openPicker('${k}')">${t('addexextra')}</button>
       </div>`}).join('')}
@@ -4031,9 +4160,9 @@ function openLibPicker(ctx){
   const norm=s=>(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
   const rows=(g,q)=>{
     const qn=norm(q);
-    const ids=Object.keys(E).filter(id=>!used.has(id)&&(g==='all'||E[id].grp===g)&&(!qn||norm(E[id].name).indexOf(qn)>=0));
-    ids.sort((a,b)=>E[a].name.localeCompare(E[b].name,LANG==='en'?'en':'pt'));
-    return ids.map(id=>`<div class="prow"><div class="rtx"><b>${E[id].name}</b><small>${grpLabel(E[id].grp)} · ${E[id].sets}×${E[id].reps}</small></div>
+    const ids=Object.keys(E).filter(id=>!used.has(id)&&(g==='all'||E[id].grp===g)&&(!qn||norm(exName(id)).indexOf(qn)>=0));
+    ids.sort((a,b)=>exName(a).localeCompare(exName(b),LANG==='en'?'en':'pt'));
+    return ids.map(id=>`<div class="prow"><div class="rtx"><b>${exName(id)}</b><small>${grpLabel(E[id].grp)} · ${E[id].sets}×${E[id].reps}</small></div>
       <button class="padd" onclick="pickChoose('${id}')">＋</button></div>`).join('')||`<div class="empty">${t('nadaaqui')}</div>`;
   };
   let curG='all',curQ='';
@@ -4057,7 +4186,7 @@ function openLibPicker(ctx){
 $('pickOv').onclick=e=>{if(e.target.id==='pickOv')$('pickOv').classList.add('hidden')};
 function pickChoose(id){
   const ctx=PICKCTX;if(!ctx)return;
-  const item=buildItem(id, ctx.replaceIdx!=null?whyFor(E[id],ctx.replaceIdx):'Extra que você escolheu: '+whyFor(E[id],5));
+  const item=buildItem(id, ctx.replaceIdx!=null?whyFor(E[id],ctx.replaceIdx):(LANG==='en'?'Extra pick you made: ':'Extra que você escolheu: ')+whyFor(E[id],5));
   if(ctx.replaceIdx!=null){
     const old=ctx.list[ctx.replaceIdx];
     // aparece em outros treinos? oferece substituir lá também
@@ -4081,7 +4210,7 @@ function pickChoose(id){
 }
 function askScope(old,item,dayKey,idx,outros){
   boxOpen(`<h3>${t('trocarem')}</h3>
-    <div class="sub"><b>${old.name}</b> ${t('tambemaparece')} ${outros.length===1?t('notreino'):t('nostreinos')} <b>${outros.join(', ')}</b>. ${t('querttrocar')} <b>${item.name}</b> ${t('sopara')}</div>
+    <div class="sub"><b>${exName(old.id,old.name)}</b> ${t('tambemaparece')} ${outros.length===1?t('notreino'):t('nostreinos')} <b>${outros.join(', ')}</b>. ${t('querttrocar')} <b>${exName(item.id,item.name)}</b> ${t('sopara')}</div>
     <div class="mrow"><button class="mbtn" onclick="doScope(false)">${t('sonotreino')} ${dayKey}</button></div>
     <div class="mrow"><button class="mbtn pri" onclick="doScope(true)">${t('trocaremtodos')} (${outros.length+1})</button></div>
     <div class="mfoot"><button onclick="boxClose()">${t('cancelar')}</button></div>`);
@@ -4132,7 +4261,7 @@ function progCombo(i){
   boxOpen(`<button class="mback" onclick="boxClose()">← ${t('voltar')}</button>
     <h3>🔗 ${t('criarcombo')}</h3>
     <div class="sub">${t('combosub')}</div>
-    <div class="mlist">${others.map(o=>`<div class="prow"><div class="rtx"><b>${o.e.name}</b>${o.e.ss?`<small>${t('jaemcombo')}</small>`:''}</div>
+    <div class="mlist">${others.map(o=>`<div class="prow"><div class="rtx"><b>${exName(o.e.id,o.e.name)}</b>${o.e.ss?`<small>${t('jaemcombo')}</small>`:''}</div>
       <button class="padd" onclick="doCombo(${i},${o.idx})">🔗</button></div>`).join('')}</div>`);
 }
 function doCombo(i,j){
@@ -4473,7 +4602,7 @@ function askEvolve(){
   const uniq=[...new Set(preview)];
   boxOpen(`<h3>${t('evoluirtit')}</h3>
     <div class="sub">${t('evoluirsub1')}</div>
-    <div class="sub">${uniq.length?`${t('evoluirsub2a')} <b>${uniq.length} ${uniq.length===1?t('evoluirsub2b'):t('evoluirsub2c')}</b>, ${t('evoluirsub2d')} ${uniq.slice(0,3).map(id=>E[id].name).join(', ')}${uniq.length>3?'...':''}.`:t('evoluirsub2e')}</div>
+    <div class="sub">${uniq.length?`${t('evoluirsub2a')} <b>${uniq.length} ${uniq.length===1?t('evoluirsub2b'):t('evoluirsub2c')}</b>, ${t('evoluirsub2d')} ${uniq.slice(0,3).map(id=>exName(id)).join(', ')}${uniq.length>3?'...':''}.`:t('evoluirsub2e')}</div>
     <div class="sub"><b>${t('evoluirsub3')}</b></div>
     <div class="mrow">
       <button class="mbtn" onclick="boxClose()">${t('cancelar')}</button>
@@ -4497,8 +4626,10 @@ function doEvolve(){
       const targetId=base&&base.evolve;
       if(targetId&&E[targetId]&&!used.has(targetId)){
         used.delete(ex.id);used.add(targetId);
-        changes.push({from:ex.name,to:E[targetId].name,day:k});
-        const item=buildItem(targetId,'Evolução: versão mais completa e avançada de '+ex.name+', pra continuar progredindo com o mesmo padrão de ordem.');
+        changes.push({from:exName(ex.id,ex.name),to:exName(targetId,E[targetId].name),day:k});
+        const item=buildItem(targetId,LANG==='en'?
+          'Evolution: a more complete, advanced version of '+exName(ex.id,ex.name)+', to keep progressing with the same ordering pattern.':
+          'Evolução: versão mais completa e avançada de '+exName(ex.id,ex.name)+', pra continuar progredindo com o mesmo padrão de ordem.');
         return {...item,sets:ex.sets,ss:ex.ss};
       }
       return ex;
@@ -4586,10 +4717,10 @@ async function ensurePDF(){
   if(!(window.jspdf&&window.jspdf.jsPDF&&window.jspdf.jsPDF.API.autoTable))await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js');
 }
 function vidName(vid){
-  if(E[vid])return E[vid].name;
+  if(E[vid])return exName(vid);
   for(const k in PROGRAM){for(const ex of PROGRAM[k].ex){
-    if(ex.id===vid)return ex.name;
-    if(ex.alts){const a=ex.alts.find(x=>x.id===vid);if(a)return a.name}
+    if(ex.id===vid)return exName(vid,ex.name);
+    if(ex.alts){const a=ex.alts.find(x=>x.id===vid);if(a)return exName(vid,a.name)}
   }}
   return vid;
 }
@@ -4652,7 +4783,7 @@ async function exportPDF(){
 }
 
 /* =================== INIT =================== */
-const APP_VERSION='iron-v13';
+const APP_VERSION='iron-v14';
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){
   navigator.serviceWorker.register('./sw.js').then(reg=>{
     reg.update(); // força checar por versão nova agora, sem esperar o intervalo padrão do navegador
