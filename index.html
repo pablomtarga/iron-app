@@ -312,6 +312,16 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .day .ball.today{box-shadow:inset 0 0 0 2px var(--accent)}
 .day small{display:block;font-size:11px;color:var(--label3);margin-top:4px}
 .wkfoot{margin:10px 14px 0;font-size:12px;color:var(--label3);text-align:center}
+.heatgrid{display:grid;grid-template-rows:repeat(7,1fr);grid-auto-flow:column;grid-auto-columns:11px;gap:3px;overflow-x:auto;padding:2px 14px;scrollbar-width:none}
+.heatgrid::-webkit-scrollbar{display:none}
+.hcell{width:11px;height:11px;border-radius:3px;background:var(--sep)}
+.hcell.empty{background:transparent}
+.hcell.l1{background:var(--accent);opacity:.35}
+.hcell.l2{background:var(--accent);opacity:.55}
+.hcell.l3{background:var(--accent);opacity:.78}
+.hcell.l4{background:var(--accent);opacity:1}
+.hleg{display:inline-flex;align-items:center;gap:2px;vertical-align:middle}
+.hleg .hcell{display:inline-block;width:9px;height:9px}
 .sectit{font-size:20px;font-weight:700;letter-spacing:-.02em;margin:6px 2px 10px;
   display:flex;justify-content:space-between;align-items:center}
 .sectit button{background:var(--fill);border:none;color:var(--label2);border-radius:999px;
@@ -1974,6 +1984,63 @@ FIG.swimmingv=`<svg viewBox="0 0 120 100"><style>
  <circle cx="24" cy="54" r="8" fill="${COL.body}"/>
 </g>
 </svg>`;
+
+// Genérico (exercício próprio, sem figura específica)
+FIG.custom=`<svg viewBox="0 0 120 100"><style>
+ .cst-b{transform-origin:60px 50px;animation:cstb 1.8s infinite ease-in-out}
+ @keyframes cstb{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+</style>
+<g class="cst-b">
+ <rect x="18" y="44" width="14" height="14" rx="3" fill="${COL.frame}"/>
+ <rect x="88" y="44" width="14" height="14" rx="3" fill="${COL.frame}"/>
+ <line x1="32" y1="51" x2="88" y2="51" stroke="${COL.body}" stroke-width="8" stroke-linecap="round"/>
+ <rect x="10" y="40" width="10" height="22" rx="3" fill="${COL.bodyDark}"/>
+ <rect x="100" y="40" width="10" height="22" rx="3" fill="${COL.bodyDark}"/>
+</g>
+</svg>`;
+
+// Pescoço (resistência manual: flexão/extensão/lateral/isometria)
+FIG.neck=`<svg viewBox="0 0 120 100"><style>
+ .nck-h{transform-origin:60px 46px;animation:nckh 2s infinite ease-in-out}
+ @keyframes nckh{0%,100%{transform:rotate(-13deg)}50%{transform:rotate(13deg)}}
+</style>
+<line x1="10" y1="92" x2="110" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<line x1="60" y1="60" x2="60" y2="88" stroke="${COL.body}" stroke-width="11" stroke-linecap="round"/>
+<line x1="60" y1="68" x2="38" y2="78" stroke="${COL.body}" stroke-width="7" stroke-linecap="round"/>
+<line x1="60" y1="68" x2="82" y2="78" stroke="${COL.body}" stroke-width="7" stroke-linecap="round"/>
+<g class="nck-h">
+ <line x1="60" y1="46" x2="60" y2="60" stroke="${COL.body}" stroke-width="9" stroke-linecap="round"/>
+ <circle cx="60" cy="36" r="11" fill="${COL.body}"/>
+ <line x1="60" y1="40" x2="44" y2="30" stroke="${COL.bodyDark}" stroke-width="5" stroke-linecap="round"/>
+</g>
+</svg>`;
+
+// Ponte de pescoço (wrestler's bridge)
+FIG.neckbridge=`<svg viewBox="0 0 120 100"><style>
+ .nbr-b{transform-origin:60px 70px;animation:nbrb 2.4s infinite ease-in-out}
+ @keyframes nbrb{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+</style>
+<line x1="8" y1="92" x2="112" y2="92" stroke="${COL.floor}" stroke-width="3"/>
+<g class="nbr-b">
+ <path d="M30,90 Q60,38 90,90" fill="none" stroke="${COL.body}" stroke-width="10" stroke-linecap="round"/>
+ <circle cx="30" cy="90" r="9" fill="${COL.bodyDark}"/>
+</g>
+<line x1="90" y1="90" x2="98" y2="70" stroke="${COL.body}" stroke-width="8" stroke-linecap="round"/>
+</svg>`;
+
+// Extensão de pescoço na máquina
+FIG.neckmachine=`<svg viewBox="0 0 120 100"><style>
+ .nmc-h{transform-origin:64px 42px;animation:nmch 1.8s infinite ease-in-out}
+ @keyframes nmch{0%,100%{transform:translateX(0)}50%{transform:translateX(10px)}}
+</style>
+<rect x="18" y="30" width="10" height="60" rx="3" fill="${COL.frame}"/>
+<rect x="86" y="54" width="18" height="10" rx="2" fill="${COL.pad}"/>
+<line x1="46" y1="90" x2="46" y2="60" stroke="${COL.body}" stroke-width="11" stroke-linecap="round"/>
+<g class="nmc-h">
+ <circle cx="64" cy="42" r="11" fill="${COL.body}"/>
+ <line x1="64" y1="53" x2="64" y2="68" stroke="${COL.body}" stroke-width="9" stroke-linecap="round"/>
+</g>
+</svg>`;
 </script>
 <script>
 /* =================== ACENTOS =================== */
@@ -2096,7 +2163,15 @@ const I18N={
    gerarmeutreino:'Gerar meu treino →',programapronto:'Seu programa está pronto',
    progpronto_lead:'Séries, repetições e descansos calibrados: compostos com 8–12 reps e 90–120s de pausa, isolados com 12–15 e 45–60s (faixas com melhor evidência pra hipertrofia). Ajuste como quiser: remova (✕) ou adicione exercícios extras.',
    rotacaosugerida:'📅 Rotação sugerida:',porsemana:'x/semana',addexextra:'＋ Adicionar exercício extra',
-   concluirtreinar:'Concluir e treinar 🚀',exercicios:'exercícios',},
+   concluirtreinar:'Concluir e treinar 🚀',exercicios:'exercícios',
+   criarexercicio:'＋ Criar exercício próprio',novoexnome:'Nome do exercício',novoexgrupo:'Grupo muscular',
+   novoexpesocorp:'Sem peso externo (peso corporal)',novoexsets:'Séries',novoexreps:'Repetições (ex: 8–12)',
+   novoexcriar:'Criar exercício',novoexnomeobrig:'Digite um nome pro exercício',exerciciocriado:'Exercício criado ✔',
+   meusexercicios:'Meus exercícios',excluirexcustom:'Excluir exercício',exercicioexcluido:'Exercício excluído',personalizado:'Personalizado',
+   recordepessoal:'Recorde pessoal',novopr:'🏆 Novo recorde',forcaerecordes:'Força & Recordes',rm1est:'1RM estimado',
+   semrecordes:'Complete treinos pra ver seus recordes de carga aqui.',melhorcarga:'Melhor carga',
+   atividadeanual:'Atividade no ano',menosatividade:'menos',maisatividade:'mais',diastreinados:'dias treinados nos últimos 12 meses',
+   },
  en:{bora:"Let's go",trein:'Workout',prog:'Progress',diadotreino:'Workout day',ultimotreino:'Last workout',
    completo:'✓ Complete',parcial:'Partial',series:'sets',progressodotreino:'Workout progress',
    porqueessaordem:'🧠 Why this order?',editarex:'✎ Edit exercises',concluirtreino:'Finish workout',
@@ -2198,7 +2273,15 @@ const I18N={
    gerarmeutreino:'Generate my workout →',programapronto:'Your program is ready',
    progpronto_lead:'Sets, reps and rest times calibrated: compounds with 8–12 reps and 90–120s rest, isolations with 12–15 and 45–60s (ranges with the best evidence for hypertrophy). Adjust as you like: remove (✕) or add extra exercises.',
    rotacaosugerida:'📅 Suggested rotation:',porsemana:'x/week',addexextra:'＋ Add extra exercise',
-   concluirtreinar:'Finish and train 🚀',exercicios:'exercises',}
+   concluirtreinar:'Finish and train 🚀',exercicios:'exercises',
+   criarexercicio:'＋ Create your own exercise',novoexnome:'Exercise name',novoexgrupo:'Muscle group',
+   novoexpesocorp:'No external weight (bodyweight)',novoexsets:'Sets',novoexreps:'Reps (e.g. 8–12)',
+   novoexcriar:'Create exercise',novoexnomeobrig:'Enter a name for the exercise',exerciciocriado:'Exercise created ✔',
+   meusexercicios:'My exercises',excluirexcustom:'Delete exercise',exercicioexcluido:'Exercise deleted',personalizado:'Custom',
+   recordepessoal:'Personal record',novopr:'🏆 New record',forcaerecordes:'Strength & Records',rm1est:'Estimated 1RM',
+   semrecordes:'Complete workouts to see your lift records here.',melhorcarga:'Best lift',
+   atividadeanual:'Activity this year',menosatividade:'less',maisatividade:'more',diastreinados:'days trained in the last 12 months',
+   }
 };
 
 let LANG='pt-BR';
@@ -2231,9 +2314,22 @@ const YT=q=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q
 
 /* =================== BIBLIOTECA DE EXERCÍCIOS =================== */
 /* grp: chest back shoulders arms legs glutes core calf | cat: comp iso core calf lomb cardio */
-const GRP_LABEL={chest:'Peito',back:'Costas',shoulders:'Ombros',arms:'Braços',legs:'Pernas',glutes:'Glúteos',core:'Abdômen',calf:'Panturrilha',functional:'Funcional',cardio:'Cardio'};
-const GRP_LABEL_EN={chest:'Chest',back:'Back',shoulders:'Shoulders',arms:'Arms',legs:'Legs',glutes:'Glutes',core:'Abs',calf:'Calves',functional:'Functional',cardio:'Cardio'};
+const GRP_LABEL={chest:'Peito',back:'Costas',shoulders:'Ombros',arms:'Braços',legs:'Pernas',glutes:'Glúteos',core:'Abdômen',calf:'Panturrilha',neck:'Pescoço',functional:'Funcional',cardio:'Cardio'};
+const GRP_LABEL_EN={chest:'Chest',back:'Back',shoulders:'Shoulders',arms:'Arms',legs:'Legs',glutes:'Glutes',core:'Abs',calf:'Calves',neck:'Neck',functional:'Functional',cardio:'Cardio'};
 const EX_EN={
+ neckflexv:{name:'Neck Flexion (manual resistance)',steps:['Seated, hands on forehead','Push your head forward against your hands\' resistance','Hold firm without letting the head advance','Return under control to center'],g:'Only engage the neck, keep the torso still.',b:'Don\'t push through pain or dizziness.'},
+ neckextv:{name:'Neck Extension (manual resistance)',steps:['Seated, hands clasped behind the head','Push your head back against your hands\' resistance','Hold firm without letting the head move back','Return under control to center'],g:'Small, controlled motion, no jerking.',b:'Don\'t snap your head back forcefully.'},
+ necklatv:{name:'Lateral Neck Flexion',steps:['Seated, one hand on the side of the head','Push your head sideways against your hand\'s resistance','Hold firm without letting the head tilt','Switch sides when the set ends'],g:'Keep shoulders relaxed and level.',b:'Don\'t force the range past what\'s comfortable.'},
+ neckisov:{name:'Neck Isometric Hold (4 directions)',steps:['Seated or standing, upright posture','Press your head against your hand in each direction (front, back, both sides)','Keep firm pressure without moving the head','Breathe normally during the contraction'],g:'Align neck and spine before starting.',b:'Don\'t hold your breath.'},
+ neckbridgev:{name:'Neck Bridge (wrestler\'s bridge)',steps:['Lying down, rest the top of your forehead/head on the floor','Lift your hips into a bridge, weight shared between head and feet','Keep the neck neutral, don\'t turn the head','Lower with control at the end of the hold'],g:'Start with no added weight and a small range until you build control.',b:'Never turn your head during the movement; stop if you feel pain.'},
+ neckmachinev:{name:'Machine Neck Extension',steps:['Adjust the pad to rest on the back of your neck','Push your head back against the resistance','Hold 1s at peak contraction','Return with control without letting the weight slam'],g:'Start very light: the neck responds fast to excess load.',b:'Don\'t use full range in your first few sessions.'},
+ wristcurlv:{name:'Wrist Curl',steps:['Seated, forearm resting on your thigh or a bench, palm up','Hold the bar or dumbbell with just your fingertips','Close your hand and curl the wrist upward','Lower with control until the forearm stretches well'],g:'Movement stays in the wrist only, forearm stays still.',b:'Don\'t use heavy load: the forearm tires fast and cramps.'},
+ revwristcurlv:{name:'Reverse Wrist Curl',steps:['Seated, forearm resting, palm down','Hold the bar or dumbbell overhand','Extend the wrist lifting the bar','Lower with control feeling the stretch'],g:'Very light load: extensors are much weaker than flexors.',b:'Don\'t let the forearm rise along with the wrist.'},
+ rotatorcuffext:{name:'Rotator Cuff External Rotation',steps:['Elbow tucked to your side, bent at 90°','Hold the cable or band in front of your abdomen','Rotate the forearm outward, elbow fixed','Return with control without letting the cable yank'],g:'Elbow always locked against your side.',b:'Don\'t use heavy load: the rotator cuff is small, delicate muscle.'},
+ rotatorcuffint:{name:'Rotator Cuff Internal Rotation',steps:['Elbow tucked to your side, bent at 90°','Hold the cable on the outside of your body','Rotate the forearm inward, toward your abdomen','Return with control to the starting position'],g:'Small, slow movement, no rushing.',b:'Don\'t force range beyond what\'s comfortable in the shoulder.'},
+ renegaderowv:{name:'Renegade Row',steps:['High plank resting on two dumbbells','Hips locked, no twisting the torso','Row one dumbbell up to your ribcage','Lower with control and repeat on the other side'],g:'A wide foot stance helps lock the hips.',b:'Don\'t let the hips rotate or drop with each row.'},
+ nordiccurlv:{name:'Nordic Curl',steps:['Kneeling, ankles anchored or held by a partner','Torso straight, lean forward very slowly','Resist as long as possible with the hamstrings','Use your hands to cushion the floor if needed'],g:'Start with a small range: this is an advanced exercise.',b:'Don\'t let the hips flex during the descent.'},
+ pallofpressv:{name:'Pallof Press',steps:['Side-on to the cable or band, feet hip-width apart','Hold the cable at chest height','Press forward without letting the torso rotate','Return with control and repeat, then switch sides'],g:'Hips and shoulders stay facing forward the whole time.',b:'Don\'t let the torso rotate toward the cable.'},
  chestpress:{name:'Chest Press',steps:['Adjust the bench: handles at mid-chest height','Back supported, feet flat on the floor','Press forward without locking the elbow','Return with control feeling the chest stretch'],g:'Shoulder blades slightly retracted: protects the shoulder.',b:'Don\'t shrug your shoulders toward your ears.'},
  dbbench:{name:'Dumbbell Bench Press',steps:['Lying on the bench, dumbbells at chest height','Press up until almost extended','Lower with control to chest height','Elbows at ~45° from the torso'],g:'Feet flat on the floor give you stability.',b:'Don\'t bang the dumbbells together at the top.'},
  pecdeck:{name:'Pec Deck',steps:['Forearms on the pads, elbow at shoulder height','Close your arms together at the center','Hold 1s squeezing the chest','Open slowly until you feel the stretch'],g:'The movement comes from the chest, not the arms.',b:'Don\'t let the weight yank your shoulder back abruptly.'},
@@ -2345,10 +2441,52 @@ function exSteps(id,fallback){return (LANG==='en'&&EX_EN[id])?EX_EN[id].steps:(f
 function exG(id,fallback){return (LANG==='en'&&EX_EN[id])?EX_EN[id].g:(fallback||(E[id]&&E[id].g)||'')}
 function exB(id,fallback){return (LANG==='en'&&EX_EN[id])?EX_EN[id].b:(fallback||(E[id]&&E[id].b)||'')}
 
-const MUS_EN={'Abdômen':'Abs','Abdômen inferior':'Lower abs','Adutores':'Adductors','Bíceps':'Biceps','Bíceps (pico)':'Biceps (peak)','Bíceps + braquial':'Biceps + brachialis','Bíceps + dorsal':'Biceps + lats','Condicionamento':'Conditioning','Core (estabilidade)':'Core (stability)','Core + condicionamento':'Core + conditioning','Core completo':'Full core','Corpo inteiro':'Full body','Corpo inteiro (potência)':'Full body (power)','Costas (detalhe)':'Back (detail)','Costas (espessura)':'Back (thickness)','Costas (um lado)':'Back (one side)','Costas + core':'Back + core','Deltóide anterior':'Front delt','Deltóide lateral':'Side delt','Deltóide posterior':'Rear delt','Dorsal':'Lats','Dorsal (isolado)':'Lats (isolated)','Glúteo':'Glutes','Glúteo + quadríceps':'Glutes + quads','Glúteo médio':'Glute medius','Lombar':'Lower back','Oblíquos':'Obliques','Oblíquos + rotação':'Obliques + rotation','Ombro':'Shoulder','Ombro (completo)':'Shoulder (full)','Ombro + core':'Shoulder + core','Ombro + trapézio':'Shoulder + traps','Panturrilha':'Calves','Panturrilha (sóleo)':'Calves (soleus)','Pegada + core':'Grip + core','Peito':'Chest','Peito (isolado)':'Chest (isolated)','Peito + tríceps':'Chest + triceps','Peito inferior':'Lower chest','Peito superior':'Upper chest','Posterior + core':'Hamstrings + core','Posterior + costas':'Hamstrings + back','Posterior + glúteo':'Hamstrings + glutes','Posterior + lombar':'Hamstrings + lower back','Posterior + postura':'Hamstrings + posture','Posterior de coxa':'Hamstrings','Potência de pernas':'Leg power','Quadríceps':'Quads','Quadríceps (um lado)':'Quads (one side)','Quadríceps + glúteo':'Quads + glutes','Trapézio':'Traps','Tríceps':'Triceps','Tríceps (cabeça longa)':'Triceps (long head)','Tríceps + peito':'Triceps + chest'};
+const MUS_EN={'Abdômen':'Abs','Abdômen inferior':'Lower abs','Adutores':'Adductors','Bíceps':'Biceps','Bíceps (pico)':'Biceps (peak)','Bíceps + braquial':'Biceps + brachialis','Bíceps + dorsal':'Biceps + lats','Condicionamento':'Conditioning','Core (estabilidade)':'Core (stability)','Core + condicionamento':'Core + conditioning','Core completo':'Full core','Corpo inteiro':'Full body','Corpo inteiro (potência)':'Full body (power)','Costas (detalhe)':'Back (detail)','Costas (espessura)':'Back (thickness)','Costas (um lado)':'Back (one side)','Costas + core':'Back + core','Deltóide anterior':'Front delt','Deltóide lateral':'Side delt','Deltóide posterior':'Rear delt','Dorsal':'Lats','Dorsal (isolado)':'Lats (isolated)','Glúteo':'Glutes','Glúteo + quadríceps':'Glutes + quads','Glúteo médio':'Glute medius','Lombar':'Lower back','Oblíquos':'Obliques','Oblíquos + rotação':'Obliques + rotation','Ombro':'Shoulder','Ombro (completo)':'Shoulder (full)','Ombro + core':'Shoulder + core','Ombro + trapézio':'Shoulder + traps','Panturrilha':'Calves','Panturrilha (sóleo)':'Calves (soleus)','Pegada + core':'Grip + core','Peito':'Chest','Peito (isolado)':'Chest (isolated)','Peito + tríceps':'Chest + triceps','Peito inferior':'Lower chest','Peito superior':'Upper chest','Posterior + core':'Hamstrings + core','Posterior + costas':'Hamstrings + back','Posterior + glúteo':'Hamstrings + glutes','Posterior + lombar':'Hamstrings + lower back','Posterior + postura':'Hamstrings + posture','Posterior de coxa':'Hamstrings','Potência de pernas':'Leg power','Quadríceps':'Quads','Quadríceps (um lado)':'Quads (one side)','Quadríceps + glúteo':'Quads + glutes','Trapézio':'Traps','Tríceps':'Triceps','Tríceps (cabeça longa)':'Triceps (long head)','Tríceps + peito':'Triceps + chest',
+'Pescoço (flexores)':'Neck (flexors)','Pescoço (extensores)':'Neck (extensors)','Pescoço (lateral)':'Neck (lateral)','Pescoço (estabilização)':'Neck (stabilization)','Pescoço + trapézio':'Neck + traps',
+'Antebraço (flexores)':'Forearm (flexors)','Antebraço (extensores)':'Forearm (extensors)','Manguito rotador':'Rotator cuff','Posterior de coxa (excêntrico)':'Hamstrings (eccentric)','Core (anti-rotação)':'Core (anti-rotation)'};
+Object.keys(GRP_LABEL).forEach(g=>{if(!MUS_EN[GRP_LABEL[g]])MUS_EN[GRP_LABEL[g]]=GRP_LABEL_EN[g]});
 function grpLabel(g){return LANG==='en'?(GRP_LABEL_EN[g]||GRP_LABEL[g]):GRP_LABEL[g]}
 function musLabel(m){return LANG==='en'?(MUS_EN[m]||m):m}
 const E={
+ neckflexv:{name:'Flexão de Pescoço (resistência manual)',fig:'neck',grp:'neck',mus:'Pescoço (flexores)',cat:'iso',bw:true,sets:3,reps:'12–15',rest:45,yt:'manual resistance neck flexion exercise',
+  steps:['Sentado, mãos na testa','Empurre a cabeça pra frente contra a resistência das mãos','Segure a firmeza sem deixar a cabeça avançar','Volte controlado ao centro'],
+  g:'Force apenas o pescoço, mantenha o tronco parado.',b:'Não force até sentir dor ou tontura.',alts:['neckmachinev']},
+ neckextv:{name:'Extensão de Pescoço (resistência manual)',fig:'neck',grp:'neck',mus:'Pescoço (extensores)',cat:'iso',bw:true,sets:3,reps:'12–15',rest:45,yt:'manual resistance neck extension exercise',
+  steps:['Sentado, mãos entrelaçadas atrás da cabeça','Empurre a cabeça pra trás contra a resistência das mãos','Segure a firmeza sem deixar a cabeça recuar','Volte controlado ao centro'],
+  g:'Movimento pequeno e controlado, sem solavancos.',b:'Não jogue a cabeça pra trás com força.',alts:['neckmachinev']},
+ necklatv:{name:'Flexão Lateral de Pescoço',fig:'neck',grp:'neck',mus:'Pescoço (lateral)',cat:'iso',bw:true,sets:3,reps:'10–12 cada lado',rest:45,yt:'lateral neck flexion exercise',
+  steps:['Sentado, uma mão na lateral da cabeça','Empurre a cabeça pro lado contra a resistência da mão','Segure firme sem deixar a cabeça inclinar','Troque de lado ao terminar a série'],
+  g:'Mantenha os ombros relaxados e nivelados.',b:'Não force a amplitude além do confortável.',alts:[]},
+ neckisov:{name:'Isometria de Pescoço (4 direções)',fig:'neck',grp:'neck',mus:'Pescoço (estabilização)',cat:'iso',bw:true,sets:3,reps:'20–30s',rest:45,yt:'neck isometric hold exercise',
+  steps:['Sentado ou em pé, postura ereta','Pressione a cabeça contra a mão em cada direção (frente, trás, dois lados)','Mantenha a pressão firme sem mover a cabeça','Respire normal durante a contração'],
+  g:'Alinhe pescoço e coluna antes de começar.',b:'Não prenda a respiração.',alts:['neckbridgev']},
+ neckbridgev:{name:'Ponte de Pescoço (wrestler\'s bridge)',fig:'neckbridge',grp:'neck',mus:'Pescoço + trapézio',cat:'iso',bw:true,sets:3,reps:'15–20s',rest:60,yt:'wrestlers neck bridge exercise form',
+  steps:['Deitado, apoie a parte alta da testa/topo da cabeça no chão','Eleve o quadril formando uma ponte, peso dividido entre cabeça e pés','Mantenha o pescoço neutro, sem virar a cabeça','Desça controlado ao final do tempo'],
+  g:'Comece sem peso e com amplitude pequena até ganhar controle.',b:'Nunca vire a cabeça durante o movimento; pare se sentir dor.',alts:['neckisov']},
+ neckmachinev:{name:'Extensão de Pescoço na Máquina',fig:'neckmachine',grp:'neck',mus:'Pescoço (extensores)',cat:'iso',w:5,sets:3,reps:'10–15',rest:60,yt:'neck extension machine form',
+  steps:['Ajuste o encosto pra almofada ficar na nuca','Empurre a cabeça pra trás contra a resistência','Segure 1s na contração máxima','Volte controlado sem deixar o peso bater'],
+  g:'Comece com carga bem leve: o pescoço responde rápido a excesso.',b:'Não use amplitude máxima nas primeiras sessões.',alts:['neckextv']},
+ wristcurlv:{name:'Rosca de Punho',fig:'custom',grp:'arms',mus:'Antebraço (flexores)',cat:'iso',w:7.5,sets:3,reps:'15–20',rest:45,yt:'wrist curl forearm exercise form',
+  steps:['Sentado, antebraço apoiado na coxa ou banco, palma pra cima','Segure a barra ou halter só com a ponta dos dedos','Feche a mão e flexione o punho pra cima','Desça controlado até alongar bem o antebraço'],
+  g:'Movimento só no punho, antebraço fica parado.',b:'Não use carga alta: o antebraço cansa rápido e cãibra.',alts:['revwristcurlv']},
+ revwristcurlv:{name:'Rosca de Punho Invertida',fig:'custom',grp:'arms',mus:'Antebraço (extensores)',cat:'iso',w:5,sets:3,reps:'15–20',rest:45,yt:'reverse wrist curl forearm exercise form',
+  steps:['Sentado, antebraço apoiado, palma pra baixo','Segure a barra ou halter por cima','Estenda o punho levantando a barra','Desça controlado sentindo o alongamento'],
+  g:'Carga bem leve: os extensores são bem mais fracos que os flexores.',b:'Não deixe o antebraço subir junto com o punho.',alts:['wristcurlv']},
+ rotatorcuffext:{name:'Rotação Externa de Ombro (manguito rotador)',fig:'custom',grp:'shoulders',mus:'Manguito rotador',cat:'iso',w:2.5,sets:3,reps:'15–20',rest:45,yt:'external rotation rotator cuff cable exercise',
+  steps:['Cotovelo colado ao corpo, fletido a 90°','Segure o cabo ou elástico à frente do abdômen','Gire o antebraço pra fora, cotovelo fixo','Volte controlado sem deixar o cabo puxar de repente'],
+  g:'Cotovelo sempre travado na lateral do corpo.',b:'Não use carga alta: manguito é musculatura pequena e delicada.',alts:['rotatorcuffint']},
+ rotatorcuffint:{name:'Rotação Interna de Ombro (manguito rotador)',fig:'custom',grp:'shoulders',mus:'Manguito rotador',cat:'iso',w:2.5,sets:3,reps:'15–20',rest:45,yt:'internal rotation rotator cuff cable exercise',
+  steps:['Cotovelo colado ao corpo, fletido a 90°','Segure o cabo do lado de fora do corpo','Gire o antebraço pra dentro, em direção ao abdômen','Volte controlado até a posição inicial'],
+  g:'Movimento pequeno e lento, sem pressa.',b:'Não force amplitude além do confortável no ombro.',alts:['rotatorcuffext']},
+ renegaderowv:{name:'Remada Renegada',fig:'custom',grp:'functional',mus:'Costas + core',cat:'func',w:10,sets:3,reps:'8–10 cada lado',rest:60,yt:'renegade row dumbbell exercise form',
+  steps:['Prancha alta apoiado em dois halteres','Quadril travado, sem girar o tronco','Puxe um halter até a lateral das costelas','Desça controlado e repita do outro lado'],
+  g:'Base larga nos pés ajuda a travar o quadril.',b:'Não deixe o quadril girar ou cair a cada puxada.',alts:[]},
+ nordiccurlv:{name:'Nordic Curl (posterior de coxa)',fig:'custom',grp:'legs',mus:'Posterior de coxa (excêntrico)',cat:'iso',bw:true,sets:3,reps:'5–8',rest:90,yt:'nordic hamstring curl exercise form',
+  steps:['Ajoelhado, tornozelos presos ou segurados por alguém','Tronco reto, incline o corpo pra frente bem devagar','Resista o máximo possível com o posterior de coxa','Use as mãos pra amortecer no chão se precisar'],
+  g:'Comece com pouca amplitude: é um exercício avançado.',b:'Não deixe o quadril flexionar durante a descida.',alts:['legcurl']},
+ pallofpressv:{name:'Pallof Press (anti-rotação)',fig:'custom',grp:'core',mus:'Core (anti-rotação)',cat:'core',w:10,sets:3,reps:'10–12 cada lado',rest:45,yt:'pallof press anti rotation cable exercise',
+  steps:['De lado pro cabo ou elástico, pés na largura do quadril','Segure o cabo na altura do peito','Empurre à frente sem deixar o tronco girar','Volte controlado e repita, depois troque de lado'],
+  g:'Quadril e ombros ficam de frente o tempo todo.',b:'Não deixe o tronco girar em direção ao cabo.',alts:['plankv']},
  chestpress:{name:'Chest Press',fig:'chestpress',grp:'chest',mus:'Peito',cat:'comp',w:30,sets:4,reps:'8–12',rest:90,evolve:'barbellbench',yt:'seated chest press machine form shorts',
   steps:['Ajuste o banco: pegadores na linha do meio do peito','Costas apoiadas, pés firmes no chão','Empurre à frente sem travar o cotovelo','Volte controlado sentindo o peito alongar'],
   g:'Escápulas levemente retraídas: protege o ombro.',b:'Não suba os ombros em direção à orelha.',alts:['dbbench']},
@@ -2960,6 +3098,8 @@ let PROG_BACKUPS=load('iron_prog_backups',[]);
 let LAST_COINS_SEEN=load('iron_last_coins_seen',0);
 let LAST_CROSSES_SEEN=load('iron_last_crosses_seen',0);
 let THEME=load('iron_theme','light');
+let CUSTOM_EX=load('iron_customex',{});
+Object.assign(E,CUSTOM_EX);
 let SETUP=load('iron_setup',null);
 LANG=load('iron_lang','pt-BR');if(LANG!=='pt-BR'&&LANG!=='en')LANG='pt-BR';
 let PROGRAM=load('iron_program',null);
@@ -3092,7 +3232,27 @@ function render(){
   renderLastCard();
   renderTabs();
   if(view==='train'){renderTrain()}else if(view==='calories'){renderCalories()}else{renderProgress()}
+  syncWakeLock();
 }
+/* =================== TELA LIGADA (Wake Lock) =================== */
+let WAKELOCK=null;
+async function syncWakeLock(){
+  const want=view==='train';
+  if(want&&!WAKELOCK){
+    try{
+      if('wakeLock' in navigator){
+        WAKELOCK=await navigator.wakeLock.request('screen');
+        WAKELOCK.addEventListener('release',()=>{WAKELOCK=null});
+      }
+    }catch(e){WAKELOCK=null}
+  }else if(!want&&WAKELOCK){
+    try{await WAKELOCK.release()}catch(e){}
+    WAKELOCK=null;
+  }
+}
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='visible'&&view==='train')syncWakeLock();
+});
 function relDate(iso){
   const d=new Date(iso+'T00:00'),h=new Date(todayISO()+'T00:00');
   const diff=Math.round((h-d)/864e5);
@@ -3215,7 +3375,7 @@ function renderTrain(){
       ${ex.ss?'<div class="ssband"></div>':''}
       ${ebar}
       <div class="ctop">
-        <div class="viz">${FIG[a.fig]||''}</div>
+        <div class="viz">${FIG[a.fig]||FIG.custom||''}</div>
         <div class="cinfo">
           <div class="cidx"><span class="n">${String(i+1).padStart(2,'0')}</span>${badges}</div>
           <div class="cname">${exName(a.vid,a.name)}</div>
@@ -3248,13 +3408,13 @@ function renderTrain(){
         <div class="frames">
           <div class="frm"><div class="frz photo"><img src="img/${pid}_0.webp" alt="${t('inicio')}" loading="lazy"></div><span>${t('inicio')}</span></div>
           <div class="frm"><div class="frz photo"><img src="img/${pid}_1.webp" alt="${t('fim')}" loading="lazy"></div><span>${t('fim')}</span></div>
-          <div class="frm"><div class="frz">${FIG[a.fig]||''}</div><span>${t('movimento')}</span></div>
+          <div class="frm"><div class="frz">${FIG[a.fig]||FIG.custom||''}</div><span>${t('movimento')}</span></div>
         </div>
         <div class="fcredit">${t('fotoscredit')}</div>`})():`
         <div class="frames">
-          <div class="frm"><div class="frz f0">${FIG[a.fig]||''}</div><span>${t('inicio')}</span></div>
-          <div class="frm"><div class="frz f1">${FIG[a.fig]||''}</div><span>${t('fim')}</span></div>
-          <div class="frm"><div class="frz">${FIG[a.fig]||''}</div><span>${t('movimento')}</span></div>
+          <div class="frm"><div class="frz f0">${FIG[a.fig]||FIG.custom||''}</div><span>${t('inicio')}</span></div>
+          <div class="frm"><div class="frz f1">${FIG[a.fig]||FIG.custom||''}</div><span>${t('fim')}</span></div>
+          <div class="frm"><div class="frz">${FIG[a.fig]||FIG.custom||''}</div><span>${t('movimento')}</span></div>
         </div>`}
         <ol>${exSteps(a.vid,a.steps).map(s=>`<li>${s}</li>`).join('')}</ol>
         <div class="cue g"><b>✓</b><span>${exG(a.vid,a.g)}</span></div>
@@ -3522,9 +3682,22 @@ function saveBodyKg(){
   boxClose();toast(t('pesoatualizado'));render();
 }
 
+function priorMaxWeight(vid){
+  let mx=null;
+  HISTORY.forEach(h=>{
+    (h.items||[]).forEach(it=>{
+      if(it.id!==vid)return;
+      const vals=(it.sw||[]).filter(v=>v!=null);
+      const localMax=vals.length?Math.max(...vals):(it.w!=null?it.w:null);
+      if(localMax!=null&&(mx==null||localMax>mx))mx=localMax;
+    });
+    if(h.weights&&h.weights[vid]!=null&&(mx==null||h.weights[vid]>mx))mx=h.weights[vid];
+  });
+  return mx;
+}
 function finishWorkout(key,dateStr){
   const day=PROGRAM[key];if(!day)return null;
-  let done=0,tot=0,kcalTotal=0;const snap={};
+  let done=0,tot=0,kcalTotal=0;const snap={};const prs=[];
   const items=day.ex.map(ex=>{
     const a=activeOf(ex);const arr=setsArr(ex.id,a.sets,key);
     const s=arr.filter(x=>x.d).length;done+=s;tot+=a.sets;
@@ -3532,6 +3705,14 @@ function finishWorkout(key,dateStr){
     const sw=a.bw?null:arr.map(x=>x.d?(x.w!=null?x.w:wOf(a)):null);
     const trackedVal=((a.unit==='m'||a.unit==='min')&&s>0)?(()=>{const first=arr.find(x=>x.d);return first&&first.w!=null?first.w:wOf(a)})():0;
     kcalTotal+=estimateKcalForItem(ex,a,s,trackedVal);
+    if(!a.bw&&!a.unit&&s>0){
+      const doneW=(sw||[]).filter(v=>v!=null);
+      const bestNow=doneW.length?Math.max(...doneW):null;
+      if(bestNow!=null){
+        const prior=priorMaxWeight(a.vid);
+        if(prior!=null&&bestNow>prior)prs.push({name:exName(a.vid,a.name),w:bestNow});
+      }
+    }
     return {id:a.vid,n:a.name,s,t:a.sets,w:a.bw?null:wOf(a),sw};
   });
   if(done===0)return null;
@@ -3542,7 +3723,7 @@ function finishWorkout(key,dateStr){
   delete SESSMETA[key];save('iron_sessmeta',SESSMETA);
   if(RESUMED===key)RESUMED=null;
   cloudSync();
-  return {done,tot,kcal};
+  return {done,tot,kcal,prs};
 }
 $('finBtn').onclick=()=>{
   const st=sessionStats(cur);
@@ -3552,9 +3733,14 @@ $('finBtn').onclick=()=>{
     const r=finishWorkout(cur,d);
     if(!r)return;
     confetti();toast('🔥 '+t('treinoregistrado')+cur+t('registradoexcl')+r.done+'/'+r.tot+' '+t('series'));
+    announcePRs(r.prs);
     render();
   });
 };
+function announcePRs(prs){
+  if(!prs||!prs.length)return;
+  setTimeout(()=>{confetti();toast('🏆 '+t('novopr')+': '+prs.map(p=>p.name+' '+fmtW(p.w)+'kg').join(', '));},2400);
+}
 /* ---- pendências ---- */
 function alertFinish(key){
   const meta=SESSMETA[key]||{};
@@ -3562,6 +3748,7 @@ function alertFinish(key){
     const r=finishWorkout(key,d);
     if(!r){toast(t('nadapraregistrar'));render();return}
     confetti();toast('✔ '+t('treinoregistrado')+key+t('registradoexcl').replace('! ',' ')+dtBR(d));
+    announcePRs(r.prs);
     render();
   });
 }
@@ -3925,6 +4112,15 @@ function renderProgress(){
       <div class="wkscroll" id="wkscroll" onscroll="WKSCROLL=this.scrollLeft">${pagesHtml}</div>
       <div class="wkfoot">Arraste para o lado para ver semanas anteriores · toque num dia para ver ou editar</div>
     </div>
+    <div class="week">
+      <h4>${t('atividadeanual')}</h4>
+      ${heatmapHtml()}
+      <div class="wkfoot">${trainedDaysLast365()} ${t('diastreinados')} · <span class="hleg">${t('menosatividade')} <i class="hcell l0"></i><i class="hcell l1"></i><i class="hcell l2"></i><i class="hcell l3"></i><i class="hcell l4"></i> ${t('maisatividade')}</span></div>
+    </div>
+    <div class="week">
+      <h4>${t('forcaerecordes')}</h4>
+      ${strengthPanelHtml()}
+    </div>
     <div class="exports">
       <button class="abtn vid" onclick="exportXLSX()">${t('exportarxlsx')}</button>
       <button class="abtn" onclick="exportPDF()">${t('exportarpdf')}</button>
@@ -3936,6 +4132,9 @@ function renderProgress(){
     <div class="exports">
       <button class="abtn" onclick="openTrash()">${t('excluidos')}${TRASH.length?' ('+TRASH.length+')':''}</button>
       <button class="abtn" onclick="openBackup()">${t('backup')}</button>
+    </div>
+    <div class="exports">
+      <button class="abtn" onclick="openMyExercises()">${t('meusexercicios')}${Object.keys(CUSTOM_EX).length?' ('+Object.keys(CUSTOM_EX).length+')':''}</button>
     </div>
     ${PROG_BACKUPS.length?`<div class="exports"><button class="abtn" onclick="openProgBackups()">${t('versoesant')} (${PROG_BACKUPS.length})</button></div>`:''}
     <div class="sectit">${t('historico')} ${TRASH.length?`<button onclick="openTrash()">${t('lixeiravazia')} (${TRASH.length})</button>`:''}</div>
@@ -3952,6 +4151,59 @@ function renderProgress(){
   `;
   const ws=$('wkscroll');
   if(ws)requestAnimationFrame(()=>{ws.scrollLeft=(WKSCROLL!=null?WKSCROLL:ws.scrollWidth)});
+}
+function trainedDaysLast365(){
+  const cutoff=new Date(todayISO()+'T00:00');cutoff.setDate(cutoff.getDate()-364);
+  const set=new Set();
+  HISTORY.forEach(h=>{if(new Date(h.date+'T00:00')>=cutoff)set.add(h.date)});
+  return set.size;
+}
+function heatmapHtml(){
+  const days=365;
+  const end=new Date(todayISO()+'T00:00');
+  const counts={};
+  HISTORY.forEach(h=>{counts[h.date]=(counts[h.date]||0)+1});
+  let maxC=1;Object.values(counts).forEach(c=>{if(c>maxC)maxC=c});
+  const cells=[];
+  for(let i=days-1;i>=0;i--){
+    const d=new Date(end);d.setDate(d.getDate()-i);
+    const iso=isoOf(d);
+    const c=counts[iso]||0;
+    let lvl=0;
+    if(c>0)lvl=c>=maxC?4:Math.max(1,Math.ceil(c/maxC*3));
+    cells.push({iso,c,lvl});
+  }
+  const firstDow=(new Date(cells[0].iso+'T00:00').getDay()+6)%7;
+  const padded=Array(firstDow).fill(null).concat(cells);
+  return `<div class="heatgrid">${padded.map(c=>c?`<div class="hcell l${c.lvl}" title="${dtBR(c.iso)}: ${c.c} treino${c.c===1?'':'s'}"></div>`:`<div class="hcell empty"></div>`).join('')}</div>`;
+}
+function bestLiftsMap(){
+  const m={};
+  HISTORY.forEach(h=>{
+    (h.items||[]).forEach(it=>{
+      const u=unitOf(it.id);
+      if(u!=='kg')return;
+      const vals=(it.sw||[]).filter(v=>v!=null);
+      const localMax=vals.length?Math.max(...vals):(it.w!=null?it.w:null);
+      if(localMax==null)return;
+      if(!m[it.id]||localMax>m[it.id].w)m[it.id]={w:localMax,date:h.date,name:it.n};
+    });
+  });
+  return m;
+}
+function strengthPanelHtml(){
+  const m=bestLiftsMap();
+  const ids=Object.keys(m);
+  if(!ids.length)return `<div class="tip"><div class="ic">🏆</div><p>${t('semrecordes')}</p></div>`;
+  ids.sort((a,b)=>new Date(m[b].date)-new Date(m[a].date));
+  const top=ids.slice(0,8);
+  return `<div class="hist">`+top.map(id=>{
+    const rec=m[id];
+    const meta=E[id];
+    const reps=meta?parseRepsSeconds(meta.reps):{kind:'reps',avg:10};
+    const oneRM=reps.kind==='reps'?Math.round(rec.w*(1+reps.avg/30)):null;
+    return `<div class="hd-row"><span>${exName(id,rec.name)}</span><small>${t('melhorcarga')}: <b>${fmtW(rec.w)}kg</b>${oneRM?' · '+t('rm1est')+': <b>~'+oneRM+'kg</b>':''} · ${dtBR(rec.date)}</small></div>`;
+  }).join('')+`</div>`;
 }
 function calcStreak(){
   if(!HISTORY.length)return 0;
@@ -4040,7 +4292,7 @@ function renderOB(){
       </div>`:`
       <div class="qb"><h4>${t('quaisgrupos')}</h4>
         <div class="hint">${t('gruposhint')}</div>
-        <div class="qchips">${Object.keys(GRP_LABEL).filter(g=>g!=='functional'&&g!=='cardio').map(g=>
+        <div class="qchips">${Object.keys(GRP_LABEL).filter(g=>g!=='functional'&&g!=='cardio'&&g!=='neck').map(g=>
           `<button class="qchip${OBDATA.groups.includes(g)?' on':''}" onclick="obTgl('${g}')">${grpLabel(g)}</button>`).join('')}</div>
       </div>`;
     const firstBlock=(isCardio||isFunctional)?'':`
@@ -4173,7 +4425,8 @@ function openLibPicker(ctx){
       <div class="pchips">${['all',...Object.keys(GRP_LABEL)].map(x=>
         `<button class="vchip${curG===x?' on':''}" data-g="${x}">${x==='all'?t('todos'):grpLabel(x)}</button>`).join('')}</div>
       <div class="pgrid" id="pickGrid">${rows(curG,curQ)}</div>
-      <div class="mrow" style="margin-top:12px"><button class="mbtn" onclick="$('pickOv').classList.add('hidden')">${t('fechar')}</button></div>`;
+      <div class="mrow" style="margin-top:12px"><button class="mbtn" onclick="openCustomExForm()">${t('criarexercicio')}</button></div>
+      <div class="mrow"><button class="mbtn" onclick="$('pickOv').classList.add('hidden')">${t('fechar')}</button></div>`;
     $('pickModal').querySelectorAll('.pchips .vchip').forEach(b=>b.onclick=()=>{curG=b.dataset.g;paint();});
     const inp=$('pickSearch');
     inp.oninput=()=>{curQ=inp.value;$('pickGrid').innerHTML=rows(curG,curQ)};
@@ -4235,6 +4488,55 @@ function doScope(todos){
 function cleanupEx(dayKey,exId){
   if(dayKey&&SESSION[dayKey]){delete SESSION[dayKey][exId];save('iron_session',SESSION)}
   if(VARIANT[exId]!=null){delete VARIANT[exId];save('iron_variant',VARIANT)}
+}
+/* ---- exercício próprio (customizado) ---- */
+function openCustomExForm(){
+  $('pickOv').classList.add('hidden');
+  boxOpen(`<h3>${t('criarexercicio')}</h3>
+    <input type="text" id="cexName" placeholder="${t('novoexnome')}" autocomplete="off" style="width:100%;background:var(--panel2);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;color:var(--ink);font-family:'Manrope';font-weight:700;font-size:14px;margin-bottom:10px">
+    <select id="cexGrupo" style="width:100%;background:var(--panel2);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;color:var(--ink);font-family:'Manrope';font-weight:700;font-size:14px;margin-bottom:10px">
+      ${Object.keys(GRP_LABEL).map(g=>`<option value="${g}">${grpLabel(g)}</option>`).join('')}
+    </select>
+    <label style="display:flex;align-items:center;gap:8px;margin-bottom:10px;font-weight:600;font-size:14px">
+      <input type="checkbox" id="cexBw" style="width:18px;height:18px"> ${t('novoexpesocorp')}
+    </label>
+    <div style="display:flex;gap:10px;margin-bottom:10px">
+      <input type="number" id="cexSets" value="3" min="1" max="10" placeholder="${t('novoexsets')}" style="flex:1;background:var(--panel2);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;color:var(--ink);font-family:'Manrope';font-weight:700;font-size:14px">
+      <input type="text" id="cexReps" value="8–12" placeholder="${t('novoexreps')}" style="flex:1;background:var(--panel2);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;color:var(--ink);font-family:'Manrope';font-weight:700;font-size:14px">
+    </div>
+    <div class="mrow"><button class="mbtn" onclick="$('boxOv').classList.add('hidden');$('pickOv').classList.remove('hidden')">${t('cancelar')}</button>
+    <button class="mbtn pri" onclick="saveCustomEx()">${t('novoexcriar')}</button></div>`);
+}
+function saveCustomEx(){
+  const name=($('cexName').value||'').trim();
+  if(!name){toast(t('novoexnomeobrig'));return}
+  const grp=$('cexGrupo').value;
+  const bw=$('cexBw').checked;
+  const sets=Math.max(1,parseInt($('cexSets').value,10)||3);
+  const reps=($('cexReps').value||'8–12').trim();
+  const id='custom_'+Date.now();
+  const entry={name,fig:'custom',grp,mus:GRP_LABEL[grp],cat:'iso',bw,w:bw?0:20,sets,reps,rest:60,
+    yt:name+' exercise form',steps:[],g:'',b:'',custom:true,alts:[]};
+  CUSTOM_EX[id]=entry;E[id]=entry;
+  save('iron_customex',CUSTOM_EX);cloudSync();
+  boxClose();
+  toast(t('exerciciocriado'));
+  if(PICKCTX){pickChoose(id)}
+}
+function deleteCustomEx(id){
+  if(!confirm(t('excluirexcustom')+'?'))return;
+  delete CUSTOM_EX[id];delete E[id];
+  save('iron_customex',CUSTOM_EX);cloudSync();
+  toast(t('exercicioexcluido'));
+  openMyExercises();
+}
+function openMyExercises(){
+  const ids=Object.keys(CUSTOM_EX);
+  boxOpen(`<h3>${t('meusexercicios')}</h3>
+    <div class="mlist">${ids.length?ids.map(id=>{const x=CUSTOM_EX[id];
+      return `<div class="prow"><div class="rtx"><b>${x.name}</b><small>${grpLabel(x.grp)} · ${x.sets}×${x.reps}</small></div>
+      <button class="padd" onclick="deleteCustomEx('${id}')">🗑</button></div>`}).join(''):`<div class="empty">${t('nadaaqui')}</div>`}</div>
+    <div class="mrow" style="margin-top:10px"><button class="mbtn" onclick="boxClose()">${t('fechar')}</button></div>`);
 }
 function openPicker(k){
   openLibPicker({mode:'wizard',list:OBPROG[k].ex,dayKey:null,replaceIdx:null,
@@ -4402,7 +4704,7 @@ function loadScript(u){return new Promise((ok,err)=>{const s=document.createElem
 function cloudSync(){if(!sb||!sbUser)return;clearTimeout(syncT);syncT=setTimeout(cloudPush,1500)}
 async function cloudPush(){
   if(!sb||!sbUser)return;
-  const payload={weights:WEIGHTS,history:HISTORY,trash:TRASH,progBackups:PROG_BACKUPS,variant:VARIANT,session:SESSION,sessmeta:SESSMETA,program:PROGRAM,setup:SETUP,updated:Date.now()};
+  const payload={weights:WEIGHTS,history:HISTORY,trash:TRASH,progBackups:PROG_BACKUPS,variant:VARIANT,session:SESSION,sessmeta:SESSMETA,program:PROGRAM,setup:SETUP,customEx:CUSTOM_EX,updated:Date.now()};
   save('iron_updated',payload.updated);
   try{await sb.from('workout_data').upsert({user_id:sbUser.id,payload,updated_at:new Date().toISOString()})}catch(e){}
 }
@@ -4426,6 +4728,7 @@ async function cloudPull(){
         PROG_BACKUPS.sort((a,b)=>b.ts-a.ts);if(PROG_BACKUPS.length>10)PROG_BACKUPS=PROG_BACKUPS.slice(0,10);save('iron_prog_backups',PROG_BACKUPS)}
       if(p.program){PROGRAM=p.program;save('iron_program',PROGRAM)}
       if(p.setup){SETUP=p.setup;save('iron_setup',SETUP);closeOB()}
+      if(p.customEx){CUSTOM_EX={...CUSTOM_EX,...p.customEx};Object.assign(E,CUSTOM_EX);save('iron_customex',CUSTOM_EX)}
     }
     save('iron_history',HISTORY);save('iron_weights',WEIGHTS);
     save('iron_variant',VARIANT);save('iron_session',SESSION);
@@ -4783,7 +5086,7 @@ async function exportPDF(){
 }
 
 /* =================== INIT =================== */
-const APP_VERSION='iron-v14';
+const APP_VERSION='iron-v15';
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){
   navigator.serviceWorker.register('./sw.js').then(reg=>{
     reg.update(); // força checar por versão nova agora, sem esperar o intervalo padrão do navegador

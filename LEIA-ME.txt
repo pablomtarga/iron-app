@@ -1,13 +1,85 @@
 IRON · Treino PPL — Pacote do app (PWA)
 
-COMO PUBLICAR (GitHub Pages, igual você fez com o Studio Manual):
-1. Crie um repositório novo (ex: iron-app)
-2. Suba estes 5 arquivos na raiz: index.html, manifest.json, sw.js, icon-192.png, icon-512.png
-3. Settings > Pages > Branch: main > Save
+========================================
+NOVIDADES DESTA VERSÃO (iron-v15)
+========================================
+- Tela do celular não apaga mais sozinha durante o treino
+  (Wake Lock ligado automaticamente na aba Treino).
+- Botão "Criar exercício próprio" dentro de Adicionar exercício:
+  dá nome, grupo muscular, séries/reps e ele entra na sua lista.
+  Gerencie em Progresso > "Meus exercícios" (pode excluir).
+- Grupo novo "Pescoço" com 6 exercícios (flexão, extensão, lateral,
+  isometria, ponte, máquina) — grupo que estava zerado.
+- Mais 7 exercícios novos: rosca de punho e invertida (antebraço),
+  rotação externa/interna de ombro (manguito rotador), remada
+  renegada, nordic curl e Pallof press.
+- Recorde pessoal automático: quando você bate uma carga acima
+  do seu histórico num exercício, aparece um aviso de 🏆 recorde.
+- Aba Progresso agora mostra "Força & Recordes": melhor carga já
+  feita e 1RM estimado (fórmula de Epley) pros últimos exercícios.
+- Aba Progresso agora mostra um mapa de atividade do ano (estilo
+  GitHub): quanto mais treinou num dia, mais forte a cor.
+- Total de 117 exercícios na biblioteca (nada foi removido).
+
+========================================
+PARTE 1 · PUBLICAR NO GITHUB PAGES
+========================================
+1. Crie um repositório PÚBLICO (ex: ironapp)
+2. Suba estes arquivos na raiz: index.html, manifest.json, sw.js,
+   icon-192.png, icon-512.png (o supabase.sql é só referência)
+3. Settings > Pages > Branch: main / (root) > Save
 4. Abra a URL gerada no Safari do iPhone
 5. Compartilhar > Adicionar à Tela de Início
 
-Pronto: vira um app com ícone próprio, tela cheia, funciona offline
-e guarda pesos, variações e histórico no aparelho.
+========================================
+PARTE 2 · CONTA DE USUÁRIO + NUVEM (opcional)
+========================================
+1. Crie conta gratuita em https://supabase.com (pode entrar com GitHub)
+2. New Project > nome: iron > senha do banco (guarde) > região: Central EU
+3. Espere ~2 min provisionar
+4. Menu lateral > SQL Editor > New query > cole TODO o conteúdo
+   do arquivo supabase.sql > Run
+5. Menu lateral > Authentication > Sign In / Up > Email:
+   deixe ativado e DESLIGUE a opção "Confirm email"
+   (senão precisa confirmar e-mail a cada cadastro)
+6. Menu lateral > Project Settings > API:
+   copie "Project URL" e a chave "anon public"
+7. No GitHub, abra o index.html > clique no lápis (Edit) >
+   aperte Ctrl+F e busque: SUPABASE_URL
+   Cole a URL e a chave entre as aspas > Commit changes
+8. Abra o app de novo: agora o botão 👤 no topo permite
+   criar conta e entrar. Logado, o ícone vira ☁️ e os
+   treinos sincronizam sozinhos entre aparelhos.
 
-EXPORTAR DADOS: aba Progresso > botões "Exportar Excel" e "Exportar PDF".
+Obs: a chave "anon public" pode ficar visível no código,
+ela é feita pra isso. Quem protege os dados são as regras
+de segurança criadas pelo supabase.sql.
+
+========================================
+ESQUECI MINHA SENHA (configurar 1 vez)
+========================================
+Para o link de redefinição de senha voltar pro seu app
+(e não pra localhost), configure no Supabase:
+Authentication > URL Configuration:
+- Site URL: https://SEUUSUARIO.github.io/SEU-REPO/
+- Redirect URLs: adicione a mesma URL acima
+Salve. Pronto: o "Esqueci minha senha" do app já funciona.
+
+========================================
+EXPORTAR DADOS
+========================================
+Aba Progresso > "Exportar Excel" ou "Exportar PDF"
+(gera planilha com sessões + cargas por exercício e data)
+
+
+========================================
+CRÉDITOS DAS IMAGENS
+========================================
+As fotos de posição inicial e final dos exercícios (pasta img/)
+vêm do Free Exercise DB, dataset de domínio público:
+https://github.com/yuhonas/free-exercise-db (licença Unlicense)
+
+As animações de movimento (bonecos) foram criadas para este app.
+
+IMPORTANTE: ao publicar no GitHub, suba também a pasta img/
+inteira, senão as fotos não aparecem.
