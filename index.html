@@ -482,6 +482,8 @@ html[data-theme=dark] .modal input,html[data-theme=dark] .modal select{color-sch
 .ob-btn.qk{box-shadow:var(--shadow-1),inset 0 0 0 1.5px var(--accent)}
 .qk-note{font-size:13.5px;color:var(--label2);line-height:1.45}
 .qk-act{display:flex;gap:10px;margin:0 0 10px}
+.tab.qkback{flex:0 0 auto;min-width:84px}
+.tab.qkback .tl{color:var(--accent-text)}
 .qk-act button{flex:1;border:none;background:var(--fill);color:var(--accent-text);border-radius:var(--r-s);padding:12px 10px;
   font-weight:500;font-size:14.5px;cursor:pointer;min-height:44px}
 .qk-act button.rm{color:var(--label2)}
@@ -2824,6 +2826,8 @@ Object.assign(I18N['pt-BR'],{nuvemfalhou:'Não consegui buscar seus dados na nuv
 Object.assign(I18N.en,{nuvemfalhou:"Couldn't load your data from the cloud. Check your connection and try again.",
   sairsemsync:"Your latest workouts haven't reached the cloud yet (no connection or upload error). They stay saved on this device and come back when you sign in to this account again. Sign out anyway?",
   treinosrecuperados:'Recovered {n} workout(s) that had not reached the cloud ✔'});
+Object.assign(I18N['pt-BR'],{qk_myprog:'Meu treino',qk_brand:'Treino rápido'});
+Object.assign(I18N.en,{qk_myprog:'My program',qk_brand:'Quick workout'});
 function grpLabel(g){return LANG==='en'?(GRP_LABEL_EN[g]||GRP_LABEL[g]):GRP_LABEL[g]}
 function musLabel(m){return LANG==='en'?(MUS_EN[m]||m):m}
 const E={
@@ -4127,6 +4131,7 @@ if(LANG!=='pt-BR'&&LANG!=='en'){
 document.documentElement.lang=LANG;
 let PROGRAM=load('iron_program',null);
 let cur='A', view='train';
+let QKDAY=load('iron_qkonly','');   /* data (AAAA-MM-DD) em que o treino rápido foi criado: nesse dia a tela mostra só ele */
 
 const DEFAULT_SETUP={groups:Object.keys(GRP_LABEL),perDay:6,splits:3,freq:3,first:'Push',finisher:true,default:true};
 function migrateProgramUnits(){
@@ -4157,6 +4162,7 @@ function migrateProgramUnits(){
 function ensureProgram(){
   if(!PROGRAM){PROGRAM=generateProgram(SETUP||DEFAULT_SETUP)}
   if(!PROGRAM[cur])cur=Object.keys(PROGRAM)[0];
+  if(qkOnly())cur='Q';
   migrateProgramUnits();
   migrateProgramLib();
 }
@@ -4253,7 +4259,7 @@ function render(){
   const qArr=LANG==='en'?QUOTES_EN:QUOTES;
   $('quote').textContent=qArr[Math.floor(Math.random()*qArr.length)];
   $('helloName').textContent=(SETUP&&SETUP.name)?SETUP.name:t('atleta');
-  $('brandSub').textContent=SETUP&&!SETUP.default?`${setupName(SETUP)} · ${SETUP.freq}x/${LANG==='en'?'wk':'sem'}`:(LANG==='en'?'Push · Pull · Legs':'Push · Pull · Legs');
+  $('brandSub').textContent=(SETUP&&SETUP.quick)?t('qk_brand'):SETUP&&!SETUP.default?`${setupName(SETUP)} · ${SETUP.freq}x/${LANG==='en'?'wk':'sem'}`:(LANG==='en'?'Push · Pull · Legs':'Push · Pull · Legs');
   renderAlerts();
   renderLastCard();
   renderTabs();
@@ -4368,6 +4374,7 @@ let OPEN={},INFO={},SLIDE=0,ENTER=true;
 function paintTabsProgress(){
   const box=$('tabs');if(!box)return;
   box.querySelectorAll('.tab').forEach(b=>{
+    if(!b.dataset.k)return;
     const st=sessionStats(b.dataset.k);const pct=st.tot?Math.round(st.done/st.tot*100):0;
     let el=b.querySelector('.tpct');
     if(pct>0){if(!el){el=document.createElement('span');el.className='tpct';b.appendChild(el)}el.textContent=pct>=100?'✓':pct+'%'}
@@ -4388,7 +4395,7 @@ function renderTabs(){
   let ind=box.querySelector('.tabind');const first=!ind;
   if(!ind){ind=document.createElement('i');ind.className='tabind'}
   box.innerHTML='';box.appendChild(ind);
-  for(const k of Object.keys(PROGRAM)){
+  for(const k of dayKeys()){
     const p=PROGRAM[k];
     const b=document.createElement('button');
     b.className='tab'+(k===cur?' on':'');b.dataset.k=k;
@@ -4397,12 +4404,17 @@ function renderTabs(){
     b.onclick=()=>gotoDay(k);
     box.appendChild(b);
   }
+  if(qkOnly()){
+    const mb=document.createElement('button');mb.className='tab qkback';mb.setAttribute('aria-label',t('qk_myprog'));
+    mb.innerHTML=`<span class="tl">←</span><span class="nm">${t('qk_myprog')}</span>`;
+    mb.onclick=qkMyProg;box.appendChild(mb);
+  }
   paintTabsProgress();
   requestAnimationFrame(()=>placeTabInd(!first));
 }
 function gotoDay(k){
-  if(k===cur||!PROGRAM[k])return;
-  const keys=Object.keys(PROGRAM);
+  if(k===cur||!PROGRAM[k]||(qkOnly()&&k!=='Q'))return;
+  const keys=dayKeys();
   SLIDE=keys.indexOf(k)>keys.indexOf(cur)?1:-1;
   cur=k;render();
   const y=$('trainView').offsetTop-4;
@@ -4854,7 +4866,7 @@ timerLoop();
     if(!ok)return;ok=false;
     const c=e.changedTouches[0],dx=c.clientX-sx,dy=c.clientY-sy;
     if(Date.now()-st>700||Math.abs(dx)<70||Math.abs(dx)<Math.abs(dy)*1.7)return;
-    const keys=Object.keys(PROGRAM),idx=keys.indexOf(cur),n=dx<0?idx+1:idx-1;
+    const keys=dayKeys(),idx=keys.indexOf(cur),n=dx<0?idx+1:idx-1;
     if(n>=0&&n<keys.length)gotoDay(keys[n]);
   },{passive:true});
 })();
@@ -5090,6 +5102,7 @@ function alertFinish(key){
   });
 }
 function alertResume(key){
+  if(key!=='Q')qkExit();
   RESUMED=key;cur=key;view='train';
   $('trainView').classList.remove('hidden');$('progView').classList.add('hidden');
   $('navTrain').classList.add('on');$('navProg').classList.remove('on');
@@ -5439,7 +5452,7 @@ function renderProgress(){
       <div class="mid"><b>${hLabel(h)} · ${t('trein')} ${h.workout}</b><small>${ds} · ${h.done}/${h.tot} ${t('series')}</small></div>
       <div class="pct">${pct}%</div><span class="hcv" style="transform:rotate(-90deg)">▾</span></div>`;
   }).join(''):'<div class="empty">'+t('nenhumtreinoainda')+'</div>';
-  const plan=SETUP?`<div class="tip"><div class="ic">📅</div><p><b>${t('suasemana')}</b> ${weekPlan(SETUP)} (${SETUP.freq}x). ${t('suasemanatxt')}</p></div>`:'';
+  const plan=(SETUP&&!SETUP.quick)?`<div class="tip"><div class="ic">📅</div><p><b>${t('suasemana')}</b> ${weekPlan(SETUP)} (${SETUP.freq}x). ${t('suasemanatxt')}</p></div>`:'';
 
   pv.innerHTML=`
     <div class="stats">
@@ -6020,9 +6033,13 @@ function renderQuick(){
 function qkCommit(){
   if(!QKPREV)return;
   if(PROGRAM&&PROGRAM.Q&&sessionStats('Q').done>0&&!confirm(t('qk_replace')))return;
-  if(!SETUP){SETUP={...DEFAULT_SETUP,name:(OBDATA&&OBDATA.name)||'',bodyKg:(OBDATA&&OBDATA.bodyKg)||undefined};save('iron_setup',SETUP)}
-  if(!PROGRAM||!Object.keys(PROGRAM).length)PROGRAM=generateProgram(SETUP);
+  /* sem treino seu ainda (instalação nova ou depois de Sair): o A/B/C que existe é só o padrão automático, então o rápido fica sozinho */
+  const fresh=!SETUP&&qkPristine();
+  if(!SETUP){SETUP={...DEFAULT_SETUP,quick:fresh,name:(OBDATA&&OBDATA.name)||'',bodyKg:(OBDATA&&OBDATA.bodyKg)||undefined};save('iron_setup',SETUP)}
+  if(fresh)PROGRAM={};
+  else if(!PROGRAM||!Object.keys(PROGRAM).length)PROGRAM=generateProgram(SETUP);
   PROGRAM.Q=QKPREV.day;
+  QKDAY=todayISO();save('iron_qkonly',QKDAY);
   SESSION.Q={};delete SESSMETA.Q;
   save('iron_session',SESSION);save('iron_sessmeta',SESSMETA);save('iron_program',PROGRAM);
   cloudSync();
@@ -6030,10 +6047,31 @@ function qkCommit(){
   closeOB();cur='Q';render();window.scrollTo({top:0});
   toast(t('qk_pronto'));
 }
+/* "só o rápido": no dia em que o treino rápido é criado, a tela de treino mostra só ele; os treinos A, B, C... continuam guardados */
+function qkOnly(){return !!(PROGRAM&&PROGRAM.Q&&QKDAY&&QKDAY===todayISO()&&Object.keys(PROGRAM).length>1)}
+function dayKeys(){return qkOnly()?['Q']:Object.keys(PROGRAM)}
+/* o programa A/B/C é o padrão automático, sem edição e sem série marcada? (então pode ficar só o rápido) */
+function qkPristine(){
+  if(!PROGRAM)return true;
+  const ks=Object.keys(PROGRAM).filter(k=>k!=='Q');
+  if(ks.some(k=>sessionStats(k).done>0))return false;
+  let d;try{d=generateProgram(DEFAULT_SETUP)}catch(e){return false}
+  const kd=Object.keys(d);
+  return ks.length===kd.length&&ks.every(k=>d[k]&&PROGRAM[k].ex.map(e=>e.id).join()===d[k].ex.map(e=>e.id).join());
+}
+function qkExit(){QKDAY='';try{localStorage.removeItem('iron_qkonly')}catch(e){}}
+function qkMyProg(){qkExit();cur=Object.keys(PROGRAM).find(k=>k!=='Q')||'Q';render();window.scrollTo({top:0})}
 function qkRemove(){
   if(!PROGRAM||!PROGRAM.Q)return;
   if(sessionStats('Q').done>0&&!confirm(t('qk_removeconf')))return;
   delete PROGRAM.Q;delete SESSION.Q;delete SESSMETA.Q;
+  qkExit();
+  if(!Object.keys(PROGRAM).length){
+    PROGRAM=null;SETUP=null;cur='A';
+    ['iron_program','iron_setup'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});
+    save('iron_session',SESSION);save('iron_sessmeta',SESSMETA);cloudSync();
+    render();openWizard(false);toast(t('qk_removido'));return;
+  }
   save('iron_program',PROGRAM);save('iron_session',SESSION);save('iron_sessmeta',SESSMETA);cloudSync();
   cur=Object.keys(PROGRAM)[0];render();toast(t('qk_removido'));
 }
@@ -6398,7 +6436,7 @@ function obFinish(){
   SESSION={};save('iron_session',SESSION);
   SESSMETA={};save('iron_sessmeta',SESSMETA);
   save('iron_setup',SETUP);save('iron_program',PROGRAM);cloudSync();
-  closeOB();cur=Object.keys(PROGRAM)[0];render();
+  qkExit();closeOB();cur=Object.keys(PROGRAM)[0];render();
   confetti();toast(t('programacriado'));
   if(SB_ON()&&!sbUser)setTimeout(()=>{toast(t('dicaconta'))},2600);
 }
@@ -6928,7 +6966,7 @@ function restoreProgBackup(i){
   if(PROG_BACKUPS.length>10)PROG_BACKUPS=PROG_BACKUPS.slice(0,10);
   SETUP=b.setup;PROGRAM=b.program;
   save('iron_setup',SETUP);save('iron_program',PROGRAM);save('iron_prog_backups',PROG_BACKUPS);cloudSync();
-  boxClose();cur=Object.keys(PROGRAM)[0];render();
+  qkExit();boxClose();cur=Object.keys(PROGRAM)[0];render();
   toast(t('versaorestaurada'));
 }
 function openBackup(){
@@ -7474,7 +7512,7 @@ async function exportPDF(){
 }
 
 /* =================== INIT =================== */
-const APP_VERSION='iron-v21';
+const APP_VERSION='iron-v22';
 /* atualização automática: confere versão nova ao abrir, ao voltar pro app e a cada 1h; aplica sozinha
    (se houver treino em andamento, espera o app ir pro segundo plano pra não interromper) */
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){

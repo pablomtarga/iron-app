@@ -1,7 +1,28 @@
 IRON · Treino PPL — Pacote do app (PWA)
 
 ========================================
-NOVIDADES DESTA VERSÃO (iron-v21)
+NOVIDADES DESTA VERSÃO (iron-v22)
+========================================
+- Treino rápido sozinho na tela. Antes, ao criar um treino rápido, as abas
+  A, B e C continuavam aparecendo ao lado dele.
+  - Instalação nova (ou depois de Sair da conta), quando o app só tem o
+    programa padrão que ele mesmo cria: o treino rápido passa a ser o
+    único treino. O A/B/C padrão não é mais criado junto. Se você mexeu no
+    programa, ele nunca é descartado.
+  - Quem já tem treino montado: no dia em que cria o rápido, a tela mostra
+    só a aba Q, com o botão "Meu treino" (seta) ao lado para voltar ao
+    A, B, C. Os treinos A, B, C continuam guardados e nada é apagado. No
+    dia seguinte as abas voltam sozinhas. Retomar um treino em aberto
+    de outro dia, montar um programa novo ou restaurar um backup também
+    mostram as abas de novo.
+  - Se você remover o treino rápido e ele era o único, o app volta para a
+    página de início. A tela de Progresso não mostra mais a "sua semana"
+    do PPL para quem só tem o rápido.
+
+A seguir, as novidades da v21.
+
+========================================
+NOVIDADES DA VERSÃO ANTERIOR (iron-v21)
 ========================================
 - Botão "Já tenho conta · Entrar" da página de início: a janela de login
   abria por trás da página de início e parecia que o botão não fazia nada.
@@ -44,7 +65,8 @@ NOVIDADES DA VERSÃO ANTERIOR (iron-v20)
   (ou "Corpo todo") e o tempo (20, 30, 45 ou 60 min). O IRON monta um
   treino completo, mostra a prévia com o tempo estimado e, com
   "Começar este treino", guarda como o dia Q. Os dias A, B, C... não são
-  tocados. Em instalação nova, o programa padrão (PPL) também é criado.
+  tocados. (Até a v21, em instalação nova o programa padrão PPL era criado
+  junto; a partir da v22 o rápido fica sozinho.)
   - Musculação: os grupos escolhidos entram todos, compostos primeiro e
     abdômen/panturrilha no fim. Com pouco tempo, as séries ficam em no
     máximo 3 e o descanso diminui um pouco (em força o descanso longo
