@@ -478,6 +478,19 @@ html[data-theme=dark] .modal input,html[data-theme=dark] .modal select{color-sch
   border:1.5px solid transparent;border-radius:var(--r-m);padding:14px 16px;color:var(--label);
   font-weight:400;font-size:17px;text-align:center;box-shadow:var(--shadow-1)}
 .ob-name:focus{outline:none;border-color:var(--accent)}
+.ob-btn.qk{box-shadow:var(--shadow-1),inset 0 0 0 1.5px var(--accent)}
+.qk-note{font-size:13.5px;color:var(--label2);line-height:1.45}
+.qk-act{display:flex;gap:10px;margin:0 0 10px}
+.qk-act button{flex:1;border:none;background:var(--fill);color:var(--accent-text);border-radius:var(--r-s);padding:12px 10px;
+  font-weight:500;font-size:14.5px;cursor:pointer;min-height:44px}
+.qk-act button.rm{color:var(--label2)}
+.rday .rex .ssb{font-size:11px;color:var(--accent-text);font-weight:600;margin-left:6px}
+.ob-lang{position:absolute;top:calc(env(safe-area-inset-top,0px) + 6px);right:max(8px,env(safe-area-inset-right,0px));display:flex;z-index:2}
+.ob-lang button{background:none;border:none;padding:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ob-lang .fl{display:block;width:26px;height:18px;border-radius:3px;overflow:hidden;opacity:.45;box-shadow:0 0 0 1px var(--fill);transition:opacity .15s,transform .15s}
+.ob-lang .fl svg{display:block;width:100%;height:100%}
+.ob-lang button.on .fl{opacity:1;box-shadow:0 0 0 1.5px var(--accent)}
+.ob-lang button:active .fl{transform:scale(.92)}
 .qb .ob-name{max-width:100%;text-align:left;box-shadow:none;background:var(--fill);margin:0}
 .ob h2{font-size:28px;font-weight:700;letter-spacing:-.022em;margin-bottom:4px}
 .ob .lead{color:var(--label2);font-size:15px;line-height:1.45;margin-bottom:18px;letter-spacing:-.01em}
@@ -2648,7 +2661,7 @@ function setLang(l){LANG=l;save('iron_lang',LANG);document.documentElement.lang=
   const obEl=$('ob');if(obEl&&!obEl.classList.contains('hidden'))renderOB();
   toast(l==='pt-BR'?'Idioma: Português':'Language: English')}
 function openLangPicker(){
-  const opts=[['pt-BR','🇧🇷 Português (Brasil)'],['en','🇺🇸 English']];
+  const opts=[['pt-BR','🇧🇷 Português (Brasil)'],['en','🇬🇧 English']];
   boxOpen(`<h3>🌐 Idioma / Language</h3>
     <div class="sub">${t('idiomalangsub')}</div>
     <div class="mlist">${opts.map(([code,label])=>
@@ -2802,6 +2815,8 @@ const MUS_EN={'Abdômen':'Abs','Abdômen inferior':'Lower abs','Adutores':'Adduc
 'Pescoço (flexores)':'Neck (flexors)','Pescoço (extensores)':'Neck (extensors)','Pescoço (lateral)':'Neck (lateral)','Pescoço (estabilização)':'Neck (stabilization)','Pescoço + trapézio':'Neck + traps',
 'Antebraço (flexores)':'Forearm (flexors)','Antebraço (extensores)':'Forearm (extensors)','Manguito rotador':'Rotator cuff','Posterior de coxa (excêntrico)':'Hamstrings (eccentric)','Core (anti-rotação)':'Core (anti-rotation)'};
 Object.keys(GRP_LABEL).forEach(g=>{if(!MUS_EN[GRP_LABEL[g]])MUS_EN[GRP_LABEL[g]]=GRP_LABEL_EN[g]});
+Object.assign(I18N['pt-BR'],{"qk_btn": "Criar treino rápido do dia", "qk_title": "Treino rápido do dia", "qk_lead": "Escolha o objetivo, os grupos e o tempo. O IRON monta um treino completo para hoje e guarda como o dia Q, sem mexer nos seus outros treinos.", "qk_goal": "Objetivo", "qk_groups": "Grupos musculares", "qk_groupshint": "Toque nos grupos que quer treinar. Sem escolher nenhum, o treino cobre o corpo todo.", "qk_full": "Corpo todo", "qk_hiithint": "Opcional: pernas e glúteos dão um HIIT de pernas; peito, costas, ombros e braços, um HIIT de parte superior. Sem escolher, vem corpo todo.", "qk_funchint": "O treino funcional já trabalha o corpo todo, em circuito. Escolha só o tempo.", "qk_cardiohint": "Aqui o foco é condicionamento. Até 30 min vem cardio intervalado; com 45 min ou mais, cardio contínuo.", "qk_time": "Quanto tempo você tem?", "qk_timehint": "Tempo estimado de treino, sem contar o aquecimento.", "qk_min": "min", "qk_gen": "Gerar treino", "qk_ready": "Seu treino rápido", "qk_dropped": "Não coube neste tempo: {g}. Escolha mais minutos para incluir.", "qk_start": "Começar este treino", "qk_replace": "O treino rápido atual tem séries marcadas. Substituir por este?", "qk_pronto": "Treino rápido pronto: aba Q", "qk_redo": "Novo treino rápido", "qk_remove": "Remover este treino", "qk_removeconf": "Este treino rápido tem séries marcadas. Remover mesmo assim?", "qk_removido": "Treino rápido removido"});
+Object.assign(I18N.en,{"qk_btn": "Create a quick workout for today", "qk_title": "Quick workout for today", "qk_lead": "Pick a goal, the muscle groups and your time. IRON builds a complete workout for today and saves it as day Q, without touching your other workouts.", "qk_goal": "Goal", "qk_groups": "Muscle groups", "qk_groupshint": "Tap the groups you want to train. Pick none and the workout covers the whole body.", "qk_full": "Full body", "qk_hiithint": "Optional: legs and glutes give a leg HIIT; chest, back, shoulders and arms give an upper-body HIIT. Pick none for full body.", "qk_funchint": "Functional training already works the whole body, in a circuit. Just pick your time.", "qk_cardiohint": "The focus here is conditioning. Up to 30 min gives interval cardio; 45 min or more gives steady cardio.", "qk_time": "How much time do you have?", "qk_timehint": "Estimated training time, warm-up not included.", "qk_min": "min", "qk_gen": "Generate workout", "qk_ready": "Your quick workout", "qk_dropped": "Didn't fit in this time: {g}. Pick more minutes to include them.", "qk_start": "Start this workout", "qk_replace": "The current quick workout has sets checked. Replace it with this one?", "qk_pronto": "Quick workout ready: tab Q", "qk_redo": "New quick workout", "qk_remove": "Remove this workout", "qk_removeconf": "This quick workout has sets checked. Remove it anyway?", "qk_removido": "Quick workout removed"});
 function grpLabel(g){return LANG==='en'?(GRP_LABEL_EN[g]||GRP_LABEL[g]):GRP_LABEL[g]}
 function musLabel(m){return LANG==='en'?(MUS_EN[m]||m):m}
 const E={
@@ -3956,6 +3971,7 @@ function nameMaps(){
 /* nome de treino salvo em qualquer idioma -> idioma atual */
 function trLbl(l){
   if(!l||typeof l!=='string')return l;
+  if(l.indexOf(' · ')>0&&/^(Rápido|Quick) · /.test(l))return qkTrLbl(l);
   if(LANG==='en'){
     if(SPLIT_LABEL_EN[l])return SPLIT_LABEL_EN[l];
     let m=/^Funcional (\w)$/.exec(l);if(m)return 'Functional '+m[1];
@@ -3971,6 +3987,7 @@ function trSub(s){return LANG==='en'?(SPLIT_SUB_EN[s]||s):(SPLIT_SUB_PT[s]||s)}
 const hLabel=h=>trLbl(h.label);
 function buildDayIntro(meta){
   if(!meta)return '';
+  if(meta.quick)return qkIntro(meta);
   if(meta.kind==='tpl'){
     const tp=tplById(meta.tpl),en=LANG==='en',note=(GOAL_NOTE[meta.goal]||GOAL_NOTE.geral)[en?1:0];
     const nm=tp?tName(tp):trSplitName(meta.spName);
@@ -3993,12 +4010,14 @@ function buildDayIntro(meta){
 }
 function buildDayLabel(meta,fallback){
   if(!meta)return fallback;
+  if(meta.quick)return qkLabel(meta);
   if(meta.kind==='cardio')return trLbl(meta.cardioName||fallback);
   if(meta.kind==='functional')return (LANG==='en'?'Functional ':'Funcional ')+meta.letter;
   return trLbl(fallback);
 }
 function buildDaySub(meta,fallback){
   if(!meta)return fallback;
+  if(meta.quick)return qkSub(meta);
   if(meta.kind==='cardio')return LANG==='en'?'Conditioning':'Condicionamento';
   if(meta.kind==='functional')return LANG==='en'?'Full body · circuit':'Full body · circuito';
   return trSub(fallback);
@@ -4092,7 +4111,13 @@ let THEME=load('iron_theme','dark');
 let CUSTOM_EX=load('iron_customex',{});
 Object.assign(E,CUSTOM_EX);
 let SETUP=load('iron_setup',null);
-LANG=load('iron_lang','pt-BR');if(LANG!=='pt-BR'&&LANG!=='en')LANG='pt-BR';
+LANG=load('iron_lang',null);
+if(LANG!=='pt-BR'&&LANG!=='en'){
+  let had=false;try{had=['iron_setup','iron_program','iron_history','iron_weights','iron_customex'].some(k=>localStorage.getItem(k)!==null)}catch(e){}
+  LANG=had?'pt-BR':'en';
+  save('iron_lang',LANG);  /* grava já na primeira abertura: o app cria dados logo em seguida e, sem isso, a 2a abertura pareceria "usuário antigo" */
+}
+document.documentElement.lang=LANG;
 let PROGRAM=load('iron_program',null);
 let cur='A', view='train';
 
@@ -4532,6 +4557,11 @@ function renderTrain(){
   ad.className='radd big';ad.textContent=t('addextra');
   ad.onclick=()=>progAddOpen();
   list.appendChild(ad);
+  if(day.meta&&day.meta.quick){
+    const qa=document.createElement('div');qa.className='qk-act';
+    qa.innerHTML=`<button onclick="qkOpen('day')">⚡ ${t('qk_redo')}</button><button class="rm" onclick="qkRemove()">${t('qk_remove')}</button>`;
+    list.appendChild(qa);
+  }
   updateProgress();
 }
 function refreshCard(baseId){
@@ -5566,22 +5596,30 @@ function openWizard(editing){
   window.scrollTo({top:0});
 }
 function closeOB(){$('ob').classList.add('hidden')}
+/* bandeiras em SVG (aparecem iguais em qualquer aparelho, ao contrário do emoji) */
+const FLAG_UK='<svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#012169"/><path d="M0,0 60,40M60,0 0,40" stroke="#fff" stroke-width="8"/><path d="M0,0 60,40M60,0 0,40" stroke="#C8102E" stroke-width="3"/><path d="M30,0V40M0,20H60" stroke="#fff" stroke-width="13"/><path d="M30,0V40M0,20H60" stroke="#C8102E" stroke-width="8"/></svg>';
+const FLAG_BR='<svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#009C3B"/><path d="M30,3.5 56.5,20 30,36.5 3.5,20Z" fill="#FFDF00"/><circle cx="30" cy="20" r="9" fill="#002776"/><path d="M21.5,18.2Q30,14.6 38.6,21.6" stroke="#fff" stroke-width="1.8" fill="none"/></svg>';
+/* troca o idioma na página de início sem perder o nome já digitado */
+function obSetLang(l){const n=$('obName');if(n)OBDATA.name=n.value;if(LANG!==l)setLang(l);else renderOB()}
 function renderOB(){
   const ob=$('ob');
+  if(OBSTEP==='q'){renderQuick();return}
   const steps=`<div class="ob-steps">${[0,1,2].map(i=>`<i class="${i<=OBSTEP?'on':''}"></i>`).join('')}</div>`;
   if(OBSTEP===0){
-    const hasData=HISTORY.length>0||Object.keys(WEIGHTS).length>0;
     ob.innerHTML=`<div class="ob-in">
       <div class="ob-hero">
+        <div class="ob-lang" role="group" aria-label="Language / Idioma">
+          <button type="button" class="${LANG==='en'?'on':''}" data-l="en" aria-pressed="${LANG==='en'}" aria-label="English (UK)" title="English (UK)" onclick="obSetLang('en')"><span class="fl">${FLAG_UK}</span></button>
+          <button type="button" class="${LANG==='pt-BR'?'on':''}" data-l="pt-BR" aria-pressed="${LANG==='pt-BR'}" aria-label="Português (Brasil)" title="Português (Brasil)" onclick="obSetLang('pt-BR')"><span class="fl">${FLAG_BR}</span></button>
+        </div>
         <div class="logo"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="#181818"/></svg></div>
         <h1>${t('bemvindo')} <em>IRON</em></h1>
         <p>${t('heroSub')}</p>
         <input class="ob-name" id="obName" placeholder="${t('seunomeph')}" value="${OBDATA.name||''}" maxlength="20">
         <div class="ob-cta">
           <button class="ob-btn pri" onclick="obGoForm()">${t('montarmeutreino')}</button>
-          ${SETUP?`<button class="ob-btn" onclick="closeOB()">${t('voltarpromeutreino')}</button>`:
-           hasData?`<button class="ob-btn" onclick="obUseDefault()">${t('continuarppl')}</button>`:
-                    `<button class="ob-btn" onclick="obUseDefault()">${t('usarpadraoppl')}</button>`}
+          <button class="ob-btn qk" onclick="qkOpen('start')">⚡ ${t('qk_btn')}</button>
+          ${SETUP?`<button class="ob-btn" onclick="closeOB()">${t('voltarpromeutreino')}</button>`:''}
           ${SB_ON()&&!sbUser?`<button class="ob-btn ghost" onclick="$('acct').click()">${t('jatenhoconta')}</button>`:''}
         </div>
       </div></div>`;
@@ -5701,6 +5739,298 @@ function obGrabBodyKg(){const i=$('obBodyKg');if(i&&i.value){const v=parseFloat(
 function obGrabName(){const i=$('obName2')||$('obName');if(i)OBDATA.name=i.value.trim();obGrabBodyKg()}
 function obGoForm(){const i=$('obName');if(i)OBDATA.name=i.value.trim();OBSTEP=1;renderOB();window.scrollTo({top:0})}
 function obUseDefault(){const i=$('obName');if(i)OBDATA.name=i.value.trim();useDefault()}
+/* =================== TREINO RÁPIDO DO DIA ===================
+   Objetivo + grupos + tempo -> um dia completo (musculação, funcional, HIIT, circuito ou cardio) guardado como o dia extra Q.
+   Reaproveita o gerador de modelos (generateFromTpl) com um bloco de dia montado na hora. Nunca mexe nos dias A, B, C... */
+const QK_GOALS=['hipertrofia','forca','emagrecimento','hiit','funcional','circuito','cardio','resistencia','geral'];
+const QK_TIMES=[20,30,45,60];
+const QK_CHIPS=['chest','back','shoulders','arms','legs','glutes','core','calf'];
+const QK_PRIO=['legs','chest','back','shoulders','arms','glutes','core','calf'];   /* com pouco tempo, entram primeiro os da frente */
+const QK_FULL=['legs','chest','back','shoulders','arms','core'];
+const QK_SLOTS={
+ chest:['barbellbench/chestpress/dbbench','inclinedb/inclinebench/inclinepushup','pecdeck/cablefly/dbfly','cablecrossover/lowcablefly','declinebench/declinedb/chestdips','pushupv/dbpullover'],
+ back:['pullupv/latpull/neutralpull','bentrow/seatedrow/tbar','onearmrow/cablerow1/widerow','lowrow/neutralpull/widerow','straightarm/dbpullover','shrugv'],
+ shoulders:['dbshoulder/shoulderpress/ohpv','sidelat/latraisemachine/cablelatv/seateddblat','dbrevfly/reversefly/facepullv','arnoldpress/dbpressstand','frontraise/cablefrontraise','uprightrow/facepullv'],
+ arms:['biceps/ezcurl/preachercurl','triceps/pushdownbar/skullcrusher','hammer/inclinecurl/cablecurl','overheadtriceps/dbtriext/benchdipv','concentrationcurl/zottman/cablehammer','diamondpushup/benchdipv/dbkickback'],
+ legs:['backsquat/legpress/hacksquat/smithsquat','rdlv/rdlbarv','legext/lungev','legcurl/lyinglegcurl/ballegcurl','walkinglunge/bulgarian/stepup/legpresssingle','goblet2/frontsquat'],
+ glutes:['hipthrustv/hipthrustmachine/glutekick','bulgarian/walkinglunge/stepup','glutekick/abductor','rdlv/rdlbarv','abductor/bridgev'],
+ core:['plankv/deadbug/absfull','cablecrunchv/absfull/weightedcrunch','legraisev/reversecrunch/hangingraisev','russiantwist/cablewoodchop/crosscrunch','sideplank/bicyclecrunch'],
+ calf:['calf/dbcalf/seatedcalf','seatedcalf/dbcalf/calf'],
+ pad:['legext/lungev','legcurl/lyinglegcurl/ballegcurl','walkinglunge/bulgarian/stepup/legpresssingle']   /* completa o dia quando o grupo pedido tem poucas vagas (só panturrilha) */
+};
+const QK_BLK={
+ hiit:{all:['HI_TABATA','HI_FULL','HI_LO','HI_UP','HI_KB'],low:['HI_LO','HI_TABATA','HI_KB'],up:['HI_UP','HI_TABATA','HI_KB'],mach:['HI_MACH','HI_MACH2']},
+ funcional:{all:['FU_A','FU_B','FU_C'],body:['FU_BW','FU_BW2']},
+ cardio:{short:['CA_I_A','CA_I_B','CA_I_C'],long:['CA_Z_A','CA_Z_B','CA_Z_C']}
+};
+const QK_LOW=['legs','glutes','calf'],QK_UP=['chest','back','shoulders','arms'];
+const qkNoGrp=g=>{const d=GOALS[g]||{};return !!(d.cardioFocus||d.functionalFocus)};
+let QK=null,QKSTEP='pick',QKPREV=null,QKFROM='start';
+
+/* tempo estimado de um exercício (segundos): séries x (trabalho + descanso) + troca de aparelho */
+function qkSecOf(it){
+  const rp=String(it.reps==null?'':it.reps).replace(/,/g,'.');
+  const nums=(rp.match(/\d+(?:\.\d+)?/g)||[]).map(Number);
+  const mid=nums.length?nums.reduce((a,b)=>a+b,0)/nums.length:10;
+  let work;
+  if(/min/i.test(rp))work=mid*60;
+  else if(/\d\s*s\b/.test(rp))work=mid;
+  else if(/metros/i.test(rp))work=mid*1.2;
+  else if(/passos/i.test(rp))work=mid*.8;
+  else work=Math.max(20,Math.min(75,mid*3.5));
+  if(/\/\s*(lado|perna)|cada lado/i.test(rp))work*=2;
+  const sets=Math.max(1,it.sets||1),rest=it.rest||0;
+  return sets*work+(sets-1)*rest+(it.ss?20:60);
+}
+const qkEst=ex=>Math.round(ex.reduce((s,it)=>s+qkSecOf(it),0)/60);
+
+/* reparte as vagas entre os grupos (1 de cada, depois o 2º de cada...) e põe compostos antes de isolados, panturrilha e core no fim */
+function qkAlloc(gs,n,seed,lim){
+  const lists=gs.map(g=>{let l=QK_SLOTS[g].slice();
+    if(lim&&lim[g]!=null)l=l.slice(0,lim[g]);
+    if(seed>0&&l.length>2){const tail=l.slice(1),r=seed%tail.length;return [l[0]].concat(tail.slice(r),tail.slice(0,r))}
+    return l});
+  const out=[];
+  for(let r=0;out.length<n;r++){
+    let any=false;
+    lists.forEach(l=>{if(r<l.length&&out.length<n){out.push(l[r]);any=true}});
+    if(!any)break;
+  }
+  const rk=s=>{const e=E[s.split('/')[0]],c=e?e.cat:'';return c==='comp'?0:c==='iso'?1:c==='calf'?2:3};
+  return out.map((s,i)=>[s,i]).sort((a,b)=>(rk(a[0])-rk(b[0]))||(a[1]-b[1])).map(x=>x[0]);
+}
+/* treino rápido de musculação: poucas séries e descanso um pouco menor (força mantém o descanso longo) */
+function qkCompress(ex,o){
+  const cap=o.min<=30?3:o.min<=45?4:9,k=o.min<=30?.75:o.min<=45?.9:1;
+  ex.forEach(it=>{
+    if((it.sets||0)>cap)it.sets=cap;
+    const c=E[it.id]&&E[it.id].cat;
+    if(o.goal!=='forca'&&k<1&&it.rest&&(c==='comp'||c==='iso'))it.rest=Math.max(30,Math.round(it.rest*k/5)*5);
+  });
+}
+/* dupla sem par (o parceiro era repetido) volta a ser exercício normal */
+function qkCleanPairs(ex){
+  const c={};ex.forEach(it=>{if(it.ss)c[it.ss]=(c[it.ss]||0)+1});
+  ex.forEach(it=>{if(it.ss&&c[it.ss]<2){delete it.ss;if(!it.rest)it.rest=20}});
+}
+/* duplas de circuito terminam juntas: todas com o menor número de séries da dupla */
+function qkEqualize(ex){
+  const t={};ex.forEach(it=>{if(it.ss)t[it.ss]=Math.min(t[it.ss]||99,it.sets||1)});
+  ex.forEach(it=>{if(it.ss)it.sets=t[it.ss]});
+}
+/* corta o dia até caber no tempo: primeiro séries (em dupla juntas), depois os últimos exercícios */
+function qkMinItem(it){return /min/i.test(String(it.reps))&&(it.sets||1)===1}
+function qkShrinkMin(it,f){
+  let r=String(it.reps).replace(/\d+/g,n=>String(Math.max(4,Math.round(n*f))));
+  const m=/^(\d+)–(\d+)(.*)$/.exec(r);if(m&&m[1]===m[2])r=m[1]+m[3];
+  it.reps=r;
+}
+function qkFit(ex,limitMin){
+  let guard=80;
+  while(qkEst(ex)>limitMin&&guard--){
+    const mi=ex.filter(it=>qkMinItem(it)&&Math.max.apply(null,(String(it.reps).match(/\d+/g)||[0]).map(Number))>8);
+    if(mi.length){mi.forEach(it=>qkShrinkMin(it,.85));continue}
+    let bi=-1,bs=-1;
+    ex.forEach((it,i)=>{if((it.sets||1)>2){const s=qkSecOf(it);if(s>bs){bs=s;bi=i}}});
+    if(bi>=0){const tag=ex[bi].ss;ex.forEach(x=>{if(x===ex[bi]||(tag&&x.ss===tag)){if((x.sets||1)>2)x.sets-=1}});continue}
+    if(ex.length>3){
+      const gone=ex.pop();
+      if(gone.ss){const left=ex.filter(x=>x.ss===gone.ss);if(left.length<2)left.forEach(x=>{delete x.ss;if(!x.rest)x.rest=30})}
+      continue;
+    }
+    break;
+  }
+}
+function qkHiitKey(gs,style){
+  if(style==='mach')return 'mach';
+  const g=gs.filter(x=>x!=='core');
+  if(!g.length)return 'all';
+  if(g.every(x=>QK_LOW.indexOf(x)>=0))return 'low';
+  if(g.every(x=>QK_UP.indexOf(x)>=0))return 'up';
+  return 'all';
+}
+function qkMake(o){
+  const gd=GOALS[o.goal]||GOALS.hipertrofia;
+  const style=o.goal==='cardio'?'mix':(o.style||'mix');
+  const seed=o.vseed||0;
+  const base={groups:Object.keys(GRP_LABEL),splits:1,freq:1,first:'',cardioPrefs:[],style,vseed:seed,goal:o.goal};
+  const build=(key,n,ign,fin)=>{
+    const tpl={id:'quick',goal:o.goal,n:1,days:[key],pd:n,ign,circ:o.goal==='circuito',pt:'Rápido',en:'Quick'};
+    return generateFromTpl({...base,perDay:n,finisher:fin},tpl).A;
+  };
+  const wanted=qkNoGrp(o.goal)?[]:QK_CHIPS.filter(g=>(o.groups||[]).indexOf(g)>=0);
+  let day,est,dropped=[];
+  if(!gd.cardioFocus&&!gd.functionalFocus&&!gd.hiitFocus){
+    let gs=QK_PRIO.filter(g=>wanted.indexOf(g)>=0);
+    if(!gs.length)gs=QK_FULL.slice();
+    const nsl=a=>a.reduce((s,g)=>s+QK_SLOTS[g].length,0);
+    const lim={},need=4-nsl(gs);
+    if(need>0){gs.push('pad');lim.pad=need}   /* ex.: só panturrilha tem 2 vagas: completa com 2 de pernas */
+    const fin=o.min>=45&&!!gd.finisherDefault;
+    let best=null;
+    for(let n=8;n>=3;n--){
+      const use=gs.slice(0,n);
+      TD.QK={l:['Rápido','Quick'],s:['',''],x:qkAlloc(use,n+1,seed,lim)};
+      const d=build('QK',n,true,fin);qkCompress(d.ex,o);qkEqualize(d.ex);const e=qkEst(d.ex);
+      best={d,e,use};
+      if(e<=o.min*1.08)break;
+    }
+    delete TD.QK;
+    day=best.d;est=best.e;
+    dropped=wanted.filter(g=>best.use.indexOf(g)<0);
+  }else{
+    let keys;
+    if(o.goal==='hiit')keys=QK_BLK.hiit[qkHiitKey(wanted,style)];
+    else if(o.goal==='funcional')keys=style==='body'?QK_BLK.funcional.body:QK_BLK.funcional.all;
+    else keys=o.min>=40?QK_BLK.cardio.long:QK_BLK.cardio.short;
+    const cands=keys.filter(k=>TD[k]).map(k=>{const d=build(k,8,false,false);return {k,d,e:qkEst(d.ex)}});
+    cands.sort((a,b)=>Math.abs(a.e-o.min)-Math.abs(b.e-o.min));
+    const pk=cands[seed%Math.min(cands.length,3)];
+    day=pk.d;
+    if(pk.e<o.min*.7&&(o.goal==='hiit'||o.goal==='funcional')&&cands.length>1){
+      let b2=null;
+      cands.forEach(c=>{if(c===pk)return;const sc=Math.abs(pk.e+c.e-o.min);if(!b2||sc<b2.sc)b2={c,sc}});
+      const used=new Set(day.ex.map(e=>e.id)),tm={};
+      b2.c.d.ex.forEach(e=>{
+        if(used.has(e.id))return;
+        const x={...e};
+        if(x.ss){if(!tm[x.ss])tm[x.ss]='T2'+Object.keys(tm).length;x.ss=tm[x.ss]}
+        day.ex.push(x);used.add(x.id);
+      });
+    }
+    qkCleanPairs(day.ex);qkEqualize(day.ex);
+    if(qkEst(day.ex)>o.min*1.15)qkFit(day.ex,o.min*1.1);
+    est=qkEst(day.ex);
+  }
+  day.meta=Object.assign({},day.meta,{quick:true,qgoal:o.goal,qgroups:wanted,qmin:o.min,qest:est,qseed:seed,letter:'Q',freq:1});
+  day.label=qkLabel(day.meta);day.sub=qkSub(day.meta);day.intro=qkIntro(day.meta);
+  return {day,est,dropped};
+}
+
+/* ---- textos do dia rápido (calculados no idioma atual) ---- */
+function qkFocus(m){
+  const en=LANG==='en',g=m.qgoal,gs=m.qgroups||[];
+  if(g==='hiit'||g==='funcional'||g==='cardio')return goalLabel(g);
+  if(!gs.length||gs.length>=6)return en?'Full body':'Corpo todo';
+  if(gs.length<=2)return gs.map(grpLabel).join(' + ');
+  return gs.length+' '+(en?'groups':'grupos');
+}
+function qkLabel(m){return (LANG==='en'?'Quick':'Rápido')+' · '+qkFocus(m)}
+function qkSub(m){return goalLabel(m.qgoal)+' · ~'+m.qest+' min'}
+function qkIntro(m){
+  const en=LANG==='en',g=m.qgoal,f=qkFocus(m);
+  const strength=!(g==='hiit'||g==='funcional'||g==='cardio');
+  const bits=[en?'Quick workout':'Treino rápido',goalLabel(g)];
+  if(strength)bits.push(f);
+  bits.push('~'+m.qest+' min');
+  return bits.join(' · ')+'. '+(en?'Built to fit your time; your other workouts stay as they were.':'Montado para caber no seu tempo; seus outros treinos continuam como estavam.');
+}
+function qkTrLbl(l){
+  const m=/^(Rápido|Quick) · (.+)$/.exec(l);if(!m)return l;
+  const en=LANG==='en',pre=en?'Quick':'Rápido',tail=m[2];
+  if(tail==='Corpo todo'||tail==='Full body')return pre+' · '+(en?'Full body':'Corpo todo');
+  const k=/^(\d+) (grupos|groups)$/.exec(tail);if(k)return pre+' · '+k[1]+' '+(en?'groups':'grupos');
+  const gk=Object.keys(GOALS).find(x=>GOALS[x].label===tail||(GOALS_EN[x]&&GOALS_EN[x].label===tail));
+  if(gk)return pre+' · '+goalLabel(gk);
+  const parts=tail.split(' + ').map(s=>{const key=Object.keys(GRP_LABEL).find(g=>GRP_LABEL[g]===s||GRP_LABEL_EN[g]===s);return key?grpLabel(key):s});
+  return pre+' · '+parts.join(' + ');
+}
+
+/* ---- telas ---- */
+function qkInit(){
+  const old=PROGRAM&&PROGRAM.Q&&PROGRAM.Q.meta&&PROGRAM.Q.meta.quick?PROGRAM.Q.meta:null;
+  QK={goal:old?old.qgoal:(SETUP&&QK_GOALS.indexOf(SETUP.goal)>=0?SETUP.goal:'hipertrofia'),
+      groups:old?(old.qgroups||[]).slice():[],min:old&&QK_TIMES.indexOf(old.qmin)>=0?old.qmin:30,vseed:0,
+      style:(SETUP&&SETUP.style)||'mix'};
+}
+function qkOpen(from){
+  const i=$('obName');if(i){OBDATA=OBDATA||{};OBDATA.name=i.value.trim()}
+  QKFROM=from||'start';QKSTEP='pick';QKPREV=null;qkInit();
+  OBSTEP='q';$('ob').classList.remove('hidden');renderOB();
+  $('ob').scrollTop=0;window.scrollTo({top:0});
+}
+function qkBack(){
+  if(QKFROM==='day'){closeOB();return}
+  OBSTEP=0;QKPREV=null;QKSTEP='pick';renderOB();$('ob').scrollTop=0;
+}
+function qkSetGoal(g){QK.goal=g;QK.vseed=0;renderOB()}
+function qkTglGrp(g){const i=QK.groups.indexOf(g);if(i>=0)QK.groups.splice(i,1);else QK.groups.push(g);QK.vseed=0;renderOB()}
+function qkFullBody(){QK.groups=[];QK.vseed=0;renderOB()}
+function qkSetMin(m){QK.min=m;QK.vseed=0;renderOB()}
+function qkGen(){QKPREV=qkMake(QK);QKSTEP='prev';renderOB();$('ob').scrollTop=0}
+function qkVar(){QK.vseed=(QK.vseed||0)+1;QKPREV=qkMake(QK);renderOB();toast(t('variacaoaplicada'))}
+function qkToPick(){QKSTEP='pick';renderOB();$('ob').scrollTop=0}
+function renderQuick(){
+  const ob=$('ob');
+  if(!QK)qkInit();
+  if(QKSTEP==='prev'&&QKPREV){
+    const d=QKPREV.day,m=d.meta,sets=d.ex.reduce((s,e)=>s+(e.sets||0),0);
+    const drop=QKPREV.dropped.length?`<div class="qb qk-note">${escH(t('qk_dropped').replace('{g}',QKPREV.dropped.map(grpLabel).join(', ')))}</div>`:'';
+    ob.innerHTML=`<div class="ob-in">
+      <h2>${t('qk_ready')}</h2>
+      <div class="lead">${escH(qkIntro(m))}</div>
+      ${drop}
+      <div class="rday">
+        <div class="rhead"><div class="lt" style="background:var(--accent);color:var(--accent-ink)">Q</div>
+          <div class="tx"><b>${escH(qkLabel(m))}</b><small>${d.ex.length} ${t('exercicios')} · ${sets} ${t('series')} · ~${QKPREV.est} ${t('qk_min')}</small></div></div>
+        ${d.ex.map((e,i)=>`<div class="rex"><div class="rn">${i+1}</div>
+          <div class="rtx"><b>${escH(exName(e.id,e.name))}${e.ss?`<span class="ssb">${t('supersettxt')}</span>`:''}</b><small>${musLabel(e.muscle)} · ${e.sets}×${e.reps}${e.rest?` · ${e.rest}s`:''}</small></div></div>`).join('')}
+      </div>
+      <button class="ob-btn ob-var" onclick="qkVar()">🔀 ${t('outravariacao')}</button>
+      <div class="hint" style="margin:6px 2px 14px;font-size:12.5px;color:var(--label2)">${t('variacaohint')}</div>
+      <div class="ob-nav">
+        <button class="ob-btn" onclick="qkToPick()">${t('voltar')}</button>
+        <button class="ob-btn pri" onclick="qkCommit()">${t('qk_start')}</button>
+      </div></div>`;
+    return;
+  }
+  const o=QK,G=GOALS[o.goal],noGrp=qkNoGrp(o.goal),isHiit=!!G.hiitFocus;
+  const grpBlock=o.goal==='cardio'?`<div class="qb"><h4>${t('qk_groups')}</h4><div class="hint" style="margin:0">${t('qk_cardiohint')}</div></div>`:
+    noGrp?`<div class="qb"><h4>${t('qk_groups')}</h4><div class="hint" style="margin:0">${t('qk_funchint')}</div></div>`:`
+    <div class="qb"><h4>${t('qk_groups')}</h4>
+      <div class="hint">${isHiit?t('qk_hiithint'):t('qk_groupshint')}</div>
+      <div class="qchips">
+        <button class="qchip${o.groups.length?'':' on'}" onclick="qkFullBody()">${t('qk_full')}</button>
+        ${QK_CHIPS.map(g=>`<button class="qchip${o.groups.indexOf(g)>=0?' on':''}" onclick="qkTglGrp('${g}')">${grpLabel(g)}</button>`).join('')}
+      </div></div>`;
+  ob.innerHTML=`<div class="ob-in">
+    <h2>${t('qk_title')}</h2>
+    <div class="lead">${t('qk_lead')}</div>
+    <div class="qb"><h4>${t('qk_goal')}</h4>
+      <div class="hint">${G.icon} ${goalDesc(o.goal)}</div>
+      <div class="qchips">${QK_GOALS.map(g=>`<button class="qchip${o.goal===g?' on':''}" onclick="qkSetGoal('${g}')">${GOALS[g].icon} ${goalLabel(g)}</button>`).join('')}</div>
+    </div>
+    ${grpBlock}
+    <div class="qb"><h4>${t('qk_time')}</h4>
+      <div class="hint">${t('qk_timehint')}</div>
+      <div class="qchips">${QK_TIMES.map(m=>`<button class="qchip${o.min===m?' on':''}" onclick="qkSetMin(${m})">${m} ${t('qk_min')}</button>`).join('')}</div>
+    </div>
+    <div class="ob-nav">
+      <button class="ob-btn" onclick="qkBack()">${t('voltar')}</button>
+      <button class="ob-btn pri" onclick="qkGen()">${t('qk_gen')}</button>
+    </div></div>`;
+}
+function qkCommit(){
+  if(!QKPREV)return;
+  if(PROGRAM&&PROGRAM.Q&&sessionStats('Q').done>0&&!confirm(t('qk_replace')))return;
+  if(!SETUP){SETUP={...DEFAULT_SETUP,name:(OBDATA&&OBDATA.name)||'',bodyKg:(OBDATA&&OBDATA.bodyKg)||undefined};save('iron_setup',SETUP)}
+  if(!PROGRAM||!Object.keys(PROGRAM).length)PROGRAM=generateProgram(SETUP);
+  PROGRAM.Q=QKPREV.day;
+  SESSION.Q={};delete SESSMETA.Q;
+  save('iron_session',SESSION);save('iron_sessmeta',SESSMETA);save('iron_program',PROGRAM);
+  cloudSync();
+  QKPREV=null;QKSTEP='pick';OPEN.Q=undefined;
+  closeOB();cur='Q';render();window.scrollTo({top:0});
+  toast(t('qk_pronto'));
+}
+function qkRemove(){
+  if(!PROGRAM||!PROGRAM.Q)return;
+  if(sessionStats('Q').done>0&&!confirm(t('qk_removeconf')))return;
+  delete PROGRAM.Q;delete SESSION.Q;delete SESSMETA.Q;
+  save('iron_program',PROGRAM);save('iron_session',SESSION);save('iron_sessmeta',SESSMETA);cloudSync();
+  cur=Object.keys(PROGRAM)[0];render();toast(t('qk_removido'));
+}
+
 /* aplica um modelo: define quantos treinos, frequência e exercícios por dia sugeridos */
 function obApplyTpl(tp){
   OBDATA.tpl=tp.id;OBDATA.splits=tp.n;OBDATA.freq=tp.freq;OBDATA.perDay=tp.pd;
@@ -6054,7 +6384,9 @@ function useDefault(){
   closeOB();cur='A';render();
 }
 function obFinish(){
+  const qkKeep=PROGRAM&&PROGRAM.Q&&PROGRAM.Q.meta&&PROGRAM.Q.meta.quick?PROGRAM.Q:null;
   SETUP={...OBDATA,default:false};PROGRAM=OBPROG;
+  if(qkKeep&&!PROGRAM.Q)PROGRAM.Q=qkKeep;
   if(OBDATA.bodyKg&&!BODYLOG.length){BODYLOG.push({d:todayISO(),kg:OBDATA.bodyKg});save('iron_bodylog',BODYLOG)}
   SESSION={};save('iron_session',SESSION);
   SESSMETA={};save('iron_sessmeta',SESSMETA);
@@ -7084,7 +7416,7 @@ async function exportPDF(){
 }
 
 /* =================== INIT =================== */
-const APP_VERSION='iron-v19';
+const APP_VERSION='iron-v20';
 /* atualização automática: confere versão nova ao abrir, ao voltar pro app e a cada 1h; aplica sozinha
    (se houver treino em andamento, espera o app ir pro segundo plano pra não interromper) */
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){

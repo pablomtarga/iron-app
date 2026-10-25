@@ -1,6 +1,45 @@
 IRON · Treino PPL — Pacote do app (PWA)
 
 ========================================
+NOVIDADES DESTA VERSÃO (iron-v20)
+========================================
+- Idioma na página de início: no canto de cima da tela de boas-vindas há
+  duas bandeirinhas discretas, Reino Unido (English) e Brasil (Português).
+  O padrão é English. A troca é na hora, mantém o nome já digitado e
+  fica salva neste aparelho. Também dá para trocar depois pelo ícone de
+  globo no topo do app.
+- Quem já usava o app e nunca tinha escolhido idioma continua em
+  Português: a atualização não muda o idioma de ninguém que já tem
+  treino, histórico ou cargas salvos. Só instalações novas começam em
+  English.
+
+- Treino rápido do dia: na página de início, o botão "Continuar com meu
+  treino atual (PPL)" foi trocado por "Criar treino rápido do dia". Você
+  escolhe o objetivo (hipertrofia, força, emagrecimento, HIIT, funcional,
+  circuito, cardio, resistência ou saúde geral), os grupos musculares
+  (ou "Corpo todo") e o tempo (20, 30, 45 ou 60 min). O IRON monta um
+  treino completo, mostra a prévia com o tempo estimado e, com
+  "Começar este treino", guarda como o dia Q. Os dias A, B, C... não são
+  tocados. Em instalação nova, o programa padrão (PPL) também é criado.
+  - Musculação: os grupos escolhidos entram todos, compostos primeiro e
+    abdômen/panturrilha no fim. Com pouco tempo, as séries ficam em no
+    máximo 3 e o descanso diminui um pouco (em força o descanso longo
+    continua). Se não couber tudo, os grupos de menor prioridade ficam de
+    fora e a prévia avisa quais.
+  - HIIT, funcional e cardio usam os blocos prontos do app. Em HIIT,
+    pernas/glúteos dão HIIT de pernas e peito/costas/ombros/braços dão
+    HIIT de parte superior. Com 45 e 60 min, HIIT e funcional juntam dois
+    blocos.
+  - O tempo mostrado é uma estimativa (séries, descanso e troca de
+    aparelho), sem aquecimento.
+  - "Outra variação" troca os exercícios por equivalentes. No dia Q há
+    os botões "Novo treino rápido" e "Remover este treino". Um novo treino
+    rápido substitui o Q (pergunta antes se houver séries marcadas).
+  - Reconstruir o programa em "Montar meu treino" mantém o dia Q.
+
+A seguir, as novidades da v19.
+
+========================================
 NOVIDADES DESTA VERSÃO (iron-v19)
 ========================================
 - Elevação Lateral na Máquina agora tem imagens: 2 quadros (início e fim)
