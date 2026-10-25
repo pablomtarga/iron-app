@@ -1,6 +1,25 @@
 IRON · Treino PPL — Pacote do app (PWA)
 
 ========================================
+NOVIDADES DESTA VERSÃO (iron-v19)
+========================================
+- Elevação Lateral na Máquina agora tem imagens: 2 quadros (início e fim)
+  desenhados para o IRON, mais a figura animada no passo a passo. Não são
+  fotos: não existe foto de uso livre dessa máquina. O crédito mostrado no
+  passo a passo desse exercício é "Ilustração própria do IRON"; nos demais
+  continua "Free Exercise DB (domínio público)". Se quiser fotos da
+  máquina da sua academia, basta trocar img/latraisemachine_0.webp e
+  img/latraisemachine_1.webp (360x240).
+- Último treino: no cartão da aba Treino agora aparece o dia da semana e a
+  data (por exemplo "Quinta-feira, 22 de out. · há 3 dias"). O bloco
+  "Último treino" do Progresso mostra a data embaixo da letra, e a janela
+  de detalhes traz o dia da semana por extenso.
+- Biblioteca: 230 exercícios, 227 com imagens e 3 sem (burpee, natação e
+  ponte de pescoço, que usam a figura animada).
+
+A seguir, as novidades da v18.
+
+========================================
 NOVIDADES DESTA VERSÃO (iron-v18)
 ========================================
 - Novo exercício: Elevação Lateral na Máquina (máquina de deltoides,
@@ -8,9 +27,8 @@ NOVIDADES DESTA VERSÃO (iron-v18)
   elevações laterais (halteres, polia, sentado e elástico), então o
   Treino B já salvo ganha a opção sem refazer nada. Tem assento de 0 a 7,
   carga própria e passo a passo em português e inglês.
-- Não existe foto livre de máquina de elevação lateral, então esse
-  exercício usa a figura animada. Por isso são 4 sem foto (burpee,
-  natação, ponte de pescoço e esta máquina).
+- Não existe foto livre dessa máquina; na v19 ela ganhou 2 quadros
+  desenhados para o IRON (veja acima).
 - Nos modelos de treino, a máquina entra como opção nas vagas de elevação
   lateral: o estilo "máquinas" a escolhe primeiro, e "Gerar outra
   variação" pode sorteá-la. Casa e peso do corpo nunca recebem a máquina.
