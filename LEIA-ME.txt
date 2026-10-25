@@ -1,6 +1,26 @@
 IRON · Treino PPL — Pacote do app (PWA)
 
 ========================================
+NOVIDADES DESTA VERSÃO (iron-v18)
+========================================
+- Novo exercício: Elevação Lateral na Máquina (máquina de deltoides,
+  tipo Technogym Delts Machine). Aparece como opção em todas as
+  elevações laterais (halteres, polia, sentado e elástico), então o
+  Treino B já salvo ganha a opção sem refazer nada. Tem assento de 0 a 7,
+  carga própria e passo a passo em português e inglês.
+- Não existe foto livre de máquina de elevação lateral, então esse
+  exercício usa a figura animada. Por isso são 4 sem foto (burpee,
+  natação, ponte de pescoço e esta máquina).
+- Nos modelos de treino, a máquina entra como opção nas vagas de elevação
+  lateral: o estilo "máquinas" a escolhe primeiro, e "Gerar outra
+  variação" pode sorteá-la. Casa e peso do corpo nunca recebem a máquina.
+- Importar CSV: "Lateral Raise (Machine)" vai para a máquina; "Lateral
+  Raise" continua indo para halteres.
+- Biblioteca: 230 exercícios (42 novos desde a v16).
+
+A seguir, as novidades da v17.
+
+========================================
 NOVIDADES DESTA VERSÃO (iron-v17)
 ========================================
 Treinos que mudam de verdade
