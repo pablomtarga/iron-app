@@ -416,6 +416,7 @@ html[data-theme=dark] .modal input,html[data-theme=dark] .modal select{color-sch
 @keyframes ovIn{from{opacity:0}to{opacity:1}}
 #pickOv{z-index:120}
 #boxOv{z-index:118}
+#acctOv{z-index:117}
 .modal{background:var(--surface);border-radius:var(--r-xl) var(--r-xl) 0 0;max-width:560px;width:100%;
   padding:20px var(--sp) calc(20px + env(safe-area-inset-bottom));box-shadow:var(--shadow-2);
   animation:sheetIn .42s var(--ease);max-height:92vh;overflow:hidden;display:flex;flex-direction:column}
@@ -2817,6 +2818,12 @@ const MUS_EN={'Abdômen':'Abs','Abdômen inferior':'Lower abs','Adutores':'Adduc
 Object.keys(GRP_LABEL).forEach(g=>{if(!MUS_EN[GRP_LABEL[g]])MUS_EN[GRP_LABEL[g]]=GRP_LABEL_EN[g]});
 Object.assign(I18N['pt-BR'],{"qk_btn": "Criar treino rápido do dia", "qk_title": "Treino rápido do dia", "qk_lead": "Escolha o objetivo, os grupos e o tempo. O IRON monta um treino completo para hoje e guarda como o dia Q, sem mexer nos seus outros treinos.", "qk_goal": "Objetivo", "qk_groups": "Grupos musculares", "qk_groupshint": "Toque nos grupos que quer treinar. Sem escolher nenhum, o treino cobre o corpo todo.", "qk_full": "Corpo todo", "qk_hiithint": "Opcional: pernas e glúteos dão um HIIT de pernas; peito, costas, ombros e braços, um HIIT de parte superior. Sem escolher, vem corpo todo.", "qk_funchint": "O treino funcional já trabalha o corpo todo, em circuito. Escolha só o tempo.", "qk_cardiohint": "Aqui o foco é condicionamento. Até 30 min vem cardio intervalado; com 45 min ou mais, cardio contínuo.", "qk_time": "Quanto tempo você tem?", "qk_timehint": "Tempo estimado de treino, sem contar o aquecimento.", "qk_min": "min", "qk_gen": "Gerar treino", "qk_ready": "Seu treino rápido", "qk_dropped": "Não coube neste tempo: {g}. Escolha mais minutos para incluir.", "qk_start": "Começar este treino", "qk_replace": "O treino rápido atual tem séries marcadas. Substituir por este?", "qk_pronto": "Treino rápido pronto: aba Q", "qk_redo": "Novo treino rápido", "qk_remove": "Remover este treino", "qk_removeconf": "Este treino rápido tem séries marcadas. Remover mesmo assim?", "qk_removido": "Treino rápido removido"});
 Object.assign(I18N.en,{"qk_btn": "Create a quick workout for today", "qk_title": "Quick workout for today", "qk_lead": "Pick a goal, the muscle groups and your time. IRON builds a complete workout for today and saves it as day Q, without touching your other workouts.", "qk_goal": "Goal", "qk_groups": "Muscle groups", "qk_groupshint": "Tap the groups you want to train. Pick none and the workout covers the whole body.", "qk_full": "Full body", "qk_hiithint": "Optional: legs and glutes give a leg HIIT; chest, back, shoulders and arms give an upper-body HIIT. Pick none for full body.", "qk_funchint": "Functional training already works the whole body, in a circuit. Just pick your time.", "qk_cardiohint": "The focus here is conditioning. Up to 30 min gives interval cardio; 45 min or more gives steady cardio.", "qk_time": "How much time do you have?", "qk_timehint": "Estimated training time, warm-up not included.", "qk_min": "min", "qk_gen": "Generate workout", "qk_ready": "Your quick workout", "qk_dropped": "Didn't fit in this time: {g}. Pick more minutes to include them.", "qk_start": "Start this workout", "qk_replace": "The current quick workout has sets checked. Replace it with this one?", "qk_pronto": "Quick workout ready: tab Q", "qk_redo": "New quick workout", "qk_remove": "Remove this workout", "qk_removeconf": "This quick workout has sets checked. Remove it anyway?", "qk_removido": "Quick workout removed"});
+Object.assign(I18N['pt-BR'],{nuvemfalhou:'Não consegui buscar seus dados na nuvem. Confira a internet e tente de novo.',
+  sairsemsync:'Seus últimos treinos ainda não chegaram à nuvem (sem internet ou erro no envio). Eles ficam guardados neste aparelho e voltam quando você entrar de novo nesta conta. Sair mesmo assim?',
+  treinosrecuperados:'Recuperei {n} treino(s) que não tinham chegado à nuvem ✔'});
+Object.assign(I18N.en,{nuvemfalhou:"Couldn't load your data from the cloud. Check your connection and try again.",
+  sairsemsync:"Your latest workouts haven't reached the cloud yet (no connection or upload error). They stay saved on this device and come back when you sign in to this account again. Sign out anyway?",
+  treinosrecuperados:'Recovered {n} workout(s) that had not reached the cloud ✔'});
 function grpLabel(g){return LANG==='en'?(GRP_LABEL_EN[g]||GRP_LABEL[g]):GRP_LABEL[g]}
 function musLabel(m){return LANG==='en'?(MUS_EN[m]||m):m}
 const E={
@@ -6410,17 +6417,32 @@ const SUPABASE_ANON_KEY = 'sb_publishable_lRPzAYweHnyvZDktHx5V3A_LTnM8U3D';
 let sb=null, sbUser=null, syncT=null, authMode='in';
 const SB_ON=()=>SUPABASE_URL.indexOf('https://')===0&&SUPABASE_ANON_KEY.length>20;
 
+let sbP=null, PULLED=false;   /* PULLED: só escreve na nuvem depois de ter conseguido ler a nuvem nesta sessão */
+function sbBind(){
+  sb.auth.onAuthStateChange((ev,s)=>{sbUser=s?s.user:null;if(!s)PULLED=false;paintAcctBtn();
+    if(ev==='PASSWORD_RECOVERY'){authMode='newpass';renderAcct();$('acctOv').classList.remove('hidden');
+      try{history.replaceState(null,'',location.pathname)}catch(e){}}});
+}
+function sbEnsure(){
+  if(sb)return Promise.resolve(true);
+  if(!sbP)sbP=(async()=>{
+    try{
+      await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2');
+      sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+      sbBind();
+      return true;
+    }catch(e){return false}
+  })().then(ok=>{if(!ok)sbP=null;return ok});
+  return sbP;
+}
 async function sbInit(){
   if(!SB_ON()){maybeOnboard();return}
   try{
-    await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2');
-    sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-    const {data:{session}}=await sb.auth.getSession();
-    sbUser=session?session.user:null;
-    if(sbUser){await cloudPull()}
-    sb.auth.onAuthStateChange((ev,s)=>{sbUser=s?s.user:null;paintAcctBtn();
-      if(ev==='PASSWORD_RECOVERY'){authMode='newpass';renderAcct();$('acctOv').classList.remove('hidden');
-        try{history.replaceState(null,'',location.pathname)}catch(e){}}});
+    if(await sbEnsure()){
+      const {data:{session}}=await sb.auth.getSession();
+      sbUser=session?session.user:null;
+      if(sbUser){await cloudPull()}
+    }
   }catch(e){}
   paintAcctBtn();maybeOnboard();
 }
@@ -6428,22 +6450,50 @@ function maybeOnboard(){if(!SETUP)openWizard(false)}
 function paintAcctBtn(){$('acct').textContent=((sbUser||shOn())?'☁️':'👤')}
 
 function loadScript(u){return new Promise((ok,err)=>{const s=document.createElement('script');s.src=u;s.onload=ok;s.onerror=err;document.head.appendChild(s)})}
-function cloudSync(){if(!(sb&&sbUser)&&!shOn())return;clearTimeout(syncT);syncT=setTimeout(()=>{if(sb&&sbUser)cloudPush();if(shOn())shPush()},1500)}
+function cloudSync(){if(!(sb&&sbUser)&&!shOn())return;if(sb&&sbUser)save('iron_dirty',true);clearTimeout(syncT);syncT=setTimeout(()=>{if(sb&&sbUser)cloudPush();if(shOn())shPush()},1500)}
 async function cloudPush(){
-  if(!sb||!sbUser)return;
+  if(!sb||!sbUser)return false;
+  if(!PULLED){const ok=await cloudPull(false,true);return ok&&!load('iron_dirty',false)}   /* cloudPull já empurra o resultado mesclado */
   const payload=payloadNow();
   save('iron_updated',payload.updated);
-  try{await sb.from('workout_data').upsert({user_id:sbUser.id,payload,updated_at:new Date().toISOString()})}catch(e){}
+  try{
+    const r=await sb.from('workout_data').upsert({user_id:sbUser.id,payload,updated_at:new Date().toISOString()});
+    if(r&&r.error)throw r.error;      /* o supabase-js devolve a falha em r.error em vez de lançar */
+    save('iron_dirty',false);return true;
+  }catch(e){save('iron_dirty',true);return false}
 }
-async function cloudPull(){
+async function cloudPull(loud,waitPush){
+  if(!sb||!sbUser)return false;
   try{
     const {data,error}=await sb.from('workout_data').select('payload').eq('user_id',sbUser.id).maybeSingle();
-    if(error)return;
-    if(!data){cloudPush();return}
-    mergeRemote(data.payload||{});
-    cloudPush();
+    if(error){if(loud)toast(t('nuvemfalhou'));return false}
+    PULLED=true;
+    if(data)mergeRemote(data.payload||{});
+    const pr=cloudPush();if(waitPush)await pr;   /* na abertura o envio segue em segundo plano; ao sair da conta, espera */
+    return true;
+  }catch(e){if(loud)toast(t('nuvemfalhou'));return false}
+}
+/* treinos que sobraram no aparelho ao sair da conta sem conseguir enviar: voltam quando entrar de novo na mesma conta */
+async function restoreSignoutBackup(){
+  try{
+    const bk=load('iron_signout_bk',null);
+    if(!bk||!bk.payload||!sbUser)return;
+    if(bk.uid&&bk.uid!==sbUser.id)return;     /* outra conta: não mistura os treinos */
+    const seen=new Set(HISTORY.map(h=>h.ts));
+    const maxTs=Math.max(0,...HISTORY.map(h=>h.ts||0));
+    const back=(bk.payload.history||[]).filter(h=>!seen.has(h.ts));
+    if(back.length){
+      back.forEach(h=>HISTORY.push(h));
+      HISTORY.sort((a,b)=>(b.ts||0)-(a.ts||0));
+      back.filter(h=>(h.ts||0)>maxTs).sort((a,b)=>(a.ts||0)-(b.ts||0)).forEach(h=>{Object.entries(h.weights||{}).forEach(([vid,w])=>{WEIGHTS[vid]=w})});
+      save('iron_history',HISTORY);save('iron_weights',WEIGHTS);
+      render();await cloudPush();
+      toast(t('treinosrecuperados').replace('{n}',back.length));
+    }
+    try{localStorage.removeItem('iron_signout_bk')}catch(e){}
   }catch(e){}
 }
+window.addEventListener('online',()=>{if(sb&&sbUser&&load('iron_dirty',false))cloudPush()});
 function mergeRemote(p,quiet){
   const seen=new Set(HISTORY.map(h=>h.ts));
   (p.history||[]).forEach(h=>{if(!seen.has(h.ts))HISTORY.push(h)});
@@ -6667,7 +6717,7 @@ function renderAcct(){
       <div class="who">${sbUser.email}<small>${t('sincronizasub')}</small></div>
       <div class="mrow">
         <button class="mbtn" onclick="doSignOut()">${t('sair')}</button>
-        <button class="mbtn pri" onclick="cloudPull().then(closeAcct)">${t('sincronizaragora')}</button>
+        <button class="mbtn pri" onclick="cloudPull(true).then(closeAcct)">${t('sincronizaragora')}</button>
       </div>
       <div class="mfoot"><button onclick="authMode='newpass';renderAcct()">${t('trocarsenha')}</button></div>
       ${shLink()}<div class="mfoot"><button onclick="closeAcct();openWizard(false)">${t('paginainicial')}</button></div>`;
@@ -6707,6 +6757,7 @@ async function doAuth(){
   if(!email||pass.length<6){err.textContent=t('preenchaemail');return}
   $('aGo').textContent='...';
   try{
+    if(!(await sbEnsure()))throw new Error('Failed to fetch');
     let r;
     if(authMode==='in'){r=await sb.auth.signInWithPassword({email,password:pass})}
     else{r=await sb.auth.signUp({email,password:pass})}
@@ -6714,7 +6765,9 @@ async function doAuth(){
     sbUser=r.data.user||((r.data.session||{}).user)||null;
     if(!sbUser&&authMode==='up'){err.textContent=t('contacriadaconfirme');$('aGo').textContent=t('criarconta');return}
     closeAcct();toast(authMode==='in'?t('bemvindovolta'):t('contacriadatoast'));
-    paintAcctBtn();await cloudPull();
+    paintAcctBtn();PULLED=false;await cloudPull(true);
+    await restoreSignoutBackup();
+    if(SETUP)closeOB();   /* entrou pela página de início e os dados voltaram: vai direto pro treino */
   }catch(e){
     err.textContent=authErr(e);
     $('aGo').textContent=authMode==='in'?t('entrar'):t('criarconta');
@@ -6726,6 +6779,7 @@ async function doForgot(){
   if(!email||email.indexOf('@')<1){err.textContent=t('emailvalido');return}
   $('aGo').textContent='...';
   try{
+    if(!(await sbEnsure()))throw new Error('Failed to fetch');
     const redirect=location.href.split('#')[0].split('?')[0];
     const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:redirect});
     if(error)throw error;
@@ -6783,8 +6837,12 @@ async function doNewPass(){
 }
 async function doSignOut(){
   if(!confirm(t('sairconta')+'\n\n'+t('sairsub')))return;
+  /* antes de limpar este aparelho: confere se a nuvem recebeu tudo; se não, avisa e guarda uma cópia local */
+  let synced=false;try{synced=await Promise.race([cloudPush(),new Promise(r=>setTimeout(()=>r(false),8000))])}catch(e){}   /* rede pendurada: depois de 8 s trata como não enviado */
+  if(!synced&&!confirm(t('sairsemsync')))return;
+  try{localStorage.setItem('iron_signout_bk',JSON.stringify({uid:sbUser?sbUser.id:null,at:Date.now(),payload:payloadNow()}))}catch(e){}
   try{await sb.auth.signOut()}catch(e){}
-  sbUser=null;
+  sbUser=null;PULLED=false;save('iron_dirty',false);
   if(SH){SH={url:SH.url,user:SH.user};shSave()}
   ['iron_weights','iron_session','iron_sessmeta','iron_history','iron_trash','iron_variant','iron_setup','iron_program','iron_updated','iron_bodylog'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});
   WEIGHTS={};SESSION={};SESSMETA={};HISTORY=[];TRASH=[];VARIANT={};BODYLOG=[];SETUP=null;PROGRAM=null;cur='A';
@@ -7416,7 +7474,7 @@ async function exportPDF(){
 }
 
 /* =================== INIT =================== */
-const APP_VERSION='iron-v20';
+const APP_VERSION='iron-v21';
 /* atualização automática: confere versão nova ao abrir, ao voltar pro app e a cada 1h; aplica sozinha
    (se houver treino em andamento, espera o app ir pro segundo plano pra não interromper) */
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){

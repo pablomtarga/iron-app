@@ -1,7 +1,31 @@
 IRON · Treino PPL — Pacote do app (PWA)
 
 ========================================
-NOVIDADES DESTA VERSÃO (iron-v20)
+NOVIDADES DESTA VERSÃO (iron-v21)
+========================================
+- Botão "Já tenho conta · Entrar" da página de início: a janela de login
+  abria por trás da página de início e parecia que o botão não fazia nada.
+  Agora a janela aparece por cima. Ao entrar, os seus dados voltam da
+  nuvem (treino, histórico e cargas) e a página de início se fecha sozinha
+  quando já existe treino. Se não houver internet, o app avisa em vez de
+  ficar parado, e carrega o serviço de conta sob demanda quando a
+  internet volta (sem precisar reabrir o app).
+- Sair da conta ficou mais seguro. Antes de limpar o aparelho, o app
+  confere se a nuvem recebeu todos os treinos. Se algum não chegou (sem
+  internet, erro de envio), avisa e pergunta se quer sair mesmo assim. Se
+  sair, uma cópia fica guardada neste aparelho e os treinos que não
+  tinham subido voltam, com as cargas, quando você entrar de novo na
+  mesma conta. A cópia de outra conta nunca é misturada.
+- Sincronização com a nuvem: o app só grava na nuvem depois de conseguir
+  ler a nuvem naquela abertura (antes, uma leitura que falhasse podia
+  deixar um aparelho vazio ou desatualizado gravar por cima). Falhas de
+  envio agora são percebidas e reenviadas quando a internet volta. "Sincronizar
+  agora" avisa quando não consegue.
+
+A seguir, as novidades da v20.
+
+========================================
+NOVIDADES DA VERSÃO ANTERIOR (iron-v20)
 ========================================
 - Idioma na página de início: no canto de cima da tela de boas-vindas há
   duas bandeirinhas discretas, Reino Unido (English) e Brasil (Português).
