@@ -1,0 +1,5 @@
+# Exemplo com Caddy (https automático). Troque o domínio e rode: caddy run --config Caddyfile
+iron.seudominio.com {
+	encode zstd gzip
+	reverse_proxy 127.0.0.1:8787
+}

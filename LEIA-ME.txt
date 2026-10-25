@@ -1,7 +1,124 @@
 IRON · Treino PPL — Pacote do app (PWA)
 
 ========================================
-NOVIDADES DESTA VERSÃO (iron-v15)
+NOVIDADES DESTA VERSÃO (iron-v17)
+========================================
+Treinos que mudam de verdade
+- Antes, qualquer objetivo gerava a mesma ordem de treino. Agora são 39
+  modelos prontos, de 2 a 6 dias por semana, em 9 objetivos:
+  Hipertrofia (9 modelos), Força (6), Emagrecimento (4), HIIT (4),
+  Cardio (4), Resistência (3), Saúde geral (3), Funcional (3) e
+  Circuito (3). Cada um tem divisão, séries, repetições e descanso
+  próprios do objetivo (push/pull/legs, superior/inferior, full body,
+  5x5, um músculo por dia, circuitos, zona 2, intervalado, Tabata etc.).
+- No assistente, depois de escolher o objetivo você escolhe o modelo
+  (cada um mostra o nível: iniciante, intermediário ou avançado) e o
+  estilo: padrão do modelo, máquinas, peso livre, em casa ou peso do corpo.
+- Botão "Gerar outra variação": gera o mesmo modelo com outros exercícios
+  equivalentes do mesmo grupo, sem repetir exercício no dia.
+- Quem já tinha treino montado continua com ele. Evoluir treino e as
+  versões anteriores funcionam igual, com os novos exercícios.
+
+Biblioteca
+- 229 exercícios (eram 188): 41 novos, sendo 21 de abdômen (infra,
+  oblíquo, rotação, roda, polia, bola, prancha e variações), mais
+  funcional, cardio, HIIT, pescoço, ombro, peito e perna.
+- 226 com 2 fotos do passo a passo. Os 3 sem foto (burpee, natação e
+  ponte de pescoço) usam a figura animada.
+- Todo exercício de máquina ou polia traz, logo na lista de opções,
+  uma versão com peso livre (halteres, barra, anilha ou peso do corpo).
+
+Progresso
+- Peso corporal: registro ao longo do tempo com gráfico e tabela.
+- Evolução da carga: gráfico da melhor carga de cada treino, por
+  exercício, com o recorde pessoal.
+- Equilíbrio muscular: séries por grupo em 7, 30 ou 90 dias, com o
+  que é esperado e aviso dos grupos pouco treinados.
+- Aquecimento: antes da primeira série de trabalho o cartão mostra 3
+  séries leves já calculadas (50%, 70% e 85% da carga).
+- Importar de outro app: CSV do Strong, Hevy e FitNotes (ou qualquer
+  CSV com data, exercício, peso e repetições). Não duplica treinos já
+  importados. Fica em Progresso > Backup > Importar de outro app (CSV).
+
+Atualização automática
+- O app confere se há versão nova ao abrir, ao voltar pra ele e a cada
+  hora, e se atualiza sozinho. Se você estiver no meio de um treino,
+  espera você sair do app pra não perder nada.
+
+Servidor próprio (opcional)
+- Pasta selfhost/: um servidor pequeno com login por passkey (sem
+  senha) e Docker Compose, que guarda seus dados numa pasta sua e
+  sincroniza os aparelhos. Passo a passo em selfhost/README.md. No app:
+  Conta > Servidor próprio (passkey).
+
+Fontes e licenças
+- Fotos: Free Exercise DB (Unlicense, domínio público). Textos em
+  português e inglês são próprios.
+- Algumas fotos são aproximadas, pois não há foto exata no banco:
+  esteira (corrida), búlgaro (afundo com halteres), leg press unilateral
+  (leg press), elevação de quadril na máquina (com barra), assault bike
+  (bicicleta) e máquina de pescoço. Exercícios parecidos dividem a mesma
+  foto (por exemplo corrida e tiro na esteira).
+- O projeto openGym foi usado só como referência de ideias de funções.
+  Nenhum código, imagem ou texto dele foi copiado.
+
+========================================
+VERSÃO ANTERIOR (iron-v16)
+========================================
+
+Visual e navegação
+- Mesmo amarelo e cinza bem escuro. Cada treino (A, B, C, D) se diferencia
+  só por uma barra fina com degradê metalizado na cor do dia (topo da tela,
+  topo de cada cartão, aba do dia e barra de progresso).
+- Abas de dia com indicador deslizante e porcentagem concluída; dá pra
+  deslizar o dedo para os lados para trocar de treino.
+- Barra de navegação flutuante (Treino, Progresso, Calorias).
+- Cada exercício é um cartão que abre e fecha; ao marcar a última série
+  o próximo abre sozinho.
+- Fotos do passo a passo: cada exercício mostra só as suas próprias fotos
+  (179 exercícios com 2 fotos). Os 9 sem foto mostram a figura animada.
+
+Treino
+- Assento (cadeira) nível 0 a 7 em 22 aparelhos, discreto, lembra o
+  último nível usado em cada exercício.
+- "Por que, o que treina e o que faz": dicas extras ficam recolhidas e
+  abrem ao toque, com explicação do exercício, músculos principais e
+  secundários.
+- "Por que essa ordem?" agora explica por que cada exercício vem depois
+  do anterior (mesmo músculo com outro ângulo, ou troca de região).
+- Todo exercício tem alternativas: peso do corpo, halteres, polia,
+  elástico, máquina ou barra.
+- Exercício novo sempre entra por último.
+- Editar: arrastar pela alça grande (sobe e desce com animação e rolagem
+  automática), menu com trocar, subir, descer e excluir.
+- Biblioteca: 188 exercícios (era 117), com muito mais abdômen e opções
+  livres (peso do corpo e elástico). Filtro por grupo e por equipamento.
+
+Timer de descanso
+- Guarda o horário final, então continua certo mesmo com a tela
+  bloqueada ou o app em segundo plano. Ao voltar, mostra o tempo certo.
+- Limite real do iPhone: com a tela bloqueada o navegador congela o
+  código do app, então não toca som nem vibra nesse momento. Para avisar
+  com a tela bloqueada, use o timer do iPhone: botão "Abrir timer do
+  iPhone" na folha do timer (precisa criar um atalho uma vez, o passo a
+  passo aparece no próprio app).
+
+Idiomas
+- Português e inglês revisados: datas, cabeçalhos do Excel e do PDF,
+  nomes de treino, subtítulos, textos de "por que", mensagens e avisos.
+- Corrigidos: grade do mapa de atividade (células enormes), linhas de
+  "Força & Recordes" cortadas, campos de formulário sem borda e com fonte
+  errada, avisos que cobriam botões de janelas abertas.
+
+Para publicar: suba index.html, sw.js e a pasta img/ no GitHub
+(o sw.js muda de versão sozinho e o app se atualiza).
+Atenção: o envio pelo navegador do GitHub aceita só cerca de 100
+arquivos por vez. A pasta img/ tem mais de 450, então use git (ou o
+GitHub Desktop) ou envie em lotes. Se faltar imagem no repositório,
+os exercícios aparecem sem foto no app publicado.
+
+========================================
+VERSÃO ANTERIOR (iron-v15)
 ========================================
 - Tela do celular não apaga mais sozinha durante o treino
   (Wake Lock ligado automaticamente na aba Treino).
@@ -26,7 +143,8 @@ PARTE 1 · PUBLICAR NO GITHUB PAGES
 ========================================
 1. Crie um repositório PÚBLICO (ex: ironapp)
 2. Suba estes arquivos na raiz: index.html, manifest.json, sw.js,
-   icon-192.png, icon-512.png (o supabase.sql é só referência)
+   icon-192.png, icon-512.png e a pasta img/ inteira (o supabase.sql
+   é só referência; a pasta selfhost/ é só para o servidor próprio)
 3. Settings > Pages > Branch: main / (root) > Save
 4. Abra a URL gerada no Safari do iPhone
 5. Compartilhar > Adicionar à Tela de Início

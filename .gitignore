@@ -1,0 +1,4 @@
+node_modules/
+selfhost/data/
+selfhost/.env
+.DS_Store

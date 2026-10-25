@@ -1,6 +1,6 @@
-const CACHE='iron-v16';
+const CACHE='iron-v17';
 self.addEventListener('install',e=>{
-  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./','./index.html'])));
+  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./','./index.html','./manifest.json','./icon-192.png'])));
   self.skipWaiting();
 });
 self.addEventListener('activate',e=>{
@@ -8,6 +8,9 @@ self.addEventListener('activate',e=>{
   self.clients.claim();
 });
 self.addEventListener('fetch',e=>{
+  const u=new URL(e.request.url);
+  /* API do servidor próprio, envios (POST/PUT) e sites de outras origens vão direto pra rede, sem cache */
+  if(e.request.method!=='GET'||u.pathname.indexOf('/api/')>=0||(u.origin!==self.location.origin&&!/cdnjs|fonts\./.test(u.href)))return;
   if(e.request.mode==='navigate'){
     e.respondWith(fetch(e.request).then(r=>{const c=r.clone();caches.open(CACHE).then(x=>x.put(e.request,c));return r})
       .catch(()=>caches.match('./index.html')));
