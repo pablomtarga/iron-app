@@ -1,7 +1,60 @@
 IRON · Treino PPL — Pacote do app (PWA)
 
 ========================================
-NOVIDADES DESTA VERSÃO (iron-v22)
+NOVIDADES DESTA VERSÃO (iron-v23)
+========================================
+- Novo módulo "Treino Especial", na aba Calorias, no lugar das moedas.
+  São três trilhas, independentes dos seus treinos A, B e C (nada neles
+  muda):
+  - Músculo e força: corpo inteiro em dois treinos, A e B, para fazer
+    uma vez cada por semana (cada grande grupo entra 2 vezes). Tempo de
+    30 ou 45 min.
+  - Fôlego em pouco tempo: um bloco intervalado e um circuito curto, de
+    15, 20 ou 30 min. Tem versão para academia e versão em casa, sem
+    máquina.
+  - Dose mínima: 15 ou 20 min de corpo inteiro, para semanas corridas.
+  Você escolhe a trilha, o tempo, a versão (o app sugere a que alterna
+  com a última que você fez) e onde treina (academia ou em casa). Antes
+  de começar, o app mostra o plano inteiro, as séries por semana de cada
+  grupo muscular e, em cada exercício, o porquê dele estar ali e naquela
+  posição, com o grau de certeza da fonte (Forte, Moderado, Fraco ou
+  "Escolha do app", quando é decisão de montagem sem teste direto).
+  "Outra variação" troca os exercícios mantendo a lógica. A tela
+  "Fontes e grau de certeza" lista cada estudo, o que ele diz e o que
+  foi ou não foi conferido de verdade.
+- O Treino Especial vale para o dia em que é criado. Aparece sozinho na
+  tela, com o botão "Meu treino" ao lado para voltar ao A, B, C. No dia
+  seguinte some se você não marcou nenhuma série. Se marcou e não
+  concluiu, ele fica como treino em aberto para retomar. Ao concluir, vai
+  para o histórico como "Especial · nome da trilha" e a próxima versão
+  sugerida passa a ser a outra (A, B, A, B...). O painel "Por que essa
+  ordem?" do dia explica as regras gerais (esforço, descanso,
+  frequência) e cada exercício.
+- Moedas, cruzes, barra de moedas e as animações delas foram removidas.
+  Ficam na aba Calorias o anel de kcal do dia, a meta diária (400 kcal,
+  valor arbitrário do app), as somas da semana, mês e ano e o peso
+  corporal. A estimativa de kcal continua sendo aproximada (MET do
+  exercício x seu peso x tempo da série) e agora a tela diz isso.
+- Textos corrigidos onde prometiam mais do que a evidência sustenta
+  (por exemplo "mais gasto calórico no mesmo tempo" e "maximizar a
+  queima"). Os treinos que já existiam não foram alterados.
+- Botão "Ver vídeo": antes ele abria uma busca no YouTube e, em muitos
+  exercícios, a busca não levava ao exercício certo. Agora cada um dos
+  230 exercícios da biblioteca abre direto um vídeo daquele exercício
+  (cada link foi conferido em 29/10/2026). Os vídeos são em inglês, de
+  canais como Bodybuilding.com, Scott Herman, Buff Dudes, PureGym e
+  Renaissance Periodization, e a opção alternativa de um exercício abre o
+  vídeo da própria opção. Na folha "Passo a passo" há também o link
+  "Buscar outros vídeos", para o caso de um vídeo sair do ar. Treinos
+  salvos antes e exercícios criados por você continuam funcionando: os
+  da biblioteca usam o vídeo novo, os seus abrem a busca pelo nome.
+- Mantidos: o aviso de recorde pessoal e os confetes ao concluir um
+  treino.
+
+A seguir, as novidades da v22.
+
+========================================
+NOVIDADES DA VERSÃO ANTERIOR (iron-v22)
 ========================================
 - Treino rápido sozinho na tela. Antes, ao criar um treino rápido, as abas
   A, B e C continuavam aparecendo ao lado dele.

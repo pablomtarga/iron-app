@@ -601,8 +601,6 @@ html[data-theme=dark] .modal input,html[data-theme=dark] .modal select{color-sch
 .kcal-badge{display:inline-flex;align-items:center;gap:5px;margin-top:10px;padding:5px 12px;
   border-radius:999px;background:rgba(255,150,30,.14);color:#C2600A;font-size:12px;font-weight:700}
 html[data-theme=dark] .kcal-badge{background:rgba(255,170,60,.18);color:#FFB84D}
-.kcal-badge.hot{animation:kcalPulse 1.6s infinite ease-in-out}
-@keyframes kcalPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 
 .kcal-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
 .kcal-stat{background:var(--surface);border-radius:var(--r-m);padding:12px 6px;text-align:center;
@@ -618,63 +616,6 @@ html[data-theme=dark] .kcal-badge{background:rgba(255,170,60,.18);color:#FFB84D}
 .kcal-ptitle button{background:var(--fill);border:none;color:var(--label2);border-radius:999px;
   font-size:11px;font-weight:600;padding:5px 10px;cursor:pointer}
 
-/* moedas */
-.coinrow{display:flex;align-items:center;gap:14px}
-.coin-ic{flex:0 0 auto;width:52px;height:52px;border-radius:50%;
-  background:radial-gradient(circle at 35% 30%,#FFEB99,#F5B301 55%,#B87700 100%);
-  display:flex;align-items:center;justify-content:center;font-size:24px;
-  box-shadow:0 2px 0 #8A5A00,0 6px 14px -4px rgba(184,119,0,.55);
-  position:relative;animation:coinFloat 2.6s infinite ease-in-out}
-.coin-ic::after{content:'';position:absolute;top:8%;left:18%;width:26%;height:26%;border-radius:50%;
-  background:rgba(255,255,255,.55);filter:blur(1px)}
-@keyframes coinFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-4px) rotate(3deg)}}
-.coininfo{flex:1;min-width:0}
-.coin-num{font-size:26px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;
-  color:var(--label);display:flex;align-items:baseline;gap:5px}
-.coin-num small{font-size:12px;color:var(--label3);font-weight:600}
-.coin-hint{font-size:12px;color:var(--label2);margin-top:2px}
-
-/* barra de progresso pra próxima cruz */
-.crossbar-wrap{margin-top:14px}
-.crossbar{height:12px;border-radius:7px;background:var(--fill);overflow:hidden;position:relative}
-.crossbar i{display:block;height:100%;border-radius:7px;width:0%;
-  background:linear-gradient(90deg,#3FCB6B,#22A555);
-  transition:width 1s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
-.crossbar i::after{content:'';position:absolute;inset:0;
-  background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.45) 48%,transparent 66%);
-  background-size:220% 100%;animation:shimmerMove 2.2s infinite linear}
-@keyframes shimmerMove{0%{background-position:140% 0}100%{background-position:-40% 0}}
-.crossbar-lab{display:flex;justify-content:space-between;margin-top:6px;font-size:11px;
-  color:var(--label3);font-weight:600;font-variant-numeric:tabular-nums}
-
-/* cruzes conquistadas */
-.crossgrid{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
-.crossitem{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;
-  font-size:21px;background:linear-gradient(160deg,#3FCB6B,#1C8A46);color:#fff;
-  box-shadow:0 2px 0 #0F5C2C,0 5px 12px -4px rgba(28,138,70,.55);
-  animation:crossPop .5s cubic-bezier(.24,1.4,.4,1) backwards}
-.crossitem.next{background:var(--fill);color:var(--label3);box-shadow:none;
-  border:1.5px dashed var(--sep-strong);position:relative;animation:none}
-.crossitem.next .cxfill{position:absolute;inset:0;border-radius:11px;overflow:hidden}
-.crossitem.next .cxfill i{position:absolute;left:0;bottom:0;width:100%;height:0%;
-  background:linear-gradient(0deg,#3FCB6B,#6EE499);transition:height .9s cubic-bezier(.16,1,.3,1)}
-.crossitem.next span{position:relative;z-index:2}
-@keyframes crossPop{0%{transform:scale(0) rotate(-25deg);opacity:0}70%{transform:scale(1.18) rotate(6deg)}100%{transform:scale(1) rotate(0);opacity:1}}
-.cross-empty{font-size:12.5px;color:var(--label3);padding:6px 2px;line-height:1.5}
-
-/* burst de conquista (cruz nova) */
-.kcal-burst{position:fixed;inset:0;z-index:95;display:flex;align-items:center;justify-content:center;
-  pointer-events:none;opacity:0}
-.kcal-burst.show{opacity:1;animation:burstFade 1.9s ease forwards}
-@keyframes burstFade{0%{opacity:0}12%{opacity:1}78%{opacity:1}100%{opacity:0}}
-.kcal-burst .bx{width:120px;height:120px;border-radius:32px;display:flex;align-items:center;justify-content:center;
-  font-size:56px;color:#fff;background:linear-gradient(160deg,#3FCB6B,#1C8A46);
-  box-shadow:0 8px 0 #0F5C2C,0 20px 50px -10px rgba(28,138,70,.6);
-  animation:burstPop 1.9s cubic-bezier(.2,1.4,.3,1) forwards}
-@keyframes burstPop{0%{transform:scale(.2) rotate(-40deg)}45%{transform:scale(1.22) rotate(8deg)}62%{transform:scale(1) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
-.kcal-burst .blab{position:absolute;margin-top:150px;font-size:16px;font-weight:800;color:#fff;
-  text-shadow:0 2px 10px rgba(0,0,0,.4);white-space:nowrap}
-
 /* peso corporal editável */
 .bodykg-row{display:flex;align-items:center;justify-content:space-between;gap:10px;
   background:var(--fill);border-radius:var(--r-m);padding:12px 14px;margin-bottom:14px;cursor:pointer}
@@ -682,16 +623,52 @@ html[data-theme=dark] .kcal-badge{background:rgba(255,170,60,.18);color:#FFB84D}
 .bodykg-row .v{font-size:15px;font-weight:800;color:var(--label)}
 .bodykg-row .v span{color:var(--label3);font-weight:600;font-size:12px}
 
-/* moedas voadoras */
-.coinfly{position:fixed;z-index:96;pointer-events:none;font-size:20px;
-  animation:coinFly 1.1s cubic-bezier(.2,.7,.3,1) forwards}
-@keyframes coinFly{0%{transform:translateY(0) scale(.6);opacity:0}15%{opacity:1;transform:translateY(-10px) scale(1.15)}
-  100%{transform:translateY(-130px) scale(.7);opacity:0}}
-
-@media (prefers-reduced-motion:reduce){
-  .coin-ic,.crossbar i::after,.kcal-badge.hot,.crossitem{animation:none!important}
-}
 .hidden{display:none!important}
+
+/* ---- treino especial (cores lisas, sem degradê) ---- */
+.kcal-note{font-size:12px;color:var(--label3);line-height:1.5;margin:0 4px 14px}
+.spx-plead{font-size:13px;color:var(--label2);line-height:1.5;margin:-4px 0 12px}
+.spx-card{display:block;width:100%;text-align:left;border:1.5px solid transparent;background:var(--fill);color:var(--label);
+  border-radius:var(--r-m);padding:12px 14px;margin:0 0 8px;cursor:pointer;font:inherit;min-height:44px}
+.spx-card b{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em}
+.spx-card small{display:block;font-size:12.5px;color:var(--label2);margin-top:2px;line-height:1.4}
+.spx-card.on{border-color:var(--accent);background:var(--surface)}
+.spx-link{display:block;width:100%;border:none;background:none;color:var(--accent-text);font:inherit;font-size:14px;font-weight:600;
+  padding:12px 4px;cursor:pointer;text-align:center;min-height:44px}
+.spx-link.strong{background:var(--accent);color:var(--accent-ink);border-radius:var(--r-s);margin:4px 0 6px}
+.spx-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.spx-tag{display:inline-block;font-size:11px;font-weight:700;font-style:normal;letter-spacing:.01em;padding:3px 9px;border-radius:999px;
+  background:var(--fill);color:var(--label2);text-decoration:none;line-height:1.5}
+.spx-tag.g-f{background:rgba(48,160,90,.16);color:#1E7A45}
+.spx-tag.g-m{background:rgba(60,120,220,.15);color:#2B5FB8}
+.spx-tag.g-w{background:rgba(220,150,30,.18);color:#9A6200}
+html[data-theme=dark] .spx-tag.g-f{background:rgba(80,200,130,.18);color:#7FDBA6}
+html[data-theme=dark] .spx-tag.g-m{background:rgba(110,160,250,.2);color:#9DBEFF}
+html[data-theme=dark] .spx-tag.g-w{background:rgba(250,180,60,.2);color:#FFC96B}
+.spx-det{border-bottom:.5px solid var(--sep)}
+.spx-det:last-child{border-bottom:none}
+.spx-det summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:11px;padding:11px 14px;min-height:44px;font-size:15px}
+.spx-det summary::-webkit-details-marker{display:none}
+.spx-det summary::after{content:"";flex:0 0 7px;width:7px;height:7px;margin-left:auto;border-right:1.8px solid var(--label3);border-bottom:1.8px solid var(--label3);transform:rotate(45deg) translate(-2px,-2px);transition:transform .2s}
+.spx-det[open] summary::after{transform:rotate(225deg) translate(-2px,-2px)}
+.spx-det p{margin:0;padding:0 14px 4px 45px;font-size:13.5px;line-height:1.5;color:var(--label2)}
+.spx-det .spx-tags{padding:0 14px 12px 45px;margin-top:6px}
+.spx-ex .rn{flex:0 0 20px;height:20px;border-radius:50%;background:var(--fill);color:var(--label3);font-weight:600;font-size:11.5px;
+  display:flex;align-items:center;justify-content:center}
+.spx-ex .rtx{flex:1;min-width:0}
+.spx-ex .rtx b{display:block;font-size:15px;font-weight:500;letter-spacing:-.01em}
+.spx-ex .rtx small{display:block;color:var(--label3);font-size:12.5px}
+.spx-ex .ssb{font-size:11px;color:var(--accent-text);font-weight:600;margin-left:6px}
+.qb .spx-det summary{padding:10px 0;font-weight:600;font-size:14.5px}
+.qb .spx-det p{padding:0 0 4px}
+.qb .spx-det .spx-tags{padding:0 0 10px}
+.spx-vol{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.spx-vol span{background:var(--fill);border-radius:999px;padding:6px 12px;font-size:13px;color:var(--label2)}
+.spx-vol b{color:var(--label);font-variant-numeric:tabular-nums}
+.order .oi.spx-g .n{background:var(--fill);color:var(--label2);font-style:italic}
+.order .spx-link{padding:10px 0 4px;text-align:left}
+.spx-src h4 a{color:var(--label);text-decoration:none;border-bottom:1px solid var(--sep-strong)}
+.spx-src h4 .spx-tag{margin-left:6px;vertical-align:1px}
 
 /* =====================================================================
    REMODELAGEM v16: amarelo + cinza escuro fixos, cor do dia só na barra metálica
@@ -2430,7 +2407,7 @@ const I18N={
    exportarxlsx:'📊 Exportar Excel',exportarpdf:'📄 Exportar PDF',personalizar:'⚙️ Personalizar meu treino',
    evoluir:'🚀 Evoluir treino',excluidos:'🗑 Treinos excluídos',backup:'💾 Backup',versoesant:'🕒 Versões anteriores do treino',
    vervideo:'▶ Ver vídeo',passoapasso:'Passo a passo',opcoes:'Opções',anterior:'Anterior',descanso:'Descanso',
-   semdescanso:'Sem pausa',continuo:'Contínuo',addextra:'＋ Adicionar exercício extra hoje',hoje:'hoje',ontem:'ontem',kcalnav:'Calorias',kcalhoje:'queimadas hoje',kcalmeta:'Meta',kcalsemana:'Semana',kcalmes:'Mês',kcalano:'Ano',kcalmoedas:'moedas',kcalcruzes:'Moedas verdes conquistadas',kcalmoedastit:'Suas moedas amarelas',kcalcomo:'Como funciona',kcalpeso:'Seu peso corporal',kcalajustar:'toque pra ajustar',kcalbatida:'Meta do dia batida!',kcalproxima:'pra próxima moeda verde',kcalempty:'Queime calorias treinando pra ganhar sua primeira moeda verde 💪',kcalverde:'moeda verde',kcalverdes:'moedas verdes',
+   semdescanso:'Sem pausa',continuo:'Contínuo',addextra:'＋ Adicionar exercício extra hoje',hoje:'hoje',ontem:'ontem',kcalnav:'Calorias',kcalhoje:'queimadas hoje',kcalmeta:'Meta',kcalsemana:'Semana',kcalmes:'Mês',kcalano:'Ano',kcalpeso:'Seu peso corporal',kcalajustar:'toque pra ajustar',kcalbatida:'Meta do dia batida!',
    askdatetit:'Quando foi este treino?',askdatesub:'Confirme o dia pra não registrar na data errada.',cancelar:'Cancelar',confirmar:'Confirmar',fechar:'Fechar',
    pesosalvo:'Peso salvo: ',distsalva:'Distância salva: ',tempoSalvo:'Tempo salvo: ',registroexcluido:'Registro excluído',marcaruma:'Marca pelo menos uma série antes 😉',
    wdSeg:'S',wdTer:'T',wdQua:'Q',wdQui:'Q',wdSex:'S',wdSab:'S',wdDom:'D',movidolixeira:'Movido para a lixeira',regnaoenc:'Registro não encontrado',
@@ -2497,7 +2474,7 @@ const I18N={
    vocemarcou:'Você marcou ',de:' de ',semdetalhessessao:'Sem detalhes salvos nesta sessão',
    principiosdr:'Princípios do Dr. 🧬',progressaodupla:'Progressão dupla:',progressaoduplatxt:'fechou o topo das reps em todas as séries (com 2 na reserva)? Sobe ~5% na carga e volta pro fundo da faixa.',
    frequencia2x:'Frequência 2×:',frequencia2xtxt:'treinar cada músculo 2x por semana rende mais hipertrofia que 1x com o mesmo volume.',
-   descansostip:'Descansos:',descansostiptxt:'90 a 120s nos compostos pesados e 45 a 60s nos isolados é o que a evidência mais recente aponta como ideal.',
+   descansostip:'Descansos:',descansostiptxt:'Descansar de 1 a 2 min entre as séries foi a faixa que melhor se saiu numa metanálise preliminar (menos de 1 min pode reduzir o ganho). Em exercícios pesados, muita gente prefere a parte alta dessa faixa.',
    composicaotip:'Composição:',composicaotiptxt:'o abdômen aparece no déficit. ~300–500 kcal abaixo do gasto + proteína 1,6–2,2 g/kg.',
    ambientenaosalva:'⚠️ Este ambiente não salva dados entre sessões. Hospede o arquivo (ex: GitHub Pages).',
    arrastarreordenar:'Arraste para reordenar',trocarbtn:'Trocar',combobtn:'Combo',desfazercombo:'Desfazer',
@@ -2505,8 +2482,8 @@ const I18N={
    jaemcombo:' · já em combo',combocriado:'Combo criado! Os dois viram um só bloco sem descanso.',combodesfeito:'Combo desfeito',
    semoutroexcombo:'Adicione mais um exercício neste treino pra poder criar um combo.',excluirconfirm:'Excluir',doTreino:' do Treino ',
    idiomalangsub:'Exercícios, dicas e textos longos continuam em português por enquanto. A navegação do app já muda.',
-   verificaratualiz:'🔄 Verificar atualização',verificandoatualiz:'Verificando atualização...',movimento:'Movimento',nadapraregistrar:'Nada pra registrar nesse treino',retomandotreino:'Retomando o Treino ',emaberto:' em aberto',retomarbtn:'Retomar',concluirbtn:'Concluir',descartarbtn:'Descartar',kcalcomotxt:'Calculamos as calorias de cada treino a partir do seu peso corporal e do tipo de exercício (força, cardio, funcional). É uma estimativa, não uma medição clínica exata: varia conforme seu esforço real. A cada {p} kcal você ganha 1 moeda amarela, e a cada {c} moedas amarelas, uma moeda verde pra guardar na coleção.',
-   bemvindo:'Bem-vindo ao',heroSub:'Seu treino de academia, do seu jeito. Responda algumas perguntas rápidas e eu monto seu programa completo: exercícios, ordem, séries, repetições e descansos calibrados pela ciência de hipertrofia mais recente.',
+   verificaratualiz:'🔄 Verificar atualização',verificandoatualiz:'Verificando atualização...',movimento:'Movimento',nadapraregistrar:'Nada pra registrar nesse treino',retomandotreino:'Retomando o Treino ',emaberto:' em aberto',retomarbtn:'Retomar',concluirbtn:'Concluir',descartarbtn:'Descartar',
+   bemvindo:'Bem-vindo ao',heroSub:'Seu treino de academia, do seu jeito. Responda algumas perguntas rápidas e eu monto seu programa completo: exercícios, ordem, séries, repetições e descansos em faixas usuais de hipertrofia.',
    seunomeph:'Seu nome (como quer ser chamado)',montarmeutreino:'Montar meu treino',voltarpromeutreino:'← Voltar pro meu treino',
    continuarppl:'Continuar com meu treino atual (PPL)',usarpadraoppl:'Usar o programa padrão (PPL)',jatenhoconta:'Já tenho conta ☁️ · Entrar',
    qualcardio:'Qual cardio você prefere?',ordemrotacao:'A ordem que você marcar define a rotação. Pode escolher mais de um.',
@@ -2520,9 +2497,9 @@ const I18N={
    qualobjetivo:'Qual é o seu objetivo?',quantosex:'Quantos exercícios por dia?',quantosexhint:'6 é o ponto ideal pra maioria: volume suficiente sem virar treino de 2 horas.',
    quantasdiv:'Quantas divisões de treino?',divhintcardio:'Quantos treinos de cardio diferentes você quer alternar.',
    divhintfunc:'Quantos treinos funcionais diferentes você quer alternar.',divhintnormal:'A-B (Upper/Lower) · A-B-C (Push/Pull/Legs) · A-B-C-D (por grupo).',
-   quantasvezes:'Quantas vezes por semana?',vezeshint:'A ciência é clara: cada músculo 2x por semana rende mais que 1x.',
+   quantasvezes:'Quantas vezes por semana?',vezeshint:'O ACSM (2026) recomenda treinar cada grande grupo muscular pelo menos 2x por semana.',
    gerarmeutreino:'Gerar meu treino →',programapronto:'Seu programa está pronto',
-   progpronto_lead:'Séries, repetições e descansos calibrados: compostos com 8–12 reps e 90–120s de pausa, isolados com 12–15 e 45–60s (faixas com melhor evidência pra hipertrofia). Ajuste como quiser: remova (✕) ou adicione exercícios extras.',
+   progpronto_lead:'Séries, repetições e descansos: compostos com 8–12 reps e 90–120s de pausa, isolados com 12–15 e 45–60s (faixas usuais de hipertrofia). Ajuste como quiser: remova (✕) ou adicione exercícios extras.',
    rotacaosugerida:'📅 Rotação sugerida:',porsemana:'x/semana',addexextra:'＋ Adicionar exercício extra',
    concluirtreinar:'Concluir e treinar 🚀',exercicios:'exercícios',
    criarexercicio:'＋ Criar exercício próprio',novoexnome:'Nome do exercício',novoexgrupo:'Grupo muscular',
@@ -2540,7 +2517,7 @@ const I18N={
    exportarxlsx:'📊 Export Excel',exportarpdf:'📄 Export PDF',personalizar:'⚙️ Customize my workout',
    evoluir:'🚀 Evolve workout',excluidos:'🗑 Deleted workouts',backup:'💾 Backup',versoesant:'🕒 Previous workout versions',
    vervideo:'▶ Watch video',passoapasso:'Step by step',opcoes:'Options',anterior:'Last time',descanso:'Rest',
-   semdescanso:'No rest',continuo:'Continuous',addextra:'＋ Add extra exercise today',hoje:'today',ontem:'yesterday',kcalnav:'Calories',kcalhoje:'burned today',kcalmeta:'Goal',kcalsemana:'Week',kcalmes:'Month',kcalano:'Year',kcalmoedas:'coins',kcalcruzes:'Green coins earned',kcalmoedastit:'Your yellow coins',kcalcomo:'How it works',kcalpeso:'Your body weight',kcalajustar:'tap to adjust',kcalbatida:'Daily goal hit!',kcalproxima:'to next green coin',kcalempty:'Burn calories training to earn your first green coin 💪',kcalverde:'green coin',kcalverdes:'green coins',
+   semdescanso:'No rest',continuo:'Continuous',addextra:'＋ Add extra exercise today',hoje:'today',ontem:'yesterday',kcalnav:'Calories',kcalhoje:'burned today',kcalmeta:'Goal',kcalsemana:'Week',kcalmes:'Month',kcalano:'Year',kcalpeso:'Your body weight',kcalajustar:'tap to adjust',kcalbatida:'Daily goal hit!',
    askdatetit:'When was this workout?',askdatesub:'Confirm the day so it doesn\'t log on the wrong date.',cancelar:'Cancel',confirmar:'Confirm',fechar:'Close',
    pesosalvo:'Weight saved: ',distsalva:'Distance saved: ',tempoSalvo:'Time saved: ',registroexcluido:'Entry deleted',marcaruma:'Check at least one set first 😉',
    wdSeg:'M',wdTer:'T',wdQua:'W',wdQui:'T',wdSex:'F',wdSab:'S',wdDom:'S',movidolixeira:'Moved to trash',regnaoenc:'Entry not found',
@@ -2607,7 +2584,7 @@ const I18N={
    vocemarcou:'You checked ',de:' of ',semdetalhessessao:'No details saved for this session',
    principiosdr:"Dr.'s Principles 🧬",progressaodupla:'Double progression:',progressaoduplatxt:'hit the top of the rep range on every set (with 2 in reserve)? Add ~5% load and drop back to the bottom of the range.',
    frequencia2x:'2× frequency:',frequencia2xtxt:'training each muscle 2x a week builds more muscle than 1x with the same volume.',
-   descansostip:'Rest times:',descansostiptxt:'90 to 120s on heavy compounds and 45 to 60s on isolations is what the latest evidence points to as ideal.',
+   descansostip:'Rest times:',descansostiptxt:'Resting 1 to 2 min between sets was the range that did best in a preliminary meta-analysis (under 1 min may reduce gains). On heavy exercises, many people prefer the upper part of that range.',
    composicaotip:'Body composition:',composicaotiptxt:'abs show up in a deficit. ~300–500 kcal below maintenance + 1.6–2.2 g/kg protein.',
    ambientenaosalva:"⚠️ This environment doesn't save data between sessions. Host the file (e.g. GitHub Pages).",
    arrastarreordenar:'Drag to reorder',trocarbtn:'Swap',combobtn:'Combo',desfazercombo:'Undo',
@@ -2615,8 +2592,8 @@ const I18N={
    jaemcombo:' · already in a combo',combocriado:"Combo created! The two become one block with no rest between them.",combodesfeito:'Combo undone',
    semoutroexcombo:'Add one more exercise to this workout to create a combo.',excluirconfirm:'Delete',doTreino:' from Workout ',
    idiomalangsub:"Exercises, tips and long texts stay in Portuguese for now. The app's navigation already switches.",
-   verificaratualiz:'🔄 Check for updates',verificandoatualiz:'Checking for updates...',movimento:'Movement',nadapraregistrar:'Nothing to log for this workout',retomandotreino:'Resuming Workout ',emaberto:' in progress',retomarbtn:'Resume',concluirbtn:'Finish',descartarbtn:'Discard',kcalcomotxt:'We calculate calories for each workout from your body weight and the type of exercise (strength, cardio, functional). This is an estimate, not an exact clinical measurement: it varies with your real effort. Every {p} kcal earns 1 yellow coin, and every {c} yellow coins earns 1 green coin to keep in your collection.',
-   bemvindo:'Welcome to',heroSub:"Your gym workout, your way. Answer a few quick questions and I'll build your complete program: exercises, order, sets, reps and rest times calibrated by the latest hypertrophy science.",
+   verificaratualiz:'🔄 Check for updates',verificandoatualiz:'Checking for updates...',movimento:'Movement',nadapraregistrar:'Nothing to log for this workout',retomandotreino:'Resuming Workout ',emaberto:' in progress',retomarbtn:'Resume',concluirbtn:'Finish',descartarbtn:'Discard',
+   bemvindo:'Welcome to',heroSub:"Your gym workout, your way. Answer a few quick questions and I'll build your complete program: exercises, order, sets, reps and rest times in ranges commonly used for hypertrophy.",
    seunomeph:'Your name (how you want to be called)',montarmeutreino:'Build my workout',voltarpromeutreino:'← Back to my workout',
    continuarppl:'Continue with my current workout (PPL)',usarpadraoppl:'Use the default program (PPL)',jatenhoconta:'Already have an account ☁️ · Sign in',
    qualcardio:'Which cardio do you prefer?',ordemrotacao:'The order you pick sets the rotation. You can choose more than one.',
@@ -2630,9 +2607,9 @@ const I18N={
    qualobjetivo:'What is your goal?',quantosex:'How many exercises per day?',quantosexhint:'6 is the sweet spot for most people: enough volume without turning into a 2-hour workout.',
    quantasdiv:'How many workout splits?',divhintcardio:'How many different cardio workouts you want to alternate.',
    divhintfunc:'How many different functional workouts you want to alternate.',divhintnormal:'A-B (Upper/Lower) · A-B-C (Push/Pull/Legs) · A-B-C-D (by muscle group).',
-   quantasvezes:'How many times a week?',vezeshint:'The science is clear: each muscle 2x a week beats 1x.',
+   quantasvezes:'How many times a week?',vezeshint:'The ACSM (2026) recommends training each major muscle group at least 2x a week.',
    gerarmeutreino:'Generate my workout →',programapronto:'Your program is ready',
-   progpronto_lead:'Sets, reps and rest times calibrated: compounds with 8–12 reps and 90–120s rest, isolations with 12–15 and 45–60s (ranges with the best evidence for hypertrophy). Adjust as you like: remove (✕) or add extra exercises.',
+   progpronto_lead:'Sets, reps and rest times: compounds with 8–12 reps and 90–120s rest, isolations with 12–15 and 45–60s (ranges commonly used for hypertrophy). Adjust as you like: remove (✕) or add extra exercises.',
    rotacaosugerida:'📅 Suggested rotation:',porsemana:'x/week',addexextra:'＋ Add extra exercise',
    concluirtreinar:'Finish and train 🚀',exercicios:'exercises',
    criarexercicio:'＋ Create your own exercise',novoexnome:'Exercise name',novoexgrupo:'Muscle group',
@@ -2684,6 +2661,10 @@ async function forceRefresh(){
   location.reload(true);
 }
 const YT=q=>'https://www.youtube.com/results?search_query='+encodeURIComponent(q);
+/* vídeo de cada exercício: link direto (conferido em 29/10/2026); quem não tem cai na busca do YouTube */
+const YTV={"neckflexv":"6k9VQNN8B5U","neckextv":"VLdIkr2Gfdc","necklatv":"hdfpRNALXaY","neckisov":"5cjezZUBoFA","neckbridgev":"koLDgMf8YIw","neckmachinev":"3dMnCZWvUVg","wristcurlv":"NoO4ol8Zw2I","revwristcurlv":"FW7URAaC-vE","rotatorcuffext":"T_WCU7wjn4Y","rotatorcuffint":"QFnXM2ueUIE","renegaderowv":"F68p7cJFtOI","nordiccurlv":"Lgibr8od0yA","pallofpressv":"5_8d8vHgZvU","chestpress":"sqNwDkUU_Ps","dbbench":"U2wKgoUAEMo","pecdeck":"K2VJ4HeXb4s","cablefly":"Iwe6AmxVf7o","shoulderpress":"TnhIyp4kmO8","dbshoulder":"0JfYxMRsUCQ","sidelat":"n5dsI9qQXwY","cablelatv":"qitQHqNZbeM","reversefly":"nc2dAacSYJE","dbrevfly":"evXOlgLTPCw","facepullv":"eTCBSFlCJ_s","triceps":"qHDrQglWgS4","benchdipv":"c3ZGl4pAwZ4","biceps":"dDI8ClxRS04","hammer":"Hy5L3-QJETc","latpull":"j9jtjL8FhPI","neutralpull":"j6DGiY4iUmo","seatedrow":"xQNrFHEMhI4","widerow":"e9oe5qbN0jo","lowrow":"NYok5zjbDcw","legpress":"W1SD96lrudY","goblet2":"3gpXflqRiEc","legext":"KO0-I-JAi8Q","lungev":"1LuRcKJMn8w","legcurl":"ELOCsoDSmrg","rdlv":"5zmlnbWb-g4","glutekick":"WhtxQnm4254","bridgev":"tqp5XQPpTxY","abductor":"OQC8nso2aPE","bandabd":"WMV4kdFBkns","adductor":"36EB4I915sU","cableadd":"SIQrpq6YnT8","calf":"6O5hh1rBtx8","dbcalf":"ElcvJ0kjt6c","lowerback":"G6HG5VzJoNc","supermanv":"UXUGfiNL1lI","absfull":"V7p_DmkYLZw","plankv":"A2b2EmIg0dA","reversecrunch":"lmSP-c1X_iY","legraisev":"l4kQd9eWclE","finisher":"NwwDBARCGgo","treadmillv":"NAsObfFJXvE","rowerv":"6_eLpWiNijE","barbellbench":"4Y2ZdHCOXok","backsquat":"rrJIyZGlK8c","deadliftv":"r4MzxtBKyNE","pullupv":"vw5Xmu5CIew","chinupv":"mRy9m2Q9_1I","bentrow":"6FZHJGzMFEc","ohpv":"F3QY5vMz_6I","dipsweightedv":"2i3o0bFZT_s","hangingraisev":"Pr1ieGZ5atk","hipthrustv":"Zp26q4BY5HE","goodmorningv":"dEJ0FTm-CEk","rdlbarv":"CN_7cz3P-1U","ellipticalv":"gpxUeHJ-Ps0","stairsv":"GMc8fUksKpY","runningv":"3RlvKMxPMr0","kettlebellswing":"LBhaLLc153A","farmercarry":"zDjBc2tJ358","sledpush":"QaTrePoCT4g","battleropes":"_nkQ9ej1CFs","medicineball":"Q5scdl7ZxZA","boxjump":"G-bxQY57mKc","trxrow":"d3mEoo5b0mw","jumpropev":"u3zgHI8QnqE","burpeev":"G2hv_NYhM-A","mountainclimberv":"ixxk9Qfn61o","swimmingv":"5HLW2AI1Ink","inclinebench":"5kyLUGVq_pk","inclinedb":"gl8H4QLXKTo","declinebench":"LfyQBUKR8SE","cablecrossover":"EsXgqAxVKbA","pushupv":"IODxDxX7oi4","tbar":"yPis7nlbqdY","onearmrow":"8iMJWCAIV78","shrugv":"8lP_eJvClSA","straightarm":"wcVDItawocI","arnoldpress":"6Z15_WdXmVw","uprightrow":"jaAV-rD45I0","frontraise":"T76xu0XjYTk","preachercurl":"Gydpcouclx8","concentrationcurl":"ZcU2hN76UyA","cablecurl":"2MUEL4nL6hA","skullcrusher":"ir5PsbniVSc","overheadtriceps":"fYqswDVbJDg","closegrip":"cXbSJHtjrQQ","bulgarian":"DeCnHqrN22U","hacksquat":"0tn5K9NlCfo","legpresssingle":"ZYDTJaAM-gE","walkinglunge":"yDVAlYTNPSo","frontsquat":"I5GaxSYLCSc","cablekickback":"5jJNfIlKTmg","hipthrustmachine":"UlljOYPM57U","stepup":"DxUNi119Qzs","seatedcalf":"3ZRe_QpvRPg","legpresscalf":"PYZY00hI43w","russiantwist":"99T1EfpMwPA","abwheel":"VmqDIL2xzbk","sideplank":"Oe9Tp9SvTCE","deadbug":"4XLEnwUr1d8","cablewoodchop":"GwxbI7hnnwI","sledpull":"QaTrePoCT4g","assaultbike":"Fv8tIEJhcsc","cablecrunchv":"3qjoXDTuyOE","declinecrunch":"FRzQXeN1hro","crosscrunch":"S3a-uB-GQWo","jackknife":"GEZ8NLbtc8Q","obliquecrunch":"QxaKQG-gmPY","dbsidebend":"wY9nQ-yfRwo","scissorkick":"W7z-gOt2aNM","kneeraisebars":"MfuZXcYd8tM","abmachine":"NpjB_rp756Y","situpv":"pCX65Mtc_Kk","weightedcrunch":"1YSxi0qv3wg","ballcrunch":"n6oxd7JhwFM","cablecrunchtwist":"xUulEXD1AQc","legpullin":"2dS23oaQiBY","dbfly":"Nhvz9EzdJ4U","inclinefly":"JSDpq14vCZ8","dbpullover":"jQjWlIwG4sI","inclinepushup":"yAbg3_pJKvw","feetelevpushup":"5QFjmotLfW4","diamondpushup":"8_ILkbB9an8","chestdips":"wjUmnZH528Y","declinedb":"Pf1nDoqx_1A","lowcablefly":"wnFEC_34Bls","invertedrow":"11F_O_sZ1Z4","dbbentrow":"6gvmcqr226U","reverserow":"0RyZHNgCiqQ","cablerow1":"CrylzZHfO1c","assistedpullup":"B_VkNQS5YLs","bandlateral":"yfNg5sFndbw","bandrevfly":"3OYSIWaJJk4","cablerevfly":"IloCYmYWayM","seateddblat":"g_7iXXBrCkY","dbpressstand":"e_f5oodNEcI","cablefrontraise":"vtH93qBItdk","zottman":"FSGDM9-dZ9w","inclinecurl":"aTYlqC_JacQ","ezcurl":"6LrOTcr595A","reversecurl":"ypfd1kaI1AU","dbkickback":"m9me06UBPKc","dbtriext":"dsRbS_em7D8","pushdownbar":"7R88yqmcGrw","cablehammer":"BnFjdVxV8hw","bwsquat":"RClKKQqsvXA","dbsquat":"v_c67Omje48","sumosquat":"QqvTW0pzLFw","jumpsquat":"A-cFYWvaHr0","splitsquat":"SX7BtPh_pL0","reverselunge":"xrPteyQLGAo","singlelegdl":"gz9l8UA_KXs","lyinglegcurl":"jxctD6fL_FQ","ballegcurl":"WNB90xXLEOg","barbelllunge":"ci4rsmlOk24","singlelegbridge":"sVfp4LN9niA","barbellbridge":"DQv1IMQDbE4","monsterwalk":"snbNxUIUQPc","sumodeadlift":"JbY72Him34Q","cablepullthrough":"yXopOhzEoeo","donkeycalf":"r30EoMPSNns","turkishgetup":"YX6-DfhIx1o","kbthruster":"y0QfDZvoJcQ","inchworm":"ml3MdmCkwbQ","standinglongjump":"BiaUluYAjNM","bandrotext":"4HqMXMn3FBk","bandrotint":"MfjCK5_Ss5g","bandfly":"yVcEkvgymt8","bandpress":"0rLjkQweIDg","bandgoodmorning":"S1S3JHNmEAA","bandadduct":"ugWMLte1FiM","bandupright":"bfzl23IIOi8","wristroller":"-lOFG0U_rlY","bwlunge":"M-w-SjY6Di0","bicyclecrunch":"wnuLak2onoA","heeltouch":"9bR-elyolBQ","cablerussian":"ZUVe_Jcuos0","cableseatedcrunch":"mkE_gNDQN8o","legsballcrunch":"OPNXSGA-8gk","declineoblique":"1vn_bB1b0VA","declinereverse":"YcMj0EEadQo","landmine180":"YC7poHGaVFE","platetwist":"8ohhG1Y4tzU","kbwindmill":"VsxdNUc5Jb4","palloffrot":"zoYwuVw3kkQ","barbellrollout":"O-d6HC9gLcw","cablesidebend":"ykbAuxIDFiU","seatedlegtuck":"I6TAn1FLGw4","spidercrawl":"zQ2hUq9Rdgs","toetouchers":"GTX63djcDEo","cocoon":"DB-gT4lMgxs","suspendedfallout":"3X8UHOVMXuQ","stomachvacuum":"f2PliOQHQ4c","bentkneehipraise":"lMhAj27-n3w","hangingpike":"wVRlRmGsZ2w","neckplateext":"hYqVUHC-GhE","neckplateflex":"ajcwzDCvQS0","dbextrot":"af3Qy82vjRg","smithsquat":"-eO_VydErV0","starjump":"h6wu4_LOhyU","splitjump":"G93T5c40S4w","kneetuckjump":"zh1v8jINBZ0","plyopushup":"Y-uF4F3mQIs","benchjump":"KJ1WSHe6cTQ","fastskipping":"oDdkytliOqE","lateralbound":"_PX9-8uaZzQ","rocketjump":"JPlK7BR1NCw","sledgehammer":"wbl7j9LVH7o","dbvertswing":"wqUKvSouuFI","pushpress":"ep30avTSMB0","recumbentbike":"M134EXNHYdA","stepmill":"0yRG2F9P0kk","treadmillhiit":"PkAw3NbcJ78","bikehiit":"Rh8VswzWDow","rowerhiit":"zBzVKitJ32E","latraisemachine":"siazAOww2Tc"};
+const ytQuery=a=>{const id=a&&(a.vid||a.id),e=id&&E[id];return (e&&e.yt)||(a&&(a.yt||a.name))||''};
+const ytUrl=a=>{const id=a&&(a.vid||a.id);return YTV[id]?'https://www.youtube.com/watch?v='+YTV[id]:YT(ytQuery(a))};
 
 /* =================== BIBLIOTECA DE EXERCÍCIOS =================== */
 /* grp: chest back shoulders arms legs glutes core calf | cat: comp iso core calf lomb cardio */
@@ -2828,6 +2809,10 @@ Object.assign(I18N.en,{nuvemfalhou:"Couldn't load your data from the cloud. Chec
   treinosrecuperados:'Recovered {n} workout(s) that had not reached the cloud ✔'});
 Object.assign(I18N['pt-BR'],{qk_myprog:'Meu treino',qk_brand:'Treino rápido'});
 Object.assign(I18N.en,{qk_myprog:'My program',qk_brand:'Quick workout'});
+Object.assign(I18N['pt-BR'],{"spx_title": "Treino Especial", "spx_lead": "Três trilhas montadas a partir da evidência que foi possível conferir. Cada exercício vem com o porquê, o grau de certeza e a fonte. Seus treinos A, B e C não mudam.", "spx_panellead": "Montados a partir da evidência mais recente que foi possível conferir, com o porquê de cada escolha. Independentes dos seus treinos A, B e C.", "spx_trail": "Trilha", "spx_time": "Tempo disponível", "spx_ver": "Qual treino", "spx_sug": "sugerido", "spx_where": "Onde você treina", "spx_gym": "Academia", "spx_body": "Em casa (corpo, barra e elástico)", "spx_see": "Ver treino", "spx_start": "Começar este treino", "spx_howto": "Como fazer o treino", "spx_week": "Séries por semana (A + B)", "spx_weekhint": "Contagem aproximada pelo grupo principal de cada exercício. Referência do ACSM para hipertrofia: cerca de 10 séries por músculo por semana.", "spx_weekmin": "Este treino não chega a 10 séries por músculo. Tudo bem: o ACSM diz que qualquer treino de força vence nenhum.", "spx_sources": "Fontes e grau de certeza", "spx_srclead": "O que cada fonte diz, o que foi lido de verdade e o grau de certeza que isso dá.", "spx_grades": "Como ler os graus", "spx_gradestxt": "Forte: posição oficial ou diretriz. Moderado: metanálise (preprints incluídos). Fraco: estudo observacional, resumo de segunda mão ou efeito incerto. Escolha do app: decisão de montagem sem teste direto.", "spx_notver": "O que não foi verificado", "spx_notvertxt": "As revisões de dose mínima de força e de HIIT contra contínuo não foram verificadas (o acesso ao PubMed/PMC não foi liberado), então o app não usa números delas. A divisão dos tiros do bloco de fôlego e a escolha dos exercícios em cada papel são decisões de montagem, sem teste direto.", "spx_my": "Escolha do app", "spx_cont": "Continuar o treino especial de hoje", "spx_replace": "Já há um treino especial de hoje com séries marcadas. Substituir por este?", "spx_pronto": "Treino especial pronto", "spx_redo": "Novo treino especial", "spx_remove": "Remover este treino", "spx_removeconf": "Este treino especial tem séries marcadas. Remover mesmo assim?", "spx_removido": "Treino especial removido", "kcalaprox": "Estimativa aproximada: MET do exercício x seu peso x tempo da série. Não é uma medição."});
+Object.assign(I18N.en,{"spx_title": "Special workout", "spx_lead": "Three tracks built from the evidence that could be checked. Each exercise comes with the why, the grade of certainty and the source. Your A, B and C workouts do not change.", "spx_panellead": "Built from the most recent evidence that could be checked, with the why of every choice. Independent of your A, B and C workouts.", "spx_trail": "Track", "spx_time": "Time available", "spx_ver": "Which workout", "spx_sug": "suggested", "spx_where": "Where you train", "spx_gym": "Gym", "spx_body": "At home (bodyweight, bar and band)", "spx_see": "See workout", "spx_start": "Start this workout", "spx_howto": "How to do the workout", "spx_week": "Sets per week (A + B)", "spx_weekhint": "Approximate count by the main group of each exercise. ACSM reference for hypertrophy: about 10 sets per muscle per week.", "spx_weekmin": "This workout does not reach 10 sets per muscle. That is fine: the ACSM says any strength training beats none.", "spx_sources": "Sources and grade of certainty", "spx_srclead": "What each source says, what was actually read and the grade of certainty that gives.", "spx_grades": "How to read the grades", "spx_gradestxt": "Strong: official position or guideline. Moderate: meta-analysis (preprints included). Weak: observational study, second-hand summary or uncertain effect. App choice: a build decision with no direct test.", "spx_notver": "What was not verified", "spx_notvertxt": "The reviews on minimum strength dose and on HIIT versus continuous were not verified (PubMed/PMC access was not granted), so the app uses no numbers from them. The split of efforts in the conditioning block and the choice of exercises within each role are build decisions with no direct test.", "spx_my": "App choice", "spx_cont": "Continue today special workout", "spx_replace": "There is already a special workout today with sets logged. Replace it with this one?", "spx_pronto": "Special workout ready", "spx_redo": "New special workout", "spx_remove": "Remove this workout", "spx_removeconf": "This special workout has sets logged. Remove it anyway?", "spx_removido": "Special workout removed", "kcalaprox": "Approximate estimate: exercise MET x your weight x set time. It is not a measurement."});
+Object.assign(I18N['pt-BR'],{"outrosvideos": "Buscar outros vídeos"});
+Object.assign(I18N.en,{"outrosvideos": "Search other videos"});
 function grpLabel(g){return LANG==='en'?(GRP_LABEL_EN[g]||GRP_LABEL[g]):GRP_LABEL[g]}
 function musLabel(m){return LANG==='en'?(MUS_EN[m]||m):m}
 const E={
@@ -3247,11 +3232,12 @@ function migrateProgramLib(){
 /* o "por que" é calculado na hora, no idioma atual (antes era gravado em português na criação do treino) */
 function roleWhy(day,i){
   const ex=day.ex[i],lib=E[ex.id],meta=Object.assign({},day.meta||{});
+  if(meta.special)return spxWhyOf(day,i);
   if(meta.kind==='tpl')meta.kind=meta.tplKind;
   if(meta.kind==='cardio')return lib&&lib.cat==='cardio'?(LANG==='en'?'Base of the cardio workout: sustained calorie burn and conditioning.':'Base do treino de cardio: gasto calórico sustentado e condicionamento.'):(LANG==='en'?'Core stability to support your posture during the cardio.':'Estabilidade central pra sustentar a postura durante o cardio.');
   if(meta.kind==='functional')return LANG==='en'?'Functional movement: trains the body as one unit, mirroring everyday patterns.':'Movimento funcional: treina o corpo como uma unidade, replicando padrões do dia a dia.';
-  if(ex.ss)return LANG==='en'?'Circuit station: alternates with the next exercise with no rest, keeping your heart rate up to maximize the burn.':'Estação de circuito: intercala com o próximo exercício sem descanso, mantendo a frequência cardíaca elevada pra maximizar a queima.';
-  if(meta.kind==='hiit')return LANG==='en'?'HIIT block: hard effort for a short time and short rest, raising your heart rate and energy burn in less time.':'Bloco de HIIT: esforço forte por pouco tempo e descanso curto, pra elevar a frequência cardíaca e o gasto de energia em menos tempo.';
+  if(ex.ss)return LANG==='en'?'Circuit station: alternates with the next exercise with no rest, keeping the pace and shortening the workout.':'Estação de circuito: intercala com o próximo exercício sem descanso, mantendo o ritmo e encurtando o treino.';
+  if(meta.kind==='hiit')return LANG==='en'?'HIIT block: hard effort for a short time and short rest, raising your heart rate in little time.':'Bloco de HIIT: esforço forte por pouco tempo e descanso curto, pra elevar a frequência cardíaca em pouco tempo.';
   if(lib)return whyFor(lib,i,true);
   return ex.why||'';
 }
@@ -3279,7 +3265,7 @@ function seqWhy(list,i){
   return en?`Switches region after ${pn}: the ${ml(pp)} area rests while the ${ml(pc)} area takes over, so you keep the pace without losing strength.`
            :`Troca de região depois de ${pn}: a região de ${ml(pp)} descansa enquanto a de ${ml(pc)} entra em ação, e você mantém o ritmo sem perder força.`;
 }
-function dynWhy(day,i){const a=roleWhy(day,i),b=seqWhy(day.ex,i);return b?a+' '+b:a}
+function dynWhy(day,i){const a=roleWhy(day,i),b=(day.meta&&day.meta.special)?'':seqWhy(day.ex,i);return b?a+' '+b:a}
 
 /* =================== DIVISÕES / TEMPLATES =================== */
 const SPLITS={
@@ -3303,7 +3289,7 @@ const GOALS={
    repsComp:'8–12',repsIso:'12–15',restComp:100,restIso:55,finisherDefault:true},
  forca:{label:'Força',icon:'🏋️',desc:'Levantar mais peso: séries baixas, descanso longo.',
    repsComp:'4–6',repsIso:'8–10',restComp:150,restIso:80,finisherDefault:false},
- emagrecimento:{label:'Emagrecimento',icon:'🔥',desc:'Mais gasto calórico por treino, descansos curtos.',
+ emagrecimento:{label:'Emagrecimento',icon:'🔥',desc:'Exercícios em pares e descansos curtos, com cardio.',
    repsComp:'12–15',repsIso:'15–20',restComp:45,restIso:30,finisherDefault:true},
  hiit:{label:'HIIT',icon:'⏱️',desc:'Intervalos curtos e intensos: esforço forte, descanso curto. Treino rápido que acelera o fôlego e a queima.',
    repsComp:'12–15',repsIso:'15',restComp:30,restIso:20,finisherDefault:false,hiitFocus:true},
@@ -3321,7 +3307,7 @@ const GOALS={
 const GOALS_EN={
  hipertrofia:{label:'Hypertrophy',desc:'Build muscle mass with moderate-high volume.'},
  forca:{label:'Strength',desc:'Lift heavier: low reps, long rest.'},
- emagrecimento:{label:'Fat loss',desc:'More calorie burn per workout, short rest.'},
+ emagrecimento:{label:'Fat loss',desc:'Paired exercises and short rest, with cardio.'},
  hiit:{label:'HIIT',desc:'Short, intense intervals: hard effort, short rest. A quick workout that lifts conditioning and burn.'},
  resistencia:{label:'Endurance',desc:'Stamina and muscular endurance, high reps.'},
  cardio:{label:'Cardio',desc:'All-in on cardiovascular conditioning.'},
@@ -3842,8 +3828,8 @@ TP('ci_mach2','circuito',2,{days:['MA_A','MA_B'],pd:6,freq:3,lvl:0,ign:true,circ
  den:'Two machines alternated with no rest between them: burns calories on your schedule, every move guided.'});
 TP('ci_fb3','circuito',3,{days:['FB_A','FB_B','FB_C'],pd:6,freq:3,lvl:1,ign:true,circ:true,
  pt:'Circuito corpo todo (A / B / C)',en:'Full-body circuit (A / B / C)',
- dpt:'Exercícios de corpo inteiro em duplas, sem descanso entre os dois: mais gasto calórico no mesmo tempo.',
- den:'Full-body exercises in pairs with no rest between the two: more calories burned in the same time.'});
+ dpt:'Exercícios de corpo inteiro em duplas, sem descanso entre os dois: treino mais curto para o mesmo volume.',
+ den:'Full-body exercises in pairs with no rest between the two: a shorter workout for the same volume.'});
 TP('ci_ul4','circuito',4,{days:['UPPER_A','LOWER_A','UPPER_B','LOWER_B'],pd:6,freq:4,lvl:1,ign:true,circ:true,
  pt:'Circuito superior / inferior (4 treinos)',en:'Upper / lower circuit (4 workouts)',
  dpt:'Superior e inferior em duplas, com duas versões de cada pra variar os exercícios ao longo da semana.',
@@ -3858,15 +3844,15 @@ TPLS.forEach(t=>{
 });
 const LVL_TXT={0:['Iniciante','Beginner'],1:['Intermediário','Intermediate'],2:['Avançado','Advanced']};
 const GOAL_NOTE={
- hipertrofia:['Compostos pesados primeiro (você fresco = mais carga = mais estímulo), isolados completam, core fecha.','Heavy compounds first (fresh you = more weight = more stimulus), isolations complete it, core wraps it up.'],
+ hipertrofia:['Compostos pesados primeiro, com você descansado (a ordem pesa mais na força do que no ganho de massa), isolados completam, core fecha.','Heavy compounds first, while you are fresh (order matters more for strength than for muscle size), isolations complete it, core wraps it up.'],
  forca:['O levantamento principal vem primeiro, em séries baixas e descanso longo: a carga na barra é o estímulo. Acessórios só depois.','The main lift comes first, in low reps and long rest: the load on the bar is the stimulus. Accessories only after.'],
- emagrecimento:['Exercícios em pares sem descanso entre eles e descansos curtos: mais gasto calórico no mesmo tempo, com cardio curto no fim.','Paired exercises with no rest between them and short breaks: more calories burned in the same time, with short cardio to finish.'],
- hiit:['Blocos curtos e intensos: esforço forte e descanso curto. Treino enxuto que eleva o gasto de energia e o fôlego.','Short, intense blocks: hard effort and short rest. A lean workout that lifts energy burn and conditioning.'],
+ emagrecimento:['Exercícios em pares sem descanso entre eles e descansos curtos: treino mais curto para o mesmo volume, com cardio curto no fim.','Paired exercises with no rest between them and short breaks: a shorter workout for the same volume, with short cardio to finish.'],
+ hiit:['Blocos curtos e intensos: esforço forte e descanso curto. Treino enxuto para trabalhar o fôlego em pouco tempo.','Short, intense blocks: hard effort and short rest. A lean workout to train conditioning in little time.'],
  resistencia:['Repetições altas e descanso curto pra treinar fôlego e resistência muscular.','High reps and short rest to train stamina and muscular endurance.'],
  geral:['Equilíbrio entre força, cardio leve e core, sem exagerar na carga.','Balance of strength, easy cardio and core, without overdoing the load.'],
  cardio:['Cardio contínuo e intervalado em aparelhos, com core pra sustentar a postura.','Steady and interval cardio on machines, with core to support your posture.'],
  funcional:['Kettlebell, cordas, trenó e peso do corpo em pares sem descanso: movimento do corpo todo.','Kettlebell, ropes, sled and bodyweight in no-rest pairs: whole-body movement.'],
- circuito:['Exercícios alternados em duplas, sem descanso entre eles: mais gasto calórico no mesmo tempo.','Exercises alternated in pairs, no rest between them: more calories burned in the same time.']};
+ circuito:['Exercícios alternados em duplas, sem descanso entre eles: treino mais curto para o mesmo volume.','Exercises alternated in pairs, no rest between them: a shorter workout for the same volume.']};
 const tplById=id=>TPLS.find(t=>t.id===id);
 const tplsFor=g=>TPLS.filter(t=>t.goal===g);
 const tplPick=(g,n)=>{const l=tplsFor(g);return l.find(t=>t.n===n)||l[0]};
@@ -3962,7 +3948,7 @@ function generateFromTpl(setup0,tpl){
   days.forEach((d,i)=>{
     const L=LETTERS[i],sel=buildTplDay(d,{...setup,goal},gdef,tpl);
     const circ=sel.some(x=>x.ss);
-    const ex=sel.map((x,idx)=>exItem(x,idx,x.ss?(LANG==='en'?'Circuit station: alternates with the next exercise with no rest, keeping your heart rate up to maximize the burn.':'Estação de circuito: intercala com o próximo exercício sem descanso, mantendo a frequência cardíaca elevada pra maximizar a queima.'):null));
+    const ex=sel.map((x,idx)=>exItem(x,idx,x.ss?(LANG==='en'?'Circuit station: alternates with the next exercise with no rest, keeping the pace and shortening the workout.':'Estação de circuito: intercala com o próximo exercício sem descanso, mantendo o ritmo e encurtando o treino.'):null));
     if(setup.finisher&&kind==='normal'&&(i===0||i===days.length-1)&&!sel.some(x=>x.cat==='cardio')){
       const f=E[finId];ex.push({...exItem({id:finId,...f},99),bw:finId==='jumpropev'?true:!!f.bw,rest:0,sets:1,reps:f.reps});
     }
@@ -3983,6 +3969,7 @@ function nameMaps(){
 function trLbl(l){
   if(!l||typeof l!=='string')return l;
   if(l.indexOf(' · ')>0&&/^(Rápido|Quick) · /.test(l))return qkTrLbl(l);
+  if(/^(Especial|Special) · /.test(l))return spxTrLbl(l);
   if(LANG==='en'){
     if(SPLIT_LABEL_EN[l])return SPLIT_LABEL_EN[l];
     let m=/^Funcional (\w)$/.exec(l);if(m)return 'Functional '+m[1];
@@ -3999,6 +3986,7 @@ const hLabel=h=>trLbl(h.label);
 function buildDayIntro(meta){
   if(!meta)return '';
   if(meta.quick)return qkIntro(meta);
+  if(meta.special)return spxIntro(meta);
   if(meta.kind==='tpl'){
     const tp=tplById(meta.tpl),en=LANG==='en',note=(GOAL_NOTE[meta.goal]||GOAL_NOTE.geral)[en?1:0];
     const nm=tp?tName(tp):trSplitName(meta.spName);
@@ -4007,21 +3995,22 @@ function buildDayIntro(meta){
   const gl=goalLabel(meta.goal).toLowerCase();
   const spN=trSplitName(meta.spName);
   if(meta.kind==='cardio')return LANG==='en'?
-    `${goalLabel('cardio')} · ${meta.freq}x per week. Cardio machines alternated with core stability to hold posture and burn more.`:
-    `${goalLabel('cardio')} · ${meta.freq}x por semana. Máquinas de cardio alternadas com estabilidade central pra sustentar postura e queimar mais.`;
+    `${goalLabel('cardio')} · ${meta.freq}x per week. Cardio machines alternated with core stability to hold posture.`:
+    `${goalLabel('cardio')} · ${meta.freq}x por semana. Máquinas de cardio alternadas com estabilidade central pra sustentar a postura.`;
   if(meta.kind==='functional')return LANG==='en'?
-    `${goalLabel('funcional')} · ${meta.freq}x per week. Kettlebell, sled, TRX, ropes and moves like burpees, always in pairs with no rest between them: more calorie burn in the same time.`:
-    `${goalLabel('funcional')} · ${meta.freq}x por semana. Kettlebell, trenó, TRX, cordas e movimentos como burpee, sempre em duplas sem descanso entre elas: mais gasto calórico no mesmo tempo.`;
+    `${goalLabel('funcional')} · ${meta.freq}x per week. Kettlebell, sled, TRX, ropes and moves like burpees, always in pairs with no rest between them: a shorter workout for the same volume.`:
+    `${goalLabel('funcional')} · ${meta.freq}x por semana. Kettlebell, trenó, TRX, cordas e movimentos como burpee, sempre em duplas sem descanso entre elas: treino mais curto para o mesmo volume.`;
   if(meta.circuitPairs)return LANG==='en'?
-    `${spN} · ${meta.freq}x per week · ${meta.goal==='circuito'?'burn':gl} circuit. Exercises alternated in pairs, no rest between them: more calorie burn in the same time.`:
-    `${spN} · ${meta.freq}x por semana · circuito de ${meta.goal==='circuito'?'queima':gl}. Exercícios alternados em duplas, sem descanso entre eles: mais gasto calórico no mesmo tempo.`;
+    `${spN} · ${meta.freq}x per week · ${meta.goal==='circuito'?'burn':gl} circuit. Exercises alternated in pairs, no rest between them: a shorter workout for the same volume.`:
+    `${spN} · ${meta.freq}x por semana · circuito de ${meta.goal==='circuito'?'queima':gl}. Exercícios alternados em duplas, sem descanso entre eles: treino mais curto para o mesmo volume.`;
   return LANG==='en'?
-    `${spN} · ${meta.freq}x per week · focus on ${gl}. Heavy compounds first (fresh you = more weight = more stimulus), isolations complete it, core wraps it up.`:
-    `${spN} · ${meta.freq}x por semana · foco em ${gl}. Compostos pesados primeiro (você fresco = mais carga = mais estímulo), isolados completam, core fecha.`;
+    `${spN} · ${meta.freq}x per week · focus on ${gl}. Heavy compounds first, while you are fresh (order matters more for strength than for muscle size), isolations complete it, core wraps it up.`:
+    `${spN} · ${meta.freq}x por semana · foco em ${gl}. Compostos pesados primeiro, com você descansado (a ordem pesa mais na força do que no ganho de massa), isolados completam, core fecha.`;
 }
 function buildDayLabel(meta,fallback){
   if(!meta)return fallback;
   if(meta.quick)return qkLabel(meta);
+  if(meta.special)return spxLabel(meta);
   if(meta.kind==='cardio')return trLbl(meta.cardioName||fallback);
   if(meta.kind==='functional')return (LANG==='en'?'Functional ':'Funcional ')+meta.letter;
   return trLbl(fallback);
@@ -4029,6 +4018,7 @@ function buildDayLabel(meta,fallback){
 function buildDaySub(meta,fallback){
   if(!meta)return fallback;
   if(meta.quick)return qkSub(meta);
+  if(meta.special)return spxSub(meta);
   if(meta.kind==='cardio')return LANG==='en'?'Conditioning':'Condicionamento';
   if(meta.kind==='functional')return LANG==='en'?'Full body · circuit':'Full body · circuito';
   return trSub(fallback);
@@ -4074,7 +4064,7 @@ function generateProgramLegacy(setup){
       ss:x.ss,yt:x.yt,steps:x.steps,g:x.g,b:x.b,
       why:d.cardio?(x.cat==='cardio'?(LANG==='en'?'Base of the cardio workout: sustained calorie burn and conditioning.':'Base do treino de cardio: gasto calórico sustentado e condicionamento.'):(LANG==='en'?'Core stability to support your posture during the cardio.':'Estabilidade central pra sustentar a postura durante o cardio.')):
           d.functional?(LANG==='en'?'Functional movement: trains the body as one unit, mirroring everyday patterns.':'Movimento funcional: treina o corpo como uma unidade, replicando padrões do dia a dia.'):
-          (x.ss?(LANG==='en'?'Circuit station: alternates with the next exercise with no rest, keeping your heart rate up to maximize the burn.':'Estação de circuito: intercala com o próximo exercício sem descanso, mantendo a frequência cardíaca elevada pra maximizar a queima.'):whyFor(x,idx,true)),
+          (x.ss?(LANG==='en'?'Circuit station: alternates with the next exercise with no rest, keeping the pace and shortening the workout.':'Estação de circuito: intercala com o próximo exercício sem descanso, mantendo o ritmo e encurtando o treino.'):whyFor(x,idx,true)),
       alts:(x.alts||[]).map(aid=>({id:aid,fig:E[aid].fig,name:E[aid].name,w:E[aid].w,bw:!!E[aid].bw,unit:E[aid].unit,reps:E[aid].reps,yt:E[aid].yt,steps:E[aid].steps,g:E[aid].g,b:E[aid].b}))
     }));
     if(setup.finisher&&!d.cardio&&!d.functional&&(i===0||i===days.length-1)){
@@ -4116,8 +4106,8 @@ let VARIANT=load('iron_variant',{});
 let SESSMETA=load('iron_sessmeta',{});
 let TRASH=load('iron_trash',[]);
 let PROG_BACKUPS=load('iron_prog_backups',[]);
-let LAST_COINS_SEEN=load('iron_last_coins_seen',0);
-let LAST_CROSSES_SEEN=load('iron_last_crosses_seen',0);
+/* v23: o sistema de moedas e cruzes saiu; limpa o que ele guardava */
+try{localStorage.removeItem('iron_last_coins_seen');localStorage.removeItem('iron_last_crosses_seen')}catch(e){}
 let THEME=load('iron_theme','dark');
 let CUSTOM_EX=load('iron_customex',{});
 Object.assign(E,CUSTOM_EX);
@@ -4131,6 +4121,7 @@ if(LANG!=='pt-BR'&&LANG!=='en'){
 document.documentElement.lang=LANG;
 let PROGRAM=load('iron_program',null);
 let cur='A', view='train';
+let QKKEY=load('iron_qkkey','Q');   /* qual treino de um dia está em foco: Q (rápido) ou S (especial) */
 let QKDAY=load('iron_qkonly','');   /* data (AAAA-MM-DD) em que o treino rápido foi criado: nesse dia a tela mostra só ele */
 
 const DEFAULT_SETUP={groups:Object.keys(GRP_LABEL),perDay:6,splits:3,freq:3,first:'Push',finisher:true,default:true};
@@ -4161,8 +4152,9 @@ function migrateProgramUnits(){
 }
 function ensureProgram(){
   if(!PROGRAM){PROGRAM=generateProgram(SETUP||DEFAULT_SETUP)}
+  spxPurge();
   if(!PROGRAM[cur])cur=Object.keys(PROGRAM)[0];
-  if(qkOnly())cur='Q';
+  if(qkOnly())cur=focusKey();else if(cur==='S')cur=dayKeys()[0];
   migrateProgramUnits();
   migrateProgramLib();
 }
@@ -4413,7 +4405,7 @@ function renderTabs(){
   requestAnimationFrame(()=>placeTabInd(!first));
 }
 function gotoDay(k){
-  if(k===cur||!PROGRAM[k]||(qkOnly()&&k!=='Q'))return;
+  if(k===cur||!PROGRAM[k]||(qkOnly()&&k!==focusKey()))return;
   const keys=dayKeys();
   SLIDE=keys.indexOf(k)>keys.indexOf(cur)?1:-1;
   cur=k;render();
@@ -4528,7 +4520,7 @@ function fillCard(card,ex,i,day){
       <div class="infob${infoOpen?' op':''}"><div class="infoi">${infoHTML(ex,a,i,day)}</div></div>
       <div class="acts">
         <button class="abtn vid" onclick="openHow('${ex.id}')">${t('passoapasso')}</button>
-        <a class="abtn" href="${YT(a.yt)}" target="_blank" rel="noopener">${t('vervideo')}</a>
+        <a class="abtn" href="${ytUrl(a)}" target="_blank" rel="noopener">${t('vervideo')}</a>
       </div>
     </div></div>`;
 }
@@ -4547,6 +4539,7 @@ function buildRow(ex,i,day){
 }
 function paintOrder(){
   const day=PROGRAM[cur];
+  if(day.meta&&day.meta.special){paintOrderSpecial(day);return}
   $('orderBody').innerHTML=day.ex.map((ex,i)=>{
     const a=activeOf(ex);
     return `<div class="oi"><div class="n">${i+1}</div><div class="tx"><b>${escH(nmv(a.vid,a.name))}${ex.ss?' ('+t('supersettxt')+')':''}</b><span>${escH(dynWhy(day,i))}</span></div></div>`;
@@ -4579,6 +4572,11 @@ function renderTrain(){
   if(day.meta&&day.meta.quick){
     const qa=document.createElement('div');qa.className='qk-act';
     qa.innerHTML=`<button onclick="qkOpen('day')">⚡ ${t('qk_redo')}</button><button class="rm" onclick="qkRemove()">${t('qk_remove')}</button>`;
+    list.appendChild(qa);
+  }
+  if(day.meta&&day.meta.special){
+    const qa=document.createElement('div');qa.className='qk-act';
+    qa.innerHTML=`<button onclick="spxOpen('day')">⚡ ${t('spx_redo')}</button><button class="rm" onclick="spxRemove()">${t('spx_remove')}</button>`;
     list.appendChild(qa);
   }
   updateProgress();
@@ -4682,7 +4680,8 @@ function openHow(baseId){
     ${steps.length?`<ol class="shsteps">${steps.map(s=>`<li>${escH(s)}</li>`).join('')}</ol>`:`<div class="empty">${t('semsteps')}</div>`}
     ${g?`<div class="cue g"><b>✓</b><span>${escH(g)}</span></div>`:''}
     ${b?`<div class="cue b"><b>✕</b><span>${escH(b)}</span></div>`:''}
-    <div class="shfoot"><a class="mbtn pri" href="${YT(a.yt)}" target="_blank" rel="noopener">${t('vervideo')}</a><button class="mbtn" onclick="closeSheet()">${t('fechar')}</button></div>`,'how');
+    <div class="shfoot"><a class="mbtn pri" href="${ytUrl(a)}" target="_blank" rel="noopener">${t('vervideo')}</a><button class="mbtn" onclick="closeSheet()">${t('fechar')}</button></div>
+    <a class="spx-link" style="text-align:center;text-decoration:none;padding:12px 0 2px;font-weight:500" href="${YT(ytQuery(a))}" target="_blank" rel="noopener">${t('outrosvideos')}</a>`,'how');
   const car=$('shCar'),dots=$('shDots');
   if(car&&dots)car.addEventListener('scroll',()=>{
     const idx=Math.round(car.scrollLeft/(car.firstElementChild.offsetWidth+10));
@@ -4873,7 +4872,7 @@ timerLoop();
 
 /* concluir */
 /* =================== ABA CALORIAS (gamificado) =================== */
-const KCAL_PER_COIN=10, COINS_PER_CROSS=50, KCAL_DAILY_GOAL=400;
+const KCAL_DAILY_GOAL=400;
 function kcalRangeSum(pred){return HISTORY.filter(pred).reduce((s,h)=>s+kcalOf(h),0)}
 function kcalToday(){const d=todayISO();return Math.round(kcalRangeSum(h=>h.date===d))}
 function kcalThisWeek(){
@@ -4900,11 +4899,7 @@ function animateNumber(el,to,duration){
 }
 function renderCalories(){
   const el=$('kcalView');if(!el)return;
-  const today=kcalToday(),week=kcalThisWeek(),month=kcalThisMonth(),year=kcalThisYear(),allTime=kcalAllTime();
-  const totalCoins=Math.floor(allTime/KCAL_PER_COIN);
-  const totalCrosses=Math.floor(totalCoins/COINS_PER_CROSS);
-  const intoCircle=totalCoins%COINS_PER_CROSS;
-  const pct=Math.round(intoCircle/COINS_PER_CROSS*100);
+  const today=kcalToday(),week=kcalThisWeek(),month=kcalThisMonth(),year=kcalThisYear();
   const ringPct=Math.min(100,Math.round(today/KCAL_DAILY_GOAL*100));
   const circumference=2*Math.PI*52;
   const dashoffset=circumference*(1-ringPct/100);
@@ -4927,7 +4922,7 @@ function renderCalories(){
           <div class="kcal-sub">${t('kcalhoje')}</div>
         </div>
       </div>
-      ${overGoal?`<div class="kcal-badge hot">🔥 ${t('kcalbatida')}</div>`:
+      ${overGoal?`<div class="kcal-badge">${t('kcalbatida')}</div>`:
         `<div class="kcal-badge">🎯 ${t('kcalmeta')}: ${KCAL_DAILY_GOAL} kcal${LANG==='en'?'/day':'/dia'}</div>`}
     </div>
 
@@ -4943,34 +4938,8 @@ function renderCalories(){
       <span class="v">${fmtW(bk)} kg <span>· ${t('kcalajustar')}</span></span>
     </div>
 
-    <div class="kcal-panel">
-      <div class="kcal-ptitle"><h4>💰 ${t('kcalmoedastit')}</h4></div>
-      <div class="coinrow">
-        <div class="coin-ic">🪙</div>
-        <div class="coininfo">
-          <div class="coin-num" id="coinNum" data-val="0"><span>0</span><small>${t('kcalmoedas')}</small></div>
-          <div class="coin-hint">A cada ${KCAL_PER_COIN} kcal queimadas = 1 moeda</div>
-        </div>
-      </div>
-      <div class="crossbar-wrap">
-        <div class="crossbar"><i id="crossBarFill" style="width:0%"></i></div>
-        <div class="crossbar-lab"><span>${intoCircle}/${COINS_PER_CROSS} ${t('kcalproxima')}</span><span>${pct}%</span></div>
-      </div>
-    </div>
-
-    <div class="kcal-panel">
-      <div class="kcal-ptitle"><h4>✚ ${t('kcalcruzes')}</h4><span style="font-size:13px;color:var(--label2);font-weight:700">${totalCrosses}</span></div>
-      <div class="crossgrid">
-        ${Array.from({length:totalCrosses}).map((_,i)=>`<div class="crossitem" style="animation-delay:${Math.min(i,10)*45}ms">🪙</div>`).join('')}
-        <div class="crossitem next"><div class="cxfill"><i id="nextCrossFill" style="height:0%"></i></div><span>🪙</span></div>
-      </div>
-      ${totalCrosses===0?`<div class="cross-empty">${t('kcalempty')}</div>`:''}
-    </div>
-
-    <div class="kcal-panel">
-      <div class="kcal-ptitle"><h4>ℹ️ ${t('kcalcomo')}</h4></div>
-      <p style="font-size:12.5px;color:var(--label2);line-height:1.55">${t('kcalcomotxt').replace('{p}','<b>'+KCAL_PER_COIN+' kcal</b>').replace('{c}','<b>'+COINS_PER_CROSS+'</b>')}</p>
-    </div>
+    ${spxPanelHTML()}
+    <p class="kcal-note">${t('kcalaprox')}</p>
   `;
 
   animateNumber($('kcalTodayNum'),today,900);
@@ -4978,42 +4947,11 @@ function renderCalories(){
   animateNumber($('stSemana'),week,900);
   animateNumber($('stMes'),month,1100);
   animateNumber($('stAno'),year,1300);
-  animateNumber($('coinNum'),totalCoins,1000);
 
   requestAnimationFrame(()=>{
     const ring=$('kcalRingFg');if(ring)ring.style.strokeDashoffset=String(dashoffset);
-    const cb=$('crossBarFill');if(cb)cb.style.width=pct+'%';
-    const nf=$('nextCrossFill');if(nf)nf.style.height=pct+'%';
   });
 
-  if(totalCoins>LAST_COINS_SEEN)spawnCoinFly(Math.min(10,totalCoins-LAST_COINS_SEEN));
-  if(totalCrosses>LAST_CROSSES_SEEN){const gained=totalCrosses-LAST_CROSSES_SEEN;setTimeout(()=>celebrateCross(gained),550)}
-  LAST_COINS_SEEN=totalCoins;save('iron_last_coins_seen',LAST_COINS_SEEN);
-  LAST_CROSSES_SEEN=totalCrosses;save('iron_last_crosses_seen',LAST_CROSSES_SEEN);
-}
-function spawnCoinFly(n){
-  const host=document.querySelector('.coin-ic');if(!host)return;
-  const r=host.getBoundingClientRect();
-  for(let i=0;i<n;i++){
-    setTimeout(()=>{
-      const d=document.createElement('div');d.className='coinfly';d.textContent='🪙';
-      d.style.left=(r.left+r.width/2-10+(Math.random()*30-15))+'px';
-      d.style.top=(r.top+8)+'px';
-      document.body.appendChild(d);
-      setTimeout(()=>d.remove(),1250);
-    },i*90);
-  }
-  if(navigator.vibrate)navigator.vibrate(12);
-}
-function celebrateCross(n){
-  const b=document.createElement('div');b.className='kcal-burst';
-  const lbl=n>1?t('kcalverdes'):t('kcalverde');
-  b.innerHTML=`<div class="bx">🪙</div><div class="blab">+${n} ${lbl}! 🎉</div>`;
-  document.body.appendChild(b);
-  requestAnimationFrame(()=>b.classList.add('show'));
-  if(navigator.vibrate)navigator.vibrate([30,60,30,60,90]);
-  confetti();
-  setTimeout(()=>b.remove(),2000);
 }
 function openBodyKgEdit(){
   boxOpen(`<h3>${t('pesocorporal')}</h3>
@@ -5102,7 +5040,8 @@ function alertFinish(key){
   });
 }
 function alertResume(key){
-  if(key!=='Q')qkExit();
+  if(key==='S'){QKKEY='S';QKDAY=todayISO();save('iron_qkkey',QKKEY);save('iron_qkonly',QKDAY)}
+  else if(key!=='Q')qkExit();
   RESUMED=key;cur=key;view='train';
   $('trainView').classList.remove('hidden');$('progView').classList.add('hidden');
   $('navTrain').classList.add('on');$('navProg').classList.remove('on');
@@ -5624,6 +5563,7 @@ function obSetLang(l){const n=$('obName');if(n)OBDATA.name=n.value;if(LANG!==l)s
 function renderOB(){
   const ob=$('ob');
   if(OBSTEP==='q'){renderQuick();return}
+  if(OBSTEP==='x'){renderSpecial();return}
   const steps=`<div class="ob-steps">${[0,1,2].map(i=>`<i class="${i<=OBSTEP?'on':''}"></i>`).join('')}</div>`;
   if(OBSTEP===0){
     ob.innerHTML=`<div class="ob-in">
@@ -5980,6 +5920,442 @@ function qkSetMin(m){QK.min=m;QK.vseed=0;renderOB()}
 function qkGen(){QKPREV=qkMake(QK);QKSTEP='prev';renderOB();$('ob').scrollTop=0}
 function qkVar(){QK.vseed=(QK.vseed||0)+1;QKPREV=qkMake(QK);renderOB();toast(t('variacaoaplicada'))}
 function qkToPick(){QKSTEP='pick';renderOB();$('ob').scrollTop=0}
+/* =================== TREINO ESPECIAL (módulo próprio) =================== */
+/* Independente de A, B, C e dos 39 modelos: monta o dia 'S' a partir de listas de vagas próprias.
+   Cada vaga tem um papel (r) com o porquê, as fontes e o grau de certeza. Cargas e histórico são os do app. */
+const sxl=a=>a[LANG==='en'?1:0];
+const SPX_GR={f:['Forte','Strong'],m:['Moderado','Moderate'],w:['Fraco','Weak']};
+/* fontes: g = grau (f forte, m moderado, w fraco); s = nome curto; d = o que diz e o que foi lido */
+const SPX_SRC={
+ acsm:{s:'ACSM 2026',g:'f',u:'https://acsm.org/resistance-training-guidelines-update-2026/',
+  n:['ACSM, posição oficial (março de 2026)','ACSM position stand (March 2026)'],
+  d:['137 revisões sistemáticas, mais de 30 mil pessoas. Treinar os grandes grupos pelo menos 2 dias por semana; cerca de 10 séries por músculo por semana para hipertrofia; ir até a falha, máquina contra peso livre e periodização complexa não mudaram o resultado de forma consistente; elástico, peso do corpo e treino em casa funcionam. Lido: o comunicado e o infográfico, não o artigo completo.',
+     '137 systematic reviews, more than 30,000 people. Train the major groups at least 2 days a week; about 10 sets per muscle per week for hypertrophy; training to failure, machines vs free weights and complex periodization did not consistently change results; bands, bodyweight and home training work. Read: the press release and infographic, not the full paper.']},
+ who:{s:'OMS 2020',g:'f',u:'https://www.ncbi.nlm.nih.gov/books/NBK566048/',
+  n:['OMS, diretrizes de atividade física (2020)','WHO physical activity guidelines (2020)'],
+  d:['Adultos: 150 a 300 min de atividade moderada ou 75 a 150 min de vigorosa por semana, mais exercícios de força em 2 ou mais dias.',
+     'Adults: 150 to 300 min of moderate or 75 to 150 min of vigorous activity per week, plus strength exercises on 2 or more days.']},
+ dose:{s:'Pelland (preprint)',g:'m',u:'https://sportrxiv.org/index.php/server/preprint/view/460',
+  n:['Pelland e colegas, volume e frequência (preprint)','Pelland and colleagues, volume and frequency (preprint)'],
+  d:['67 estudos, 2.058 pessoas. Mais séries por semana dão mais músculo, com retorno decrescente; o método que melhor se ajustou contou séries indiretas como meia série; a frequência em si teve efeito compatível com desprezível na hipertrofia. Preprint: nenhuma revisão por pares encontrada na verificação.',
+     '67 studies, 2,058 people. More weekly sets give more muscle, with diminishing returns; the best-fitting method counted indirect sets as half a set; frequency itself had an effect compatible with negligible on hypertrophy. Preprint: no peer review found when checked.']},
+ freq:{s:'Schoenfeld 2016',g:'m',u:'https://pubmed.ncbi.nlm.nih.gov/27102172/',
+  n:['Schoenfeld e colegas, frequência (2016)','Schoenfeld and colleagues, frequency (2016)'],
+  d:['Metanálise de 10 estudos: treinar o músculo 2 vezes por semana deu mais hipertrofia que 1 vez com volume igualado. Se 3 vezes é melhor que 2 ficou em aberto.',
+     'Meta-analysis of 10 studies: training a muscle twice a week gave more hypertrophy than once with equated volume. Whether three times beats two was left open.']},
+ fail:{s:'Robinson 2024',g:'m',u:'https://www.fau.edu/newsdesk/articles/muscle-growth-strength-study',
+  n:['Robinson e colegas, proximidade da falha (Sports Medicine, 2024)','Robinson and colleagues, proximity to failure (Sports Medicine, 2024)'],
+  d:['Metanálise de 55 estudos: quanto mais perto da falha, mais hipertrofia (sugerem de 0 a 5 repetições de reserva). Para força o efeito não é claro (sugerem de 3 a 5).',
+     'Meta-analysis of 55 studies: the closer to failure, the more hypertrophy (they suggest 0 to 5 reps in reserve). For strength the effect is unclear (they suggest 3 to 5).']},
+ rest:{s:'Stronger By Science',g:'w',u:'https://www.strongerbyscience.com/rest-times-for-muscle-growth/',
+  n:['Descanso entre séries (resumo do Stronger By Science)','Rest between sets (Stronger By Science summary)'],
+  d:['Resumo de uma metanálise preliminar com 9 estudos: menos de 1 min pode reduzir a hipertrofia; 1 a 2 min foi a faixa com melhores resultados. Lido: o resumo, não o preprint. Por isso o grau é fraco.',
+     'Summary of a preliminary meta-analysis of 9 studies: under 1 min may reduce hypertrophy; 1 to 2 min was the range with the best results. Read: the summary, not the preprint. That is why the grade is weak.']},
+ order:{s:'Nunes 2020',g:'m',u:'https://examine.com/conditions/muscle-size-and-strength/faq/which-exercise-should-be-performed-first-in-a-workout',
+  n:['Nunes e colegas, ordem dos exercícios (2020)','Nunes and colleagues, exercise order (2020)'],
+  d:['Metanálise (European Journal of Sport Science), lida pelo resumo do Examine: o exercício feito primeiro rende mais força; para hipertrofia a ordem não fez diferença relevante.',
+     'Meta-analysis (European Journal of Sport Science), read through the Examine summary: the exercise done first gains more strength; for hypertrophy the order made no relevant difference.']},
+ sup:{s:'Supersets 2025',g:'m',u:'https://eprints.leedsbeckett.ac.uk/id/eprint/11908',
+  n:['Metanálise de supersets (2025)','Supersets meta-analysis (2025)'],
+  d:['19 estudos, 313 pessoas: supersets encurtam a sessão, com volume parecido e sem diferença em força ou hipertrofia; o esforço percebido é maior. Lido: o resumo.',
+     '19 studies, 313 people: supersets shorten the session, with similar volume and no difference in strength or hypertrophy; perceived exertion is higher. Read: the abstract.']},
+ vilpa:{s:'VILPA 2022',g:'w',u:'https://eprints.gla.ac.uk/288120',
+  n:['Stamatakis e colegas, surtos curtos de esforço (Nature Medicine, 2022)','Stamatakis and colleagues, short bursts of effort (Nature Medicine, 2022)'],
+  d:['25.241 pessoas que não treinavam (UK Biobank): cerca de 3 surtos de 1 a 2 min por dia de esforço vigoroso no cotidiano ligados a 38 a 40% menos mortalidade geral. Estudo observacional: mostra associação, não causa.',
+     '25,241 people who did not exercise (UK Biobank): about 3 bursts of 1 to 2 min a day of vigorous effort in daily life linked to 38 to 40% lower all-cause mortality. Observational study: shows association, not cause.']},
+ len:{s:'Varovic 2024',g:'w',u:'https://sportrxiv.org/index.php/server/preprint/download/464/988/924',
+  n:['Varovic, Wolf e colegas, comprimento muscular (preprint, 2024)','Varovic, Wolf and colleagues, muscle length (preprint, 2024)'],
+  d:['13 estudos: treinar em comprimento muscular maior teve efeito trivial e incerto na hipertrofia regional. Por isso o módulo não usa parciais alongadas como diferencial.',
+     '13 studies: training at longer muscle lengths had a trivial, uncertain effect on regional hypertrophy. That is why the module does not use lengthened partials as a selling point.']}
+};
+const SPX_SRC_ORDER=['acsm','who','dose','freq','fail','order','sup','rest','vilpa','len'];
+/* papéis: w = porquê (PT, EN); s = fontes; my = inclui escolha do app sem teste direto */
+const SPX_ROLE={
+ squat:{s:['order','acsm'],my:1,w:[
+  'Abre o treino porque é o que mais exige de você, então entra com você descansado: a ordem pesa mais na força do primeiro exercício do que na hipertrofia. Máquina ou halter vêm antes na lista por praticidade e segurança perto da falha; o ACSM não achou diferença consistente entre máquina e peso livre.',
+  'It opens the workout because it demands the most from you, so you do it fresh: order matters more for the strength of the first exercise than for hypertrophy. Machines and dumbbells come first in the list for convenience and safety near failure; the ACSM found no consistent difference between machines and free weights.']},
+ pressH:{s:['sup'],w:[
+  'Empurrar na horizontal (peito, ombro, tríceps), em dupla com o exercício de puxar logo abaixo. Músculos opostos se alternam: a sessão encurta, o volume fica parecido e não houve diferença em força ou hipertrofia numa metanálise de 2025. O custo é um esforço percebido maior.',
+  'Horizontal push (chest, shoulders, triceps), paired with the pulling exercise right below. Opposing muscles alternate: the session gets shorter, volume stays similar and a 2025 meta-analysis found no difference in strength or hypertrophy. The cost is a higher perceived effort.']},
+ rowH:{s:['sup'],w:[
+  'Puxar na horizontal (costas, bíceps), em dupla com o exercício de empurrar. Você descansa só depois do par, o que corta o tempo parado sem tirar séries.',
+  'Horizontal pull (back, biceps), paired with the pushing exercise. You rest only after the pair, which cuts idle time without removing sets.']},
+ pullV:{s:['sup','acsm'],w:[
+  'Puxar na vertical (dorsais, bíceps), em dupla com o exercício de empurrar. As costas recebem séries aqui e na remada, o que ajuda a chegar perto das cerca de 10 séries por músculo por semana do ACSM.',
+  'Vertical pull (lats, biceps), paired with the pushing exercise. The back gets sets here and in the row, which helps approach the ACSM figure of about 10 sets per muscle per week.']},
+ pressV:{s:['sup','dose'],w:[
+  'Empurrar na vertical (ombros, tríceps), em dupla com o exercício de puxar. O ombro também trabalha nos compostos de peito; no método que melhor se ajustou no preprint de Pelland, uma série indireta vale cerca de meia série direta.',
+  'Vertical push (shoulders, triceps), paired with the pulling exercise. The shoulder also works in chest compounds; in the best-fitting method of the Pelland preprint, an indirect set counts as about half a direct set.']},
+ hinge:{s:['acsm'],my:1,w:[
+  'Quadril e parte de trás da coxa (posterior e glúteo), que o agachamento trabalha menos. Reparte as séries pelos grandes grupos: o ACSM fala em cerca de 10 séries por músculo por semana.',
+  'Hips and back of the thigh (hamstrings and glutes), which the squat works less. It spreads sets across the major groups: the ACSM mentions about 10 sets per muscle per week.']},
+ lat:{s:['rest'],my:1,w:[
+  'Isolado curto para o ombro lateral, que recebe pouco dos compostos. Descanso de 60 s: abaixo de 1 min pode reduzir a hipertrofia, então fica no limite da faixa.',
+  'Short isolation for the side delt, which gets little from the compounds. 60 s rest: under 1 min may reduce hypertrophy, so this sits at the edge of the range.']},
+ rear:{s:['rest'],my:1,w:[
+  'Ombro posterior e parte alta das costas, que supino e puxadas treinam pouco. Descanso de 60 s pelo mesmo motivo da elevação lateral.',
+  'Rear delts and upper back, which pressing and pulldowns train little. 60 s rest for the same reason as the lateral raise.']},
+ arms:{s:['sup','dose'],my:1,w:[
+  'Bíceps e tríceps em dupla, no fim: já trabalharam nos compostos (série indireta vale cerca de meia série no preprint de Pelland), então poucas séries completam o volume.',
+  'Biceps and triceps paired, at the end: they already worked in the compounds (an indirect set counts about half a set in the Pelland preprint), so a few sets complete the volume.']},
+ calf:{s:[],my:1,w:[
+  'Panturrilha recebe pouco dos outros exercícios; 2 séries mantêm o grupo no programa. Escolha do app, sem estudo específico.',
+  'Calves get little from the other exercises; 2 sets keep the group in the program. App choice, no specific study.']},
+ core:{s:[],my:1,w:[
+  'Core no fim, para não cansar o tronco antes dos exercícios pesados. Escolha do app, sem estudo específico.',
+  'Core at the end, so the trunk is not tired before the heavy exercises. App choice, no specific study.']},
+ hiit:{s:['who'],my:1,w:[
+  'Bloco principal: tiros fortes alternados com recuperação fácil. A OMS pede 75 a 150 min de atividade vigorosa por semana (ou 150 a 300 moderada); 2 a 3 blocos assim cobrem parte disso. A divisão exata dos tiros é escolha do app, sem revisão verificada que a defenda.',
+  'Main block: hard efforts alternated with easy recovery. The WHO asks for 75 to 150 min of vigorous activity a week (or 150 to 300 moderate); 2 to 3 blocks like this cover part of it. The exact split of the efforts is an app choice, with no verified review behind it.']},
+ swingC:{s:[],my:1,w:[
+  'Condicionamento com movimento do corpo todo, para manter o ritmo cardíaco alto depois do bloco principal. Escolha do app, sem estudo específico.',
+  'Whole-body conditioning to keep the heart rate up after the main block. App choice, no specific study.']},
+ pushC:{s:['sup'],w:[
+  'Empurrar e puxar em par, sem descanso entre os dois: encurta o treino com volume parecido (metanálise de supersets de 2025).',
+  'Push and pull in a pair with no rest between them: shortens the workout with similar volume (2025 supersets meta-analysis).']},
+ rowC:{s:['sup'],w:[
+  'Puxar em par com o empurrar, sem descanso entre os dois.',
+  'Pull paired with the push, no rest between the two.']},
+ squatC:{s:['sup'],my:1,w:[
+  'Pernas em par com o core, sem descanso entre os dois: mantém o ritmo e encurta o treino. A combinação é escolha do app.',
+  'Legs paired with core, no rest between the two: keeps the pace and shortens the workout. The combination is an app choice.']},
+ coreC:{s:['sup'],my:1,w:[
+  'Core em par com as pernas, sem descanso entre os dois.',
+  'Core paired with the legs, no rest between the two.']},
+ fill:{s:[],my:1,w:[
+  'Exercício de peso do corpo que completa o treino quando falta equipamento. Escolha do app.',
+  'Bodyweight exercise that completes the workout when equipment is missing. App choice.']}
+};
+/* linhas gerais do painel "Por que essa ordem?" (esforço, descanso, frequência) */
+const SPX_GLOBAL={
+ str:[
+  {h:['Esforço','Effort'],s:['fail','acsm'],my:1,w:[
+   'Termine cada série com 1 a 3 repetições sobrando. Quanto mais perto da falha, mais hipertrofia numa metanálise de 2024 (0 a 5 repetições de reserva); para força o efeito não é claro. O ACSM não achou diferença consistente entre chegar ou não à falha, então não precisa chegar nela. O número 1 a 3 é escolha do app.',
+   'Finish each set with 1 to 3 reps left. The closer to failure, the more hypertrophy in a 2024 meta-analysis (0 to 5 reps in reserve); for strength the effect is unclear. The ACSM found no consistent difference between reaching failure or not, so you do not need to reach it. The 1 to 3 figure is an app choice.']},
+  {h:['Descanso','Rest'],s:['rest'],w:[
+   'De 1 a 2 minutos na maioria dos exercícios; nos pares, descanse só depois do segundo exercício. Abaixo de 1 minuto pode reduzir a hipertrofia numa metanálise preliminar (grau fraco: só o resumo foi lido).',
+   '1 to 2 minutes on most exercises; in pairs, rest only after the second exercise. Under 1 minute may reduce hypertrophy in a preliminary meta-analysis (weak grade: only the summary was read).']},
+  {h:['Frequência','Frequency'],s:['acsm','freq','dose'],w:[
+   'Faça A e B uma vez cada por semana: cada grande grupo entra 2 vezes, o mínimo do ACSM. O preprint de Pelland vê pouco efeito da frequência quando o volume é igual, e 3 vezes contra 2 ficou em aberto em 2016; mais sessões não são obrigatórias.',
+   'Do A and B once each per week: every major group is trained twice, the ACSM minimum. The Pelland preprint sees little effect of frequency when volume is equal, and three times versus two was left open in 2016; more sessions are not required.']}],
+ fo:[
+  {h:['Esforço','Effort'],s:[],my:1,w:[
+   'Nos tiros, esforço forte, mas que você consiga sustentar até o último; nas recuperações, fácil o bastante para respirar. Escolha do app, sem revisão verificada.',
+   'In the efforts, hard but sustainable until the last one; in the recoveries, easy enough to breathe. App choice, no verified review.']},
+  {h:['Frequência e dose','Frequency and dose'],s:['who'],w:[
+   'A OMS pede 75 a 150 min de atividade vigorosa por semana, ou 150 a 300 min moderada, mais força em 2 ou mais dias. Este treino cobre parte da dose vigorosa; os treinos de força cobrem o resto.',
+   'The WHO asks for 75 to 150 min of vigorous activity a week, or 150 to 300 min moderate, plus strength on 2 or more days. This workout covers part of the vigorous dose; the strength workouts cover the rest.']},
+  {h:['Fora do treino','Outside the workout'],s:['vilpa'],w:[
+   'Surtos de 1 a 2 min de esforço forte no dia a dia (subir escada rápido, caminhar acelerado) aparecem associados a menos mortalidade, mas é estudo observacional: associação, não prova.',
+   'Bursts of 1 to 2 min of hard effort in daily life (climbing stairs fast, brisk walking) are associated with lower mortality, but it is an observational study: association, not proof.']}]
+};
+/* trilhas: v = listas de vagas por versão; no fôlego, B é a versão sem equipamento */
+const SPX_T={
+ mf:{ico:'💪',n:['Músculo e força','Muscle and strength'],per:2,ver:1,times:[30,45],glob:'str',
+  sub:['Corpo inteiro, A e B, uma vez cada por semana','Full body, A and B, once each per week'],
+  dd:['Corpo inteiro em dois treinos, A e B, para fazer uma vez cada por semana: cada grande grupo entra 2 vezes, como pede o ACSM.','Full body in two workouts, A and B, one of each per week: every major group is trained twice, as the ACSM asks.'],
+  v:{A:[
+   {r:'squat',x:'hacksquat/legpress/goblet2/backsquat/bwsquat 3x6-10 r120'},
+   {r:'pressH',x:'chestpress/dbbench/barbellbench/pushupv 3x6-10 r75 &A'},
+   {r:'rowH',x:'seatedrow/onearmrow/bentrow/invertedrow 3x8-12 r75 &A'},
+   {r:'hinge',x:'rdlv/lyinglegcurl/legcurl/rdlbarv/bridgev 3x8-12 r90'},
+   {r:'pressV',x:'shoulderpress/dbshoulder/ohpv/bandpress 2x8-12 r75 &B'},
+   {r:'pullV',x:'latpull/neutralpull/pullupv/chinupv 2x8-12 r75 &B'},
+   {r:'lat',x:'sidelat/latraisemachine/cablelatv/bandlateral 2x12-15 r60'},
+   {r:'arms',x:'hammer/biceps/ezcurl/cablecurl 2x10-12 r60 &C'},
+   {r:'arms',x:'pushdownbar/triceps/overheadtriceps/dbtriext 2x10-12 r60 &C'},
+   {r:'core',x:'plankv/deadbug/absfull 2x30-45s r45'}],
+  B:[
+   {r:'squat',x:'legpress/hacksquat/splitsquat/goblet2/bwsquat 3x8-12 r120'},
+   {r:'pressH',x:'inclinedb/chestpress/inclinebench/inclinepushup 3x8-12 r75 &A'},
+   {r:'pullV',x:'latpull/neutralpull/pullupv/invertedrow 3x8-12 r75 &A'},
+   {r:'hinge',x:'hipthrustmachine/hipthrustv/rdlv/rdlbarv/bridgev 3x8-12 r90'},
+   {r:'pressV',x:'dbshoulder/shoulderpress/arnoldpress/bandpress 2x8-12 r75 &B'},
+   {r:'rowH',x:'cablerow1/onearmrow/seatedrow/invertedrow 2x10-12 r75 &B'},
+   {r:'arms',x:'preachercurl/inclinecurl/hammer/cablecurl 2x10-12 r60 &C'},
+   {r:'arms',x:'overheadtriceps/dbtriext/skullcrusher/pushdownbar 2x10-12 r60 &C'},
+   {r:'rear',x:'cablerevfly/reversefly/dbrevfly/facepullv 2x12-15 r60'},
+   {r:'calf',x:'calf/seatedcalf/dbcalf 2x12-15 r60'}]}},
+ dm:{ico:'⏱',n:['Dose mínima','Minimum dose'],per:2,ver:1,times:[15,20],glob:'str',
+  sub:['15 ou 20 min, para semanas corridas','15 or 20 min, for busy weeks'],
+  dd:['O menor treino de força que ainda cobre o corpo todo, com pares para ganhar tempo. Faça A e B uma vez cada na semana.','The smallest strength workout that still covers the whole body, with pairs to save time. Do A and B once each per week.'],
+  v:{A:[
+   {r:'squat',x:'legpress/hacksquat/goblet2/bwsquat 2x8-12 r90'},
+   {r:'pressH',x:'chestpress/dbbench/pushupv 2x8-12 r75 &A'},
+   {r:'rowH',x:'seatedrow/onearmrow/invertedrow 2x8-12 r75 &A'},
+   {r:'hinge',x:'lyinglegcurl/legcurl/rdlv/bridgev 2x8-12 r75'},
+   {r:'pressV',x:'shoulderpress/dbshoulder/bandpress 2x8-12 r60 &B'},
+   {r:'pullV',x:'latpull/neutralpull/pullupv 2x8-12 r60 &B'},
+   {r:'arms',x:'hammer/biceps/ezcurl/cablecurl 2x10-12 r60 &C'},
+   {r:'arms',x:'pushdownbar/triceps/overheadtriceps/dbtriext 2x10-12 r60 &C'}],
+  B:[
+   {r:'squat',x:'hacksquat/legpress/splitsquat/bwsquat 2x8-12 r90'},
+   {r:'pressH',x:'inclinedb/chestpress/inclinepushup 2x8-12 r75 &A'},
+   {r:'pullV',x:'latpull/neutralpull/pullupv/invertedrow 2x8-12 r75 &A'},
+   {r:'hinge',x:'hipthrustmachine/hipthrustv/rdlv/bridgev 2x8-12 r75'},
+   {r:'pressV',x:'dbshoulder/shoulderpress/bandpress 2x8-12 r60 &B'},
+   {r:'rowH',x:'cablerow1/onearmrow/seatedrow/invertedrow 2x10-12 r60 &B'},
+   {r:'arms',x:'preachercurl/inclinecurl/hammer/cablecurl 2x10-12 r60 &C'},
+   {r:'arms',x:'overheadtriceps/dbtriext/skullcrusher/pushdownbar 2x10-12 r60 &C'}]}},
+ fo:{ico:'🫁',n:['Fôlego em pouco tempo','Conditioning in little time'],per:0,ver:0,times:[15,20,30],glob:'fo',
+  sub:['Bloco intervalado e circuito curto, 15 a 30 min','Interval block and short circuit, 15 to 30 min'],
+  dd:['Bloco de tiros fortes com recuperação fácil, seguido de um circuito curto em pares. Pensado para 2 a 3 vezes por semana.','Hard intervals with easy recovery, followed by a short circuit in pairs. Meant for 2 to 3 times a week.'],
+  v:{A:[
+   {r:'hiit',x:'treadmillhiit/bikehiit/rowerhiit/assaultbike 1x12-16min r0'},
+   {r:'swingC',x:'kettlebellswing/dbvertswing/burpeev 3x12-15 r40'},
+   {r:'pushC',x:'pushupv/inclinepushup 3x8-15 r40 &A'},
+   {r:'rowC',x:'invertedrow/trxrow/seatedrow 3x10-12 r40 &A'},
+   {r:'squatC',x:'goblet2/bwsquat/dbsquat 3x12-15 r40 &B'},
+   {r:'coreC',x:'mountainclimberv/plankv 3x30s r30 &B'}],
+  B:[
+   {r:'hiit',x:'jumpropev/starjump/fastskipping 5x40s r20'},
+   {r:'swingC',x:'burpeev/kneetuckjump/splitjump 3x10-12 r30'},
+   {r:'pushC',x:'pushupv/inclinepushup/feetelevpushup 3x8-15 r30 &A'},
+   {r:'rowC',x:'invertedrow/trxrow 3x10-12 r30 &A'},
+   {r:'squatC',x:'bwsquat/jumpsquat/splitsquat 3x12-15 r30 &B'},
+   {r:'coreC',x:'mountainclimberv/plankv 3x30s r30 &B'}]}}
+};
+const SPX_ORDER=['mf','fo','dm'];
+
+/* ---- montagem do dia 'S' ---- */
+function spxName(id){return sxl(SPX_T[id].n)}
+function spxLabel(m){return (LANG==='en'?'Special':'Especial')+' · '+spxName(m.sid)+(m.sver?' '+m.sver:'')}
+function spxSub(m){return '~'+m.sest+' min'+(m.sid==='fo'?'':' · '+(LANG==='en'?'full body':'corpo inteiro'))}
+function spxIntro(m){
+  const en=LANG==='en',T=SPX_T[m.sid];
+  return (en?'Special workout':'Treino especial')+' · '+spxName(m.sid)+(m.sver?' '+m.sver:'')+' · ~'+m.sest+' min. '+sxl(T.dd)+' '+(en?'Your A, B and C workouts stay as they were.':'Seus treinos A, B e C continuam como estavam.');
+}
+function spxTrLbl(l){
+  const m=/^(Especial|Special) · (.+?)(?: ([AB]))?$/.exec(l);if(!m)return l;
+  const id=SPX_ORDER.find(k=>SPX_T[k].n[0]===m[2]||SPX_T[k].n[1]===m[2]);if(!id)return l;
+  return (LANG==='en'?'Special':'Especial')+' · '+spxName(id)+(m[3]?' '+m[3]:'');
+}
+/* o treino especial feito por último define o sugerido de hoje (A depois B depois A...) */
+function spxNextVer(trail){
+  if(!SPX_T[trail].ver)return '';
+  let best=null;
+  HISTORY.forEach(h=>{
+    if(h.workout!=='S')return;
+    const m=/^(?:Especial|Special) · (.+?)(?: ([AB]))?$/.exec(String(h.label||''));
+    if(!m||(m[1]!==SPX_T[trail].n[0]&&m[1]!==SPX_T[trail].n[1]))return;
+    if(!best||(h.ts||0)>=(best.ts||0))best={ts:h.ts||0,v:m[2]||''};
+  });
+  return best&&best.v==='A'?'B':'A';
+}
+/* corta até caber no tempo: primeiro tira os exercícios do fim (menor prioridade, em par juntos), só depois séries dos compostos */
+function spxFit(ex,limit){
+  let guard=40;
+  while(qkEst(ex)>limit&&guard--){
+    if(ex.length>5){
+      const gone=ex.pop();
+      if(gone.ss)while(ex.length&&ex[ex.length-1].ss===gone.ss)ex.pop();
+      qkCleanPairs(ex);continue;
+    }
+    qkFit(ex,limit);break;
+  }
+}
+function spxMake(o){
+  const T=SPX_T[o.trail],style=o.style==='body'?'body':'mix';
+  const vk=T.ver?(o.ver==='B'?'B':'A'):(style==='body'?'B':'A');
+  let slots=T.v[vk].map(s=>({r:s.r,x:s.x}));
+  /* com mais tempo, os 4 primeiros (os compostos) ganham uma série */
+  const bump=o.trail==='mf'?45:0;
+  if(bump&&o.min>=bump)slots=slots.map((s,i)=>i<4?{r:s.r,x:s.x.replace(/ (\d)x/,(m,n)=>' '+(+n+1)+'x')}:s);
+  if(o.trail==='fo'&&vk==='B'){
+    const rounds={15:4,20:5,30:8}[o.min]||5;
+    slots=slots.map((s,i)=>i===0?{r:s.r,x:s.x.replace(/ \dx/,' '+rounds+'x')}:(o.min>=30?{r:s.r,x:s.x.replace(/ (\d)x/,(m,n)=>' '+(+n+1)+'x')}:s));
+  }
+  const setup={style,vseed:o.vseed||0};
+  const used=new Set(),items=[];
+  slots.forEach((s,pos)=>{
+    const p=parseSlot(s.x),id=pickCand(p.ids,pos,setup,used);if(!id)return;
+    used.add(id);
+    const it={id,...E[id]};
+    if(p.sets)it.sets=p.sets;
+    if(p.reps)it.reps=p.reps;
+    it.rest=p.rest!=null?p.rest:0;
+    it._ss=p.ss;it._r=s.r;items.push(it);
+  });
+  if(items.length<3)FILL_BODY.forEach(id=>{if(items.length<3&&E[id]&&!used.has(id)&&styleOK(id,style)){used.add(id);items.push({id,...E[id],_r:'fill'})}});
+  const tags={};
+  items.forEach((it,i)=>{if(it._ss)(tags[it._ss]=tags[it._ss]||[]).push(i)});
+  Object.keys(tags).forEach(g=>{const ix=tags[g];if(ix.length>=2)ix.forEach((i,k)=>{items[i].ss='S'+g;if(k<ix.length-1)items[i].rest=0})});
+  const ex=items.map((it,i)=>{const r=it._r;delete it._ss;delete it._r;const e=exItem(it,i,null);e.sk=r;return e});
+  spxFit(ex,o.min*1.06);
+  const est=qkEst(ex);
+  const meta={special:true,kind:'special',sid:o.trail,sver:T.ver?vk:'',smin:o.min,sest:est,sstyle:style,sseed:o.vseed||0,sdate:todayISO(),letter:'S',freq:T.per||1};
+  const day={label:'',sub:'',intro:'',meta,ex};
+  day.label=spxLabel(meta);day.sub=spxSub(meta);day.intro=spxIntro(meta);
+  return {day,est};
+}
+/* séries por semana fazendo A e B uma vez cada (grupo principal do exercício) */
+function spxWeekVol(o){
+  if(!SPX_T[o.trail].per)return null;
+  const g={};
+  ['A','B'].forEach(v=>{spxMake({...o,ver:v}).day.ex.forEach(e=>{const k=(E[e.id]||{}).grp;if(k)g[k]=(g[k]||0)+(e.sets||0)})});
+  return g;
+}
+/* ---- fontes e etiquetas ---- */
+function spxTags(srcs,my){
+  const c=(srcs||[]).filter(id=>SPX_SRC[id]).map(id=>{const s=SPX_SRC[id];
+    return `<a class="spx-tag g-${s.g}" href="${s.u}" target="_blank" rel="noopener">${escH(sxl(SPX_GR[s.g]))} · ${escH(s.s)}</a>`});
+  if(my)c.push(`<span class="spx-tag g-s">${escH(t('spx_my'))}</span>`);
+  return c.length?`<div class="spx-tags">${c.join('')}</div>`:'';
+}
+function spxRole(ex){return SPX_ROLE[ex&&ex.sk]||null}
+function spxWhyOf(day,i){const r=spxRole(day.ex[i]);return r?sxl(r.w):''}
+function paintOrderSpecial(day){
+  const T=SPX_T[day.meta.sid];
+  const g=(SPX_GLOBAL[T.glob]||[]).map(r=>`<div class="oi spx-g"><div class="n">i</div><div class="tx"><b>${escH(sxl(r.h))}</b><span>${escH(sxl(r.w))}</span>${spxTags(r.s,r.my)}</div></div>`).join('');
+  const rows=day.ex.map((ex,i)=>{
+    const a=activeOf(ex),r=spxRole(ex);
+    return `<div class="oi"><div class="n">${i+1}</div><div class="tx"><b>${escH(nmv(a.vid,a.name))}${ex.ss?' ('+t('supersettxt')+')':''}</b><span>${escH(r?sxl(r.w):'')}</span>${r?spxTags(r.s,r.my):''}</div></div>`;
+  }).join('');
+  $('orderBody').innerHTML=g+rows+`<button class="spx-link" onclick="spxOpen('day',null,'src')">${escH(t('spx_sources'))}</button>`;
+}
+/* ---- ciclo de vida: o dia 'S' vale para o dia em que foi criado ---- */
+function spxPurge(){
+  if(!PROGRAM)return;
+  const S=PROGRAM.S;let ch=false;
+  if(S){
+    if(S.meta&&S.meta.special&&S.meta.sdate&&S.meta.sdate!==todayISO()&&sessionStats('S').done===0){delete PROGRAM.S;delete SESSION.S;delete SESSMETA.S;ch=true}
+  }else if(SESSION.S||SESSMETA.S){delete SESSION.S;delete SESSMETA.S;ch=true}
+  if(ch){save('iron_program',PROGRAM);save('iron_session',SESSION);save('iron_sessmeta',SESSMETA)}
+}
+function spxActive(){return !!(PROGRAM&&PROGRAM.S&&PROGRAM.S.meta&&PROGRAM.S.meta.special&&PROGRAM.S.meta.sdate===todayISO())}
+function spxContinue(){
+  if(!spxActive())return;
+  QKKEY='S';QKDAY=todayISO();save('iron_qkkey',QKKEY);save('iron_qkonly',QKDAY);
+  cur='S';setView('train');
+}
+function spxCommit(){
+  if(!SX||!SX.prev)return;
+  if(PROGRAM&&PROGRAM.S&&sessionStats('S').done>0&&!confirm(t('spx_replace')))return;
+  if(!PROGRAM||!Object.keys(PROGRAM).length)PROGRAM=generateProgram(SETUP||DEFAULT_SETUP);
+  PROGRAM.S=SX.prev.day;
+  QKKEY='S';QKDAY=todayISO();save('iron_qkkey',QKKEY);save('iron_qkonly',QKDAY);
+  SESSION.S={};delete SESSMETA.S;
+  save('iron_session',SESSION);save('iron_sessmeta',SESSMETA);save('iron_program',PROGRAM);
+  cloudSync();
+  SX=null;OPEN.S=undefined;closeOB();
+  cur='S';setView('train');
+  toast(t('spx_pronto'));
+}
+function spxRemove(){
+  if(!PROGRAM||!PROGRAM.S)return;
+  if(sessionStats('S').done>0&&!confirm(t('spx_removeconf')))return;
+  delete PROGRAM.S;delete SESSION.S;delete SESSMETA.S;
+  qkExit();
+  if(!Object.keys(PROGRAM).length)PROGRAM=generateProgram(SETUP||DEFAULT_SETUP);
+  cur=Object.keys(PROGRAM).find(k=>k!=='Q'&&k!=='S')||Object.keys(PROGRAM)[0];
+  save('iron_program',PROGRAM);save('iron_session',SESSION);save('iron_sessmeta',SESSMETA);cloudSync();
+  render();window.scrollTo({top:0});toast(t('spx_removido'));
+}
+/* ---- telas (usam a tela cheia do #ob, como o treino rápido) ---- */
+let SX=null;
+function spxInit(trail,step,from){
+  const tr=SPX_T[trail]?trail:'mf',T=SPX_T[tr];
+  SX={trail:tr,min:T.times.indexOf(30)>=0?30:T.times[0],ver:spxNextVer(tr)||'A',style:'mix',vseed:0,step:step||'pick',from:from||'cal',prev:null,back:null};
+}
+function spxOpen(from,trail,step){
+  if(from==='day'&&PROGRAM&&PROGRAM.S&&PROGRAM.S.meta&&PROGRAM.S.meta.special&&!trail){
+    const m=PROGRAM.S.meta;spxInit(m.sid,step,from);
+    if(SPX_T[m.sid].times.indexOf(m.smin)>=0)SX.min=m.smin;
+    SX.style=m.sstyle==='body'?'body':'mix';if(m.sver)SX.ver=m.sver;
+  }else spxInit(trail||'mf',step,from);
+  OBSTEP='x';$('ob').classList.remove('hidden');renderOB();
+  $('ob').scrollTop=0;window.scrollTo({top:0});
+}
+function spxClose(){SX=null;closeOB()}
+function spxBack(){
+  if(!SX){closeOB();return}
+  if(SX.step==='src'){
+    if(SX.back){SX.step=SX.back;SX.back=null;renderOB();$('ob').scrollTop=0;return}
+    spxClose();return;
+  }
+  if(SX.step==='prev'){SX.step='pick';renderOB();$('ob').scrollTop=0;return}
+  spxClose();
+}
+function spxSetTrail(k){const keep=SX.from,st=SX.style;spxInit(k,'pick',keep);SX.style=st;renderOB()}
+function spxSetMin(m){SX.min=m;renderOB()}
+function spxSetVer(v){SX.ver=v;renderOB()}
+function spxSetStyle(s){SX.style=s;renderOB()}
+function spxGen(){SX.prev=spxMake(SX);SX.step='prev';renderOB();$('ob').scrollTop=0}
+function spxVar(){SX.vseed=(SX.vseed||0)+1;SX.prev=spxMake(SX);renderOB();toast(t('variacaoaplicada'))}
+function spxSrc(){SX.back=SX.step;SX.step='src';renderOB();$('ob').scrollTop=0}
+function renderSpecial(){
+  const ob=$('ob');
+  if(!SX)spxInit('mf','pick','cal');
+  const T=SPX_T[SX.trail];
+  if(SX.step==='src'){
+    ob.innerHTML=`<div class="ob-in">
+      <h2>${escH(t('spx_sources'))}</h2>
+      <div class="lead">${escH(t('spx_srclead'))}</div>
+      <div class="qb"><h4>${escH(t('spx_grades'))}</h4><div class="hint" style="margin:0">${escH(t('spx_gradestxt'))}</div></div>
+      ${SPX_SRC_ORDER.map(id=>{const s=SPX_SRC[id];return `<div class="qb spx-src"><h4><a href="${s.u}" target="_blank" rel="noopener">${escH(sxl(s.n))}</a> <span class="spx-tag g-${s.g}">${escH(sxl(SPX_GR[s.g]))}</span></h4><div class="hint" style="margin:0">${escH(sxl(s.d))}</div></div>`}).join('')}
+      <div class="qb"><h4>${escH(t('spx_notver'))}</h4><div class="hint" style="margin:0">${escH(t('spx_notvertxt'))}</div></div>
+      <div class="ob-nav"><button class="ob-btn pri" onclick="spxBack()">${escH(t('voltar'))}</button></div></div>`;
+    return;
+  }
+  if(SX.step==='prev'&&SX.prev){
+    const d=SX.prev.day,m=d.meta,sets=d.ex.reduce((s,e)=>s+(e.sets||0),0);
+    const vol=spxWeekVol(SX);
+    const gl=(SPX_GLOBAL[T.glob]||[]).map(r=>`<details class="spx-det"><summary>${escH(sxl(r.h))}</summary><p>${escH(sxl(r.w))}</p>${spxTags(r.s,r.my)}</details>`).join('');
+    const volHtml=vol?`<div class="qb"><h4>${escH(t('spx_week'))}</h4>
+      <div class="spx-vol">${['chest','back','legs','shoulders','arms','glutes','calf','core'].filter(g=>vol[g]).map(g=>`<span><b>${vol[g]}</b> ${escH(grpLabel(g))}</span>`).join('')}</div>
+      <div class="hint" style="margin:8px 0 0">${escH(t('spx_weekhint'))}${SX.trail==='dm'?' '+escH(t('spx_weekmin')):''}</div></div>`:'';
+    ob.innerHTML=`<div class="ob-in">
+      <h2>${escH(d.label)}</h2>
+      <div class="lead">${escH(d.intro)}</div>
+      ${volHtml}
+      <div class="rday">
+        <div class="rhead"><div class="lt" style="background:var(--accent);color:var(--accent-ink)">S</div>
+          <div class="tx"><b>${escH(d.label)}</b><small>${d.ex.length} ${t('exercicios')} · ${sets} ${t('series')} · ~${SX.prev.est} ${t('qk_min')}</small></div></div>
+        ${d.ex.map((e,i)=>{const r=spxRole(e);
+          return `<details class="spx-det spx-ex"><summary><span class="rn">${i+1}</span><span class="rtx"><b>${escH(exName(e.id,e.name))}${e.ss?`<span class="ssb">${t('supersettxt')}</span>`:''}</b><small>${musLabel(e.muscle)} · ${e.sets}×${e.reps}${e.rest?` · ${e.rest}s`:''}</small></span></summary>
+            <p>${escH(r?sxl(r.w):'')}</p>${r?spxTags(r.s,r.my):''}</details>`}).join('')}
+      </div>
+      <div class="qb"><h4>${escH(t('spx_howto'))}</h4>${gl}</div>
+      <button class="ob-btn ob-var" onclick="spxVar()">🔀 ${escH(t('outravariacao'))}</button>
+      <div class="hint" style="margin:6px 2px 14px;font-size:12.5px;color:var(--label2)">${escH(t('variacaohint'))}</div>
+      <button class="spx-link" onclick="spxSrc()">${escH(t('spx_sources'))}</button>
+      <div class="ob-nav">
+        <button class="ob-btn" onclick="spxBack()">${escH(t('voltar'))}</button>
+        <button class="ob-btn pri" onclick="spxCommit()">${escH(t('spx_start'))}</button>
+      </div></div>`;
+    return;
+  }
+  const verBlock=T.ver?`<div class="qb"><h4>${escH(t('spx_ver'))}</h4><div class="qchips">${['A','B'].map(v=>`<button class="qchip${SX.ver===v?' on':''}" onclick="spxSetVer('${v}')">${v}${spxNextVer(SX.trail)===v?' · '+escH(t('spx_sug')):''}</button>`).join('')}</div></div>`:'';
+  const timeBlock=T.times.length>1?`<div class="qb"><h4>${escH(t('spx_time'))}</h4><div class="qchips">${T.times.map(m=>`<button class="qchip${SX.min===m?' on':''}" onclick="spxSetMin(${m})">${m} ${t('qk_min')}</button>`).join('')}</div></div>`:'';
+  ob.innerHTML=`<div class="ob-in">
+    <h2>${escH(t('spx_title'))}</h2>
+    <div class="lead">${escH(t('spx_lead'))}</div>
+    <div class="qb"><h4>${escH(t('spx_trail'))}</h4>
+      ${SPX_ORDER.map(k=>`<button class="spx-card${SX.trail===k?' on':''}" onclick="spxSetTrail('${k}')"><b>${SPX_T[k].ico} ${escH(spxName(k))}</b><small>${escH(sxl(SPX_T[k].sub))}</small></button>`).join('')}
+      <div class="hint" style="margin:6px 0 0">${escH(sxl(T.dd))}</div>
+    </div>
+    ${timeBlock}${verBlock}
+    <div class="qb"><h4>${escH(t('spx_where'))}</h4><div class="qchips">
+      <button class="qchip${SX.style==='mix'?' on':''}" onclick="spxSetStyle('mix')">${escH(t('spx_gym'))}</button>
+      <button class="qchip${SX.style==='body'?' on':''}" onclick="spxSetStyle('body')">${escH(t('spx_body'))}</button></div></div>
+    <button class="spx-link" onclick="spxSrc()">${escH(t('spx_sources'))}</button>
+    <div class="ob-nav">
+      <button class="ob-btn" onclick="spxBack()">${escH(t('voltar'))}</button>
+      <button class="ob-btn pri" onclick="spxGen()">${escH(t('spx_see'))}</button>
+    </div></div>`;
+}
+/* ---- painel na aba Calorias (no lugar das moedas) ---- */
+function spxPanelHTML(){
+  const act=spxActive();
+  return `<div class="kcal-panel spx-panel">
+    <div class="kcal-ptitle"><h4>⚡ ${escH(t('spx_title'))}</h4></div>
+    <p class="spx-plead">${escH(t('spx_panellead'))}</p>
+    ${SPX_ORDER.map(k=>`<button class="spx-card" onclick="spxOpen('cal','${k}')"><b>${SPX_T[k].ico} ${escH(spxName(k))}</b><small>${escH(sxl(SPX_T[k].sub))}</small></button>`).join('')}
+    ${act?`<button class="spx-link strong" onclick="spxContinue()">${escH(t('spx_cont'))}</button>`:''}
+    <button class="spx-link" onclick="spxOpen('cal','mf','src')">${escH(t('spx_sources'))}</button>
+  </div>`;
+}
+
 function renderQuick(){
   const ob=$('ob');
   if(!QK)qkInit();
@@ -6040,6 +6416,7 @@ function qkCommit(){
   else if(!PROGRAM||!Object.keys(PROGRAM).length)PROGRAM=generateProgram(SETUP);
   PROGRAM.Q=QKPREV.day;
   QKDAY=todayISO();save('iron_qkonly',QKDAY);
+  QKKEY='Q';save('iron_qkkey',QKKEY);
   SESSION.Q={};delete SESSMETA.Q;
   save('iron_session',SESSION);save('iron_sessmeta',SESSMETA);save('iron_program',PROGRAM);
   cloudSync();
@@ -6048,19 +6425,21 @@ function qkCommit(){
   toast(t('qk_pronto'));
 }
 /* "só o rápido": no dia em que o treino rápido é criado, a tela de treino mostra só ele; os treinos A, B, C... continuam guardados */
-function qkOnly(){return !!(PROGRAM&&PROGRAM.Q&&QKDAY&&QKDAY===todayISO()&&Object.keys(PROGRAM).length>1)}
-function dayKeys(){return qkOnly()?['Q']:Object.keys(PROGRAM)}
+function focusKey(){return QKKEY==='S'?'S':'Q'}
+function qkOnly(){const k=focusKey();return !!(PROGRAM&&PROGRAM[k]&&QKDAY&&QKDAY===todayISO()&&Object.keys(PROGRAM).length>1)}
+/* o treino especial só aparece na tela no dia em que está em foco; fora dele A, B, C... ficam como sempre */
+function dayKeys(){if(qkOnly())return [focusKey()];const ks=Object.keys(PROGRAM).filter(k=>k!=='S');return ks.length?ks:Object.keys(PROGRAM)}
 /* o programa A/B/C é o padrão automático, sem edição e sem série marcada? (então pode ficar só o rápido) */
 function qkPristine(){
   if(!PROGRAM)return true;
-  const ks=Object.keys(PROGRAM).filter(k=>k!=='Q');
+  const ks=Object.keys(PROGRAM).filter(k=>k!=='Q'&&k!=='S');
   if(ks.some(k=>sessionStats(k).done>0))return false;
   let d;try{d=generateProgram(DEFAULT_SETUP)}catch(e){return false}
   const kd=Object.keys(d);
   return ks.length===kd.length&&ks.every(k=>d[k]&&PROGRAM[k].ex.map(e=>e.id).join()===d[k].ex.map(e=>e.id).join());
 }
 function qkExit(){QKDAY='';try{localStorage.removeItem('iron_qkonly')}catch(e){}}
-function qkMyProg(){qkExit();cur=Object.keys(PROGRAM).find(k=>k!=='Q')||'Q';render();window.scrollTo({top:0})}
+function qkMyProg(){qkExit();cur=Object.keys(PROGRAM).find(k=>k!=='Q'&&k!=='S')||Object.keys(PROGRAM)[0];render();window.scrollTo({top:0})}
 function qkRemove(){
   if(!PROGRAM||!PROGRAM.Q)return;
   if(sessionStats('Q').done>0&&!confirm(t('qk_removeconf')))return;
@@ -7512,7 +7891,7 @@ async function exportPDF(){
 }
 
 /* =================== INIT =================== */
-const APP_VERSION='iron-v22';
+const APP_VERSION='iron-v23';
 /* atualização automática: confere versão nova ao abrir, ao voltar pro app e a cada 1h; aplica sozinha
    (se houver treino em andamento, espera o app ir pro segundo plano pra não interromper) */
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){
