@@ -1,7 +1,44 @@
 IRON · Treino PPL — Pacote do app (PWA)
 
 ========================================
-NOVIDADES DESTA VERSÃO (iron-v23)
+NOVIDADES DESTA VERSÃO (iron-v24)
+========================================
+Esta versão é só de segurança. Nada muda no que você vê e usa, a não
+ser o detalhe do apóstrofo descrito abaixo.
+
+- Texto vindo de fora agora é tratado só como texto. Antes, um arquivo
+  de importação (CSV de Strong, Hevy, FitNotes), um backup ou dados da
+  nuvem feitos de má-fé podiam esconder código no nome de um exercício
+  ou de um treino, e esse código rodava dentro do app ao abrir o
+  histórico, a aba Progresso ou "Meus exercícios". Isso foi corrigido
+  nos pontos em que o nome aparecia sem proteção.
+- Limpeza dos dados que entram por CSV, backup, nuvem, servidor próprio
+  e pelo próprio aparelho: aspas, sinais de maior e menor, crase e barra
+  invertida viram caracteres parecidos e inofensivos, chaves perigosas
+  (__proto__, constructor, prototype) são descartadas, o carimbo de hora
+  dos treinos só pode ser número, e datas e números inválidos de um
+  backup são descartados. Seus dados normais passam sem nenhuma
+  mudança. O único efeito visível: um apóstrofo ou aspas em nome de
+  exercício personalizado passa a ser salvo na versão tipográfica
+  (Farmer's walk vira Farmer’s walk).
+- Bibliotecas de fora (supabase-js, Excel, PDF) com versão exata e
+  verificação de integridade (SRI). Se o arquivo no servidor de
+  distribuição for diferente do que foi conferido, o navegador recusa
+  carregar. O supabase-js deixou de ser "sempre a versão mais nova da
+  linha 2" e fica na 2.118.0.
+- supabase.sql (para quem usa a nuvem): no fim do arquivo há um trecho
+  novo, opcional e recomendado, que limita o tamanho dos dados de cada
+  usuário a 5 MB, exige que seja um objeto JSON e tira do papel "anon" e
+  do usuário logado as permissões que o app não usa. Rode uma vez no
+  SQL Editor do Supabase. Para quem já tem a tabela criada, o trecho
+  também serve: ele só adiciona as travas.
+- Recomendação sem código (painel do Supabase): se pessoas além de você
+  vão criar conta, ligue "Confirm email" em Authentication, Sign In /
+  Providers, Email. Se só você usa, desligue "Allow new users to sign
+  up".
+
+========================================
+NOVIDADES DA VERSÃO ANTERIOR (iron-v23)
 ========================================
 - Novo módulo "Treino Especial", na aba Calorias, no lugar das moedas.
   São três trilhas, independentes dos seus treinos A, B e C (nada neles

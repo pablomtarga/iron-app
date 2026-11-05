@@ -4099,19 +4099,84 @@ let LS_OK=true; try{localStorage.setItem('__t','1');localStorage.removeItem('__t
 const load=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}};
 const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 
-let WEIGHTS=load('iron_weights',{});
-let SESSION=load('iron_session',{});
-let HISTORY=load('iron_history',[]);
-let VARIANT=load('iron_variant',{});
-let SESSMETA=load('iron_sessmeta',{});
-let TRASH=load('iron_trash',[]);
-let PROG_BACKUPS=load('iron_prog_backups',[]);
+/* ---- v24 · higiene dos dados que vêm de fora (CSV, backup, nuvem, servidor próprio, armazenamento do aparelho) ----
+   Nada que entra por aqui pode virar HTML ou código: < > " ` \ ' viram parecidos inofensivos, chaves perigosas
+   (__proto__, constructor, prototype) são descartadas e o ts dos treinos só pode ser número. */
+const SCR_MAP={'<':'‹','>':'›','"':'”','`':'´','\\':'∖',"'":'’'};
+const scrStr=s=>String(s).replace(/[<>"`\\']/g,c=>SCR_MAP[c]);
+function scrub(v,d){
+  d=d|0;if(d>14)return null;
+  if(typeof v==='string')return scrStr(v);
+  if(typeof v==='number')return isFinite(v)?v:0;
+  if(v===null||v===undefined||typeof v==='boolean')return v;
+  if(Array.isArray(v))return v.map(x=>scrub(x,d+1));
+  if(typeof v==='object'){const o={};for(const k of Object.keys(v)){if(k==='__proto__'||k==='constructor'||k==='prototype')continue;o[scrStr(k)]=scrub(v[k],d+1)}return o}
+  return null;
+}
+function scrubTs(x){
+  if(typeof x==='number')return isFinite(x)?x:undefined;
+  if(typeof x==='string'&&/^\d{1,16}$/.test(x))return Number(x);
+  return undefined;
+}
+const isNum=x=>typeof x==='number'&&isFinite(x);
+function numOnly(o){
+  const r={};if(!o||typeof o!=='object'||Array.isArray(o))return r;
+  for(const k of Object.keys(o))if(isNum(o[k]))r[k]=o[k];
+  return r;
+}
+function scrubHist(a){
+  if(!Array.isArray(a))return [];
+  return a.filter(h=>h&&typeof h==='object'&&!Array.isArray(h)).map(h=>{
+    const c=scrub(h);
+    if('ts' in c){const n=scrubTs(h.ts);if(n===undefined)delete c.ts;else c.ts=n}
+    for(const k of ['done','tot','kcal'])if(c[k]!=null&&!isNum(c[k]))c[k]=Number(c[k])||0;
+    if('weights' in c)c.weights=numOnly(c.weights);
+    if('items' in c){
+      c.items=Array.isArray(c.items)?c.items.filter(it=>it&&typeof it==='object'&&!Array.isArray(it)).map(it=>{
+        for(const k of ['s','t'])if(it[k]!=null&&!isNum(it[k]))it[k]=Number(it[k])||0;
+        if(it.w!=null&&!isNum(it.w))it.w=null;
+        if(Array.isArray(it.sw))it.sw=it.sw.map(x=>x===null?null:(isNum(x)?x:0));
+        return it}):[];
+    }
+    return c});
+}
+const ISO_DATE=/^\d{4}-\d{2}-\d{2}$/;
+const validDay=h=>typeof h.date==='string'&&ISO_DATE.test(h.date);
+function scrubProgram(pr){
+  const o=scrub(pr);if(!o||typeof o!=='object'||Array.isArray(o))return null;
+  for(const k of Object.keys(o)){const d=o[k];if(d&&Array.isArray(d.ex))d.ex=d.ex.filter(e=>e&&typeof e==='object').map(e=>{
+    for(const f of ['sets','rest','w'])if(e[f]!=null&&!isNum(e[f]))e[f]=Number(e[f])||0;
+    return e})}
+  return o;
+}
+function scrubBody(a){
+  if(!Array.isArray(a))return [];
+  return a.filter(x=>x&&typeof x.d==='string').map(x=>({d:scrStr(x.d),kg:Number(x.kg)||0}));
+}
+function scrubPayload(p){
+  if(!p||typeof p!=='object'||Array.isArray(p))return {};
+  const o=scrub(p);
+  if(Array.isArray(p.history))o.history=scrubHist(p.history).filter(validDay);
+  if(Array.isArray(p.trash))o.trash=scrubHist(p.trash).filter(validDay);
+  if(Array.isArray(p.bodylog))o.bodylog=scrubBody(p.bodylog).filter(x=>ISO_DATE.test(x.d));
+  if(p.weights)o.weights=numOnly(o.weights);
+  if(p.program)o.program=scrubProgram(p.program);
+  return o;
+}
+
+let WEIGHTS=numOnly(scrub(load('iron_weights',{})));
+let SESSION=scrub(load('iron_session',{}))||{};
+let HISTORY=scrubHist(load('iron_history',[]));
+let VARIANT=scrub(load('iron_variant',{}))||{};
+let SESSMETA=scrub(load('iron_sessmeta',{}))||{};
+let TRASH=scrubHist(load('iron_trash',[]));
+let PROG_BACKUPS=scrub(load('iron_prog_backups',[]));if(!Array.isArray(PROG_BACKUPS))PROG_BACKUPS=[];
 /* v23: o sistema de moedas e cruzes saiu; limpa o que ele guardava */
 try{localStorage.removeItem('iron_last_coins_seen');localStorage.removeItem('iron_last_crosses_seen')}catch(e){}
 let THEME=load('iron_theme','dark');
-let CUSTOM_EX=load('iron_customex',{});
+let CUSTOM_EX=scrub(load('iron_customex',{}))||{};
 Object.assign(E,CUSTOM_EX);
-let SETUP=load('iron_setup',null);
+let SETUP=scrub(load('iron_setup',null));
 LANG=load('iron_lang',null);
 if(LANG!=='pt-BR'&&LANG!=='en'){
   let had=false;try{had=['iron_setup','iron_program','iron_history','iron_weights','iron_customex'].some(k=>localStorage.getItem(k)!==null)}catch(e){}
@@ -4119,7 +4184,7 @@ if(LANG!=='pt-BR'&&LANG!=='en'){
   save('iron_lang',LANG);  /* grava já na primeira abertura: o app cria dados logo em seguida e, sem isso, a 2a abertura pareceria "usuário antigo" */
 }
 document.documentElement.lang=LANG;
-let PROGRAM=load('iron_program',null);
+let PROGRAM=scrubProgram(load('iron_program',null));
 let cur='A', view='train';
 let QKKEY=load('iron_qkkey','Q');   /* qual treino de um dia está em foco: Q (rápido) ou S (especial) */
 let QKDAY=load('iron_qkonly','');   /* data (AAAA-MM-DD) em que o treino rápido foi criado: nesse dia a tela mostra só ele */
@@ -4293,16 +4358,16 @@ function renderLastCard(){
     const sv=(it.sw||[]).filter(v=>v!=null);
     const u=unitOf(it.id);
     const wtx=sv.length?sv.map(fmtW).join(' · ')+' '+u:(it.w!=null?fmtW(it.w)+' '+u:t('pesocorp'));
-    return `<div class="lrow"><span>${exName(it.id,it.n)}</span><small>${it.s}/${it.t} ${t('series')}<br>${wtx}</small></div>`;
+    return `<div class="lrow"><span>${escH(exName(it.id,it.n))}</span><small>${it.s}/${it.t} ${t('series')}<br>${wtx}</small></div>`;
   }).join(''):(h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
     `<div class="lrow"><span>${vidName(vid)}</span><small>${fmtW(w)} ${unitOf(vid)}</small></div>`).join(''):
     `<div class="lrow"><span>${t('semdetalhessessao')}</span></div>`);
   const open=LASTOPEN?' op':'';
   el.innerHTML=`<div class="lastcard">
     <button class="lhead${open}" onclick="toggleLast(this)">
-      <div class="lbadge" style="background:${metalCss(h.workout)};color:#1A1A1A">${h.workout}</div>
+      <div class="lbadge" style="background:${metalCss(h.workout)};color:#1A1A1A">${escH(h.workout)}</div>
       <div class="ltx"><span class="lk">${t('ultimotreino')}</span>
-        <b>${hLabel(h)} · ${t('trein')} ${h.workout}</b>
+        <b>${escH(hLabel(h))} · ${t('trein')} ${escH(h.workout)}</b>
         <small>${dtLong(h.date)}${relTag(h.date)}<br>${h.done}/${h.tot} ${t('series')}</small>
         <span class="ldone ${h.done>=h.tot?'full':'part'}">${h.done>=h.tot?t('completo'):t('parcial')+' · '+Math.round(h.done/h.tot*100)+'%'}</span></div>
       <span class="lcv">▾</span>
@@ -4337,7 +4402,7 @@ const bv=(id,fb)=>exB(id,(E[id]&&E[id].b)||fb||'');
 const isIOS=()=>/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 
 /* ---- assento (0 a 7) ---- */
-let SEAT=load('iron_seat',{});
+let SEAT=scrub(load('iron_seat',{}))||{};
 const seatOn=vid=>{const s=SEAT[vid];if(s&&s.o!=null)return !!s.o;return !!(E[vid]&&E[vid].seat)};
 const seatLevel=vid=>{const s=SEAT[vid];return s&&s.l!=null?s.l:null};
 function saveSeat(){Object.keys(SEAT).forEach(k=>{const s=SEAT[k];if(!s||(s.l==null&&s.o==null))delete SEAT[k]});save('iron_seat',SEAT);cloudSync()}
@@ -5122,8 +5187,8 @@ function openDay(iso){
   if(hits.length===1){editHist(hits[0].ts);return}
   boxOpen(`<h3>${dtBR(iso)}</h3>
     <div class="sub">${hits.length} ${t('treinosnodia')}</div>
-    <div class="mlist">${hits.map(h=>`<div class="prow"><div class="rtx"><b>${hLabel(h)} · ${t('trein')} ${h.workout}</b><small>${h.done}/${h.tot} ${t('series')}</small></div>
-      <button class="padd" onclick="editHist(${h.ts})">✎</button></div>`).join('')}</div>
+    <div class="mlist">${hits.map(h=>`<div class="prow"><div class="rtx"><b>${escH(hLabel(h))} · ${t('trein')} ${escH(h.workout)}</b><small>${h.done}/${h.tot} ${t('series')}</small></div>
+      <button class="padd" onclick="editHist(${+h.ts||0})">✎</button></div>`).join('')}</div>
     <div class="mrow" style="margin-top:10px"><button class="mbtn" onclick="boxClose()">← ${t('voltar')}</button></div>`);
 }
 
@@ -5222,7 +5287,7 @@ function openTrash(){
     <h3>${t('lixeiravazia')}</h3>
     <div class="sub">${TRASH.length} ${TRASH.length===1?t('regnalixeira'):t('regnalixeiraS')} ${t('nalixeira')}</div>
     <div class="mlist">${TRASH.map((h,i)=>`<div class="prow">
-      <div class="rtx"><b>${hLabel(h)} · ${t('trein')} ${h.workout}</b><small>${dtBR(h.date)} · ${h.done}/${h.tot} ${t('series')}</small></div>
+      <div class="rtx"><b>${escH(hLabel(h))} · ${t('trein')} ${escH(h.workout)}</b><small>${dtBR(h.date)} · ${h.done}/${h.tot} ${t('series')}</small></div>
       <button class="padd" onclick="restoreTrash(${i})">↩</button></div>`).join('')}</div>
     <div class="mrow" style="margin-top:12px">
       <button class="mbtn" onclick="boxClose()">${t('fechar')}</button>
@@ -5255,20 +5320,20 @@ function openHistMenu(ts){
     const sv=(it.sw||[]).filter(v=>v!=null);
     const u=unitOf(it.id);
     const wtx=sv.length?sv.map(fmtW).join(' · ')+' '+u:(it.w!=null?fmtW(it.w)+' '+u:t('pesocorpcurto'));
-    return `<div class="hd-row"><span>${exName(it.id,it.n)}</span><small>${it.s}/${it.t} ${t('series')}<br>${wtx}</small></div>`}).join(''):
+    return `<div class="hd-row"><span>${escH(exName(it.id,it.n))}</span><small>${it.s}/${it.t} ${t('series')}<br>${wtx}</small></div>`}).join(''):
     (h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
       `<div class="hd-row"><span>${vidName(vid)}</span><small>${fmtW(w)} ${unitOf(vid)}</small></div>`).join(''):
       `<div class="empty">${t('semdetalhes2')}</div>`);
   boxOpen(`<button class="mback" onclick="boxClose()">← ${t('voltar')}</button>
-    <h3>${hLabel(h)} · ${t('trein')} ${h.workout}</h3>
+    <h3>${escH(hLabel(h))} · ${t('trein')} ${escH(h.workout)}</h3>
     <div class="sub">${dtLong(h.date)} · ${h.done}/${h.tot} ${t('series')} (${Math.round(h.done/h.tot*100)}%)</div>
     <div class="mlist">${det}</div>
     <div class="mrow" style="margin-top:12px">
-      <button class="mbtn pri" onclick="editHist(${h.ts})">${t('editarbtn')}</button>
+      <button class="mbtn pri" onclick="editHist(${+h.ts||0})">${t('editarbtn')}</button>
     </div>
     <div class="mrow">
-      <button class="mbtn" onclick="dupHist(${h.ts})">${t('repetirhoje')}</button>
-      <button class="mbtn" onclick="delHistTs(${h.ts})" style="color:var(--red)">${t('excluirbtn')}</button>
+      <button class="mbtn" onclick="dupHist(${+h.ts||0})">${t('repetirhoje')}</button>
+      <button class="mbtn" onclick="delHistTs(${+h.ts||0})" style="color:var(--red)">${t('excluirbtn')}</button>
     </div>`);
 }
 function dupHist(ts){
@@ -5287,9 +5352,9 @@ function statWeek(){
   boxOpen(`<button class="mback" onclick="boxClose()">← ${t('voltar')}</button>
     <h3>${t('ultimos7')}</h3>
     <div class="sub">${list.length} ${list.length===1?t('umtreino'):t('doistreinos')} · ${sets} ${t('series')} ${t('nototal')}</div>
-    <div class="mlist">${list.length?list.map(h=>`<div class="prow"><div class="rtx"><b>${hLabel(h)} · ${t('trein')} ${h.workout}</b>
+    <div class="mlist">${list.length?list.map(h=>`<div class="prow"><div class="rtx"><b>${escH(hLabel(h))} · ${t('trein')} ${escH(h.workout)}</b>
       <small>${dtBR(h.date)} · ${h.done}/${h.tot} ${t('series')}</small></div>
-      <button class="padd" onclick="editHist(${h.ts})">✎</button></div>`).join(''):`<div class="empty">${t('nenhumtreino7')}</div>`}</div>
+      <button class="padd" onclick="editHist(${+h.ts||0})">✎</button></div>`).join(''):`<div class="empty">${t('nenhumtreino7')}</div>`}</div>
     <div class="mrow" style="margin-top:10px"><button class="mbtn pri" onclick="boxClose()">${t('fechar')}</button></div>`);
 }
 function statLast(){
@@ -5298,14 +5363,14 @@ function statLast(){
     <div class="mrow"><button class="mbtn pri" onclick="boxClose()">${t('fechar')}</button></div>`);return}
   const det=(h.items||[]).map(it=>{
     const u=unitOf(it.id);const sv=(it.sw||[]).filter(v=>v!=null);const wtx=sv.length?sv.map(fmtW).join(' · ')+' '+u:(it.w!=null?fmtW(it.w)+' '+u:t('pesocorpcurto'));
-    return `<div class="hd-row"><span>${exName(it.id,it.n)}</span><small>${it.s}/${it.t} ${t('series')}<br>${wtx}</small></div>`}).join('');
+    return `<div class="hd-row"><span>${escH(exName(it.id,it.n))}</span><small>${it.s}/${it.t} ${t('series')}<br>${wtx}</small></div>`}).join('');
   boxOpen(`<button class="mback" onclick="boxClose()">← ${t('voltar')}</button>
-    <h3>${hLabel(h)} · ${t('trein')} ${h.workout}</h3>
+    <h3>${escH(hLabel(h))} · ${t('trein')} ${escH(h.workout)}</h3>
     <div class="sub">${dtLong(h.date)} · ${h.done}/${h.tot} ${t('series')} (${Math.round(h.done/h.tot*100)}%)</div>
     <div class="mlist">${det||`<div class="empty">${t('semdetalhes')}</div>`}</div>
     <div class="mrow" style="margin-top:10px">
       <button class="mbtn" onclick="boxClose()">${t('fechar')}</button>
-      <button class="mbtn pri" onclick="editHist(${h.ts})">${t('editarbtn')}</button>
+      <button class="mbtn pri" onclick="editHist(${+h.ts||0})">${t('editarbtn')}</button>
     </div>`);
 }
 function statTotal(){
@@ -5318,9 +5383,9 @@ function statTotal(){
     <div class="sub">${t('agrupadosmes')}</div>
     <div class="mlist">${keys.length?keys.map(k=>`
       <div class="wkhead">${mLbl(k)} · ${by[k].length} ${by[k].length===1?t('umtreino'):t('doistreinos')}</div>
-      ${by[k].map(h=>`<div class="prow"><div class="rtx"><b>${hLabel(h)} · ${t('trein')} ${h.workout}</b>
+      ${by[k].map(h=>`<div class="prow"><div class="rtx"><b>${escH(hLabel(h))} · ${t('trein')} ${escH(h.workout)}</b>
         <small>${dtBR(h.date)} · ${h.done}/${h.tot} ${t('series')}</small></div>
-        <button class="padd" onclick="editHist(${h.ts})">✎</button></div>`).join('')}
+        <button class="padd" onclick="editHist(${+h.ts||0})">✎</button></div>`).join('')}
       `).join(''):'<div class="empty">'+t('nenhumtreino')+'</div>'}</div>
     <div class="mrow" style="margin-top:10px"><button class="mbtn pri" onclick="boxClose()">${t('fechar')}</button></div>`);
 }
@@ -5382,13 +5447,13 @@ function renderProgress(){
     lastWk=wk;
     const det=h.items?h.items.map(it=>{
       const u=unitOf(it.id);const sv=(it.sw||[]).filter(v=>v!=null);const wtx=sv.length?sv.map(fmtW).join(' · ')+' '+u:(it.w!=null?fmtW(it.w)+' '+u:'');
-      return `<div class="hd-row"><span>${exName(it.id,it.n)}</span><small>${it.s}/${it.t} ${t('series')}${wtx?' · '+wtx:''}</small></div>`}).join(''):
+      return `<div class="hd-row"><span>${escH(exName(it.id,it.n))}</span><small>${it.s}/${it.t} ${t('series')}${wtx?' · '+wtx:''}</small></div>`}).join(''):
       (h.weights&&Object.keys(h.weights).length?Object.entries(h.weights).map(([vid,w])=>
       `<div class="hd-row"><span>${vidName(vid)}</span><small>${fmtW(w)} ${unitOf(vid)}</small></div>`).join(''):
       `<div class="hd-row"><span>${t('semdetalhessessao')}</span></div>`);
-    return `${head}<div class="hrow" onclick="openHistMenu(${h.ts})">
-      <div class="wk" style="background:${metalCss(h.workout)};color:#1A1A1A">${h.workout}</div>
-      <div class="mid"><b>${hLabel(h)} · ${t('trein')} ${h.workout}</b><small>${ds} · ${h.done}/${h.tot} ${t('series')}</small></div>
+    return `${head}<div class="hrow" onclick="openHistMenu(${+h.ts||0})">
+      <div class="wk" style="background:${metalCss(h.workout)};color:#1A1A1A">${escH(h.workout)}</div>
+      <div class="mid"><b>${escH(hLabel(h))} · ${t('trein')} ${escH(h.workout)}</b><small>${ds} · ${h.done}/${h.tot} ${t('series')}</small></div>
       <div class="pct">${pct}%</div><span class="hcv" style="transform:rotate(-90deg)">▾</span></div>`;
   }).join(''):'<div class="empty">'+t('nenhumtreinoainda')+'</div>';
   const plan=(SETUP&&!SETUP.quick)?`<div class="tip"><div class="ic">📅</div><p><b>${t('suasemana')}</b> ${weekPlan(SETUP)} (${SETUP.freq}x). ${t('suasemanatxt')}</p></div>`:'';
@@ -5499,7 +5564,7 @@ function strengthPanelHtml(){
     const meta=E[id];
     const reps=meta?parseRepsSeconds(meta.reps):{kind:'reps',avg:10};
     const oneRM=reps.kind==='reps'?Math.round(rec.w*(1+reps.avg/30)):null;
-    return `<div class="hd-row"><span>${exName(id,rec.name)}</span><small>${t('melhorcarga')}: <b>${fmtW(rec.w)}kg</b>${oneRM?' · '+t('rm1est')+': <b>~'+oneRM+'kg</b>':''} · ${dtBR(rec.date)}</small></div>`;
+    return `<div class="hd-row"><span>${escH(exName(id,rec.name))}</span><small>${t('melhorcarga')}: <b>${fmtW(rec.w)}kg</b>${oneRM?' · '+t('rm1est')+': <b>~'+oneRM+'kg</b>':''} · ${dtBR(rec.date)}</small></div>`;
   }).join('')+`</div>`;
 }
 function calcStreak(){
@@ -5595,7 +5660,7 @@ function renderOB(){
       <div class="qb"><h4>${t('qualcardio')}</h4>
         <div class="hint">${t('ordemrotacao')}</div>
         <div class="qchips">${CARDIO_IDS.filter(id=>id!=='finisher').map(id=>
-          `<button class="qchip${(OBDATA.cardioPrefs||[]).includes(id)?' on':''}" onclick="obTglCardio('${id}')">${exName(id)}</button>`).join('')}</div>
+          `<button class="qchip${(OBDATA.cardioPrefs||[]).includes(id)?' on':''}" onclick="obTglCardio('${id}')">${escH(exName(id))}</button>`).join('')}</div>
       </div>`:isFunctional?`
       <div class="qb"><h4>${t('funcionalcircuito')}</h4>
         <div class="hint">${t('funcionalhint')}</div>
@@ -5684,9 +5749,9 @@ function renderOB(){
       const d=OBPROG[k];
       return `<div class="rday">
         <div class="rhead"><div class="lt" style="background:${metalCss(k)};color:#1A1A1A">${k}</div>
-          <div class="tx"><b>${trLbl(d.label)}</b><small>${d.ex.length} ${t('exercicios')} · ${d.ex.reduce((s,e)=>s+e.sets,0)} ${t('series')}</small></div></div>
+          <div class="tx"><b>${escH(trLbl(d.label))}</b><small>${d.ex.length} ${t('exercicios')} · ${d.ex.reduce((s,e)=>s+e.sets,0)} ${t('series')}</small></div></div>
         ${d.ex.map((e,i)=>`<div class="rex"><div class="rn">${i+1}</div>
-          <div class="rtx"><b>${exName(e.id,e.name)}</b><small>${musLabel(e.muscle)} · ${e.sets}×${e.reps}${e.rest?` · ${e.rest}s`:''}</small></div>
+          <div class="rtx"><b>${escH(exName(e.id,e.name))}</b><small>${musLabel(e.muscle)} · ${e.sets}×${e.reps}${e.rest?` · ${e.rest}s`:''}</small></div>
           <button class="rx" onclick="obRm('${k}',${i})">✕</button></div>`).join('')}
         <button class="radd" onclick="openPicker('${k}')">${t('addexextra')}</button>
       </div>`}).join('')}
@@ -6582,7 +6647,7 @@ function pickChoose(id){
 }
 function askScope(old,item,dayKey,idx,outros){
   boxOpen(`<h3>${t('trocarem')}</h3>
-    <div class="sub"><b>${exName(old.id,old.name)}</b> ${t('tambemaparece')} ${outros.length===1?t('notreino'):t('nostreinos')} <b>${outros.join(', ')}</b>. ${t('querttrocar')} <b>${exName(item.id,item.name)}</b> ${t('sopara')}</div>
+    <div class="sub"><b>${escH(exName(old.id,old.name))}</b> ${t('tambemaparece')} ${outros.length===1?t('notreino'):t('nostreinos')} <b>${outros.map(escH).join(', ')}</b>. ${t('querttrocar')} <b>${escH(exName(item.id,item.name))}</b> ${t('sopara')}</div>
     <div class="mrow"><button class="mbtn" onclick="doScope(false)">${t('sonotreino')} ${dayKey}</button></div>
     <div class="mrow"><button class="mbtn pri" onclick="doScope(true)">${t('trocaremtodos')} (${outros.length+1})</button></div>
     <div class="mfoot"><button onclick="boxClose()">${t('cancelar')}</button></div>`);
@@ -6627,12 +6692,12 @@ function openCustomExForm(){
     <button class="mbtn pri" onclick="saveCustomEx()">${t('novoexcriar')}</button></div>`);
 }
 function saveCustomEx(){
-  const name=($('cexName').value||'').trim();
+  const name=scrStr(($('cexName').value||'').trim()).slice(0,80);
   if(!name){toast(t('novoexnomeobrig'));return}
   const grp=$('cexGrupo').value;
   const bw=$('cexBw').checked;
   const sets=Math.max(1,parseInt($('cexSets').value,10)||3);
-  const reps=($('cexReps').value||'8–12').trim();
+  const reps=scrStr(($('cexReps').value||'8–12').trim()).slice(0,20);
   const id='custom_'+Date.now();
   const entry={name,fig:'custom',grp,mus:GRP_LABEL[grp],cat:'iso',bw,w:bw?0:20,sets,reps,rest:60,
     yt:name+' exercise form',steps:[],g:'',b:'',custom:true,alts:[]};
@@ -6653,7 +6718,7 @@ function openMyExercises(){
   const ids=Object.keys(CUSTOM_EX);
   boxOpen(`<h3>${t('meusexercicios')}</h3>
     <div class="mlist">${ids.length?ids.map(id=>{const x=CUSTOM_EX[id];
-      return `<div class="prow"><div class="rtx"><b>${x.name}</b><small>${grpLabel(x.grp)} · ${x.sets}×${x.reps}</small></div>
+      return `<div class="prow"><div class="rtx"><b>${escH(x.name)}</b><small>${grpLabel(x.grp)} · ${x.sets}×${x.reps}</small></div>
       <button class="padd" onclick="deleteCustomEx('${id}')">🗑</button></div>`}).join(''):`<div class="empty">${t('nadaaqui')}</div>`}</div>
     <div class="mrow" style="margin-top:10px"><button class="mbtn" onclick="boxClose()">${t('fechar')}</button></div>`);
 }
@@ -6682,7 +6747,7 @@ function progCombo(i){
   boxOpen(`<button class="mback" onclick="boxClose()">← ${t('voltar')}</button>
     <h3>🔗 ${t('criarcombo')}</h3>
     <div class="sub">${t('combosub')}</div>
-    <div class="mlist">${others.map(o=>`<div class="prow"><div class="rtx"><b>${exName(o.e.id,o.e.name)}</b>${o.e.ss?`<small>${t('jaemcombo')}</small>`:''}</div>
+    <div class="mlist">${others.map(o=>`<div class="prow"><div class="rtx"><b>${escH(exName(o.e.id,o.e.name))}</b>${o.e.ss?`<small>${t('jaemcombo')}</small>`:''}</div>
       <button class="padd" onclick="doCombo(${i},${o.idx})">🔗</button></div>`).join('')}</div>`);
 }
 function doCombo(i,j){
@@ -6844,7 +6909,7 @@ function sbEnsure(){
   if(sb)return Promise.resolve(true);
   if(!sbP)sbP=(async()=>{
     try{
-      await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2');
+      await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js','sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK');
       sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
       sbBind();
       return true;
@@ -6866,7 +6931,8 @@ async function sbInit(){
 function maybeOnboard(){if(!SETUP)openWizard(false)}
 function paintAcctBtn(){$('acct').textContent=((sbUser||shOn())?'☁️':'👤')}
 
-function loadScript(u){return new Promise((ok,err)=>{const s=document.createElement('script');s.src=u;s.onload=ok;s.onerror=err;document.head.appendChild(s)})}
+/* v24: com SRI (integrity) o navegador só executa o arquivo se ele for idêntico ao auditado; senão dispara onerror */
+function loadScript(u,sri){return new Promise((ok,err)=>{const s=document.createElement('script');s.src=u;if(sri){s.integrity=sri;s.crossOrigin='anonymous'}s.onload=ok;s.onerror=err;document.head.appendChild(s)})}
 function cloudSync(){if(!(sb&&sbUser)&&!shOn())return;if(sb&&sbUser)save('iron_dirty',true);clearTimeout(syncT);syncT=setTimeout(()=>{if(sb&&sbUser)cloudPush();if(shOn())shPush()},1500)}
 async function cloudPush(){
   if(!sb||!sbUser)return false;
@@ -6898,7 +6964,8 @@ async function restoreSignoutBackup(){
     if(bk.uid&&bk.uid!==sbUser.id)return;     /* outra conta: não mistura os treinos */
     const seen=new Set(HISTORY.map(h=>h.ts));
     const maxTs=Math.max(0,...HISTORY.map(h=>h.ts||0));
-    const back=(bk.payload.history||[]).filter(h=>!seen.has(h.ts));
+    const bkp=scrubPayload(bk.payload);
+    const back=(bkp.history||[]).filter(h=>!seen.has(h.ts));
     if(back.length){
       back.forEach(h=>HISTORY.push(h));
       HISTORY.sort((a,b)=>(b.ts||0)-(a.ts||0));
@@ -6912,6 +6979,7 @@ async function restoreSignoutBackup(){
 }
 window.addEventListener('online',()=>{if(sb&&sbUser&&load('iron_dirty',false))cloudPush()});
 function mergeRemote(p,quiet){
+  p=scrubPayload(p);
   const seen=new Set(HISTORY.map(h=>h.ts));
   (p.history||[]).forEach(h=>{if(!seen.has(h.ts))HISTORY.push(h)});
   HISTORY.sort((a,b)=>(b.ts||0)-(a.ts||0));
@@ -7131,7 +7199,7 @@ function renderAcct(){
   }
   if(sbUser){
     m.innerHTML=`<h3>${t('conectado')}</h3>
-      <div class="who">${sbUser.email}<small>${t('sincronizasub')}</small></div>
+      <div class="who">${escH(sbUser.email)}<small>${t('sincronizasub')}</small></div>
       <div class="mrow">
         <button class="mbtn" onclick="doSignOut()">${t('sair')}</button>
         <button class="mbtn pri" onclick="cloudPull(true).then(closeAcct)">${t('sincronizaragora')}</button>
@@ -7282,7 +7350,7 @@ function askEvolve(){
   const uniq=[...new Set(preview)];
   boxOpen(`<h3>${t('evoluirtit')}</h3>
     <div class="sub">${t('evoluirsub1')}</div>
-    <div class="sub">${uniq.length?`${t('evoluirsub2a')} <b>${uniq.length} ${uniq.length===1?t('evoluirsub2b'):t('evoluirsub2c')}</b>, ${t('evoluirsub2d')} ${uniq.slice(0,3).map(id=>exName(id)).join(', ')}${uniq.length>3?'...':''}.`:t('evoluirsub2e')}</div>
+    <div class="sub">${uniq.length?`${t('evoluirsub2a')} <b>${uniq.length} ${uniq.length===1?t('evoluirsub2b'):t('evoluirsub2c')}</b>, ${t('evoluirsub2d')} ${uniq.slice(0,3).map(id=>escH(exName(id))).join(', ')}${uniq.length>3?'...':''}.`:t('evoluirsub2e')}</div>
     <div class="sub"><b>${t('evoluirsub3')}</b></div>
     <div class="mrow">
       <button class="mbtn" onclick="boxClose()">${t('cancelar')}</button>
@@ -7372,7 +7440,7 @@ function doRestore(inp){
   const r=new FileReader();
   r.onload=()=>{
     try{
-      const d=JSON.parse(r.result);
+      const d=scrubPayload(JSON.parse(r.result));
       if(!d||!d.history)throw new Error(t('arquivosemhist'));
       const seen=new Set(HISTORY.map(h=>h.ts));
       let add=0;(d.history||[]).forEach(h=>{if(!seen.has(h.ts)){HISTORY.push(h);add++}});
@@ -7394,7 +7462,7 @@ function doRestore(inp){
 }
 
 /* =================== PESO CORPORAL (registro ao longo do tempo) =================== */
-let BODYLOG=load('iron_bodylog',[]);
+let BODYLOG=scrubBody(load('iron_bodylog',[]));
 function bodyLogSave(){
   BODYLOG.sort((a,b)=>a.d<b.d?-1:a.d>b.d?1:0);save('iron_bodylog',BODYLOG);
   const last=BODYLOG[BODYLOG.length-1];
@@ -7733,14 +7801,14 @@ function impParse(text,defUnit){
   if(C.exercise==null||C.date==null)throw new Error('cols');
   const W={},order=[];let nsets=0;
   for(let r=1;r<rows.length;r++){
-    const row=rows[r],name=(row[C.exercise]||'').trim(),date=impDate(row[C.date]);
+    const row=rows[r],name=scrStr((row[C.exercise]||'').trim()).slice(0,80),date=impDate(row[C.date]);
     if(!name||!date)continue;
     if(C.setType!=null&&/warm/i.test(row[C.setType]||''))continue;
-    const wn=C.workout!=null?(row[C.workout]||'').trim():'';
+    const wn=C.workout!=null?scrStr((row[C.workout]||'').trim()).slice(0,60):'';
     const key=date+'|'+wn;
     if(!W[key]){W[key]={date,label:wn||'',ex:{},eo:[]};order.push(key)}
     const w=W[key];
-    if(!w.ex[name]){w.ex[name]={name,cat:C.category!=null?row[C.category]:'',sets:[]};w.eo.push(name)}
+    if(!w.ex[name]){w.ex[name]={name,cat:C.category!=null?scrStr(row[C.category]||''):'',sets:[]};w.eo.push(name)}
     let kg=null;
     const num=v=>{const x=parseFloat(String(v||'').replace(',','.'));return isNaN(x)?null:x};
     if(C.wkg!=null&&num(row[C.wkg])>0)kg=num(row[C.wkg]);
@@ -7818,10 +7886,10 @@ function impCommit(){
 }
 
 /* =================== EXPORTAÇÃO (Excel / PDF) =================== */
-async function ensureXLSX(){if(!window.XLSX)await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js')}
+async function ensureXLSX(){if(!window.XLSX)await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js','sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw')}
 async function ensurePDF(){
-  if(!window.jspdf)await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
-  if(!(window.jspdf&&window.jspdf.jsPDF&&window.jspdf.jsPDF.API.autoTable))await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js');
+  if(!window.jspdf)await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js','sha384-JcnsjUPPylna1s1fvi1u12X5qjY5OL56iySh75FdtrwhO/SWXgMjoVqcKyIIWOLk');
+  if(!(window.jspdf&&window.jspdf.jsPDF&&window.jspdf.jsPDF.API.autoTable))await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js','sha384-vuyrTV5nkscLp1knFvt+FIHfKKzmROBq5reruhMRslauj54mW+l2B8b6szMN6lCL');
 }
 function vidName(vid){
   if(E[vid])return exName(vid);
@@ -7891,7 +7959,7 @@ async function exportPDF(){
 }
 
 /* =================== INIT =================== */
-const APP_VERSION='iron-v23';
+const APP_VERSION='iron-v24';
 /* atualização automática: confere versão nova ao abrir, ao voltar pro app e a cada 1h; aplica sozinha
    (se houver treino em andamento, espera o app ir pro segundo plano pra não interromper) */
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){

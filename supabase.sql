@@ -18,3 +18,21 @@ create policy "criar proprios dados" on public.workout_data
 
 create policy "atualizar proprios dados" on public.workout_data
   for update using (auth.uid() = user_id);
+
+-- ------------------------------------------------------------
+-- v24 (recomendado, rode uma vez): endurecimento da tabela
+-- ------------------------------------------------------------
+-- O dado de cada usuário precisa ser um objeto JSON e ter no máximo 5 MB.
+alter table public.workout_data
+  add constraint workout_data_payload_objeto check (jsonb_typeof(payload) = 'object'),
+  add constraint workout_data_payload_tamanho check (octet_length(payload::text) <= 5242880);
+
+-- O app só usa usuário logado: o papel anon não precisa de nenhuma permissão na tabela,
+-- e o usuário logado só precisa de SELECT, INSERT e UPDATE (o app faz upsert).
+revoke all on table public.workout_data from anon;
+revoke delete, truncate, references, trigger on table public.workout_data from authenticated;
+
+-- Para desfazer:
+--   alter table public.workout_data drop constraint workout_data_payload_objeto, drop constraint workout_data_payload_tamanho;
+--   grant all on table public.workout_data to anon;
+--   grant delete, truncate, references, trigger on table public.workout_data to authenticated;
