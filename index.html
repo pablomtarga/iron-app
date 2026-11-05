@@ -947,6 +947,111 @@ body.tmron{padding-top:0}
 .order .bd-i{padding:12px 14px 6px}
 .order .dintro{margin:0 0 6px;font-size:13.5px}
 html[data-theme=dark] .erow.lift{box-shadow:var(--shadow-2),0 0 0 1.5px var(--accent)}
+
+/* =====================================================================
+   v25: vidro + aquarela, só nos elementos desta versão (o resto do app fica como estava)
+   ===================================================================== */
+:root{
+  --glass:rgba(255,255,255,.62);--glass2:rgba(255,255,255,.34);--glass-bd:rgba(255,255,255,.78);
+  --glass-hi:inset 0 1px 0 rgba(255,255,255,.9);
+  --glass-sh:0 10px 28px -14px rgba(40,50,90,.28),0 1px 2px rgba(40,50,90,.06);
+  --bm-base:color-mix(in srgb,var(--label) 10%,var(--surface));
+  --bm-mus:color-mix(in srgb,var(--label) 16%,var(--surface));
+  --st-ok:#43BF86;--st-lo:#F0B341;--st-bad:#F06A5E;--st-hi:#6BA5F2;
+  --wash1:rgba(255,190,130,.55);--wash2:rgba(140,190,255,.50);--wash3:rgba(170,230,200,.50);
+}
+html[data-theme=dark]{
+  --glass:rgba(62,62,68,.50);--glass2:rgba(255,255,255,.05);--glass-bd:rgba(255,255,255,.15);
+  --glass-hi:inset 0 1px 0 rgba(255,255,255,.17);
+  --glass-sh:0 12px 30px -14px rgba(0,0,0,.75),0 1px 2px rgba(0,0,0,.4);
+  --wash1:rgba(255,160,100,.30);--wash2:rgba(110,160,255,.28);--wash3:rgba(90,200,160,.26);
+  --bm-base:color-mix(in srgb,var(--label) 19%,var(--surface));
+  --bm-mus:color-mix(in srgb,var(--label) 29%,var(--surface));
+}
+.glass{background:linear-gradient(160deg,var(--glass),var(--glass2));border:.5px solid var(--glass-bd);box-shadow:var(--glass-hi),var(--glass-sh)}
+@supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  .glass,.wub,.bmtile{-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%)}
+}
+
+/* ---- número do treino (A, B, C...): aquarela com vidro, sem brilho metálico ---- */
+.wcn{position:relative;isolation:isolate;overflow:hidden;color:#1C1C1E;text-shadow:0 .5px 0 rgba(255,255,255,.45);
+  background:
+    radial-gradient(120% 110% at 16% 10%,var(--w3) 0%,transparent 58%),
+    radial-gradient(95% 95% at 88% 92%,var(--w2) 0%,transparent 64%),
+    radial-gradient(110% 100% at 72% 18%,var(--w1) 0%,transparent 72%),
+    var(--w1);
+  box-shadow:inset 0 0 0 .5px rgba(255,255,255,.6),inset 0 1.5px 1px rgba(255,255,255,.8),inset 0 -2px 5px rgba(0,0,0,.07),0 5px 12px -6px var(--w1)}
+.wcn::before{content:"";position:absolute;left:7%;right:7%;top:4%;height:46%;border-radius:inherit;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,0))}
+@supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){.wcn{-webkit-backdrop-filter:blur(8px) saturate(160%);backdrop-filter:blur(8px) saturate(160%)}}
+.tab .tdot.wcd{background:radial-gradient(circle at 30% 28%,var(--w3) 0%,transparent 60%),radial-gradient(circle at 78% 80%,var(--w2) 0%,transparent 66%),var(--w1);
+  box-shadow:inset 0 0 0 .5px rgba(255,255,255,.55),0 0 6px -1px var(--w1)}
+
+/* ---- aquecimento escondido atrás de um botão discreto ---- */
+.wuw{margin:10px 0 2px}
+.wub{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 11px 0 9px;border-radius:999px;cursor:pointer;
+  background:linear-gradient(160deg,var(--glass),var(--glass2)),var(--fill);border:.5px solid var(--sep-strong);box-shadow:var(--glass-hi);
+  color:var(--label2);font-size:12.5px;font-weight:600;letter-spacing:-.005em}
+.wub svg{width:13px;height:13px;color:var(--warn);flex:0 0 auto}
+.wub .wcv{font-style:normal;font-size:9.5px;opacity:.65;transition:transform .25s var(--ease)}
+.wub.on{color:var(--label)}
+.wub.on .wcv{transform:rotate(180deg)}
+.wuw .wu{margin-top:8px}
+.wuw .wu>span{display:block;font-size:12.5px;color:var(--label2)}
+
+/* ---- região do músculo (mapa do corpo) ---- */
+.bmap{display:block;height:92px;width:auto;max-width:100%}
+.bmap.sq{width:100%;height:100%}
+.bmtile.z{padding:0;overflow:hidden;width:96px;height:96px}
+.bmap .bm-fig{fill:var(--bm-base);color:var(--bm-base)}
+.bmap .bm-m{fill:var(--bm-mus)}
+.bmap .bm-p{fill:var(--accent)}
+.bmap .bm-s{fill:var(--accent);fill-opacity:.38}
+.bmap .st-ok{fill:var(--st-ok)}.bmap .st-lo{fill:var(--st-lo)}.bmap .st-bad{fill:var(--st-bad)}.bmap .st-hi{fill:var(--st-hi)}
+.bmtile{flex:0 0 auto;display:flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:16px;min-width:64px;
+  background:radial-gradient(90% 80% at 15% 10%,var(--wash1),transparent 62%),radial-gradient(80% 80% at 90% 95%,var(--wash2),transparent 64%),linear-gradient(160deg,var(--glass),var(--glass2));
+  border:.5px solid var(--glass-bd);box-shadow:var(--glass-hi)}
+.ib.bmrow{display:flex;align-items:center;gap:14px}
+.ib.bmrow .bmtx{flex:1;min-width:0}
+.shh.bmw{display:flex;align-items:center;gap:14px}
+.shh.bmw .shl{flex:1;min-width:0}
+.shh.bmw .bmtile{padding:6px 10px}
+.shh.bmw .bmap{height:84px}
+.shh.bmw .bmtile.z{width:88px;height:88px}
+
+/* ---- equilíbrio muscular: claro e objetivo ---- */
+.week.bal2{position:relative;isolation:isolate;overflow:hidden;padding-bottom:14px}
+.week.bal2::before{content:"";position:absolute;inset:-20% -25% auto -25%;height:62%;z-index:-1;pointer-events:none;filter:blur(30px);
+  background:radial-gradient(45% 60% at 22% 40%,var(--wash1),transparent 70%),radial-gradient(45% 60% at 78% 30%,var(--wash2),transparent 70%),radial-gradient(40% 50% at 55% 80%,var(--wash3),transparent 70%)}
+.bal2 h4{color:var(--label);font-size:16px;font-weight:700;letter-spacing:-.015em}
+.bal2 .hint2{font-size:13px;line-height:1.42}
+.bal2-top{display:flex;align-items:center;gap:14px}
+.bal2-fig{flex:0 0 auto;display:flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:18px;
+  background:linear-gradient(160deg,var(--glass),var(--glass2));border:.5px solid var(--glass-bd);box-shadow:var(--glass-hi)}
+.bal2-fig .bmap{height:132px;width:auto}
+.bal2-sum{flex:1;min-width:0;font-size:14.5px;line-height:1.35;color:var(--label);letter-spacing:-.01em}
+.bal2-sum p+p{margin-top:6px}
+.bal2-sum b{font-weight:700}
+.bal2-sum .bal2-do{font-size:13px;color:var(--label2)}
+.bal2-sum.bad b{color:var(--st-bad)}.bal2-sum.lo b{color:var(--warn)}.bal2-sum.ok b{color:var(--green)}
+.bal2-leg{display:flex;flex-wrap:wrap;gap:6px 12px;margin:12px 0 4px}
+.bal2-lg{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--label2);font-weight:500}
+.bal2-lg i,.bal2-c i{width:8px;height:8px;border-radius:50%;background:var(--st);display:block;box-shadow:inset 0 0 0 .5px rgba(255,255,255,.5)}
+.bal2-lg.ok,.bal2-r.ok,.bal2-c{--st:var(--st-ok)}
+.bal2-lg.lo,.bal2-r.lo{--st:var(--st-lo)}
+.bal2-lg.bad,.bal2-r.bad{--st:var(--st-bad)}
+.bal2-lg.hi,.bal2-r.hi{--st:var(--st-hi)}
+.bal2-r{--st:var(--label3)}
+.bal2-rows{display:flex;flex-direction:column;gap:11px;margin-top:12px;padding-top:14px;border-top:.5px solid var(--sep)}
+.bal2-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px}
+.bal2-n{font-size:15px;font-weight:600;letter-spacing:-.012em;color:var(--label)}
+.bal2-c{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;padding:3px 10px 3px 8px;border-radius:999px;color:var(--label);
+  background:color-mix(in srgb,var(--st) 18%,transparent);border:.5px solid color-mix(in srgb,var(--st) 38%,transparent)}
+.bal2-r.lo .bal2-c,.bal2-r.bad .bal2-c,.bal2-r.hi .bal2-c{--st:inherit}
+.bal2-b{display:flex;align-items:center;gap:10px}
+.bal2-t{flex:1;height:8px;border-radius:999px;background:var(--fill);overflow:hidden;position:relative}
+.bal2-t i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,color-mix(in srgb,var(--st) 62%,#fff),var(--st));box-shadow:inset 0 .5px 0 rgba(255,255,255,.5)}
+.bal2-m{flex:0 0 auto;min-width:86px;text-align:right;font-size:12px;color:var(--label2);font-variant-numeric:tabular-nums}
 </style>
 </head>
 <body>
@@ -2395,8 +2500,10 @@ function keyIndex(k){const ks=PROGRAM?Object.keys(PROGRAM):['A','B','C'];const i
 function accentFor(k,theme){return PALETTE[theme||THEME][0]}
 const ACCENTS={get light(){return {}},get dark(){return {}}};
 const HIST_COLORS=new Proxy({},{get:(_,k)=>accentFor(String(k),'light').a});
-const PHOTOS={"chestpress":"Machine Bench Press","dbbench":"Dumbbell Bench Press","pecdeck":"Butterfly","cablefly":"Cable Crossover","shoulderpress":"Machine Shoulder (Military) Press","dbshoulder":"Seated Dumbbell Press","sidelat":"Side Lateral Raise","reversefly":"Reverse Machine Flyes","dbrevfly":"Bent Over Dumbbell Rear Delt Raise With Head On Bench","facepullv":"Face Pull","triceps":"Triceps Pushdown - Rope Attachment","benchdipv":"Bench Dips","biceps":"Barbell Curl","hammer":"Hammer Curls","latpull":"Wide-Grip Lat Pulldown","neutralpull":"Close-Grip Front Lat Pulldown","seatedrow":"Seated Cable Rows","lowrow":"Leverage Iso Row","legpress":"Leg Press","goblet2":"Goblet Squat","legext":"Leg Extensions","lungev":"Dumbbell Lunges","legcurl":"Seated Leg Curl","rdlv":"Stiff-Legged Dumbbell Deadlift","glutekick":"Glute Kickback","bridgev":"Butt Lift (Bridge)","abductor":"Thigh Abductor","adductor":"Thigh Adductor","cableadd":"Cable Hip Adduction","calf":"Standing Calf Raises","dbcalf":"Standing Dumbbell Calf Raise","lowerback":"Hyperextensions (Back Extensions)","supermanv":"Superman","absfull":"Crunches","plankv":"Plank","reversecrunch":"Reverse Crunch","legraisev":"Flat Bench Lying Leg Raise","finisher":"Bicycling, Stationary","treadmillv":"Walking, Treadmill","rowerv":"Rowing, Stationary","cablelatv":"Cable Seated Lateral Raise","widerow":"Elevated Cable Rows","bandabd":"Monster Walk","neckflexv":"Isometric Neck Exercise - Front And Back","neckextv":"Isometric Neck Exercise - Front And Back","necklatv":"Isometric Neck Exercise - Sides","neckisov":"Isometric Neck Exercise - Front And Back","wristcurlv":"Palms-Up Barbell Wrist Curl Over A Bench","revwristcurlv":"Palms-Down Wrist Curl Over A Bench","rotatorcuffext":"External Rotation with Cable","rotatorcuffint":"Cable Internal Rotation","renegaderowv":"Alternating Renegade Row","nordiccurlv":"Natural Glute Ham Raise","pallofpressv":"Pallof Press","barbellbench":"Barbell Bench Press - Medium Grip","backsquat":"Barbell Full Squat","deadliftv":"Barbell Deadlift","pullupv":"Pullups","chinupv":"Chin-Up","bentrow":"Bent Over Barbell Row","ohpv":"Standing Military Press","dipsweightedv":"Dips - Triceps Version","hangingraisev":"Hanging Leg Raise","hipthrustv":"Barbell Hip Thrust","goodmorningv":"Good Morning","rdlbarv":"Romanian Deadlift","ellipticalv":"Elliptical Trainer","stairsv":"Stairmaster","kettlebellswing":"One-Arm Kettlebell Swings","farmercarry":"Farmer's Walk","sledpush":"Sled Push","battleropes":"Battling Ropes","boxjump":"Box Jump (Multiple Response)","trxrow":"Suspended Row","jumpropev":"Rope Jumping","mountainclimberv":"Mountain Climbers","inclinebench":"Barbell Incline Bench Press - Medium Grip","inclinedb":"Incline Dumbbell Press","declinebench":"Decline Barbell Bench Press","cablecrossover":"Cable Crossover","pushupv":"Pushups","tbar":"T-Bar Row with Handle","onearmrow":"One-Arm Dumbbell Row","shrugv":"Barbell Shrug","straightarm":"Straight-Arm Pulldown","arnoldpress":"Arnold Dumbbell Press","uprightrow":"Upright Barbell Row","frontraise":"Front Dumbbell Raise","preachercurl":"Preacher Curl","concentrationcurl":"Concentration Curls","cablecurl":"Standing Biceps Cable Curl","skullcrusher":"EZ-Bar Skullcrusher","overheadtriceps":"Seated Triceps Press","closegrip":"Close-Grip Barbell Bench Press","hacksquat":"Hack Squat","walkinglunge":"Bodyweight Walking Lunge","frontsquat":"Front Barbell Squat","cablekickback":"One-Legged Cable Kickback","stepup":"Dumbbell Step Ups","seatedcalf":"Seated Calf Raise","legpresscalf":"Calf Press On The Leg Press Machine","russiantwist":"Russian Twist","abwheel":"Ab Roller","sideplank":"Side Bridge","cablewoodchop":"Standing Cable Wood Chop","sledpull":"Sled Drag - Harness","cablecrunchv":"Cable Crunch","declinecrunch":"Decline Crunch","crosscrunch":"Cross-Body Crunch","jackknife":"Jackknife Sit-Up","obliquecrunch":"Oblique Crunches","dbsidebend":"Dumbbell Side Bend","scissorkick":"Scissor Kick","kneeraisebars":"Knee/Hip Raise On Parallel Bars","abmachine":"Ab Crunch Machine","situpv":"Sit-Up","weightedcrunch":"Weighted Crunches","ballcrunch":"Exercise Ball Crunch","cablecrunchtwist":"Kneeling Cable Crunch With Alternating Oblique Twists","legpullin":"Flat Bench Leg Pull-In","dbfly":"Dumbbell Flyes","inclinefly":"Incline Dumbbell Flyes","dbpullover":"Bent-Arm Dumbbell Pullover","inclinepushup":"Incline Push-Up","feetelevpushup":"Push-Ups With Feet Elevated","diamondpushup":"Push-Ups - Close Triceps Position","chestdips":"Dips - Chest Version","declinedb":"Decline Dumbbell Bench Press","lowcablefly":"Low Cable Crossover","invertedrow":"Inverted Row","dbbentrow":"Bent Over Two-Dumbbell Row","reverserow":"Reverse Grip Bent-Over Rows","cablerow1":"Seated One-arm Cable Pulley Rows","assistedpullup":"Band Assisted Pull-Up","bandlateral":"Lateral Raise - With Bands","bandrevfly":"Back Flyes - With Bands","cablerevfly":"Cable Rear Delt Fly","seateddblat":"Seated Side Lateral Raise","dbpressstand":"Standing Dumbbell Press","cablefrontraise":"Front Cable Raise","zottman":"Zottman Curl","inclinecurl":"Incline Dumbbell Curl","ezcurl":"EZ-Bar Curl","reversecurl":"Reverse Barbell Curl","dbkickback":"Tricep Dumbbell Kickback","dbtriext":"Standing Dumbbell Triceps Extension","pushdownbar":"Triceps Pushdown","cablehammer":"Cable Hammer Curls - Rope Attachment","bwsquat":"Bodyweight Squat","dbsquat":"Dumbbell Squat","sumosquat":"Plie Dumbbell Squat","jumpsquat":"Freehand Jump Squat","splitsquat":"Split Squat with Dumbbells","reverselunge":"Dumbbell Rear Lunge","singlelegdl":"Kettlebell One-Legged Deadlift","lyinglegcurl":"Lying Leg Curls","ballegcurl":"Ball Leg Curl","barbelllunge":"Barbell Lunge","singlelegbridge":"Single Leg Glute Bridge","barbellbridge":"Barbell Glute Bridge","monsterwalk":"Monster Walk","sumodeadlift":"Sumo Deadlift","cablepullthrough":"Pull Through","donkeycalf":"Donkey Calf Raises","turkishgetup":"Kettlebell Turkish Get-Up (Squat style)","kbthruster":"Kettlebell Thruster","inchworm":"Inchworm","standinglongjump":"Standing Long Jump","medicineball":"One-Arm Medicine Ball Slam","deadbug":"Dead Bug","bandrotext":"External Rotation with Band","bandrotint":"Internal Rotation with Band","bandfly":"Cross Over - With Bands","bandpress":"Shoulder Press - With Bands","bandgoodmorning":"Band Good Morning","bandadduct":"Band Hip Adductions","bandupright":"Upright Row - With Bands","wristroller":"Wrist Roller","bwlunge":"Bodyweight Walking Lunge","bicyclecrunch":"Air Bike","heeltouch":"Alternate Heel Touchers","cablerussian":"Cable Russian Twists","cableseatedcrunch":"Cable Seated Crunch","legsballcrunch":"Crunch - Legs On Exercise Ball","declineoblique":"Decline Oblique Crunch","declinereverse":"Decline Reverse Crunch","landmine180":"Landmine 180's","platetwist":"Plate Twist","kbwindmill":"Kettlebell Windmill","palloffrot":"Pallof Press With Rotation","barbellrollout":"Barbell Ab Rollout","cablesidebend":"One-Arm High-Pulley Cable Side Bends","seatedlegtuck":"Seated Leg Tucks","spidercrawl":"Spider Crawl","toetouchers":"Toe Touchers","cocoon":"Cocoons","suspendedfallout":"Suspended Fallout","stomachvacuum":"Stomach Vacuum","bentkneehipraise":"Bent-Knee Hip Raise","hangingpike":"Hanging Pike","neckplateext":"Lying Face Down Plate Neck Resistance","neckplateflex":"Lying Face Up Plate Neck Resistance","dbextrot":"External Rotation","smithsquat":"Smith Machine Squat","starjump":"Star Jump","splitjump":"Split Jump","kneetuckjump":"Knee Tuck Jump","plyopushup":"Plyo Push-up","benchjump":"Bench Jump","fastskipping":"Fast Skipping","lateralbound":"Lateral Bound","rocketjump":"Rocket Jump","sledgehammer":"Sledgehammer Swings","dbvertswing":"Vertical Swing","pushpress":"Push Press","recumbentbike":"Recumbent Bike","stepmill":"Step Mill","legpresssingle":"Leg Press","hipthrustmachine":"Barbell Hip Thrust","assaultbike":"Bicycling, Stationary","neckmachinev":"Seated Head Harness Neck Resistance","treadmillhiit":"Running, Treadmill","bikehiit":"Bicycling, Stationary","rowerhiit":"Rowing, Stationary","latraisemachine":"IRON illustration","runningv":"Running, Treadmill","bulgarian":"Split Squat with Dumbbells"};
+const PHOTOS={"chestpress":"Machine Bench Press","dbbench":"Dumbbell Bench Press","pecdeck":"Butterfly","cablefly":"Cable Crossover","shoulderpress":"Machine Shoulder (Military) Press","dbshoulder":"Seated Dumbbell Press","sidelat":"Side Lateral Raise","reversefly":"Reverse Machine Flyes","dbrevfly":"Bent Over Dumbbell Rear Delt Raise With Head On Bench","facepullv":"Face Pull","triceps":"Triceps Pushdown - Rope Attachment","benchdipv":"Bench Dips","biceps":"Barbell Curl","hammer":"Hammer Curls","latpull":"Wide-Grip Lat Pulldown","neutralpull":"Close-Grip Front Lat Pulldown","seatedrow":"Seated Cable Rows","lowrow":"Leverage Iso Row","legpress":"Leg Press","goblet2":"Goblet Squat","legext":"Leg Extensions","lungev":"Dumbbell Lunges","legcurl":"Seated Leg Curl","rdlv":"Stiff-Legged Dumbbell Deadlift","glutekick":"Glute Kickback","bridgev":"Butt Lift (Bridge)","abductor":"Thigh Abductor","adductor":"Thigh Adductor","cableadd":"Cable Hip Adduction","calf":"Standing Calf Raises","dbcalf":"Standing Dumbbell Calf Raise","lowerback":"Hyperextensions (Back Extensions)","supermanv":"Superman","absfull":"Crunches","plankv":"Plank","reversecrunch":"Reverse Crunch","legraisev":"Flat Bench Lying Leg Raise","finisher":"Bicycling, Stationary","treadmillv":"Walking, Treadmill","rowerv":"Rowing, Stationary","cablelatv":"Cable Seated Lateral Raise","widerow":"Elevated Cable Rows","bandabd":"Monster Walk","neckflexv":"Isometric Neck Exercise - Front And Back","neckextv":"Isometric Neck Exercise - Front And Back","necklatv":"Isometric Neck Exercise - Sides","neckisov":"Isometric Neck Exercise - Front And Back","wristcurlv":"Palms-Up Barbell Wrist Curl Over A Bench","revwristcurlv":"Palms-Down Wrist Curl Over A Bench","rotatorcuffext":"External Rotation with Cable","rotatorcuffint":"Cable Internal Rotation","renegaderowv":"Alternating Renegade Row","nordiccurlv":"Natural Glute Ham Raise","pallofpressv":"Pallof Press","barbellbench":"Barbell Bench Press - Medium Grip","backsquat":"Barbell Full Squat","deadliftv":"Barbell Deadlift","pullupv":"Pullups","chinupv":"Chin-Up","bentrow":"Bent Over Barbell Row","ohpv":"Standing Military Press","dipsweightedv":"Dips - Triceps Version","hangingraisev":"Hanging Leg Raise","hipthrustv":"Barbell Hip Thrust","goodmorningv":"Good Morning","rdlbarv":"Romanian Deadlift","ellipticalv":"Elliptical Trainer","stairsv":"Stairmaster","kettlebellswing":"One-Arm Kettlebell Swings","farmercarry":"Farmer's Walk","sledpush":"Sled Push","battleropes":"Battling Ropes","boxjump":"Box Jump (Multiple Response)","trxrow":"Suspended Row","jumpropev":"Rope Jumping","mountainclimberv":"Mountain Climbers","inclinebench":"Barbell Incline Bench Press - Medium Grip","inclinedb":"Incline Dumbbell Press","declinebench":"Decline Barbell Bench Press","cablecrossover":"Cable Crossover","pushupv":"Pushups","tbar":"T-Bar Row with Handle","onearmrow":"One-Arm Dumbbell Row","shrugv":"Barbell Shrug","straightarm":"Straight-Arm Pulldown","arnoldpress":"Arnold Dumbbell Press","uprightrow":"Upright Barbell Row","frontraise":"Front Dumbbell Raise","preachercurl":"Preacher Curl","concentrationcurl":"Concentration Curls","cablecurl":"Standing Biceps Cable Curl","skullcrusher":"EZ-Bar Skullcrusher","overheadtriceps":"Seated Triceps Press","closegrip":"Close-Grip Barbell Bench Press","hacksquat":"Hack Squat","walkinglunge":"Bodyweight Walking Lunge","frontsquat":"Front Barbell Squat","cablekickback":"One-Legged Cable Kickback","stepup":"Dumbbell Step Ups","seatedcalf":"Seated Calf Raise","legpresscalf":"Calf Press On The Leg Press Machine","russiantwist":"Russian Twist","abwheel":"Ab Roller","sideplank":"Side Bridge","cablewoodchop":"Standing Cable Wood Chop","sledpull":"Sled Drag - Harness","cablecrunchv":"Cable Crunch","declinecrunch":"Decline Crunch","crosscrunch":"Cross-Body Crunch","jackknife":"Jackknife Sit-Up","obliquecrunch":"Oblique Crunches","dbsidebend":"Dumbbell Side Bend","scissorkick":"Scissor Kick","kneeraisebars":"Knee/Hip Raise On Parallel Bars","abmachine":"Ab Crunch Machine","situpv":"Sit-Up","weightedcrunch":"Weighted Crunches","ballcrunch":"Exercise Ball Crunch","cablecrunchtwist":"Kneeling Cable Crunch With Alternating Oblique Twists","legpullin":"Flat Bench Leg Pull-In","dbfly":"Dumbbell Flyes","inclinefly":"Incline Dumbbell Flyes","dbpullover":"Bent-Arm Dumbbell Pullover","inclinepushup":"Incline Push-Up","feetelevpushup":"Push-Ups With Feet Elevated","diamondpushup":"Push-Ups - Close Triceps Position","chestdips":"Dips - Chest Version","declinedb":"Decline Dumbbell Bench Press","lowcablefly":"Low Cable Crossover","invertedrow":"Inverted Row","dbbentrow":"Bent Over Two-Dumbbell Row","reverserow":"Reverse Grip Bent-Over Rows","cablerow1":"Seated One-arm Cable Pulley Rows","assistedpullup":"Band Assisted Pull-Up","bandlateral":"Lateral Raise - With Bands","bandrevfly":"Back Flyes - With Bands","cablerevfly":"Cable Rear Delt Fly","seateddblat":"Seated Side Lateral Raise","dbpressstand":"Standing Dumbbell Press","cablefrontraise":"Front Cable Raise","zottman":"Zottman Curl","inclinecurl":"Incline Dumbbell Curl","ezcurl":"EZ-Bar Curl","reversecurl":"Reverse Barbell Curl","dbkickback":"Tricep Dumbbell Kickback","dbtriext":"Standing Dumbbell Triceps Extension","pushdownbar":"Triceps Pushdown","cablehammer":"Cable Hammer Curls - Rope Attachment","bwsquat":"Bodyweight Squat","dbsquat":"Dumbbell Squat","sumosquat":"Plie Dumbbell Squat","jumpsquat":"Freehand Jump Squat","splitsquat":"Split Squat with Dumbbells","reverselunge":"Dumbbell Rear Lunge","singlelegdl":"Kettlebell One-Legged Deadlift","lyinglegcurl":"Lying Leg Curls","ballegcurl":"Ball Leg Curl","barbelllunge":"Barbell Lunge","singlelegbridge":"Single Leg Glute Bridge","barbellbridge":"Barbell Glute Bridge","monsterwalk":"Monster Walk","sumodeadlift":"Sumo Deadlift","cablepullthrough":"Pull Through","donkeycalf":"Donkey Calf Raises","turkishgetup":"Kettlebell Turkish Get-Up (Squat style)","kbthruster":"Kettlebell Thruster","inchworm":"Inchworm","standinglongjump":"Standing Long Jump","medicineball":"One-Arm Medicine Ball Slam","deadbug":"Dead Bug","bandrotext":"External Rotation with Band","bandrotint":"Internal Rotation with Band","bandfly":"Cross Over - With Bands","bandpress":"Shoulder Press - With Bands","bandgoodmorning":"Band Good Morning","bandadduct":"Band Hip Adductions","bandupright":"Upright Row - With Bands","wristroller":"Wrist Roller","bwlunge":"Bodyweight Walking Lunge","bicyclecrunch":"Air Bike","heeltouch":"Alternate Heel Touchers","cablerussian":"Cable Russian Twists","cableseatedcrunch":"Cable Seated Crunch","legsballcrunch":"Crunch - Legs On Exercise Ball","declineoblique":"Decline Oblique Crunch","declinereverse":"Decline Reverse Crunch","landmine180":"Landmine 180's","platetwist":"Plate Twist","kbwindmill":"Kettlebell Windmill","palloffrot":"Pallof Press With Rotation","barbellrollout":"Barbell Ab Rollout","cablesidebend":"One-Arm High-Pulley Cable Side Bends","seatedlegtuck":"Seated Leg Tucks","spidercrawl":"Spider Crawl","toetouchers":"Toe Touchers","cocoon":"Cocoons","suspendedfallout":"Suspended Fallout","stomachvacuum":"Stomach Vacuum","bentkneehipraise":"Bent-Knee Hip Raise","hangingpike":"Hanging Pike","neckplateext":"Lying Face Down Plate Neck Resistance","neckplateflex":"Lying Face Up Plate Neck Resistance","dbextrot":"External Rotation","smithsquat":"Smith Machine Squat","starjump":"Star Jump","splitjump":"Split Jump","kneetuckjump":"Knee Tuck Jump","plyopushup":"Plyo Push-up","benchjump":"Bench Jump","fastskipping":"Fast Skipping","lateralbound":"Lateral Bound","rocketjump":"Rocket Jump","sledgehammer":"Sledgehammer Swings","dbvertswing":"Vertical Swing","pushpress":"Push Press","recumbentbike":"Recumbent Bike","stepmill":"Step Mill","legpresssingle":"Leg Press","hipthrustmachine":"Barbell Hip Thrust","assaultbike":"Bicycling, Stationary","neckmachinev":"Seated Head Harness Neck Resistance","treadmillhiit":"Running, Treadmill","bikehiit":"Bicycling, Stationary","rowerhiit":"Rowing, Stationary","latraisemachine":"IRON illustration","runningv":"Trail Running/Walking","bulgarian":"Split Squat with Dumbbells"};
 const hasPhoto=id=>!!PHOTOS[id];
+/* v25 · a fonte desta foto traz os dois quadros iguais (sem movimento): mostra um quadro só */
+const ONE_FRAME=new Set(['reverserow']);
 /* exercícios com imagens desenhadas para o IRON (não são fotos do Free Exercise DB) */
 const OWN_ART=new Set(['latraisemachine']);
 const I18N={
@@ -2460,7 +2567,7 @@ const I18N={
    errredirect:'O endereço de retorno não está liberado. No Supabase: Authentication > URL Configuration > adicione esta página em Site URL e Redirect URLs.',
    errsmtp:'O servidor de e-mail do Supabase recusou o envio. Verifique Authentication > Emails, ou tente de novo mais tarde.',
    seriesecargas:'Séries e cargas',aplicanaomarcadas:'aplica nas séries não marcadas',
-   inicio:'Início',fim:'Fim',fotoscredit:'Fotos: Free Exercise DB (domínio público)',ilustcredit:'Ilustração própria do IRON',
+   inicio:'Início',fim:'Fim',posicaoini:'Posição inicial',fotoscredit:'Fotos: Free Exercise DB (domínio público)',ilustcredit:'Ilustração própria do IRON',
    proximaserie:'Próxima série: ',mandaproxima:'Manda a próxima série 💪',
    pesojamarcado:'série já marcada mantém o peso',pesosjamarcados:'séries já marcadas mantêm o peso',
    serietxt:'Série ',edicaosalva:'Edição salva ✔',exexcluido:' excluído',
@@ -2570,7 +2677,7 @@ const I18N={
    errredirect:'The return address is not allowed. In Supabase: Authentication > URL Configuration > add this page to Site URL and Redirect URLs.',
    errsmtp:"Supabase's email server refused to send. Check Authentication > Emails, or try again later.",
    seriesecargas:'Sets and loads',aplicanaomarcadas:'applies to unchecked sets',
-   inicio:'Start',fim:'End',fotoscredit:'Photos: Free Exercise DB (public domain)',ilustcredit:'Illustration by IRON',
+   inicio:'Start',fim:'End',posicaoini:'Start position',fotoscredit:'Photos: Free Exercise DB (public domain)',ilustcredit:'Illustration by IRON',
    proximaserie:'Next set: ',mandaproxima:"Bring the next set 💪",
    pesojamarcado:'set already checked keeps its weight',pesosjamarcados:'sets already checked keep their weight',
    serietxt:'Set ',edicaosalva:'Edit saved ✔',exexcluido:' deleted',
@@ -2815,6 +2922,8 @@ Object.assign(I18N['pt-BR'],{"outrosvideos": "Buscar outros vídeos"});
 Object.assign(I18N.en,{"outrosvideos": "Search other videos"});
 function grpLabel(g){return LANG==='en'?(GRP_LABEL_EN[g]||GRP_LABEL[g]):GRP_LABEL[g]}
 function musLabel(m){return LANG==='en'?(MUS_EN[m]||m):m}
+Object.assign(I18N['pt-BR'],{"balhint2": "Cada barra mostra quanto você treinou de cada parte do corpo em relação ao ideal. Barra cheia é o ideal: uma divisão equilibrada das suas séries.", "balde": "de", "bal_ok": "Em dia", "bal_lo": "Um pouco abaixo", "bal_bad": "Falta treinar", "bal_hi": "Acima do ideal", "balatras": "Ficaram para trás:", "balquase": "Um pouco abaixo:", "baldica": "Inclua 1 ou 2 exercícios dessas partes por semana."});
+Object.assign(I18N.en,{"balhint2": "Each bar shows how much you trained each body part compared with the ideal. A full bar is the ideal: a balanced split of your sets.", "balde": "of", "bal_ok": "On track", "bal_lo": "A bit low", "bal_bad": "Needs work", "bal_hi": "Above ideal", "balatras": "Falling behind:", "balquase": "A bit low:", "baldica": "Add 1 or 2 exercises for these parts each week."});
 const E={
  neckflexv:{name:'Flexão de Pescoço (resistência manual)',fig:'neck',grp:'neck',mus:'Pescoço (flexores)',cat:'iso',bw:true,sets:3,reps:'12–15',rest:45,yt:'manual resistance neck flexion exercise',
   steps:['Sentado, mãos na testa','Empurre a cabeça pra frente contra a resistência das mãos','Segure a firmeza sem deixar a cabeça avançar','Volte controlado ao centro'],
@@ -4365,7 +4474,7 @@ function renderLastCard(){
   const open=LASTOPEN?' op':'';
   el.innerHTML=`<div class="lastcard">
     <button class="lhead${open}" onclick="toggleLast(this)">
-      <div class="lbadge" style="background:${metalCss(h.workout)};color:#1A1A1A">${escH(h.workout)}</div>
+      <div class="lbadge wcn" style="${wcVars(h.workout)}">${escH(h.workout)}</div>
       <div class="ltx"><span class="lk">${t('ultimotreino')}</span>
         <b>${escH(hLabel(h))} · ${t('trein')} ${escH(h.workout)}</b>
         <small>${dtLong(h.date)}${relTag(h.date)}<br>${h.done}/${h.tot} ${t('series')}</small>
@@ -4386,11 +4495,16 @@ function toggleLast(btn){
 /* =================== NAVEGAÇÃO / TREINO (v16) =================== */
 const escH=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ICON={
+  flame:'<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8.2 1.2c.3 2.3-1.6 3.4-2.7 5.1C4.6 7.7 4.2 8.8 4.2 10c0 2.4 1.7 4.4 3.9 4.4s3.9-1.9 3.9-4.2c0-1.5-.7-2.6-1.4-3.5-.2.9-.6 1.4-1.2 1.7.3-2.4-.2-5-1.2-7.2z"/></svg>',
   seat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v10.5a2 2 0 0 0 2 2h9.5M6 15.5V21M17.5 15.5V21M10 9h3"/></svg>',
   grip:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="6" r="1.7"/><circle cx="15" cy="6" r="1.7"/><circle cx="9" cy="12" r="1.7"/><circle cx="15" cy="12" r="1.7"/><circle cx="9" cy="18" r="1.7"/><circle cx="15" cy="18" r="1.7"/></svg>',
   more:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5.5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="18.5" cy="12" r="1.9"/></svg>'
 };
 /* cor do treino: só aparece como barra fina metalizada (amarelo e cinza escuro ficam fixos) */
+/* v25 · número do treino: aquarela (três tons) em vez do brilho metálico; a barra fina do dia continua com METAL */
+const WC=[['#F6C84C','#F4A261','#FFF0B3'],['#4FCDBD','#7FB6F2','#D4F6EE'],['#F59B68','#F2788C','#FFE1D1'],['#A596F0','#E697CF','#E9E2FF'],
+          ['#F08BB4','#F6B28A','#FFDCEB'],['#6AA6F5','#86D9E6','#DCEBFF'],['#86D083','#C6E07C','#E3F6DC'],['#D8B578','#C3C88C','#F5E9CC']];
+const wcVars=k=>{const m=WC[keyIndex(k)%WC.length];return `--w1:${m[0]};--w2:${m[1]};--w3:${m[2]}`};
 const METAL=[['#8A6A00','#FFD426','#FFF3B0'],['#0B6B62','#2DD4BF','#C4F7EF'],['#9A3A0A','#FB923C','#FFDDBF'],['#5B34C9','#A78BFA','#E6DDFF'],
              ['#A01C59','#F472B6','#FFD6EC'],['#1F55C8','#60A5FA','#D3E6FF'],['#3A7A22','#86D96B','#DFF8D6'],['#7A5A22','#D6B36A','#F5E7C2']];
 const metalFor=k=>METAL[keyIndex(k)%METAL.length];
@@ -4457,7 +4571,7 @@ function renderTabs(){
     const b=document.createElement('button');
     b.className='tab'+(k===cur?' on':'');b.dataset.k=k;
     const lbl=p.meta?buildDayLabel(p.meta,p.label):p.label;
-    b.innerHTML=`<span class="tl"><i class="tdot" style="background:${metalCss(k)}"></i>${k}</span><span class="nm">${escH(lbl)}</span>`;
+    b.innerHTML=`<span class="tl"><i class="tdot wcd" style="${wcVars(k)}"></i>${k}</span><span class="nm">${escH(lbl)}</span>`;
     b.onclick=()=>gotoDay(k);
     box.appendChild(b);
   }
@@ -4504,7 +4618,8 @@ function infoHTML(ex,a,i,day){
     ?pr.map(m=>`<span class="mc p">${escH(mvLabel(m))}</span>`).join('')+sc.map(m=>`<span class="mc">${escH(mvLabel(m))}</span>`).join('')
     :`<span class="mc p">${escH(musLabel((E[a.vid]&&E[a.vid].mus)||a.muscle||ex.muscle||''))}</span>`;
   const does=doesOf(a.vid)||gv(a.vid,a.g);
-  return `<div class="ib"><label>${t('treinalab')}</label><div class="mchips">${chips}</div></div>`
+  const bk=bmKeys(a.vid,ex),bm=bodyMapSVG(bk[0],bk[1]);
+  return `<div class="ib${bm?' bmrow':''}">${bmTile(bm)}<div class="bmtx"><label>${t('treinalab')}</label><div class="mchips">${chips}</div></div></div>`
     +(does?`<div class="ib"><label>${t('oquefaz')}</label><p>${escH(does)}</p></div>`:'')
     +`<div class="ib"><label>${t('porqueordem')}</label><p>${escH(dynWhy(day,i))}</p></div>`;
 }
@@ -4728,17 +4843,20 @@ function openHow(baseId){
   const own=hasPhoto(a.vid);
   const fig=FIG[a.fig]||FIG.custom||'';
   const fr=(inner,cap,svg)=>`<div class="fr"><div class="fz${svg?' svg':''}">${inner}</div><div class="cap">${cap}</div></div>`;
+  const one=own&&ONE_FRAME.has(a.vid);
   const frames=own
-    ?fr(`<img src="img/${a.vid}_0.webp" alt="${t('inicio')}">`,t('inicio'))+fr(`<img src="img/${a.vid}_1.webp" alt="${t('fim')}">`,t('fim'))+fr(fig,t('movimento'),1)
+    ?(one?fr(`<img src="img/${a.vid}_0.webp" alt="${t('posicaoini')}">`,t('posicaoini'))
+         :fr(`<img src="img/${a.vid}_0.webp" alt="${t('inicio')}">`,t('inicio'))+fr(`<img src="img/${a.vid}_1.webp" alt="${t('fim')}">`,t('fim')))+fr(fig,t('movimento'),1)
     :fr(fig,t('movimento'),1);
-  const nf=own?3:1;
+  const nf=own?(one?2:3):1;
   const steps=stepsv(a.vid,a.steps);
   const eq=eqLabel(a.vid);
   const pr=primOf(a.vid).map(m=>`<span class="mc p">${escH(mvLabel(m))}</span>`).join('');
   const g=gv(a.vid,a.g),b=bv(a.vid,a.b);
-  openSheet(`<div class="shh"><h3>${escH(nmv(a.vid,a.name))}</h3>
+  const bk=bmKeys(a.vid,ex),bm=bodyMapSVG(bk[0],bk[1]);
+  openSheet(`<div class="shh${bm?' bmw':''}"><div class="shl"><h3>${escH(nmv(a.vid,a.name))}</h3>
       <div class="sub">${[eq,a.sets+'×'+a.reps].filter(Boolean).map(escH).join(' · ')}</div>
-      ${pr?`<div class="mchips">${pr}</div>`:''}</div>
+      ${pr?`<div class="mchips">${pr}</div>`:''}</div>${bmTile(bm)}</div>
     <div class="car" id="shCar">${frames}</div>
     ${nf>1?`<div class="cdots" id="shDots">${Array.from({length:nf},(_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div>`:''}
     ${own?`<div class="fcredit">${t(OWN_ART.has(a.vid)?'ilustcredit':'fotoscredit')}</div>`:''}
@@ -5452,7 +5570,7 @@ function renderProgress(){
       `<div class="hd-row"><span>${vidName(vid)}</span><small>${fmtW(w)} ${unitOf(vid)}</small></div>`).join(''):
       `<div class="hd-row"><span>${t('semdetalhessessao')}</span></div>`);
     return `${head}<div class="hrow" onclick="openHistMenu(${+h.ts||0})">
-      <div class="wk" style="background:${metalCss(h.workout)};color:#1A1A1A">${escH(h.workout)}</div>
+      <div class="wk wcn" style="${wcVars(h.workout)}">${escH(h.workout)}</div>
       <div class="mid"><b>${escH(hLabel(h))} · ${t('trein')} ${escH(h.workout)}</b><small>${ds} · ${h.done}/${h.tot} ${t('series')}</small></div>
       <div class="pct">${pct}%</div><span class="hcv" style="transform:rotate(-90deg)">▾</span></div>`;
   }).join(''):'<div class="empty">'+t('nenhumtreinoainda')+'</div>';
@@ -5748,7 +5866,7 @@ function renderOB(){
     ${keys.map(k=>{
       const d=OBPROG[k];
       return `<div class="rday">
-        <div class="rhead"><div class="lt" style="background:${metalCss(k)};color:#1A1A1A">${k}</div>
+        <div class="rhead"><div class="lt wcn" style="${wcVars(k)}">${k}</div>
           <div class="tx"><b>${escH(trLbl(d.label))}</b><small>${d.ex.length} ${t('exercicios')} · ${d.ex.reduce((s,e)=>s+e.sets,0)} ${t('series')}</small></div></div>
         ${d.ex.map((e,i)=>`<div class="rex"><div class="rn">${i+1}</div>
           <div class="rtx"><b>${escH(exName(e.id,e.name))}</b><small>${musLabel(e.muscle)} · ${e.sets}×${e.reps}${e.rest?` · ${e.rest}s`:''}</small></div>
@@ -7583,6 +7701,103 @@ function loadCardHtml(){
     ${best?`<div class="bl-head"><div><span class="bl-v">${fmtW(best)}</span><span class="bl-u"> ${u}</span></div><div class="bl-d">${t('recordepessoal')}</div></div>`:''}${chart}${tab}</div></div>`;
 }
 
+/* =================== MAPA DO CORPO (v25) =================== */
+/* ---- v25 · mapa do corpo: silhueta (frente e costas) com a região do músculo destacada ---- */
+const BM_BASE='<ellipse cx="50" cy="12" rx="9.5" ry="11.5"/><rect x="44.5" y="21" width="11" height="13" rx="4"/>'
+ +'<path d="M30 36Q50 29 70 36Q80 40 78 54L72 70Q68 84 69 98Q70 106 71 114H29Q30 106 31 98Q32 84 28 70L22 54Q20 40 30 36Z"/>'
+ +'<g fill="none" stroke="currentColor" stroke-linecap="round"><path d="M22 44L16 78" stroke-width="11"/><path d="M16 80L12 112" stroke-width="9"/>'
+ +'<path d="M78 44L84 78" stroke-width="11"/><path d="M84 80L88 112" stroke-width="9"/>'
+ +'<path d="M41 118L38 154" stroke-width="17"/><path d="M38 156L37 192" stroke-width="11"/>'
+ +'<path d="M59 118L62 154" stroke-width="17"/><path d="M62 156L63 192" stroke-width="11"/></g>'
+ +'<ellipse cx="11" cy="119" rx="4" ry="6"/><ellipse cx="89" cy="119" rx="4" ry="6"/><ellipse cx="35.5" cy="197" rx="6.5" ry="3.5"/><ellipse cx="64.5" cy="197" rx="6.5" ry="3.5"/>';
+/* regiões: [vista, espelhar?, formas do lado esquerdo] */
+const BM_REG={
+ neckF:['f',0,'<rect x="44.5" y="21" width="11" height="13" rx="4"/>'],
+ trapF:['f',1,'<path d="M45.5 29Q38 31 30 36.5L32.5 41Q40 36.5 46 34Z"/>'],
+ dA:['f',1,'<ellipse cx="25.5" cy="43.5" rx="5.6" ry="7.6"/>'],
+ dL:['*',1,'<ellipse cx="19.8" cy="47" rx="3.4" ry="6.6" transform="rotate(8 19.8 47)"/>'],
+ pecU:['f',1,'<path d="M31 40.5Q40 37 49.4 41.5V49.2Q40 50.5 32 47.6Z"/>'],
+ pecL:['f',1,'<path d="M32 48.8Q40.5 52 49.4 50.4V58Q41 62 33.4 57.2Q30.8 53 32 48.8Z"/>'],
+ bi:['f',1,'<ellipse cx="19.6" cy="60.5" rx="4.6" ry="10.5" transform="rotate(10 19.6 60.5)"/>'],
+ br:['f',1,'<ellipse cx="17.4" cy="73.8" rx="3.6" ry="4.8" transform="rotate(10 17.4 73.8)"/>'],
+ faF:['f',1,'<ellipse cx="14.2" cy="96" rx="3.9" ry="13.5" transform="rotate(7 14.2 96)"/>'],
+ ab1:['f',1,'<rect x="43.4" y="62" width="6" height="8" rx="2.2"/>'],
+ ab2:['f',1,'<rect x="43.4" y="71" width="6" height="8" rx="2.2"/>'],
+ ab3:['f',1,'<rect x="43.4" y="80" width="6" height="8" rx="2.2"/>'],
+ ab4:['f',1,'<rect x="43.4" y="89" width="6" height="8" rx="2.2"/>'],
+ ob:['f',1,'<path d="M35.4 62Q40 66 42 70V97Q38 98.5 34.2 96.5Q32.4 82 35.4 62Z"/>'],
+ qd:['f',1,'<path d="M34.2 120Q42 117.5 48.6 121L47.6 150Q41.5 153.5 35.6 150Q32 135 34.2 120Z"/>'],
+ ad:['f',1,'<path d="M46 122.5L49.6 124L48.6 147Q46.6 143 46 138Z"/>'],
+ neckB:['b',0,'<rect x="44.5" y="21" width="11" height="13" rx="4"/>'],
+ trapB:['b',1,'<path d="M49.4 27.5Q43 30 33.4 36Q31 38.5 31 41.5Q40 46 49.4 63Z"/>'],
+ dP:['b',1,'<ellipse cx="25.5" cy="44" rx="5.6" ry="7.4"/>'],
+ rc:['b',1,'<ellipse cx="37" cy="51" rx="5.2" ry="5.4"/>'],
+ lat:['b',1,'<path d="M30.4 52Q35 60 41 65L43.6 72V88Q39.6 96 36.4 96Q33 76 30.4 52Z"/>'],
+ mid:['b',0,'<path d="M41 47Q50 51 59 47V61Q50 65 41 61Z"/>'],
+ tri:['b',1,'<ellipse cx="19.6" cy="60.5" rx="4.8" ry="10.5" transform="rotate(10 19.6 60.5)"/>'],
+ faB:['b',1,'<ellipse cx="14.2" cy="96" rx="3.9" ry="13.5" transform="rotate(7 14.2 96)"/>'],
+ low:['b',1,'<ellipse cx="46.5" cy="91" rx="3" ry="8.5"/>'],
+ gl:['b',1,'<ellipse cx="41.2" cy="119" rx="9" ry="8"/>'],
+ gm:['b',1,'<path d="M31 108.5Q37 104.5 44 107.4Q41.5 114.5 33.6 118.4Q30.6 114.4 31 108.5Z"/>'],
+ ham:['b',1,'<path d="M34.2 129Q42 126.5 48.6 129.5L47.6 152Q41.5 155.5 35.6 152Q32 141 34.2 129Z"/>'],
+ calf:['b',1,'<path d="M33.2 158Q38.5 155 42.6 159Q43.5 172 40.6 182Q37.2 185 34.6 182Q31.8 170 33.2 158Z"/>']
+};
+const BM_ALL=Object.keys(BM_REG);
+/* caixa (x0,y0,x1,y1) de cada região, para dar zoom no que importa */
+const BM_BOX={"neckF":[44.5,21,55.5,34],"trapF":[30,29,70,41],"dA":[19.9,35.9,80.1,51.1],"dL":[15.5,40,84.5,54],"pecU":[31,39,69,49.6],"pecL":[31.6,48.8,68.4,59.8],"bi":[13.2,49.4,86.8,71.6],"br":[13,68.4,87,79.2],"faF":[8.7,82.1,91.3,109.9],"ab1":[43.4,62,56.6,70],"ab2":[43.4,71,56.6,79],"ab3":[43.4,80,56.6,88],"ab4":[43.4,89,56.6,97],"ob":[33.5,62,66.5,97.6],"qd":[33.4,119,66.6,151.8],"ad":[46,122.5,54,147],"neckB":[44.5,21,55.5,34],"trapB":[31,27.5,69,63],"dP":[19.9,36.6,80.1,51.4],"rc":[31.8,45.6,68.2,56.4],"lat":[30.4,52,69.6,96],"mid":[41,47,59,63],"tri":[13,49.3,87,71.7],"faB":[8.7,82.1,91.3,109.9],"low":[43.5,82.5,56.5,99.5],"gl":[32.2,111,67.8,127],"gm":[31,106.2,69,118.4],"ham":[33.4,127.9,66.6,153.8],"calf":[32.7,156.7,67.3,183.5]};
+const BM_MAP={peito:['pecU','pecL'],peitosup:['pecU'],peitoinf:['pecL'],ombroA:['dA'],ombroL:['dL'],ombroP:['dP'],dorsal:['lat'],costas:['mid','rc'],
+ trap:['trapF','trapB'],lombar:['low'],manguito:['rc'],biceps:['bi'],braquial:['br'],triceps:['tri'],antebraco:['faF','faB'],
+ abdomen:['ab1','ab2','ab3','ab4'],abdinf:['ab3','ab4'],obliquos:['ob'],core:['ab1','ab2','ab3','ab4','ob','low'],
+ gluteo:['gl'],gmedio:['gm'],quad:['qd'],posterior:['ham'],adutores:['ad'],pant:['calf'],pescoco:['neckF','neckB'],cardio:BM_ALL,corpo:BM_ALL};
+const BM_GRP={chest:['peito'],back:['dorsal','costas'],shoulders:['ombroA','ombroL'],arms:['biceps','triceps'],legs:['quad','posterior'],glutes:['gluteo'],core:['abdomen'],calf:['pant'],neck:['pescoco'],cardio:['cardio'],functional:['corpo']};
+function bmFig(v,cls){
+  let o=`<g class="bm-fig">${BM_BASE}</g>`;
+  BM_ALL.forEach(r=>{const g=BM_REG[r];if(g[0]!==v&&g[0]!=='*')return;
+    o+=`<g class="${cls(r)}">${g[2]}${g[1]?`<g transform="matrix(-1 0 0 1 100 0)">${g[2]}</g>`:''}</g>`});
+  return o}
+/* vista única: quadrado centrado na região principal (com folga), para a figura pequena ainda mostrar onde fica o músculo */
+function bmZoom(P,v){
+  const rs=[...P].filter(r=>BM_REG[r][0]===v||BM_REG[r][0]==='*');
+  if(!rs.length)return null;
+  let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  rs.forEach(r=>{const q=BM_BOX[r];x0=Math.min(x0,q[0]);y0=Math.min(y0,q[1]);x1=Math.max(x1,q[2]);y1=Math.max(y1,q[3])});
+  const s=Math.max(64,Math.min(Math.max(x1-x0,y1-y0)+24,204));
+  const cx=(x0+x1)/2,cy=(y0+y1)/2;
+  const x=s>=100?50-s/2:Math.max(0,Math.min(100-s,cx-s/2)),y=Math.max(0,Math.min(204-s,cy-s/2));
+  return [x,y,s,s].map(n=>+n.toFixed(1)).join(' ');
+}
+function bmSvg(f,b,cls,extra,vb){
+  const two=f&&b;
+  return `<svg class="bmap${extra?' '+extra:''}${two?' two':''}${vb?' sq':''}" viewBox="${vb||('0 0 '+(two?206:100)+' 204')}" aria-hidden="true" focusable="false">`
+    +(f?`<g>${bmFig('f',cls)}</g>`:'')+(b?`<g${f?' transform="translate(106 0)"':''}>${bmFig('b',cls)}</g>`:'')+'</svg>'}
+function bodyMapSVG(prim,sec,extra){
+  prim=(prim||[]).filter(k=>BM_MAP[k]);sec=(sec||[]).filter(k=>BM_MAP[k]);
+  if(!prim.length)return '';
+  const P=new Set(),S=new Set();
+  prim.forEach(k=>BM_MAP[k].forEach(r=>P.add(r)));
+  sec.forEach(k=>BM_MAP[k].forEach(r=>{if(!P.has(r))S.add(r)}));
+  const side=r=>BM_REG[r][0];
+  let f=[...P].some(r=>side(r)==='f'&&r!=='neckF'),b=[...P].some(r=>side(r)==='b'&&r!=='neckB');
+  if(P.size>=BM_ALL.length-1){f=b=true}
+  if(!f&&!b){f=[...P].some(r=>side(r)==='*'||r==='neckF');b=!f}
+  const vb=(f&&b)?null:bmZoom(P,f?'f':'b');
+  return bmSvg(f,b,r=>P.has(r)?'bm-p':S.has(r)?'bm-s':'bm-m',extra,vb);
+}
+/* mapa de calor do equilíbrio: cada grupo pinta suas regiões com a cor do estado dele */
+const BAL_REGS={chest:['pecU','pecL'],back:['lat','mid','rc','trapB'],shoulders:['dA','dL','dP'],arms:['bi','br','tri','faF','faB'],legs:['qd','ad','ham'],glutes:['gl','gm'],core:['ab1','ab2','ab3','ab4','ob','low'],calf:['calf']};
+function bodyMapStatus(st){
+  const rc={};Object.keys(BAL_REGS).forEach(g=>BAL_REGS[g].forEach(r=>{rc[r]=st[g]||''}));
+  return bmSvg(true,true,r=>'bm-m'+(rc[r]?' st-'+rc[r]:''),'bmap-st');
+}
+/* exercícios criados pelo usuário não têm músculo detalhado: usa o grupo */
+/* moldura de vidro da figura: com zoom (vista única) a imagem vai até a borda, como um recorte */
+const bmTile=bm=>bm?`<div class="bmtile${/ sq"/.test(bm)?' z':''}">${bm}</div>`:'';
+function bmKeys(vid,ex){
+  const e=E[vid]||{};
+  const pr=(e.prim&&e.prim.length)?e.prim:(BM_GRP[e.grp||(ex&&ex.grp)]||[]);
+  return [pr,e.sec||[]];
+}
+
 /* =================== EQUILÍBRIO MUSCULAR (o que está sendo treinado e o que está esquecido) =================== */
 let BALRANGE=30;
 const BAL_GRP=['chest','back','shoulders','arms','legs','glutes','core','calf'];
@@ -7598,20 +7813,40 @@ function balanceData(days){
   const low=total>=12?BAL_GRP.filter(g=>exp[g]>=2&&sets[g]<exp[g]*.5):[];
   return {sets,exp,total,low};
 }
+function balStatus(D,g){
+  if(D.total<12)return '';
+  const e=D.exp[g];if(e<2)return 'ok';
+  const r=D.sets[g]/e;
+  return r<.5?'bad':r<.8?'lo':r<=1.3?'ok':'hi';
+}
 function balanceCardHtml(){
   const D=balanceData(BALRANGE);
   const chips=[7,30,90].map(n=>`<button class="qchip${BALRANGE===n?' on':''}" onclick="BALRANGE=${n};renderProgress()">${t('dias'+n)}</button>`).join('');
   if(!D.total)return `<div class="week"><h4>${t('equilibrio')}</h4><div class="wp"><div class="qchips" style="margin-bottom:10px">${chips}</div><div class="tip" style="margin:0"><div class="ic">💪</div><p>${t('semdadosbal')}</p></div></div></div>`;
-  const mx=Math.max(...BAL_GRP.map(g=>Math.max(D.sets[g],D.exp[g])),1);
-  const rows=BAL_GRP.slice().sort((a,b)=>D.sets[b]-D.sets[a]).map(g=>{
-    const w=D.sets[g]/mx*100,ex=D.exp[g]/mx*100,isLow=D.low.indexOf(g)>=0;
-    return `<div class="bal-r"><span class="bal-n">${escH(grpLabel(g))}</span>
-      <span class="bal-t"><i class="bal-b${isLow?' lo':''}" style="width:${Math.max(w,D.sets[g]?1.5:0).toFixed(1)}%"></i><i class="bal-x" style="left:${ex.toFixed(1)}%" title="${t('esperado')}"></i></span>
-      <span class="bal-v">${D.sets[g]}${isLow?`<em>${t('poucotreinado')}</em>`:''}</span></div>`}).join('');
-  const msg=D.total<12?t('balpoucodado'):D.low.length?`${t('treinemais')} <b>${D.low.map(grpLabel).map(escH).join(', ')}</b>.`:t('tudoequilibrado');
-  return `<div class="week"><h4>${t('equilibrio')}</h4><div class="wp"><div class="hint2">${t('equilibriohint')}</div>
-    <div class="qchips" style="margin-bottom:10px">${chips}</div><div class="bal">${rows}</div>
-    <div class="bal-msg">${msg}</div></div></div>`;
+  const few=D.total<12;
+  const st={};BAL_GRP.forEach(g=>st[g]=balStatus(D,g));
+  const rank={bad:0,lo:1,ok:2,hi:3,'':4};
+  const order=BAL_GRP.slice().sort((a,b)=>few?D.sets[b]-D.sets[a]:(rank[st[a]]-rank[st[b]])||(D.sets[a]/Math.max(D.exp[a],1)-D.sets[b]/Math.max(D.exp[b],1)));
+  const mx=Math.max(...BAL_GRP.map(g=>D.sets[g]),1);
+  const rows=order.map(g=>{
+    const s=D.sets[g],e=D.exp[g],k=st[g];
+    const pct=few?s/mx*100:Math.min(100,e>0?s/e*100:0);
+    const meta=few?`${s} ${t('series')}`:`${s} ${t('balde')} ${Math.round(e)} ${t('series')}`;
+    return `<div class="bal2-r${k?' '+k:''}"><div class="bal2-h"><span class="bal2-n">${escH(grpLabel(g))}</span>${k?`<span class="bal2-c"><i></i>${t('bal_'+k)}</span>`:''}</div>
+      <div class="bal2-b"><span class="bal2-t"><i style="width:${Math.max(pct,s?2:0).toFixed(1)}%"></i></span><span class="bal2-m">${meta}</span></div></div>`}).join('');
+  const names=a=>a.map(g=>escH(grpLabel(g))).join(', ');
+  const bad=BAL_GRP.filter(g=>st[g]==='bad'),lo=BAL_GRP.filter(g=>st[g]==='lo');
+  let sum,tone='ok';
+  if(few){sum=`<p>${t('balpoucodado')}</p>`;tone='n'}
+  else if(bad.length){tone='bad';sum=`<p><b>${t('balatras')}</b> ${names(bad)}.</p><p class="bal2-do">${t('baldica')}</p>`}
+  else if(lo.length){tone='lo';sum=`<p><b>${t('balquase')}</b> ${names(lo)}.</p><p class="bal2-do">${t('baldica')}</p>`}
+  else sum=`<p><b>${t('tudoequilibrado')}</b></p>`;
+  const leg=few?'':['ok','lo','bad','hi'].map(k=>`<span class="bal2-lg ${k}"><i></i>${t('bal_'+k)}</span>`).join('');
+  return `<div class="week bal2 glass"><h4>${t('equilibrio')}</h4><div class="wp"><div class="hint2">${t('balhint2')}</div>
+    <div class="qchips" style="margin-bottom:12px">${chips}</div>
+    <div class="bal2-top"><div class="bal2-fig">${bodyMapStatus(few?{}:st)}</div><div class="bal2-sum ${tone}">${sum}</div></div>
+    ${leg?`<div class="bal2-leg">${leg}</div>`:''}
+    <div class="bal2-rows">${rows}</div></div></div>`;
 }
 
 /* =================== AQUECIMENTO (séries leves antes da primeira série de trabalho) =================== */
@@ -7620,13 +7855,22 @@ function warmupSets(base){
   const out=[];[[.5,8],[.7,5],[.85,3]].forEach(([p,r])=>{const w=rnd(base*p);if(w<base&&(!out.length||w>out[out.length-1][0]))out.push([w,r])});
   return out;
 }
+const WU_OPEN=new Set();
 function warmupHtml(ex,a){
   const e=E[a.vid];
   if(!e||e.cat!=='comp'||a.bw||a.unit)return '';
   const base=wOf(a);if(!(base>=8))return '';
   const ws=warmupSets(base);if(!ws.length)return '';
-  return `<div class="wu"><b>${t('aquecimento')}</b> <span>${t('aquecedica')}</span>
-    <div>${ws.map(([w,r])=>`<span class="wc">${fmtW(w)} kg × ${r}</span>`).join('')}</div></div>`;
+  const on=WU_OPEN.has(ex.id);
+  return `<div class="wuw"><button class="wub${on?' on':''}" aria-expanded="${on}" onclick="toggleWarm(this,'${ex.id}')">${ICON.flame}<span>${t('aquecimento')}</span><i class="wcv">▾</i></button>
+    <div class="wu"${on?'':' hidden'}><span>${t('aquecedica')}</span>
+    <div>${ws.map(([w,r])=>`<span class="wc">${fmtW(w)} kg × ${r}</span>`).join('')}</div></div></div>`;
+}
+function toggleWarm(btn,id){
+  const box=btn.parentElement.querySelector('.wu');if(!box)return;
+  const on=box.hidden;box.hidden=!on;
+  btn.classList.toggle('on',on);btn.setAttribute('aria-expanded',on?'true':'false');
+  if(on)WU_OPEN.add(id);else WU_OPEN.delete(id);
 }
 
 /* =================== IMPORTAR HISTÓRICO (Strong, Hevy, FitNotes e CSV genérico) =================== */
@@ -7959,7 +8203,7 @@ async function exportPDF(){
 }
 
 /* =================== INIT =================== */
-const APP_VERSION='iron-v24';
+const APP_VERSION='iron-v25';
 /* atualização automática: confere versão nova ao abrir, ao voltar pro app e a cada 1h; aplica sozinha
    (se houver treino em andamento, espera o app ir pro segundo plano pra não interromper) */
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){

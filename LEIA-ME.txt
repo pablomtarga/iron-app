@@ -1,7 +1,50 @@
 IRON · Treino PPL — Pacote do app (PWA)
 
 ========================================
-NOVIDADES DESTA VERSÃO (iron-v24)
+NOVIDADES DESTA VERSÃO (iron-v25)
+========================================
+Esta entrega inclui a v24 (segurança), que ainda não tinha sido
+publicada. As novidades da v24 estão logo abaixo.
+
+- Aquecimento escondido. Em cada exercício composto, o aquecimento
+  agora fica atrás de um botão pequeno de vidro, "Aquecimento", que
+  abre e fecha as séries leves. Se você abriu, ele continua aberto
+  enquanto marca as séries.
+- Equilíbrio muscular reescrito (aba Progresso). Cada barra mostra
+  quanto você treinou de cada parte do corpo em relação ao ideal, e
+  barra cheia é o ideal. Cada parte ganhou uma palavra (Em dia, Um pouco
+  abaixo, Falta treinar, Acima do ideal), o número ("12 de 27 séries")
+  e as que mais precisam de atenção ficam no topo. Um boneco de frente e
+  de costas pinta cada região com a cor do estado. No alto, uma frase
+  diz o que ficou para trás e o que fazer: incluir 1 ou 2 exercícios
+  dessas partes por semana. As contas de antes não mudaram, só a forma de
+  mostrar.
+- Região do músculo em imagem. Em "Por que, o que treina e o que faz" e
+  no "Passo a passo", cada exercício mostra um recorte do corpo com a
+  região do músculo principal em destaque e a dos auxiliares mais
+  clara. Exercícios criados por você usam o grupo escolhido.
+- Número dos treinos (A, B, C...) sem cor metálica: aquarela suave com
+  efeito de vidro, no histórico, no "Último treino", nas abas e no
+  assistente. A barra fina do dia, no topo do app e dos cartões, continua
+  como estava.
+- Conferência de todas as imagens de movimento. Os 230 exercícios foram
+  cruzados com os 454 arquivos: 227 têm imagem de 2 quadros (início e
+  fim), 3 usam só a figura desenhada (burpee, ponte de pescoço e
+  natação) e nenhum arquivo está sobrando. Cada par de quadros foi
+  conferido contra o nome do exercício. Correções:
+  - Corrida ao ar livre mostrava uma esteira. Agora usa duas fotos de
+    corrida de verdade, ao ar livre.
+  - Remada supinada com barra: a foto da fonte tem os dois quadros
+    idênticos (não mostra o movimento). O "Passo a passo" passou a
+    mostrar um quadro só, "Posição inicial", e a figura desenhada.
+  Diferenças que ficaram (o movimento é o certo, o equipamento da foto
+  não): Hip thrust na máquina mostra hip thrust com barra, Leg press
+  unilateral mostra as duas pernas, Assault bike e Bike HIIT mostram a
+  bicicleta ergométrica comum, e Flexão, Extensão e Isometria de
+  pescoço dividem a mesma foto (frente e costas da cabeça).
+
+========================================
+NOVIDADES DA VERSÃO ANTERIOR (iron-v24)
 ========================================
 Esta versão é só de segurança. Nada muda no que você vê e usa, a não
 ser o detalhe do apóstrofo descrito abaixo.
