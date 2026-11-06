@@ -1,10 +1,66 @@
 IRON · Treino PPL — Pacote do app (PWA)
 
 ========================================
-NOVIDADES DESTA VERSÃO (iron-v25)
+NOVIDADES DESTA VERSÃO (iron-v26)
 ========================================
-Esta entrega inclui a v24 (segurança), que ainda não tinha sido
-publicada. As novidades da v24 estão logo abaixo.
+- Botão do aquecimento mais minimalista. Sem ícone e sem emoji: só a
+  palavra "Aquecimento" e uma seta fina, numa cápsula de vidro fosco no
+  estilo do iPhone (desfoque do fundo, brilho fino na borda e sombra
+  suave), no tema claro e no escuro. Continua abrindo e fechando as
+  séries leves e continua aberto enquanto você marca as séries.
+- 50 exercícios novos de abdômen (o grupo Abdômen foi de 48 para 98).
+  Todos com passo a passo de 4 etapas, dica, erro comum, descrição,
+  músculos, 3 alternativas, vídeo e texto em português e em inglês.
+  - Flexão do tronco: abdominal com braços estendidos, abdominal
+    pullover com halter, abdominal sapo (frog sit-up), abdominal em pé
+    na polia com corda.
+  - Parte inferior: abdominal inverso na polia, abdominal inverso
+    suspenso (TRX), joelhos ao peito na bola suíça, flutter kicks,
+    elevação de joelhos na barra, toes to bar.
+  - Oblíquos e rotação: elevação de joelhos oblíqua na barra, limpador
+    de para-brisa na barra e no chão, canivete lateral, levantamento
+    diagonal na polia, abdominal oblíquo em pé, prancha lateral com
+    queda de quadril, prancha lateral com rotação, prancha Copenhagen,
+    prancha com joelho ao cotovelo, prancha com giro de quadril,
+    slam lateral com medicine ball.
+  - Estabilidade e anti-rotação: dragon flag, hollow hold, hollow
+    rock, barquinho (boat hold), L-sit, prancha com toque no ombro,
+    prancha com elevação de perna, prancha com puxada de peso, prancha
+    com peso, prancha alta, prancha do urso (bear hold), bird dog,
+    rollout na bola suíça, stir the pot na bola suíça, caminhada com
+    peso de um lado (suitcase carry).
+  - Dinâmicos e estilo burpee: burpee sem salto, burpee com flexão,
+    burpee com salto grupado, burpee com escalador, burpee com salto
+    à frente, sprawl, devil press, rastejar de urso (bear crawl),
+    prancha com polichinelo, prancha sobe e desce, escalador cruzado,
+    flexão com prancha lateral, inchworm com flexão. O burpee comum
+    que já existia continua no grupo Funcional.
+  Observações:
+  - "Estilo burp" foi entendido como estilo burpee. Se era outra coisa,
+    me diga.
+  - Os dinâmicos (burpees, sprawl, devil press, bear crawl, pranchas
+    com movimento, inchworm e o slam com medicine ball) ficam no grupo
+    Abdômen mas contam calorias como exercício funcional (mais
+    intenso). Os demais contam como core.
+  - Imagem de movimento: 8 dos 50 têm foto de 2 quadros. 26 usam a
+    figura desenhada mais próxima (prancha, elevação de pernas,
+    burpee, escalador, etc.). 16 usam o ícone genérico, porque não há
+    foto confiável nem figura que mostre o movimento certo. Todos têm a
+    imagem da região do músculo no "Por que" e no "Passo a passo".
+  - Os links de vídeo foram escolhidos por busca no YouTube e
+    conferidos pelo título e canal. Não assisti a cada um.
+  - Os planos gerados e os treinos rápidos não mudam: os exercícios
+    novos só aparecem ao adicionar, trocar ou pela busca.
+  - Na importação de CSV, "Hanging Knee Raise" agora vai para o novo
+    exercício de elevação de joelhos na barra (antes ia para a
+    elevação de pernas). Entraram também os nomes em inglês de toes to
+    bar, hollow hold, L-sit, bird dog, bear crawl, devil press e outros.
+
+========================================
+NOVIDADES DA VERSÃO ANTERIOR (iron-v25)
+========================================
+Esta entrega incluiu a v24 (segurança), que na época ainda não tinha
+sido publicada. As novidades da v24 estão logo abaixo.
 
 - Aquecimento escondido. Em cada exercício composto, o aquecimento
   agora fica atrás de um botão pequeno de vidro, "Aquecimento", que
