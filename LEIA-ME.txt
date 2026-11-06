@@ -5,8 +5,10 @@ NOVIDADES DESTA VERSÃO (iron-v26)
 ========================================
 - Botão do aquecimento mais minimalista. Sem ícone e sem emoji: só a
   palavra "Aquecimento" e uma seta fina, numa cápsula de vidro fosco no
-  estilo do iPhone (desfoque do fundo, brilho fino na borda e sombra
-  suave), no tema claro e no escuro. Continua abrindo e fechando as
+  estilo do iPhone (desfoque do fundo e brilho fino na borda, sem
+  sombra), no tema claro e no escuro. Discreto: 26px de altura, texto de
+  12px e fundo quase transparente, que fica um pouco mais forte só
+  quando está aberto. Continua abrindo e fechando as
   séries leves e continua aberto enquanto você marca as séries.
   Espaçamento refeito: o botão e o painel agora seguem a mesma margem
   de 14px dos outros blocos do cartão (antes encostavam na borda), com
