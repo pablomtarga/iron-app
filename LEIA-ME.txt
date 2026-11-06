@@ -8,6 +8,12 @@ NOVIDADES DESTA VERSÃO (iron-v26)
   estilo do iPhone (desfoque do fundo, brilho fino na borda e sombra
   suave), no tema claro e no escuro. Continua abrindo e fechando as
   séries leves e continua aberto enquanto você marca as séries.
+  Espaçamento refeito: o botão e o painel agora seguem a mesma margem
+  de 14px dos outros blocos do cartão (antes encostavam na borda), com
+  folga igual entre peso, botão, painel e lista de séries. O painel
+  ganhou cantos e chips no mesmo padrão dos demais, o toque no botão
+  tem área de 44px mesmo com o botão pequeno, e abrir e fechar tem uma
+  animação curta e suave que pode ser interrompida no meio.
 - 50 exercícios novos de abdômen (o grupo Abdômen foi de 48 para 98).
   Todos com passo a passo de 4 etapas, dica, erro comum, descrição,
   músculos, 3 alternativas, vídeo e texto em português e em inglês.
