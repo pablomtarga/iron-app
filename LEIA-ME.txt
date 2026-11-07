@@ -1,7 +1,52 @@
 IRON · Treino PPL — Pacote do app (PWA)
 
 ========================================
-NOVIDADES DESTA VERSÃO (iron-v27)
+NOVIDADES DESTA VERSÃO (iron-v28)
+========================================
+- Mapa dos músculos novo, colorido e mais detalhado. A figura virou um
+  atlas anatômico em frente e costas, com 33 regiões desenhadas com
+  fibras e sombras (peitoral superior e inferior, serrátil, oblíquos,
+  quatro blocos do abdômen, três cabeças do deltoide, bíceps,
+  braquial, tríceps, antebraços, dorsal, trapézio, romboides, manguito,
+  lombar, glúteos máximo e médio, quadríceps, adutores, posterior,
+  panturrilha e tibial). Cada músculo tem a sua cor, como numa carta de
+  anatomia. O músculo principal do exercício aparece em cor cheia com
+  contorno escuro (e com brilho na tela ampliada), os auxiliares ficam
+  um pouco mais suaves e o resto do corpo fica em tom claro. Funciona no
+  tema claro e no escuro.
+- Toque no mapa, na ficha ou no passo a passo do exercício, e ele abre
+  em tela ampliada: frente e costas lado a lado, com a legenda
+  Principal e Auxiliares e uma bolinha na cor de cada músculo. Fecha
+  no X, tocando fora ou com Esc, e o Esc fecha só a tela ampliada.
+- O mapa pequeno agora mostra frente e costas quando algum músculo
+  auxiliar fica do outro lado do corpo. Antes ele só mostrava a frente
+  e o tríceps do Chest Press, por exemplo, não aparecia.
+- O mapa do equilíbrio muscular continua com as cores de estado (em
+  dia, baixo, atrasado, alto): só mudou o desenho da figura.
+- Elevação Lateral na Máquina: as duas imagens eram fotos de outro
+  equipamento e foram trocadas por uma ilustração própria do IRON de
+  uma máquina sentada (apoio no peito, braços abrindo ao lado). Não
+  achei foto ou GIF dessa máquina com licença livre, por isso o
+  desenho é original e o crédito da imagem diz isso.
+- Movimento mais suave em 189 exercícios: o "Passo a passo" agora abre
+  numa animação em 24 quadros por segundo (antes eram 2 fotos que
+  trocavam) e depois vêm as fotos de início e de fim. Os quadros
+  intermediários foram criados por interpolação (modelo RIFE, licença
+  MIT, rodado só aqui, nunca no seu aparelho). Ocupa cerca de 10 MB a
+  mais no total, baixados só quando você abre o exercício. Com
+  "reduzir movimento" ligado no aparelho, a animação não toca e o
+  passo a passo volta ao formato anterior.
+- 46 exercícios continuam só com as duas fotos, de propósito: nesses a
+  câmera muda de ângulo entre o início e o fim, as duas fotos são
+  iguais, o exercício é parado (isométrico) ou a interpolação deixava
+  fantasmas (anilha ou corpo borrado no meio do movimento, como no
+  agachamento com barra e no hip thrust). Nos 189 animados pode sobrar
+  alguma imperfeição pequena em movimentos rápidos.
+- Limites: testado no Chromium; no iPhone com Modo de Pouca Energia o
+  sistema pode reduzir a taxa de quadros das animações.
+
+========================================
+NOVIDADES DA VERSÃO ANTERIOR (iron-v27)
 ========================================
 - Progresso: o mapa dos últimos 12 meses (Atividade no ano) foi trocado
   por "Atividade por mês". Cada mês é um calendário (segunda a domingo)
