@@ -1,7 +1,23 @@
 IRON · Treino PPL — Pacote do app (PWA)
 
 ========================================
-NOVIDADES DESTA VERSÃO (iron-v26)
+NOVIDADES DESTA VERSÃO (iron-v27)
+========================================
+- Progresso: o mapa dos últimos 12 meses (Atividade no ano) foi trocado
+  por "Atividade por mês". Cada mês é um calendário (segunda a domingo)
+  com o total de treinos do mês no topo, por exemplo "Novembro de 2026,
+  6 treinos". Os dias treinados ficam em amarelo, o dia com 2 ou mais
+  treinos tem um pontinho, hoje tem um contorno e os dias que ainda não
+  chegaram ficam apagados. Abre no mês atual e você arrasta para o lado
+  para ver Outubro e os meses anteriores, um mês por arrasto. Tocar num
+  dia treinado abre o treino, igual aos dias da semana. A lista vai do
+  mês do seu primeiro treino até o atual (mínimo de 6 meses, máximo de
+  36). A posição fica guardada quando a tela é redesenhada.
+- O total "dias treinados nos últimos 12 meses" e a legenda menos e mais
+  saíram junto com o mapa antigo.
+
+========================================
+NOVIDADES DA VERSÃO ANTERIOR (iron-v26)
 ========================================
 - Botão do aquecimento mais minimalista. Sem ícone e sem emoji: só a
   palavra "Aquecimento" e uma seta fina, numa cápsula de vidro fosco no

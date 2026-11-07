@@ -317,16 +317,21 @@ html[data-theme=dark] .datebox input{color-scheme:dark}
 .day .ball.today{box-shadow:inset 0 0 0 2px var(--accent)}
 .day small{display:block;font-size:11px;color:var(--label3);margin-top:4px}
 .wkfoot{margin:10px 14px 0;font-size:12px;color:var(--label3);text-align:center}
-.heatgrid{display:grid;grid-template-rows:repeat(7,1fr);grid-auto-flow:column;grid-auto-columns:11px;gap:3px;overflow-x:auto;padding:2px 14px;scrollbar-width:none}
-.heatgrid::-webkit-scrollbar{display:none}
-.hcell{width:11px;height:11px;border-radius:3px;background:var(--sep)}
-.hcell.empty{background:transparent;padding:0;font-size:0;line-height:0}
-.hcell.l1{background:var(--accent);opacity:.35}
-.hcell.l2{background:var(--accent);opacity:.55}
-.hcell.l3{background:var(--accent);opacity:.78}
-.hcell.l4{background:var(--accent);opacity:1}
-.hleg{display:inline-flex;align-items:center;gap:2px;vertical-align:middle}
-.hleg .hcell{display:inline-block;width:9px;height:9px}
+.mpage{scroll-snap-stop:always}
+.mhead{display:flex;align-items:baseline;justify-content:space-between;margin:0 2px 10px}
+.mhead b{font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--label)}
+.mhead span{font-size:13px;color:var(--label2);font-variant-numeric:tabular-nums}
+.mhead span i{font-style:normal;font-size:17px;font-weight:700;color:var(--accent-text);margin-right:3px}
+.mcal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.mwd{font-size:11px;color:var(--label3);text-align:center;padding-bottom:2px}
+.mday{position:relative;display:flex;align-items:center;justify-content:center;height:32px;padding:0;border:none;border-radius:9px;
+  background:var(--fill);font:inherit;font-size:12px;font-weight:500;color:var(--label3);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.mday.out{background:transparent}
+.mday.fut{opacity:.45}
+.mday.hit{background:var(--accent);color:var(--accent-ink);font-weight:700;cursor:pointer}
+.mday.hit:active{transform:scale(.94)}
+.mday.multi::after{content:"";position:absolute;bottom:4px;width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.6}
+.mday.today{box-shadow:inset 0 0 0 2px var(--accent)}
 .sectit{font-size:20px;font-weight:700;letter-spacing:-.02em;margin:6px 2px 10px;
   display:flex;justify-content:space-between;align-items:center}
 .sectit button{background:var(--fill);border:none;color:var(--label2);border-radius:999px;
@@ -2626,7 +2631,7 @@ const I18N={
    meusexercicios:'Meus exercícios',excluirexcustom:'Excluir exercício',exercicioexcluido:'Exercício excluído',personalizado:'Personalizado',
    recordepessoal:'Recorde pessoal',novopr:'🏆 Novo recorde',forcaerecordes:'Força & Recordes',rm1est:'1RM estimado',
    semrecordes:'Complete treinos pra ver seus recordes de carga aqui.',melhorcarga:'Melhor carga',
-   atividadeanual:'Atividade no ano',menosatividade:'menos',maisatividade:'mais',diastreinados:'dias treinados nos últimos 12 meses',
+   atividademes:'Atividade por mês',mesfootxt:'Arraste para o lado para ver os meses anteriores',
    },
  en:{bora:"Let's go",trein:'Workout',prog:'Progress',diadotreino:'Workout day',ultimotreino:'Last workout',
    completo:'✓ Complete',parcial:'Partial',series:'sets',progressodotreino:'Workout progress',
@@ -2736,7 +2741,7 @@ const I18N={
    meusexercicios:'My exercises',excluirexcustom:'Delete exercise',exercicioexcluido:'Exercise deleted',personalizado:'Custom',
    recordepessoal:'Personal record',novopr:'🏆 New record',forcaerecordes:'Strength & Records',rm1est:'Estimated 1RM',
    semrecordes:'Complete workouts to see your lift records here.',melhorcarga:'Best lift',
-   atividadeanual:'Activity this year',menosatividade:'less',maisatividade:'more',diastreinados:'days trained in the last 12 months',
+   atividademes:'Activity by month',mesfootxt:'Swipe sideways to see earlier months',
    }
 };
 
@@ -4497,7 +4502,7 @@ function renderLastCard(){
 }
 let LASTOPEN=load('iron_lastopen',false);
 let WEEKOFF=0;
-let WKSCROLL=null;
+let WKSCROLL=null,MONSCROLL=null;
 function toggleLast(btn){
   LASTOPEN=!LASTOPEN;save('iron_lastopen',LASTOPEN);
   btn.classList.toggle('op',LASTOPEN);
@@ -5598,9 +5603,9 @@ function renderProgress(){
       <div class="wkfoot">${t('wkfootxt')}</div>
     </div>
     <div class="week">
-      <h4>${t('atividadeanual')}</h4>
-      ${heatmapHtml()}
-      <div class="wkfoot">${trainedDaysLast365()} ${t('diastreinados')} · <span class="hleg">${t('menosatividade')} <i class="hcell l0"></i><i class="hcell l1"></i><i class="hcell l2"></i><i class="hcell l3"></i><i class="hcell l4"></i> ${t('maisatividade')}</span></div>
+      <h4>${t('atividademes')}</h4>
+      <div class="wkscroll" id="monscroll" onscroll="MONSCROLL=this.scrollLeft">${monthPagesHtml(wd)}</div>
+      <div class="wkfoot">${t('mesfootxt')}</div>
     </div>
     <div class="week">
       <h4>${t('forcaerecordes')}</h4>
@@ -5639,33 +5644,34 @@ function renderProgress(){
   `;
   const ws=$('wkscroll');
   if(ws)requestAnimationFrame(()=>{ws.scrollLeft=(WKSCROLL!=null?WKSCROLL:ws.scrollWidth)});
-  const hg=document.querySelector('.heatgrid');
-  if(hg)requestAnimationFrame(()=>{hg.scrollLeft=hg.scrollWidth});
+  const ms=$('monscroll');
+  if(ms)requestAnimationFrame(()=>{ms.scrollLeft=(MONSCROLL!=null?MONSCROLL:ms.scrollWidth)});
 }
-function trainedDaysLast365(){
-  const cutoff=new Date(todayISO()+'T00:00');cutoff.setDate(cutoff.getDate()-364);
-  const set=new Set();
-  HISTORY.forEach(h=>{if(new Date(h.date+'T00:00')>=cutoff)set.add(h.date)});
-  return set.size;
-}
-function heatmapHtml(){
-  const days=365;
-  const end=new Date(todayISO()+'T00:00');
-  const counts={};
-  HISTORY.forEach(h=>{counts[h.date]=(counts[h.date]||0)+1});
-  let maxC=1;Object.values(counts).forEach(c=>{if(c>maxC)maxC=c});
-  const cells=[];
-  for(let i=days-1;i>=0;i--){
-    const d=new Date(end);d.setDate(d.getDate()-i);
-    const iso=isoOf(d);
-    const c=counts[iso]||0;
-    let lvl=0;
-    if(c>0)lvl=c>=maxC?4:Math.max(1,Math.ceil(c/maxC*3));
-    cells.push({iso,c,lvl});
+function monthPagesHtml(wd){
+  const cur=new Date(todayISO()+'T00:00');
+  const today=todayISO();
+  const counts={};let minD=null;
+  HISTORY.forEach(h=>{if(!h.date)return;counts[h.date]=(counts[h.date]||0)+1;if(!minD||h.date<minD)minD=h.date});
+  let n=6;
+  if(minD){const m0=new Date(minD+'T00:00');n=Math.max(6,Math.min(36,(cur.getFullYear()-m0.getFullYear())*12+cur.getMonth()-m0.getMonth()+1))}
+  let html='';
+  for(let k=n-1;k>=0;k--){
+    const m=new Date(cur.getFullYear(),cur.getMonth()-k,1);
+    const y=m.getFullYear(),mo=m.getMonth();
+    const dim=new Date(y,mo+1,0).getDate();
+    const lead=(new Date(y,mo,1).getDay()+6)%7;
+    let total=0,cells=wd.map(x=>`<div class="mwd">${x}</div>`).join('');
+    for(let i=0;i<lead;i++)cells+='<div class="mday out"></div>';
+    for(let d=1;d<=dim;d++){
+      const iso=isoOf(new Date(y,mo,d));
+      const c=counts[iso]||0;total+=c;
+      if(c){cells+=`<button class="mday hit${c>1?' multi':''}${iso===today?' today':''}" aria-label="${dtBR(iso)}: ${c} ${c===1?t('umtreino'):t('doistreinos')}" onclick="openDay('${iso}')">${d}</button>`}
+      else cells+=`<div class="mday${iso===today?' today':''}${iso>today?' fut':''}">${d}</div>`;
+    }
+    let nm=m.toLocaleDateString(localeOf(),{month:'long',year:'numeric'});nm=nm.charAt(0).toUpperCase()+nm.slice(1);
+    html+=`<div class="wkpage mpage" role="group" aria-label="${nm}"><div class="mhead"><b>${nm}</b><span><i>${total}</i>${total===1?t('umtreino'):t('doistreinos')}</span></div><div class="mcal">${cells}</div></div>`;
   }
-  const firstDow=(new Date(cells[0].iso+'T00:00').getDay()+6)%7;
-  const padded=Array(firstDow).fill(null).concat(cells);
-  return `<div class="heatgrid">${padded.map(c=>c?`<div class="hcell l${c.lvl}" title="${dtBR(c.iso)}: ${c.c} ${c.c===1?t('umtreino'):t('doistreinos')}"></div>`:`<div class="hcell empty"></div>`).join('')}</div>`;
+  return html;
 }
 function bestLiftsMap(){
   const m={};
@@ -8232,7 +8238,7 @@ async function exportPDF(){
 }
 
 /* =================== INIT =================== */
-const APP_VERSION='iron-v26';
+const APP_VERSION='iron-v27';
 /* atualização automática: confere versão nova ao abrir, ao voltar pro app e a cada 1h; aplica sozinha
    (se houver treino em andamento, espera o app ir pro segundo plano pra não interromper) */
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){
