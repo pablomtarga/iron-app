@@ -56,6 +56,14 @@ Design e acessibilidade
   em duas linhas.
 - Espaçamento interno dos cartões unificado em 12 x 14 px.
 
+Imagens (v30.1)
+- Elevação Lateral na Máquina: o desenho foi trocado por duas fotos
+  realistas no padrão dos outros exercícios (início e fim, academia de
+  verdade, só a pessoa fazendo o movimento). Geradas por IA (Figma,
+  modelo gpt-image-2.5), e o crédito embaixo diz isso. Sem animação:
+  o passo a passo mostra as duas fotos, como nos outros 46 exercícios
+  sem animação. Cache do app subiu para iron-v30.1.
+
 Pronto para virar app
 - Botão "Excluir conta" (exigência da App Store): apaga a conta e os
   treinos da nuvem. Pede a senha da conta numa tela própria, com botão

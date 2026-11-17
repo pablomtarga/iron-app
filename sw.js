@@ -1,4 +1,4 @@
-const CACHE='iron-v30';
+const CACHE='iron-v30.1';
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./','./index.html','./manifest.json','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./apple-touch-icon.png','./privacy.html'])));
   self.skipWaiting();
