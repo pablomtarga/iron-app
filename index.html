@@ -1142,6 +1142,7 @@ html:not([data-theme=dark]) .anat-fig,html:not([data-theme=dark]) .bmtile{border
   .tab{flex-basis:60px}
 }
 .modal .mfoot .danger{color:var(--red)}
+.modal .mbtn.danger{background:var(--red);color:#fff;font-weight:600}
 .modal .mfoot a{color:var(--accent-text);font-size:14px;text-decoration:none}
 .ob-nav .ob-btn{white-space:nowrap;font-size:15px;padding-left:12px;padding-right:12px}
 @media(max-width:359px){
@@ -3019,6 +3020,9 @@ Object.assign(I18N.en,{nuvemfalhou:"Couldn't load your data from the cloud. Chec
 /* v30 · exclusão de conta (exigida pela App Store para apps com cadastro) e link da política de privacidade */
 Object.assign(I18N['pt-BR'],{excluirconta:'Excluir conta',excluircontaconf:'Excluir sua conta e todos os treinos salvos na nuvem?\n\nIsso não tem volta. Os dados deste aparelho também são apagados.',excluircontaconf2:'Última confirmação: digite EXCLUIR para apagar a conta.',excluircontafalhou:'Não consegui excluir a conta agora. Confira a internet e tente de novo.',privacidade:'Política de privacidade'});
 Object.assign(I18N.en,{excluirconta:'Delete account',excluircontaconf:'Delete your account and every workout saved in the cloud?\n\nThis cannot be undone. Data on this device is erased too.',excluircontaconf2:'Final check: type DELETE to erase the account.',excluircontafalhou:"Couldn't delete the account right now. Check your connection and try again.",privacidade:'Privacy policy'});
+/* v30 · textos da confirmação de exclusão com senha */
+Object.assign(I18N['pt-BR'],{senha:'Senha',cancelar:'Cancelar',senhaobrig:'Digite sua senha para confirmar.',senhaerrada:'Senha incorreta. Nada foi apagado.'});
+Object.assign(I18N.en,{senha:'Password',cancelar:'Cancel',senhaobrig:'Type your password to confirm.',senhaerrada:'Wrong password. Nothing was deleted.'});
 Object.assign(I18N['pt-BR'],{qk_myprog:'Meu treino',qk_brand:'Treino rápido'});
 Object.assign(I18N.en,{qk_myprog:'My program',qk_brand:'Quick workout'});
 Object.assign(I18N['pt-BR'],{"spx_title": "Treino Especial", "spx_lead": "Três trilhas montadas a partir da evidência que foi possível conferir. Cada exercício vem com o porquê, o grau de certeza e a fonte. Seus treinos A, B e C não mudam.", "spx_panellead": "Montados a partir da evidência mais recente que foi possível conferir, com o porquê de cada escolha. Independentes dos seus treinos A, B e C.", "spx_trail": "Trilha", "spx_time": "Tempo disponível", "spx_ver": "Qual treino", "spx_sug": "sugerido", "spx_where": "Onde você treina", "spx_gym": "Academia", "spx_body": "Em casa (corpo, barra e elástico)", "spx_see": "Ver treino", "spx_start": "Começar este treino", "spx_howto": "Como fazer o treino", "spx_week": "Séries por semana (A + B)", "spx_weekhint": "Contagem aproximada pelo grupo principal de cada exercício. Referência do ACSM para hipertrofia: cerca de 10 séries por músculo por semana.", "spx_weekmin": "Este treino não chega a 10 séries por músculo. Tudo bem: o ACSM diz que qualquer treino de força vence nenhum.", "spx_sources": "Fontes e grau de certeza", "spx_srclead": "O que cada fonte diz, o que foi lido de verdade e o grau de certeza que isso dá.", "spx_grades": "Como ler os graus", "spx_gradestxt": "Forte: posição oficial ou diretriz. Moderado: metanálise (preprints incluídos). Fraco: estudo observacional, resumo de segunda mão ou efeito incerto. Escolha do app: decisão de montagem sem teste direto.", "spx_notver": "O que não foi verificado", "spx_notvertxt": "As revisões de dose mínima de força e de HIIT contra contínuo não foram verificadas (o acesso ao PubMed/PMC não foi liberado), então o app não usa números delas. A divisão dos tiros do bloco de fôlego e a escolha dos exercícios em cada papel são decisões de montagem, sem teste direto.", "spx_my": "Escolha do app", "spx_cont": "Continuar o treino especial de hoje", "spx_replace": "Já há um treino especial de hoje com séries marcadas. Substituir por este?", "spx_pronto": "Treino especial pronto", "spx_redo": "Novo treino especial", "spx_remove": "Remover este treino", "spx_removeconf": "Este treino especial tem séries marcadas. Remover mesmo assim?", "spx_removido": "Treino especial removido", "kcalaprox": "Estimativa aproximada: MET do exercício x seu peso x tempo da série. Não é uma medição."});
@@ -7422,6 +7426,18 @@ function renderAcct(){
       ${shLink()}<div class="mfoot"><button onclick="closeAcct();openWizard(false)">${t('paginainicial')}</button></div>`;
     return;
   }
+  if(authMode==='del'){
+    m.innerHTML=`<h3>${t('excluirconta')}</h3>
+      <div class="sub">${t('excluircontaconf')}</div>
+      <input type="password" id="dPass" placeholder="${t('senha')}" autocomplete="current-password">
+      <div class="merr" id="dErr"></div>
+      <div class="mrow">
+        <button class="mbtn" onclick="authMode='in';renderAcct()">${t('cancelar')}</button>
+        <button class="mbtn danger" id="dGo" onclick="doDeleteAccount()">${t('excluirconta')}</button>
+      </div>`;
+    setTimeout(()=>{const i=$('dPass');if(i)i.focus()},50);
+    return;
+  }
   if(authMode==='newpass'){
     m.innerHTML=`<h3>${t('criarnovasenha')}</h3>
       <div class="sub">${t('chegouporlink')}</div>
@@ -7443,7 +7459,7 @@ function renderAcct(){
       </div>
       <div class="mfoot"><button onclick="authMode='newpass';renderAcct()">${t('trocarsenha')}</button></div>
       ${shLink()}<div class="mfoot"><button onclick="closeAcct();openWizard(false)">${t('paginainicial')}</button></div>
-      <div class="mfoot"><a href="privacy.html" target="_blank" rel="noopener">${t('privacidade')}</a> · <button class="danger" onclick="doDeleteAccount()">${t('excluirconta')}</button></div>`;
+      <div class="mfoot"><a href="privacy.html" target="_blank" rel="noopener">${t('privacidade')}</a> · <button class="danger" onclick="authMode='del';renderAcct()">${t('excluirconta')}</button></div>`;
     return;
   }
   if(authMode==='forgot'){
@@ -7561,11 +7577,23 @@ async function doNewPass(){
 /* v30 · apaga a conta no Supabase (função delete_my_account do supabase.sql; o ON DELETE CASCADE leva junto os treinos)
    e depois limpa este aparelho. Só limpa o aparelho se a nuvem confirmar a exclusão. */
 async function doDeleteAccount(){
+  /* v30: só apaga depois de a senha ser conferida de novo (signInWithPassword) e de o usuário
+     clicar no botão vermelho de uma tela própria. Sem senha certa, nada é apagado. */
   if(!sbUser||!sb)return;
-  if(!confirm(t('excluircontaconf')))return;
-  const w=(prompt(t('excluircontaconf2'))||'').trim().toUpperCase();
-  if(w!=='EXCLUIR'&&w!=='DELETE')return;
-  try{const {error}=await sb.rpc('delete_my_account');if(error)throw error}catch(e){toast(t('excluircontafalhou'));return}
+  const err=$('dErr'),btn=$('dGo'),pass=($('dPass')||{}).value||'';
+  if(err)err.textContent='';
+  if(!pass){if(err)err.textContent=t('senhaobrig');return}
+  if(btn)btn.textContent='...';
+  try{
+    const {error:authErr2}=await sb.auth.signInWithPassword({email:sbUser.email,password:pass});
+    if(authErr2){if(err)err.textContent=t('senhaerrada');if(btn)btn.textContent=t('excluirconta');return}
+    const {error}=await sb.rpc('delete_my_account');
+    if(error)throw error;
+  }catch(e){
+    if(err)err.textContent=t('excluircontafalhou');
+    if(btn)btn.textContent=t('excluirconta');
+    return;
+  }
   try{await sb.auth.signOut()}catch(e){}
   sbUser=null;PULLED=false;
   try{Object.keys(localStorage).filter(k=>k.indexOf('iron_')===0&&k!=='iron_lang').forEach(k=>localStorage.removeItem(k))}catch(e){}

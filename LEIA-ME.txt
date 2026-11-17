@@ -56,7 +56,8 @@ Design e acessibilidade
 
 Pronto para virar app
 - Botão "Excluir conta" (exigência da App Store): apaga a conta e os
-  treinos da nuvem. Precisa rodar o bloco v30 do supabase.sql.
+  treinos da nuvem. Pede a senha da conta numa tela própria, com botão
+  vermelho e Cancelar. Sem a senha certa, nada é apagado.
 - Página de política de privacidade (privacy.html), em português e
   inglês, com link dentro do app.
 - manifest.json completo (id, descrição, idioma, categorias,
