@@ -50,6 +50,8 @@ Design e acessibilidade
   cards e do relógio (em tela larga ela passava para fora).
   O traço cinza de baixo da barra das abas também foi recuado na
   mesma margem.
+  O ícone do relógio agora fica exatamente no centro da caixa; com o
+  descanso rodando, a caixa cresce para caber o tempo.
 - Botões "Gerar meu treino" e "Concluir e treinar" não quebram mais
   em duas linhas.
 - Espaçamento interno dos cartões unificado em 12 x 14 px.
