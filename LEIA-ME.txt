@@ -46,6 +46,10 @@ Design e acessibilidade
   altura e os mesmos cantos da barra das abas (era menor e ficava
   solto). Em telas pequenas, com o descanso rodando, ele mostra só o
   tempo, para não cortar o "Legs". O % do treino fica colado na letra.
+  A linha de progresso sob as abas agora termina na mesma margem dos
+  cards e do relógio (em tela larga ela passava para fora).
+  O traço cinza de baixo da barra das abas também foi recuado na
+  mesma margem.
 - Botões "Gerar meu treino" e "Concluir e treinar" não quebram mais
   em duas linhas.
 - Espaçamento interno dos cartões unificado em 12 x 14 px.

@@ -1129,6 +1129,11 @@ html:not([data-theme=dark]) .anat-fig,html:not([data-theme=dark]) .bmtile{border
 .tmr .info small{display:block;font-size:12px}
 /* botões do rodapé do onboarding quebravam em 2 linhas */
 /* botão do relógio ao lado das abas: mesma altura e raio da barra A/B/C (era 40px ao lado de 53px) */
+/* a linha de progresso sob as abas segue a mesma margem dos cards (antes passava 16px para fora de cada lado) */
+.tabsbar .dayhair{left:var(--sp);right:var(--sp)}
+/* a linha cinza de baixo da barra também passava 16px para fora dos cards: vira um traço recuado na mesma margem */
+.tabsbar{border-bottom:none}
+.tabsbar::after{content:"";display:block;position:absolute;left:var(--sp);right:var(--sp);bottom:0;height:.5px;background:rgba(84,84,88,.55);pointer-events:none}
 .tabsbar .tmini{align-self:stretch;height:auto;min-width:53px;border-radius:15px;padding:0 14px;justify-content:center;gap:6px}
 /* % do treino colado na letra, e não solto no canto da aba larga */
 .tab .tpct{right:auto;left:calc(50% + 13px);top:5px}
