@@ -56,6 +56,21 @@ Design e acessibilidade
   em duas linhas.
 - Espaçamento interno dos cartões unificado em 12 x 14 px.
 
+Privacidade e saúde (v30.2)
+- Política de privacidade refeita para o GDPR (Europa) e a LGPD
+  (Brasil): quem é o responsável, o que é guardado e por quê, base
+  legal, onde ficam os dados (Supabase em Frankfurt, UE), por quanto
+  tempo, os direitos (baixar, corrigir, apagar, reclamar na autoridade)
+  e idade mínima de 16 anos.
+- Criar conta agora pede para marcar a autorização de guardar treinos
+  e peso na nuvem (peso e treino podem contar como dado de saúde).
+  Sem a caixa marcada, nada sai do aparelho. Entrar numa conta que já
+  existe não pede.
+- Aviso de saúde na tela de boas-vindas e uma linha curta na ficha de
+  cada exercício: o IRON não substitui um profissional de educação
+  física; com lesão ou dor, procure um.
+- Cache do app subiu para iron-v30.2.
+
 Imagens (v30.1)
 - Elevação Lateral na Máquina: o desenho foi trocado por duas fotos
   realistas no padrão dos outros exercícios (início e fim, academia de

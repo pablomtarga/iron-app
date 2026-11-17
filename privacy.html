@@ -18,9 +18,10 @@ section h2:first-child{margin-top:0}
 p,li{color:var(--label2);margin:0 0 8px}
 section{background:var(--surface);border-radius:14px;padding:16px;margin:16px 0}
 .lang{display:flex;gap:8px;margin:16px 0}
-.lang a{color:var(--accent-text);text-decoration:none;font-weight:600}
+a{color:var(--accent-text);font-weight:600;text-decoration:none}
 small{color:var(--label2)}
 ul{padding-left:20px;margin:0}
+.warn{border-left:3px solid var(--accent);padding-left:12px}
 </style>
 </head>
 <body>
@@ -30,65 +31,95 @@ ul{padding-left:20px;margin:0}
 <div class="lang"><a href="#pt">Português</a> · <a href="#en">English</a></div>
 
 <section id="pt">
-<h2>Resumo</h2>
-<p>O IRON funciona sem conta. Sem conta, todos os seus treinos ficam só no seu aparelho.</p>
+<h2>Saúde: leia antes de treinar</h2>
+<p class="warn">O IRON dá orientação geral e educativa sobre treino. Ele <b>não substitui um profissional de educação física, um médico ou um fisioterapeuta</b>. Se você tem lesão, dor, doença, está grávida, voltando de cirurgia ou nunca treinou, procure um profissional antes de começar. Pare o exercício se sentir dor, tontura ou falta de ar. As calorias são estimativas.</p>
 
-<h2>O que fica no aparelho</h2>
+<h2>Quem cuida dos seus dados</h2>
+<p>O IRON é um app gratuito e independente, mantido pelo seu desenvolvedor (conta <b>pablomtarga</b> no GitHub), que é o responsável pelos dados (controlador, no GDPR e na LGPD).</p>
+<p>Contato sobre privacidade: <a href="https://github.com/pablomtarga/iron-app/issues" target="_blank" rel="noopener">abra uma mensagem aqui</a>.</p>
+
+<h2>Sem conta: nada sai do aparelho</h2>
+<p>Seu nome, peso corporal, programa, cargas, séries e histórico ficam só no armazenamento do navegador do seu aparelho. O desenvolvedor não vê esses dados.</p>
+
+<h2>Com conta: o que guardamos e por quê</h2>
 <ul>
-<li>Seu nome (como quer ser chamado), peso corporal, programa de treino, cargas, séries feitas e histórico.</li>
-<li>Esses dados ficam no armazenamento do navegador do aparelho e não saem dele, a não ser que você crie uma conta.</li>
+<li><b>E-mail e senha</b> (a senha é guardada cifrada pelo serviço de login): para você entrar.</li>
+<li><b>Dados de treino e peso corporal</b>: para sincronizar entre aparelhos. Peso e treinos podem ser considerados dados de saúde, por isso só são enviados com o seu consentimento, dado ao marcar a caixa na hora de criar a conta.</li>
+<li>Base legal: seu consentimento e a prestação do serviço que você pediu (GDPR art. 6(1)(a) e (b) e art. 9(2)(a); LGPD art. 7, I e V, e art. 11, I).</li>
 </ul>
 
-<h2>Se você criar uma conta</h2>
+<h2>Onde os dados ficam</h2>
+<p>No Supabase (banco de dados e login), com servidor em Frankfurt, na Alemanha (União Europeia). O Supabase é uma empresa dos EUA e atua como operador, seguindo contrato de proteção de dados.</p>
+
+<h2>Por quanto tempo</h2>
+<p>Enquanto a conta existir. Ao excluir a conta, ela e todos os treinos na nuvem são apagados na hora. Cópias de segurança automáticas do provedor podem levar alguns dias para expirar.</p>
+
+<h2>Seus direitos</h2>
 <ul>
-<li>Guardamos seu e-mail e uma cópia dos dados acima para sincronizar entre aparelhos.</li>
-<li>O serviço usado é o Supabase (banco de dados e login). Cada conta só consegue ler os próprios dados.</li>
-<li>Você pode excluir a conta a qualquer momento no app: ícone de nuvem › Excluir conta. A conta e todos os treinos na nuvem são apagados na hora.</li>
+<li><b>Ver e levar seus dados</b> (acesso e portabilidade): no app, Progresso › Backup baixa tudo num arquivo.</li>
+<li><b>Corrigir</b>: edite treinos, peso e perfil no próprio app.</li>
+<li><b>Apagar e retirar o consentimento</b>: ícone de nuvem › Excluir conta (pede a sua senha).</li>
+<li><b>Reclamar</b>: você pode falar com a autoridade de proteção de dados do seu país, como a Autoriteit Persoonsgegevens (Holanda) ou a ANPD (Brasil).</li>
 </ul>
 
 <h2>O que o IRON não faz</h2>
 <ul>
-<li>Não usa anúncios, rastreadores nem ferramentas de análise.</li>
+<li>Não usa anúncios, rastreadores, cookies de terceiros nem ferramentas de análise.</li>
 <li>Não vende nem compartilha seus dados.</li>
 <li>Não pede localização, contatos, câmera ou microfone.</li>
 </ul>
 
-<h2>Conteúdo de terceiros</h2>
-<p>Fontes e bibliotecas são carregadas de CDNs públicos (Google Fonts, cdnjs, jsDelivr). Os links de vídeo abrem o YouTube, que tem a própria política de privacidade.</p>
+<h2>Serviços de terceiros</h2>
+<p>Ao abrir, o app baixa a biblioteca de login do jsDelivr (CDN). Ao exportar PDF ou planilha, baixa bibliotecas do cdnjs (Cloudflare). Esses serviços recebem o endereço IP do aparelho, como qualquer site. Os links de vídeo abrem o YouTube, que tem a própria política.</p>
 
-<h2>Saúde</h2>
-<p>As orientações de treino e as calorias são estimativas educativas e não substituem um profissional de saúde.</p>
+<h2>Idade</h2>
+<p>O IRON não é destinado a menores de 16 anos. Menores devem usar só com autorização e acompanhamento dos responsáveis.</p>
 </section>
 
 <section id="en">
-<h2>Summary</h2>
-<p>IRON works without an account. Without one, all your workouts stay on your device only.</p>
+<h2>Health: read before training</h2>
+<p class="warn">IRON gives general, educational training guidance. It <b>does not replace a fitness professional, a doctor or a physiotherapist</b>. If you have an injury, pain, an illness, are pregnant, recovering from surgery or have never trained, see a professional before starting. Stop if you feel pain, dizziness or shortness of breath. Calorie numbers are estimates.</p>
 
-<h2>What stays on your device</h2>
+<h2>Who looks after your data</h2>
+<p>IRON is a free, independent app maintained by its developer (<b>pablomtarga</b> on GitHub), who is responsible for the data (controller under the GDPR and the LGPD).</p>
+<p>Privacy contact: <a href="https://github.com/pablomtarga/iron-app/issues" target="_blank" rel="noopener">send a message here</a>.</p>
+
+<h2>Without an account: nothing leaves your device</h2>
+<p>Your name, body weight, program, loads, sets and history stay in your device's browser storage only. The developer cannot see them.</p>
+
+<h2>With an account: what we store and why</h2>
 <ul>
-<li>Your name (how you want to be called), body weight, training program, loads, completed sets and history.</li>
-<li>This data lives in the browser storage on your device and never leaves it unless you create an account.</li>
+<li><b>Email and password</b> (the password is stored hashed by the sign-in service): so you can sign in.</li>
+<li><b>Workout data and body weight</b>: to sync between devices. Weight and workouts may count as health data, so they are only sent with your consent, given by ticking the box when you create the account.</li>
+<li>Legal basis: your consent and providing the service you asked for (GDPR Art. 6(1)(a) and (b) and Art. 9(2)(a); LGPD Art. 7, I and V, and Art. 11, I).</li>
 </ul>
 
-<h2>If you create an account</h2>
+<h2>Where the data is kept</h2>
+<p>On Supabase (database and sign-in), with servers in Frankfurt, Germany (European Union). Supabase is a US company acting as processor under a data processing agreement.</p>
+
+<h2>How long</h2>
+<p>For as long as the account exists. Deleting the account erases it and every workout in the cloud immediately. The provider's automatic backups may take a few days to expire.</p>
+
+<h2>Your rights</h2>
 <ul>
-<li>We store your email and a copy of the data above to sync between devices.</li>
-<li>The service used is Supabase (database and sign-in). Each account can only read its own data.</li>
-<li>You can delete your account at any time in the app: cloud icon › Delete account. The account and every workout in the cloud are erased immediately.</li>
+<li><b>See and take your data</b> (access and portability): in the app, Progress › Backup downloads everything as a file.</li>
+<li><b>Correct it</b>: edit workouts, weight and profile in the app.</li>
+<li><b>Erase it and withdraw consent</b>: cloud icon › Delete account (asks for your password).</li>
+<li><b>Complain</b>: you can contact your country's data protection authority, such as the Autoriteit Persoonsgegevens (Netherlands) or the ANPD (Brazil).</li>
 </ul>
 
 <h2>What IRON does not do</h2>
 <ul>
-<li>No ads, trackers or analytics.</li>
+<li>No ads, trackers, third-party cookies or analytics.</li>
 <li>Does not sell or share your data.</li>
 <li>Does not ask for location, contacts, camera or microphone.</li>
 </ul>
 
-<h2>Third-party content</h2>
-<p>Fonts and libraries load from public CDNs (Google Fonts, cdnjs, jsDelivr). Video links open YouTube, which has its own privacy policy.</p>
+<h2>Third-party services</h2>
+<p>On opening, the app loads the sign-in library from jsDelivr (CDN). When exporting a PDF or spreadsheet, it loads libraries from cdnjs (Cloudflare). These services receive the device's IP address, like any website. Video links open YouTube, which has its own policy.</p>
 
-<h2>Health</h2>
-<p>Training guidance and calorie numbers are educational estimates and do not replace a health professional.</p>
+<h2>Age</h2>
+<p>IRON is not intended for children under 16. Minors should only use it with a parent's or guardian's permission and supervision.</p>
 </section>
 </main>
 </body>

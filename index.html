@@ -1147,6 +1147,12 @@ html:not([data-theme=dark]) .anat-fig,html:not([data-theme=dark]) .bmtile{border
 }
 .modal .mfoot .danger{color:var(--red)}
 .modal .mbtn.danger{background:var(--red);color:#fff;font-weight:600}
+.modal .consent{display:flex;gap:10px;align-items:flex-start;margin:4px 0 12px;font-size:13px;line-height:1.4;color:var(--label2);cursor:pointer;text-align:left}
+.modal .consent input{-webkit-appearance:checkbox;appearance:auto;width:20px;height:20px;flex:0 0 20px;margin:1px 0 0;accent-color:var(--accent);padding:0;background:none;border:0;border-radius:4px}
+.modal .consent a{color:var(--accent-text);font-weight:600;text-decoration:none}
+.ob-health{max-width:420px;margin:20px auto 0;font-size:12px;line-height:1.45;color:var(--label2);text-align:center}
+.ob-health a{color:var(--accent-text);font-weight:600;text-decoration:none}
+.fhealth{margin-top:4px}
 .modal .mfoot a{color:var(--accent-text);font-size:14px;text-decoration:none}
 .ob-nav .ob-btn{white-space:nowrap;font-size:15px;padding-left:12px;padding-right:12px}
 @media(max-width:359px){
@@ -3025,6 +3031,9 @@ Object.assign(I18N.en,{nuvemfalhou:"Couldn't load your data from the cloud. Chec
 /* v30 · exclusão de conta (exigida pela App Store para apps com cadastro) e link da política de privacidade */
 Object.assign(I18N['pt-BR'],{excluirconta:'Excluir conta',excluircontaconf:'Excluir sua conta e todos os treinos salvos na nuvem?\n\nIsso não tem volta. Os dados deste aparelho também são apagados.',excluircontaconf2:'Última confirmação: digite EXCLUIR para apagar a conta.',excluircontafalhou:'Não consegui excluir a conta agora. Confira a internet e tente de novo.',privacidade:'Política de privacidade'});
 Object.assign(I18N.en,{excluirconta:'Delete account',excluircontaconf:'Delete your account and every workout saved in the cloud?\n\nThis cannot be undone. Data on this device is erased too.',excluircontaconf2:'Final check: type DELETE to erase the account.',excluircontafalhou:"Couldn't delete the account right now. Check your connection and try again.",privacidade:'Privacy policy'});
+/* v30.2 · consentimento (GDPR/LGPD) e aviso de saúde */
+Object.assign(I18N['pt-BR'],{consentimento:'Autorizo o IRON a guardar meus treinos e meu peso corporal na nuvem para sincronizar entre aparelhos. Posso excluir tudo quando quiser.',consentfalta:'Marque a caixa de autorização para criar a conta.',avisosaude:'O IRON é orientação educativa e não substitui um profissional de educação física ou de saúde. Tem lesão, dor ou alguma condição médica? Fale com um profissional antes de treinar.',avisosaudecurto:'Sentiu dor ou tem lesão? Pare e procure um profissional. O IRON não substitui um professor de educação física.'});
+Object.assign(I18N.en,{consentimento:'I allow IRON to store my workouts and body weight in the cloud to sync between devices. I can delete everything at any time.',consentfalta:'Tick the consent box to create the account.',avisosaude:'IRON is educational guidance and does not replace a fitness or health professional. Injured, in pain or have a medical condition? Talk to a professional before training.',avisosaudecurto:'Pain or an injury? Stop and see a professional. IRON does not replace a personal trainer.'});
 /* v30 · textos da confirmação de exclusão com senha */
 Object.assign(I18N['pt-BR'],{senha:'Senha',cancelar:'Cancelar',senhaobrig:'Digite sua senha para confirmar.',senhaerrada:'Senha incorreta. Nada foi apagado.'});
 Object.assign(I18N.en,{senha:'Password',cancelar:'Cancel',senhaobrig:'Type your password to confirm.',senhaerrada:'Wrong password. Nothing was deleted.'});
@@ -4976,6 +4985,7 @@ function openHow(baseId){
     <div class="car" id="shCar">${frames}</div>
     ${nf>1?`<div class="cdots" id="shDots">${Array.from({length:nf},(_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div>`:''}
     ${own?`<div class="fcredit">${t(OWN_ART.has(a.vid)?'ilustcredit':'fotoscredit')}</div>`:''}
+    <div class="fcredit fhealth">${t('avisosaudecurto')}</div>
     ${steps.length?`<ol class="shsteps">${steps.map(s=>`<li>${escH(s)}</li>`).join('')}</ol>`:`<div class="empty">${t('semsteps')}</div>`}
     ${g?`<div class="cue g"><b>✓</b><span>${escH(g)}</span></div>`:''}
     ${b?`<div class="cue b"><b>✕</b><span>${escH(b)}</span></div>`:''}
@@ -5882,6 +5892,7 @@ function renderOB(){
           ${SETUP?`<button class="ob-btn" onclick="closeOB()">${t('voltarpromeutreino')}</button>`:''}
           ${SB_ON()&&!sbUser?`<button class="ob-btn ghost" onclick="$('acct').click()">${t('jatenhoconta')}</button>`:''}
         </div>
+        <p class="ob-health">${t('avisosaude')} <a href="privacy.html" target="_blank" rel="noopener">${t('privacidade')}</a></p>
       </div></div>`;
     return;
   }
@@ -7485,6 +7496,7 @@ function renderAcct(){
     <div class="sub">${isIn?t('entrarsub'):t('criarcontasub')}</div>
     <input type="email" id="aEmail" placeholder="${t('seuemail')}" autocomplete="email">
     <input type="password" id="aPass" placeholder="${t('suasenha')}" autocomplete="${isIn?'current-password':'new-password'}">
+    ${isIn?'':`<label class="consent"><input type="checkbox" id="aOk"><span>${t('consentimento')} <a href="privacy.html" target="_blank" rel="noopener">${t('privacidade')}</a></span></label>`}
     <div class="mrow">
       <button class="mbtn" onclick="closeAcct()">${t('cancelar')}</button>
       <button class="mbtn pri" id="aGo">${isIn?t('entrar'):t('criarconta')}</button>
@@ -7499,6 +7511,8 @@ async function doAuth(){
   const email=$('aEmail').value.trim(),pass=$('aPass').value;
   const err=$('aErr');err.textContent='';
   if(!email||pass.length<6){err.textContent=t('preenchaemail');return}
+  /* v30.2: sem o consentimento marcado não cria conta (nada sai do aparelho) */
+  if(authMode!=='in'&&!($('aOk')&&$('aOk').checked)){err.textContent=t('consentfalta');return}
   $('aGo').textContent='...';
   try{
     if(!(await sbEnsure()))throw new Error('Failed to fetch');
@@ -8389,7 +8403,7 @@ async function exportPDF(){
 }
 
 /* =================== INIT =================== */
-const APP_VERSION='iron-v30.1';
+const APP_VERSION='iron-v30.2';
 /* atualização automática: confere versão nova ao abrir, ao voltar pro app e a cada 1h; aplica sozinha
    (se houver treino em andamento, espera o app ir pro segundo plano pra não interromper) */
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){
