@@ -1,7 +1,68 @@
 IRON · Treino PPL — Pacote do app (PWA)
 
 ========================================
-NOVIDADES DESTA VERSÃO (iron-v28)
+NOVIDADES DESTA VERSÃO (iron-v30)
+========================================
+Revisão completa de código, design e preparo para virar app de loja.
+(Não houve uma v29 neste Mac: a v30 parte direto da v28.)
+
+Sincronização e dados
+- Treino excluído não volta mais da nuvem. A lixeira agora vence o
+  histórico em qualquer mesclagem, inclusive vinda de outro aparelho.
+- Quem vence na sincronização é a última EDIÇÃO, não o último envio.
+  Antes, um aparelho que só abriu e reenviou passava na frente de
+  mudanças feitas offline no outro, e o programa podia voltar atrás.
+- Editar um treino antigo agora sincroniza com os outros aparelhos.
+- Servidor próprio: só envia depois de conseguir ler o servidor.
+  Abrir o app sem internet e marcar uma série não apaga mais o que só
+  existia no outro aparelho.
+- Sair da conta limpa também exercícios próprios, backups de programa
+  e o assento, para a próxima pessoa no mesmo aparelho não herdar.
+- O backup em arquivo leva os exercícios próprios.
+- App aberto de um dia para o outro: se nada foi marcado, a data do
+  treino volta a ser hoje ao abrir.
+- "−15 s" com o descanso já acabado não inicia um descanso novo.
+
+Segurança
+- O caractere & passa pela mesma limpeza dos outros símbolos. Um
+  backup ou servidor de terceiros não consegue mais rodar código ao
+  tocar num card.
+- Servidor próprio: não aceita IP forjado no cabeçalho (limite de
+  tentativas funciona de verdade) e não deixa criar segunda conta com
+  um pedido antigo depois que o cadastro fechou.
+- supabase.sql pode ser rodado de novo sem erro.
+
+Design e acessibilidade
+- Texto sobre o amarelo agora é escuro no tema claro (o branco
+  quase não se lia).
+- Abas e textos secundários com mais contraste nos dois temas.
+- Todo botão pequeno ganhou área de toque de 44 pt, sem mudar o
+  desenho. Nenhum texto menor que 11 pt.
+- Zoom com os dedos liberado (era bloqueado).
+- Cronômetro: o subtítulo aparecia como um risco ("Descanso I")
+  porque herdava o estilo do botão "Por que" do cartão. Agora mostra
+  "Próxima série: ..." inteiro, cortando com reticências se não couber.
+- Botão do relógio ao lado das abas A, B e C agora tem a mesma
+  altura e os mesmos cantos da barra das abas (era menor e ficava
+  solto). Em telas pequenas, com o descanso rodando, ele mostra só o
+  tempo, para não cortar o "Legs". O % do treino fica colado na letra.
+- Botões "Gerar meu treino" e "Concluir e treinar" não quebram mais
+  em duas linhas.
+- Espaçamento interno dos cartões unificado em 12 x 14 px.
+
+Pronto para virar app
+- Botão "Excluir conta" (exigência da App Store): apaga a conta e os
+  treinos da nuvem. Precisa rodar o bloco v30 do supabase.sql.
+- Página de política de privacidade (privacy.html), em português e
+  inglês, com link dentro do app.
+- manifest.json completo (id, descrição, idioma, categorias,
+  orientação) e ícone "maskable" separado para Android.
+- Ícone da tela de início do iPhone em arquivo próprio (180 px).
+- Cache do app subiu para iron-v30.
+
+
+========================================
+NOVIDADES DA VERSÃO ANTERIOR (iron-v28)
 ========================================
 - Mapa dos músculos novo, colorido e mais detalhado. A figura virou um
   atlas anatômico em frente e costas, com 33 regiões desenhadas com

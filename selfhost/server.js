@@ -107,7 +107,8 @@ function originInfo(req) {
 
 const app = express();
 app.disable('x-powered-by');
-app.set('trust proxy', true);
+/* v30: só confia no X-Forwarded-For do proxy local (Caddy na mesma máquina); com true qualquer cliente forjava o IP e escapava do limite */
+app.set('trust proxy', 'loopback');
 app.use(express.json({ limit: MAX_BODY }));
 /* CORS: só pras origens que você liberou (ou a mesma origem do app servido aqui) */
 app.use((req, res, next) => {
@@ -158,6 +159,8 @@ app.post('/api/register/verify', limit(20, 600000), async (req, res) => {
   try {
     const c = takeChallenge(req.body && req.body.rid);
     if (!c || c.kind !== 'reg') return res.status(400).json({ error: 'Pedido expirado. Tente de novo.' });
+    /* v30: confere de novo na hora de gravar; um pedido feito quando o cadastro estava aberto não vale depois que fechou */
+    if (c.isNew && (!userOpen() || findByName(c.user.username))) return res.status(403).json({ error: 'Cadastro fechado neste servidor.' });
     const v = await verifyRegistrationResponse({
       response: req.body.response, expectedChallenge: c.challenge, expectedOrigin: c.origin, expectedRPID: c.rpID,
     });

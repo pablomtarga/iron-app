@@ -1,6 +1,6 @@
-const CACHE='iron-v28';
+const CACHE='iron-v30';
 self.addEventListener('install',e=>{
-  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./','./index.html','./manifest.json','./icon-192.png'])));
+  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./','./index.html','./manifest.json','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./apple-touch-icon.png','./privacy.html'])));
   self.skipWaiting();
 });
 self.addEventListener('activate',e=>{
@@ -12,8 +12,9 @@ self.addEventListener('fetch',e=>{
   /* API do servidor próprio, envios (POST/PUT) e sites de outras origens vão direto pra rede, sem cache */
   if(e.request.method!=='GET'||u.pathname.indexOf('/api/')>=0||(u.origin!==self.location.origin&&!/cdnjs|fonts\./.test(u.href)))return;
   if(e.request.mode==='navigate'){
-    e.respondWith(fetch(e.request).then(r=>{const c=r.clone();caches.open(CACHE).then(x=>x.put(e.request,c));return r})
-      .catch(()=>caches.match('./index.html')));
+    /* v30: só guarda páginas que deram certo e sem query (?code= do login não vai pro cache) */
+    e.respondWith(fetch(e.request).then(r=>{if(r.ok&&!u.search){const c=r.clone();caches.open(CACHE).then(x=>x.put(e.request,c))}return r})
+      .catch(()=>caches.match(e.request,{ignoreSearch:true}).then(m=>m||caches.match('./index.html'))));
     return;
   }
   e.respondWith(
@@ -22,6 +23,6 @@ self.addEventListener('fetch',e=>{
         const cl=res.clone();caches.open(CACHE).then(c=>c.put(e.request,cl));
       }
       return res;
-    }).catch(()=>e.request.mode==='navigate'?caches.match('./index.html'):Response.error()))
+    }).catch(()=>Response.error()))
   );
 });
